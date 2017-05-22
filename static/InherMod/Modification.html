@@ -1,0 +1,133 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Inheritance through Modification
+</h1>
+<h2>
+1
+General Description
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The class concept with inheritance is the key to reuse of modeling knowledge in Modelica. However, in contrast to many other object-oriented languages Modelica also provides inheritance through modification via so-called </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">modifiers</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. This makes reuse even easier, and can be expressed very concisely. In fact, the three operations: inheritance, specialization through modifications, and object instantiation can be expressed within a single Modelica declaration.<br/><br/>A modifier modifies one or more declaration(s) from an inherited class by changing some aspect(s) of the inherited declarations. The most common kind of modifiers just changes the default value (start value) in a declaration equation.<br/></span></p><br>
+<textarea id=check0textarea>
+class Rocket
+  Real altitude(start = 59404);
+end Rocket;
+</textarea>  <div id=check0div> </div> <br>
+<h2>
+2
+Modifiers in Variable Declarations
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Modifiers change the type of a declared variable by modifying specified member declarations of the unmodified type. For example, the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Real</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> type of the variable A2 has its default declaration equations for its members (</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">unit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">fixed</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">) replaced by those given by the modifiers </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">unit = "Voltage"</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;"> fixed = true</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.<br/></span></p><br>
+<textarea id=check1textarea>
+class Mod
+  Real A1;                                   // Scalar variable
+  Real A2(unit = "Voltage", fixed = true);   // Scalar with modifiers
+end Mod;
+</textarea>  <div id=check1div> </div> <br>
+<h2>
+3
+Modifiers for Continuous-time or Discrete-time Variables
+</h2>
+<p align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">For variables with higher levels of variability such as continuous-time or unclocked discrete-time we have the following restriction. A (non-input) variable with continuous-time or unclocked discrete-time variability without a declaration binding equation is not allowed to be modified.</span></p><br>
+<p align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The reason is that if there is not already a declaration equation for a variable in a model with balanced equation count , adding a new equation via a modifier will increase the number of equations and thus destroy the balancing of the modified model. This does not apply to constants and parameters which are not variables to be solved for during simulation, have defaults of value zero and anyway always have to be defined at compile-time for a model to be compiled and simulated. It does not apply to variables with an input prefix since they are assumed to be defined by some connection or actual parameter passed at function calls. For example:</span></p><br>
+<textarea id=check2textarea>
+model Vars
+  parameter Real x0;
+  Real x1;
+  discrete Real x2;
+  Real x3 = 35.7;
+end Vars;
+</textarea>  <div id=check2div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Now let us see some legal and illegal modification of above model</span></p><br>
+<textarea id=check3textarea>
+model VarsModify
+   Vars y0(x0=8.33); // Legal modification, x0 is a parameter
+   Vars y1(x1=7.1); // Illegal modification, x1 is without binding equation
+   Vars y2(x2=3.77); // Illegal modification, x2 is without binding equation
+   Vars y3(x3=55.1); // Legal modification, x3 has a binding equation
+end VarsModify;
+</textarea>  <div id=check3div> </div> <br>
+<h2>
+4
+Modifiers for Array Variables
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Regarding modifiers for array variables, it is important to remember that each attribute has the same dimensionality as the array itself. <br/></span></p><br>
+<textarea id=check4textarea>
+class Arr
+  Real A3[2,2];                           // Array variable
+  Real A4[2,2](start = {{1, 0}, {0, 1}}); // Modifies the start value for the whole array
+  Real A5[2,2](unit = {{"Voltage", "Voltage"},
+  {"Voltage", "Voltage"}} );
+end Arr;
+</textarea>  <div id=check4div> </div> <br>
+<h2>
+5
+Modification of Protected Elements
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Protected elements may not be modified or redeclared in class modifications, despite the fact the protected elements are inherited. </span></p><br>
+<textarea id=check5textarea>
+class D
+  parameter Real a;    // a is a public element
+protected
+  parameter Real b;    // b is a protected element
+end D;  
+</textarea>  <div id=check5div> </div> <br>
+<textarea id=check6textarea>
+class D1 = D(a = 10);  // OK, since a is public
+</textarea>  <div id=check6div> </div> <br>
+<textarea id=check7textarea>
+class D2 = D(a = 10, b = 20);   // Illegal, since b is protected!
+</textarea>  <div id=check7div> </div> <br>
+<h2>
+6
+Single Modification Rule
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Two arguments of a modification are not allowed to denote the same attribute of a declared element, quite self-evident, but easy to forget in the context of array fields. </span></p><br>
+<textarea id=check8textarea>
+class C1
+  parameter Real x[3];
+end C1;
+</textarea>  <div id=check8div> </div> <br>
+<textarea id=check9textarea>
+class C2 = C1(x = {1, 1, 1}, x[2] = 2);  // Error: x[2] designated twice
+</textarea>  <div id=check9div> </div> <br>
+<h2>
+7
+Flattening of C2
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">We see in the report for the flattening of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">C2</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> that som error occurred. It is illegal to modify </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">x[2]</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> twice.</span></p><br>
+<textarea id=check10textarea>
+instantiateModel( C2 )
+</textarea>  <div id=check10div> </div> <br>
+</div></body></html>

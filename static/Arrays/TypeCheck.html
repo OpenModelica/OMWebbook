@@ -1,0 +1,128 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Array Types and Type Checking
+</h1>
+<h2>
+1
+ColorPixel
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">It is possible to declare user-defined array types analogously to other user-defined types. For example, a </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ColorPixel</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> can be defined as a three-element vector representing the three base colors, and a variable image declared as a matrix of such pixels.<br/><br/>The expanded type of an array is the multidimensional array which is constructed by taking the first dimensions from the variable declaration and subsequent dimensions from the maximally expanded array element type of the declaration. Note that we are not using ColorPixel[512, 512] as in the book, because of the incredible amount of variables it would imply.<br/></span></p><br>
+<textarea id=check0textarea>
+type ColorPixel = Real[3];
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+class ColorPixelInst
+  ColorPixel[10, 10] image = fill(10, 10, 10, 3);
+end ColorPixelInst;
+</textarea>  <div id=check1div> </div> <br>
+<h3>
+1.1
+Simulation of ColorPixelInst
+</h3>
+<textarea id=check2textarea>
+simulate( ColorPixelInst ) 
+</textarea>  <div id=check2div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Take a look at the value at time=0:</span></p><br>
+<textarea id=check3textarea>
+val(image[1,6,3],0)
+</textarea>  <div id=check3div> </div> <br>
+<h2>
+2
+Voltage and Current
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Consider the definition of the notion of the expanded type in the example below. The user-defined types </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Voltage</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Current</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> are defined using type definitions.</span></p><br>
+<textarea id=check4textarea>
+type Voltage = Real(unit = "V");
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+type Current = Real(unit = "A");
+</textarea>  <div id=check5div> </div> <br>
+<h2>
+3
+Pin
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Pin</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is defined through the declaration of a connector. The type of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">v</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">i</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Voltage</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and the expanded type of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">v</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">i</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Real</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check6textarea>
+connector Pin
+  Voltage v;
+  flow Current i;
+end Pin;
+</textarea>  <div id=check6div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">This is not allowed in the current version of Modelica, so the simulation of this example won't work.</span></p><br>
+<textarea id=check7textarea>
+type MultiPin = Pin[5];
+</textarea>  <div id=check7div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The type of p is </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MultiPin[4]</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, expanded type is </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Pin[4, 5]</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check8textarea>
+class MPInst
+  MultiPin[4] p;
+end MPInst;
+</textarea>  <div id=check8div> </div> <br>
+<h2>
+4
+Point
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The array variables </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">p1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">p2</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> have identical expanded types of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Real[10,3]</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> which makes the two equations in </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">PointSum</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> correct.</span></p><br>
+<textarea id=check9textarea>
+type Point = Real[3];
+</textarea>  <div id=check9div> </div> <br>
+<textarea id=check10textarea>
+class PointInst
+  Point[10]     p1 = fill(8, 10, 3);
+  Real[10, 3]     p2 = fill(16, 10, 3);
+  Real r[3] = p1[2, :];              // Equivalent to r[3] = p1[2]
+//equation
+  //p2[5, :] = p1[2, :] + p1[4, :];   // Equivalent to p2[5] = p1[2] + p2[4]
+end PointInst;  
+</textarea>  <div id=check10div> </div> <br>
+<textarea id=check11textarea>
+class PointSum
+  extends PointInst(p2[5, :] = p1[2, :] + p1[4, :] );
+  Real r[3] = p1[2, :];          // Equivalent to r[3] = p1[2]
+//equation
+  //p2[5] = p1[2] + p2[4];   // Equivalent to p2[5, :] = p1[2, :] + p2[4, :]
+end PointSum;
+</textarea>  <div id=check11div> </div> <br>
+<h3>
+4.1
+Simulation of PointSum
+</h3>
+<textarea id=check12textarea>
+simulate( PointInst ) 
+</textarea>  <div id=check12div> </div> <br>
+<textarea id=check13textarea>
+simulate( PointSum ) 
+</textarea>  <div id=check13div> </div> <br>
+</div></body></html>

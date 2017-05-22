@@ -1,0 +1,153 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Constraining Type of Replaceable Elements 
+</h1>
+<h2>
+1
+General Description
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A declaration of a </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">replaceable</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> element of a class can represent either a variable (as </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">comp1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> in </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MicroCircuit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">) or a local class declaration (as </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">type CompType = Resistor</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> in Gen</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MicroCircuit2</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">). The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">extends</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> keyword in the second form has nothing to do with inheritance, it is just a reuse of the keyword for a different purpose. It is however recommended to avoid modifiers in the constraining type (the expression after the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">extends</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> keyword).</span></p><br>
+<h2>
+2
+MicroCircuit
+</h2>
+<textarea id=check0textarea>
+class MicroCircuit
+  replaceable Resistor comp1;
+end MicroCircuit;
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>In the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">TempMicroCircuit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> the instance </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">comp1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is modified to have the type </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">TempResistor</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> instead of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Resistor</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check1textarea>
+class TempMicroCircuit = MicroCircuit(redeclare TempResistor comp1);
+</textarea>  <div id=check1div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>A more generic circuit expressing the same thing as </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">TempMicroCircuit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check2textarea>
+class GenMicroCircuit
+  replaceable type CompType = Resistor;
+  replaceable CompType comp1;
+end GenMicroCircuit;  
+</textarea>  <div id=check2div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Type Error, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Inductor</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is not subtype of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Resistor</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. By extending </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">CompType = Resistor</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> with </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">TwoPin</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> the redeclaration can be successfully done.</span></p><br>
+<textarea id=check3textarea>
+class InductorMicroCircuit =
+          GenMicroCircuit(redeclare type CompType = Inductor);
+
+</textarea>  <div id=check3div> </div> <br>
+<h2>
+3
+Electrical Units
+</h2>
+<textarea id=check4textarea>
+type Voltage = Real(Unit = "V");
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+type Current = Real(Unit = "A");
+</textarea>  <div id=check5div> </div> <br>
+<h2>
+4
+Connectors
+</h2>
+<textarea id=check6textarea>
+connector Pin
+  Voltage v;
+  flow Current i;
+end Pin;  
+</textarea>  <div id=check6div> </div> <br>
+<h2>
+5
+Component TwoPin
+</h2>
+<textarea id=check7textarea>
+partial class TwoPin
+  "Superclass of elements with two electrical pins"
+  Pin p, n;
+  Voltage v;
+  Current i;
+equation
+  v = p.v - n.v;
+  p.i + n.i = 0;
+  i = p.i;
+end TwoPin;
+</textarea>  <div id=check7div> </div> <br>
+<h2>
+6
+Generic MicroCircuit
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">After changing the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">GenMicroCircuit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> class there is no problem to define a more specific circuit, e.g. using the component type </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Capacitor</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check8textarea>
+class GenMicroCircuit2
+  replaceable type CompType = Resistor extends TwoPin;      // No inheritance!
+  replaceable CompType comp1;
+end GenMicroCircuit2;  
+</textarea>  <div id=check8div> </div> <br>
+<textarea id=check9textarea>
+class CapacitorMicroCircuit =
+          GenMicroCircuit2(redeclare type CompType = Capacitor);
+</textarea>  <div id=check9div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">CapacitorMicroCircuit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> has no replaceable </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">CompType</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> declaration left since the original replaceable declaration was replaced. Therefore we need to perform a redeclaration with </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">redeclare replaceable</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> to be able to perform further modifications. <br/></span></p><br>
+<textarea id=check10textarea>
+class GenCapacitorMicroCircuit =
+          GenMicroCircuit2(redeclare replaceable type CompType = TempCapacitor);
+</textarea>  <div id=check10div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The constraining type of a replaceable redeclaration must be a subtype of the constraining type of the declaration it redeclares. This condition is fulfilled for </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">GenCapacitorMicroCircuit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> above, since the constraining type </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">GenCapacitor</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is a subtype of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">TwoPin</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. Thus the modifier </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">R = 20</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> in the definition of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MicroCircuit3</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is propagated to both the declaration and the constraining type, which is apparent in the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MicroCircuit3expanded</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.<br/></span></p><br>
+<textarea id=check11textarea>
+class MicroCircuit2
+  replaceable TempResistor R1 extends Resistor;
+end MicroCircuit2;
+</textarea>  <div id=check11div> </div> <br>
+<textarea id=check12textarea>
+class MicroCircuit3 = MicroCircuit2(R1 (R = 20));
+</textarea>  <div id=check12div> </div> <br>
+<textarea id=check13textarea>
+class MicroCircuit3expanded
+  replaceable TempResistor R1(R = 20) extends Resistor(R = 20);
+end MicroCircuit3expanded;    
+</textarea>  <div id=check13div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>In an element redeclaration of a replaceable element the modifiers of the replaced constraining type are merged to both the new declaration and to the new constraining type. The modifier </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">R=30</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> for the constraining type </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Resistor</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> below is propagated to the new type </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">TempResistor2</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and the new constraining type </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Resistor</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">2.<br/></span></p><br>
+<textarea id=check14textarea>
+class MicroCircuit4
+  replaceable TempResistor R1 extends Resistor(R=30);
+end MicroCircuit4;
+</textarea>  <div id=check14div> </div> <br>
+<textarea id=check15textarea>
+class MicroCircuit5 =
+    MicroCircuit4(redeclare replaceable TempResistor2 R1 extends Resistor2);
+</textarea>  <div id=check15div> </div> <br>
+<textarea id=check16textarea>
+class MicroCircuit5expanded
+  replaceable TempResistor2 R1(R = 30) extends Restistor2(R=30);
+end MicroCircuit5expanded;
+</textarea>  <div id=check16div> </div> <br>
+</div></body></html>

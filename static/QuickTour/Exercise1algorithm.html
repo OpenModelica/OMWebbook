@@ -1,0 +1,159 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 1
+</h1>
+<h2>
+1
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Can you really put an algorithm section inside an equation section?</span></p><br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Yes, you didn't think so, did you?</span></p><br>
+</div><h2>
+2
+Writing an Algorithm Section
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Create the class, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Average</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, which calculates the average between two named integer parameters, using an algorithm section. <br/></span></p><br>
+<textarea id=check0textarea>
+
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Create another class and declare an instance of the Average class using modifiers to change the parameter values.</span></p><br>
+<textarea id=check1textarea>
+
+</textarea>  <div id=check1div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Simulate and then test the result of the instance class by using the val function to look at the values:</span></p><br>
+<textarea id=check2textarea>
+//??val needed
+</textarea>  <div id=check2div> </div> <br>
+<h3>
+2.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer1 > Answer</button>
+</h3>
+<div id=answer1 class=collapse><h4>
+2.1.1
+Average class
+</h4>
+<textarea id=check3textarea>
+class Average
+  parameter Real a;
+  parameter Real b;
+  Real result;
+algorithm
+  result := (a + b) / 2;
+end Average;
+</textarea>  <div id=check3div> </div> <br>
+<h4>
+2.1.2
+The instance
+</h4>
+<textarea id=check4textarea>
+class AverageInst
+  Average aver(a = 15, b = 23);
+end AverageInst;
+</textarea>  <div id=check4div> </div> <br>
+<h4>
+2.1.3
+Simulation of AverageInst
+</h4>
+<textarea id=check5textarea>
+simulate( AverageInst )
+</textarea>  <div id=check5div> </div> <br>
+<textarea id=check6textarea>
+val(aver.result,0) 
+</textarea>  <div id=check6div> </div> <br>
+</div><h2>
+3
+A harder exercise
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Write a class, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">AverageExtended</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, that calculates the average of 4 variables (a, b, c and d).<br/></span></p><br>
+<textarea id=check7textarea>
+
+</textarea>  <div id=check7div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Create another class and declare an instance of the AverageExtended class using modifiers to change the parameter values.</span></p><br>
+<textarea id=check8textarea>
+
+</textarea>  <div id=check8div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Simulate and then test the result of the instance  by using the val function to look at the values at time=0..</span></p><br>
+<textarea id=check9textarea>
+//??val needed {val(aver.sum,0), val(aver.aver,0)}
+</textarea>  <div id=check9div> </div> <br>
+<h3>
+3.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer2 > Answer</button>
+</h3>
+<div id=answer2 class=collapse><h4>
+3.1.1
+AverageExtended
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Note that the sum is calculated in an equation section to show that it is possible to mix algorithm and equation sections in a class. </span></p><br>
+<textarea id=check10textarea>
+class AverageExtended
+  parameter Real a;
+  parameter Real b;
+  parameter Real c;
+  parameter Real d;
+  Real sum;
+  Real aver;
+  Real nrOfVariables = 4;
+equation
+  sum = a + b + c + d;
+algorithm
+  aver := sum / nrOfVariables;
+end AverageExtended;
+</textarea>  <div id=check10div> </div> <br>
+<h4>
+3.1.2
+The instance
+</h4>
+<textarea id=check11textarea>
+class AverageExtInst
+  AverageExtended aver(a = 15, b = 23);
+end AverageExtInst;
+</textarea>  <div id=check11div> </div> <br>
+<h4>
+3.1.3
+Simulate of AverageExtended
+</h4>
+<textarea id=check12textarea>
+simulate( AverageExtInst )
+</textarea>  <div id=check12div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Then you can look at the values of the variables at a specific point in time by using the val function. We choose time = 0 below.</span></p><br>
+<textarea id=check13textarea>
+{val(aver.sum,0), val(aver.aver,0)}
+</textarea>  <div id=check13div> </div> <br>
+</div></div></body></html>

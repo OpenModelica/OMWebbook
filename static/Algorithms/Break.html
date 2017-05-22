@@ -1,0 +1,58 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Breaking Iteration Using break-statements
+</h1>
+<p align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">When executing for-statements or while-statement the iteration can be terminated by executing a break-statement somewhere within the loop. A break-statement is executed within an iteration statement such as a for- or while-statement terminates the enclosing iteration immediately without executing the rest of the iteration statement body. In the case of a while-loop, the loop is terminated without executing the while-predicate.</span></p><br>
+<p align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A break-statement has the following syntax, and is only allowed inside a for-loop or a while-loop:</span></p><br>
+<p align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; font-weight:600; color:#000000;">break</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">For example, the following function findElement searches an Integer array for a specific element. The search is done by a for-loop, which is terminated by a break-statement when the correct index position has been found and assigned to the result variable called position.</span></p><br>
+<textarea id=check0textarea>
+function findElement
+   input Integer element;
+   input Integer v[:];
+   output Integer position;
+algorithm
+   for i in 1:size(v,1) loop
+     if v[i] == element then
+       position := i;
+       break;
+     end if;
+   end for;
+end findElement;
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+findElement(5,{1,2,5,6,7,8,9,10})
+</textarea>  <div id=check1div> </div> <br>
+</div></body></html>

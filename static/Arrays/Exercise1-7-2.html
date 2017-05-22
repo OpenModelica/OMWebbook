@@ -1,0 +1,110 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 1
+</h1>
+<h2>
+1
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">What is a range vector?</span></p><br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A range vector is a vector containing a range of numeric values increasing or decreasing by a fixed increment or decrement value for each additional element.</span></p><br>
+</div><h2>
+2
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Give an example of a range vector with 5 Integers increasing by 5 for each additional element. </span></p><br>
+<h3>
+2.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer1 > Answer</button>
+</h3>
+<div id=answer1 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">{5, 10, 15, 20, 25}</span></p><br>
+</div><h2>
+3
+Considering Array Ranges
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Which result do the v1, v2, v3, v4 and v5 have below?</span></p><br>
+<textarea id=check0textarea>
+class RangeVectors
+  Integer v1[6]     = 3 : 8;
+  Integer v2[10]     = -20 : -11;
+  Real    v3[5]     = 11.3 : 15.3;
+  Integer v4[0];
+  Real    v5[3]      = 1.1 : 3.1;
+end RangeVectors;
+</textarea>  <div id=check0div> </div> <br>
+<h3>
+3.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer2 > Answer</button>
+</h3>
+<div id=answer2 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">v1 has the value {3, 4, 5, 6, 7, 8}<br/>v2 has the value {-20, -19, -18, -17, -16, -15, -14, -13, -12, -11}<br/>v3 has the value {11.3, 12.3, 13.3, 14.3, 15.3}<br/>v4 is an empty vector<br/>v5 has the value {1.1, 2.1, 3.1}</span></p><br>
+<h4>
+3.1.1
+Simulation of RangeVectors
+</h4>
+<textarea id=check1textarea>
+simulate( RangeVectors )
+</textarea>  <div id=check1div> </div> <br>
+</div><h2>
+4
+Wider Ranges
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">How can you construct the range vectors below?<br/><br/>{15.0, 18.0, 21.0, 24.0, 27.0},<br/>{-6.5, -8.5, -10.5} and<br/>an empty Integer vector.<br/><br/>Write the class containing the vectors here:</span></p><br>
+<textarea id=check2textarea>
+
+</textarea>  <div id=check2div> </div> <br>
+<h3>
+4.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer3 > Answer</button>
+</h3>
+<div id=answer3 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">These vectors are just examples of how the vectors can be constructed. There is more than one solution to every vector.</span></p><br>
+<textarea id=check3textarea>
+class RangeVectors2
+  Real     v1[5]       = 15.0 : 3 : 27.0;
+  Real     v2[3]       = -6.5 : -2 : -10.5;
+  Integer   v3[0];
+end RangeVectors2;  
+</textarea>  <div id=check3div> </div> <br>
+<h4>
+4.1.1
+Simulation of RangeVectors2
+</h4>
+<textarea id=check4textarea>
+simulate( RangeVectors2 ) 
+</textarea>  <div id=check4div> </div> <br>
+</div></div></body></html>

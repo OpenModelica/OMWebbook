@@ -1,0 +1,46 @@
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery.key.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+  <script src="../codemirror.js"></script>
+  <script src="../modelica.js"></script>
+  <link rel="stylesheet" href="../custom.css">
+  <script src="../evaldynamicnotebook.js"></script>
+
+</head>
+
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+    <button id="addtextcells" type="button" class="btn btn-primary navbar-btn">Add Cells</button>
+    <button id="deletetextcells" type="button" class="btn btn-danger navbar-btn">Delete Cells</button>
+    <button id="inserttextcells" type="button" class="btn btn-info navbar-btn">Insert Between</button>
+    <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <button id="save" type="button" class="btn btn-warning navbar-btn">Save</button>    
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+
+  </div>
+</div>
+
+
+<div id=cells class="container">
+<br><br><br>
+
+</div>
+
+</body>
+
+</html>

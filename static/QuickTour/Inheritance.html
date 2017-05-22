@@ -1,0 +1,81 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Inheritance
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>A major advantage with object-orientation is the ability to extend the bahavior and properties of an existing class. The original class (base class or superclass), is extended to create a more specialized version (subclass). By doing this the field declarations, equations and other contents are inherited by the subclass, and can be reused.</span></p><br>
+<h2>
+1
+ColorData
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">This is an example of extending a simple Modelica class, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ColorData</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Color</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> inherits the data fields (red, blue and green) from </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ColorData</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check0textarea>
+type MyReal = Real;
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+record ColorData                // Superclass of Color
+  parameter Real red;
+  parameter Real blue;
+  Real green;
+end ColorData;
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+class Color                    // Subclass of ColorData
+  extends ColorData;           // Inherits from ColorData
+equation
+  red + blue + green = 1;
+end Color;
+</textarea>  <div id=check2div> </div> <br>
+<textarea id=check3textarea>
+class Point
+  public Real x;
+  Real y, z;
+end Point;
+</textarea>  <div id=check3div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ColoredPoint</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> inherits from multiple classes, both </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Point</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Color</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check4textarea>
+class ColoredPoint
+  extends Point;
+  extends Color;
+end ColoredPoint;
+</textarea>  <div id=check4div> </div> <br>
+<h2>
+2
+Flattening of Color
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Make a call to flatten the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Color</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check5textarea>
+instantiateModel(Color)
+</textarea>  <div id=check5div> </div> <br>
+</div></body></html>

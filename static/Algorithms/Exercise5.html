@@ -1,0 +1,87 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 5
+</h1>
+<h2>
+1
+reinit
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Write a model </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">BilliardBalls</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, with two billiard balls that is rolling from opposite directions and bounces into each other. </span></p><br>
+<textarea id=check0textarea>
+//?? algorithm sections outside functions not yet implemented
+</textarea>  <div id=check0div> </div> <br>
+<h3>
+1.1
+Tip
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">reinit(x, value)</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is the sam thing as </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">x := value</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, but </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">reinit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> reinitializes the value of x at a specific time and the equations still holds.</span></p><br>
+<h3>
+1.2
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><h4>
+1.2.1
+BilliardBalls
+</h4>
+<textarea id=check1textarea>
+model BilliardBalls
+  parameter Real c = 0.9;        // Elasticity constant of balls
+  Real position1(start = 1);      // Position of ball 1
+  Real position2(start = 10);      // Position of ball 2
+  Real velocity1(start = 10);        // Velocity of ball 1
+  Real velocity2(start = -15);      // Velocity of ball 2
+equation
+  der(position1) = velocity1;
+  der(position2) = velocity2;
+  der(velocity1) = 0;
+  der(velocity2) = 0;
+algorithm
+  when position1 >= position2 then
+    reinit(velocity1, -c*velocity1);
+    reinit(velocity2, -c*velocity2);
+  end when;
+end BilliardBalls;
+</textarea>  <div id=check1div> </div> <br>
+<h4>
+1.2.2
+Simulation of BilliardBalls
+</h4>
+<textarea id=check2textarea>
+simulate( BilliardBalls )
+</textarea>  <div id=check2div> </div> <br>
+<textarea id=check3textarea>
+plot( { velocity1, velocity2, position1, position2 } )
+</textarea> <br> <div id=check3div> </div> <br>
+</div></div></body></html>

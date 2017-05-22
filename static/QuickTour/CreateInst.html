@@ -1,0 +1,125 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Creating Instances
+</h1>
+<h2>
+1
+Point
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The declaration of a class starts with a keyword, class for instance,  followed by the name of the class. A class declaration creates a type name which makes it possible to declare variables of that type, also known as an instance of the class, simply by writing: </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">typename variable</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. First we declare the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Point</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">., where the variables </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">x, y</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">z</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> are instances of the type </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Real</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.<br/></span></p><br>
+<textarea id=check0textarea>
+class Point                "Point in a three-dimensional space"
+  public
+    parameter Real x;
+    parameter Real y;
+    parameter Real z;
+end Point;    
+</textarea>  <div id=check0div> </div> <br>
+<h2>
+2
+MyPoints
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">To create new instances the "new" keyword is not used as is common in object-oriented programming languages, since it does not exist in Modelica. In </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MyPoints</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> three instances of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Point</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> are created. </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Point1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is created with initial values for the variables, given through modification. </span></p><br>
+<textarea id=check1textarea>
+class MyPoints
+  Point point1(x = 1, y = 2, z = 3);
+  Point point2(x = 1, y = 2, z = 3);
+  Point point3(x = 1, y = 2, z = 3);
+end MyPoints;
+
+</textarea>  <div id=check1div> </div> <br>
+<h2>
+3
+Look at Flattened Version of MyPoints
+</h2>
+<textarea id=check2textarea>
+instantiateModel(MyPoints)
+</textarea>  <div id=check2div> </div> <br>
+<h2>
+4
+Instances of MyPoints
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MyPointsInst</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> creates three new </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Points</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> by instantiating </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MyPoints</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. There are two different ways to give the variables initial values when creating the instance. This is shown in </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MyPointsInst1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MyPointsInst2</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. </span></p><br>
+<textarea id=check3textarea>
+class MyPointsInst1
+  MyPoints pts(point1(x= 1, y = 2, z = 3));
+end MyPointsInst1;
+</textarea>  <div id=check3div> </div> <br>
+<textarea id=check4textarea>
+class MyPointsInst2
+  MyPoints pts(point1.x = 1, point1.y = 2, point1.z = 3);
+end MyPointsInst2;
+</textarea>  <div id=check4div> </div> <br>
+<h2>
+5
+Simulation of MyPointsInst1 and MyPointsInst2
+</h2>
+<textarea id=check5textarea>
+simulate( MyPointsInst1 )
+</textarea>  <div id=check5div> </div> <br>
+<textarea id=check6textarea>
+plot(pts.point1.x)
+</textarea> <br> <div id=check6div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check6div"),
+  [[ 0.,  1.],
+       [ 1.,  1.]] 
+,
+{
+legend:"always",
+labels:
+['Time', 'pts.point1.x']
+}
+)
+</script>
+<textarea id=check7textarea>
+simulate( MyPointsInst2 )
+</textarea>  <div id=check7div> </div> <br>
+<textarea id=check8textarea>
+plot(pts.point1.y)
+</textarea> <br> <div id=check8div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check8div"),
+  [[ 0.,  2.],
+       [ 1.,  2.]] 
+,
+{
+legend:"always",
+labels:
+['Time', 'pts.point1.y']
+}
+)
+</script>
+</div></body></html>

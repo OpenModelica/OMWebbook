@@ -1,0 +1,173 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Order of evaluation
+</h1>
+<h2>
+1
+GuardTest
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Only constructs like </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">if</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">-statements and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">if</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">-expressions can be used to guard expressions against evaluation since the bodies of these constructs are only evaluated if the corresponding condition is </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">true</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. <br/><br/>The equation is correct since the use of an </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">if</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">-expression guarantees that the condition </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">(y&gt;=1 and y&lt;=n)</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is always evaluated before </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">then</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> or </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">else</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">-parts of the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">if</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">-expression.<br/></span></p><br>
+<textarea id=check0textarea>
+class GuardTest
+  Boolean v[n] = fill(false,n);
+  Boolean b;
+  Integer y = 4;
+  parameter Integer n = 5;
+equation
+  b = if (y>=1 and y<= n) then v[y] else false;      // Correct
+end GuardTest;
+</textarea>  <div id=check0div> </div> <br>
+<h2>
+2
+Simulation of GuardTest
+</h2>
+<textarea id=check1textarea>
+simulate( GuardTest )  
+</textarea>  <div id=check1div> </div> <br>
+<h2>
+3
+GuardTestInvalid
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Boolean operators such as </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">and</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> cannot be used for evaluation protection. The equation in the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">GuardTestInvalid</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> below can generate an error such as index out of bounds (if y is not in the interval 1 to 5), see the simulation below. Even if the boolean expression (</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">y&gt;=1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">y&lt;=n)</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> evaluates to </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">false</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, the evaluation of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">v[y]</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is not necessarily prevented.</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;"> <br/></span></p><br>
+<textarea id=check2textarea>
+class GuardTestInvalid
+  Boolean v[n] = fill(false,n);
+  Boolean b;
+  Integer y = 10;
+  parameter Integer n = 5;
+equation
+  b = v[y] and (y>=1 and y<=n);            // Invalid!!
+end GuardTestInvalid;
+</textarea>  <div id=check2div> </div> <br>
+<h2>
+4
+Simulation of GuardTestInvalid
+</h2>
+<textarea id=check3textarea>
+simulate( GuardTestInvalid )
+</textarea>  <div id=check3div> </div> <br>
+<h2>
+5
+Guards with Continuous-Time Conditions
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">One problem with the iterative zero-crossing search is that </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">if</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">-expressions in Modelica do not behave exactly as most people expect based on experience with conventional programming languages. During this iterative process small negative values of h can actually be supplied to the body of the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">if</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">-expression, e.g. </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">-c*sqrt(h)</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> below, causing an attempt to compute the square root of a negative number, which is an error.<br/></span></p><br>
+<textarea id=check4textarea>
+class GuardContinuousVar
+  Real h(start = 1,fixed=true);
+  parameter Real c=1;
+equation
+  der(h) = if h > 0 then -c*sqrt(h) else 0;          // Incorrect!!
+end GuardContinuousVar;
+</textarea>  <div id=check4div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">NoEvent</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> operator is used to avoid events from being generated by the expression it is applied to. The operator should be used if the expression is continuous during a discrete switch.</span></p><br>
+<textarea id=check5textarea>
+class GuardContinuousVarCorrect
+  Real h(start = 1,fixed=true);
+  parameter Real c=1;
+equation
+  der(h) = if noEvent(h > 0) then -c*sqrt(h) else 0;    // Correct!!
+end GuardContinuousVarCorrect;
+</textarea>  <div id=check5div> </div> <br>
+<h2>
+6
+Simulation of GuardContinuousVar
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The simulation shows that the value of h decreases and at t=2 is becomes a small negative number.</span></p><br>
+<textarea id=check6textarea>
+simulate( GuardContinuousVar, stopTime = 5, /* outputInterval=1, */ numberOfIntervals=5 )   
+</textarea>  <div id=check6div> </div> <br>
+<textarea id=check7textarea>
+val(h,0.1)
+</textarea>  <div id=check7div> </div> <br>
+<textarea id=check8textarea>
+plot( h ) // plot( h, xrange={1,5} );  
+</textarea> <br> <div id=check8div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check8div"),
+  [[  0.00000000e+00,   1.00000000e+00],
+       [  1.00000000e+00,   2.50000000e-01],
+       [  1.50000000e+00,   6.25000000e-02],
+       [  2.00000674e+00,  -1.00000000e-10],
+       [  2.00000674e+00,  -1.00000000e-10],
+       [  2.50000000e+00,  -1.00000000e-10],
+       [  3.50000000e+00,  -1.00000000e-10],
+       [  4.50000000e+00,  -1.00000000e-10],
+       [  5.00000000e+00,  -1.00000000e-10],
+       [  5.00000000e+00,  -1.00000000e-10]] 
+,
+{
+legend:"always",
+labels:
+['Time', 'h']
+}
+)
+</script>
+<textarea id=check9textarea>
+{h[2], h[4]}
+</textarea>  <div id=check9div> </div> <br>
+<h2>
+7
+Simulation of GuardContinuousVarCorrect
+</h2>
+<textarea id=check10textarea>
+simulate( GuardContinuousVarCorrect, stopTime = 5, numberOfIntervals=5 ) 
+</textarea>  <div id=check10div> </div> <br>
+<textarea id=check11textarea>
+plot( h )
+</textarea> <br> <div id=check11div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check11div"),
+  [[  0.00000000e+00,   1.00000000e+00],
+       [  1.00000000e+00,   2.50000000e-01],
+       [  2.00000000e+00,  -2.15364053e-07],
+       [  3.00000000e+00,  -5.74844690e-07],
+       [  4.00000000e+00,  -5.74844690e-07],
+       [  5.00000000e+00,  -5.74844690e-07],
+       [  5.00000000e+00,  -5.74844690e-07]] 
+,
+{
+legend:"always",
+labels:
+['Time', 'h']
+}
+)
+</script>
+<textarea id=check12textarea>
+val(h,2.5)
+</textarea>  <div id=check12div> </div> <br>
+<textarea id=check13textarea>
+val(h,5.0)
+</textarea>  <div id=check13div> </div> <br>
+</div></body></html>

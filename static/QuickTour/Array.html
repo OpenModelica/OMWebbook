@@ -1,0 +1,106 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Arrays
+</h1>
+<h2>
+1
+Declaring Arrays
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">An array is a collection of variables, which are all of the same type. An array variable can be declared by appending dimensions within square brackets after a class name or after a variable name.<br/></span></p><br>
+<textarea id=check0textarea>
+class ArrayDim
+  Real n = 1, m = 4, k = 5;
+  Real Voltage;
+
+   // 3-dimensional position vector
+  Real[3] positionvector = {1, 2, 3};
+
+  // transformation matrix
+  Real[3,3] identitymatrix = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
+
+  // A 3-dimensional array
+  Integer[n,m,k] arr3d;
+
+  // A boolean vector
+  Boolean[2] truthvalues = {false, true};
+
+  // A vector of voltage values
+  Voltage[10] voltagevector;
+end ArrayDim;
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Using the alternative syntax of attaching dimensions after the variable name, the same declarations can be expressed as:</span></p><br>
+<textarea id=check1textarea>
+class ArrayDim
+  Real n = 1, m = 4, k = 5;
+  Real    Voltage;
+  Real    positionvector[3]   = {1, 2, 3};
+  Real    identitymatrix[3,3] = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
+  Integer arr3d[n,m,k];
+  Boolean truthvalues[2]     = {false, true};
+  Voltage voltagevector[10];
+end ArrayDim;
+</textarea>  <div id=check1div> </div> <br>
+<h2>
+2
+Multiplication Operator
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The multiplication operator * is scalar product when used between vectors, matrix multiplication when used between matrices and element-wise multiplication when used between an array and a scalar. In the function </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ElementWiseMultiplication</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">positionvector</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is multiplied by the scalar 2.</span></p><br>
+<textarea id=check2textarea>
+function ElementWiseMultiplication
+   input  Real[3] positionvector;
+   output Real[3] result;
+ algorithm
+   result := positionvector*2;
+end ElementWiseMultiplication;  
+</textarea>  <div id=check2div> </div> <br>
+<h2>
+3
+Calling ElementWiseMultiplication
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">We see that when applying the function </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ElementWiseMultiplication</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> on </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">positionvector</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, we get the result </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">{2, 4, 6}</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check3textarea>
+ElementWiseMultiplication({1, 2, 3})  
+</textarea>  <div id=check3div> </div> <br>
+<h2>
+4
+Matrix Declaration
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The common special cases of concatenation along the first and second dimensions are supported through the special syntax forms [A;B;C;...] and [A,B,C,...] respectively. Both of these forms can be mixed. Scalar and vector arguments to these special operators are promoted to become matrices before performing the concatenation. This gives the effect that a matrix can be constructed from scalar expressions by separating rows by semicolon and columns by comma. <br/></span></p><br>
+<textarea id=check4textarea>
+class Matrix
+  Real matrix[2, 2] = [1, 2; 3, 4];
+end Matrix;
+</textarea>  <div id=check4div> </div> <br>
+</div></body></html>

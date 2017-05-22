@@ -1,0 +1,87 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 1 - Variable Declaration
+</h1>
+<h2>
+1
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;">What is a variable?</p><br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;">A variable is a place to store a piece of information. Just as you might store a friend's phone number in your own memory, you can store this information in a computer's memory. Variables are your way of accessing your computer's memory. </p><br>
+<h2>
+2
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;">Which are the two kinds of variables and what is the difference between them?</p><br>
+<h3>
+2.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;">There are two different kinds of variables, discrete-time and continuous-time variables. Discrete-time variables change value only at event instants, whereas continuous-time variables may change value both between and at events.</p><br>
+</div><h2>
+3
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;">What is a parameter?</p><br>
+<h3>
+3.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer1 > Answer</button>
+</h3>
+<div id=answer1 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;">A parameter is a special kind of constant, which is implemented as a static variable that is initialized once and never changes its value during a specific execution. </p><br>
+</div><h2>
+4
+Declaring Variables
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;">Define a class <span style=" font-family:Courier New;">Matrices</span> that declares the variables m1, m2, m3, m4 all being matrices with Integers respectively Real numbers. Make at least one of them an array. Let m1 and m2 be parameters,  m3 a regular variable and m4 a constant. </p><br>
+<textarea id=check0textarea>
+
+</textarea>  <div id=check0div> </div> <br>
+<h3>
+4.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer2 > Answer</button>
+</h3>
+<div id=answer2 class=collapse><textarea id=check1textarea>
+class Matrices
+  parameter Real m1[2,3];  // A matrix with two rows and three columns
+  parameter Real m2[5];    // An array with 5 elements
+  Real m3[1,6]; // Matrix with one row and six columns (six-element array)
+  constant Real[2,1] m4 = {{4}, {7}}; // Matrix with two rows and one column
+end Matrices;
+</textarea>  <div id=check1div> </div> <br>
+</div></div></body></html>

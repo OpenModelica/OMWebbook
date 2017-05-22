@@ -1,0 +1,67 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 1
+</h1>
+<h2>
+1
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">What is specific about equations in Modelica?</span></p><br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Equations are more powerful than assignments, since one equation can express several different assignments.</span></p><br>
+</div><h2>
+2
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">What is a declaration equation?</span></p><br>
+<h3>
+2.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer1 > Answer</button>
+</h3>
+<div id=answer1 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A declaration equation is the equation used when declaring a variable, usually constants or parameters. Such equations are actually required for constants, but are optional for parameters.  It is also possible to specify a declaration equation for a normal state variable, but this will make the variable behave as a kind of constant.</span></p><br>
+</div><h2>
+3
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">What is a modifier equation?</span></p><br>
+<h3>
+3.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer2 > Answer</button>
+</h3>
+<div id=answer2 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Modifier equations occur for example in a variable declaration when there is a need to modify the default value of an attribute of the variable. A modifier equation replaces the declaration equation, if present, for an attribute of the specific type.</span></p><br>
+</div></div></body></html>

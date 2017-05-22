@@ -1,0 +1,65 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Function return-statement
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A function is returned from when reaching the end of the function body. However, immediate return from anywhere inside a function body can be done by executing a return-statement with the following syntax.</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; font-weight:600; color:#000000;">return; </span></p><br>
+<p align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The following function findMatrixElement searches an Integer matrix for a specific element. The search is done by a doubly nested for-loop, which is immediately exited when the function is returned from by executing a return-statement. At this point the correct index position has been found and assigned to the result variables row and column.</span></p><br>
+<textarea id=check0textarea>
+function findMatrixElement
+   input Integer element;
+   input Integer M[:,:];
+   output Integer row;
+   output Integer column;
+algorithm
+   for r in 1:size(M,1) loop
+     for c in 1:size(M,2) loop
+       if M[r,c]== element then
+         row:=r;
+         column:=c;
+         return;
+       end if;
+     end for;
+   end for;
+end findMatrixElement;
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+findMatrixElement(4 ,[1,2;
+                      5,4;
+                      6,10;
+                      9,11;
+                      12,13])
+</textarea>  <div id=check1div> </div> <br>
+</div></body></html>

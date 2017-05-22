@@ -1,0 +1,93 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 1
+</h1>
+<h2>
+1
+Declaration Equations and Normal Equations
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Write a class, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Birthyear</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, which calculates the birthyear from  this year and a persons age.<br/>Point out the declaration equations and the normal equations.<br/></span></p><br>
+<textarea id=check0textarea>
+class Birthyear
+  //...
+end Birthyear;
+</textarea>  <div id=check0div> </div> <br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><textarea id=check1textarea>
+class Birthyear
+  parameter Integer thisYear = 2002;   // Declaration equation
+  parameter Integer age =10;
+  Integer birthYear;
+equation
+  birthYear = thisYear - age;          // Normal equation
+end Birthyear;
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+simulate( Birthyear )
+</textarea>  <div id=check2div> </div> <br>
+<textarea id=check3textarea>
+plot(birthYear)
+</textarea> <br> <div id=check3div> </div> <br>
+</div><h2>
+2
+Modification Equation
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Write an instance of the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Birthyear</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> above. The class, let's call it </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MartinsBirthyear</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, shall calculate the Martin's birthyear, call the variable </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">martinsBirthyear</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, who is a 29-year-old. Point out the modification equation.<br/></span></p><br>
+<textarea id=check4textarea>
+
+</textarea>  <div id=check4div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Check your answer by writing as below:</span></p><br>
+<textarea id=check5textarea>
+//??val(martinsBirthyear.birthYear,0)
+</textarea>  <div id=check5div> </div> <br>
+<h3>
+2.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer1 > Answer</button>
+</h3>
+<div id=answer1 class=collapse><textarea id=check6textarea>
+class MartinsBirthyear
+  Birthyear martinsBirthyear(age = 30);      // Modification equation
+end MartinsBirthyear;
+</textarea>  <div id=check6div> </div> <br>
+<textarea id=check7textarea>
+simulate( MartinsBirthyear )
+</textarea>  <div id=check7div> </div> <br>
+<textarea id=check8textarea>
+val(martinsBirthyear.birthYear,0)
+</textarea>  <div id=check8div> </div> <br>
+</div></div></body></html>

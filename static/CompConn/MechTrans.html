@@ -1,0 +1,125 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Mechanical Translational Coordinate Systems and Components
+</h1>
+<h2>
+1
+General Description
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Each mechanical component has an associated coordinate system, called </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">frame</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. This is true also for components in a simple domain like the 1D mechanical translational domain. Even the flanges in the 1D mechanical translational domain have their own coordinate systems. The connector classes  </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Flange_a</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Flange_b</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> used for flanges in the 1D translational mechanical domain are identical but have slightly different roles, somewhat analogous to the roles of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">PositivePin</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">NegativePin</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> in the electrical domain. <br/><br/>A </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">flange_a</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> connector is used at the "left" side of a component, whereas a </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">flange_b</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> connector is used at the "right" side of the component, represented by the empty square. Each flange has an internal coordinate system characterized by the unit vector n from left to right.</span></p><br>
+<h2>
+2
+Connectors
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The connector classes </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">PositivePin</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">NegativePin</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> are identical to </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Pin</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and can be used in electrical components to help distinguish positive and negative pins.</span></p><br>
+<textarea id=check0textarea>
+// Current p.i flowing into positive pin
+connector PositivePin = Modelica.Electrical.Analog.Interfaces.Pin;      
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+// Current n.i flowing into negative pin
+connector NegativePin = Modelica.Electrical.Analog.Interfaces.Pin;      
+</textarea>  <div id=check1div> </div> <br>
+<h2>
+3
+Electrical Components
+</h2>
+<textarea id=check2textarea>
+partial model TwoPin        "Component with two electrical pins p and n and current i from p to n"
+  Voltage v              "Voltage drop between the two pins (= p.v - n.v)";
+  Current i              "Current flowing from pin p to pin n";
+  PositivePin p;
+  NegativePin n;
+equation
+  v = p.v - n.v;
+  0 = p.i + n.i;
+  i = p.i;
+end TwoPin; // Same as OnePort in Modelica.Electrical.Analog.Interfaces
+</textarea>  <div id=check2div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>In the idealized </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Resistor</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> class below, the "coordinate system" (the direction of current flow in the resistor) is from </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">p</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> to </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">n</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> as inherited from </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">TwoPin</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. </span></p><br>
+<textarea id=check3textarea>
+model Resistor
+  extends TwoPin;
+  parameter Real R(unit = "Ohm")     "Resistance";
+equation
+  v = R * i;              // Resistor equation
+end Resistor;    
+</textarea>  <div id=check3div> </div> <br>
+<h2>
+4
+Mechanical Connectors
+</h2>
+<textarea id=check4textarea>
+// "Left" flange class
+connector Flange_a = Modelica.Mechanics.Translational.Interfaces.Flange_a;      
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+// "right" flange class
+connector Flange_b = Modelica.Mechanics.Translational.Interfaces.Flange_b;      
+</textarea>  <div id=check5div> </div> <br>
+<h2>
+5
+Mechanical Components
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The partial base class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Compliant</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> below is extended by classes for compliant flexible mechanical components with two flanges. It can be regarded as a 1D mechanical analogue of the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">TwoPin</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> base class from the electrical domain.</span><span style=" font-family:'Times New Roman'; font-size:11pt; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">flange_a </span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">connector is used at the "left" side of a component, where as a </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">flange_b connector </span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">is used at the "right" side of the component. <br/></span></p><br>
+<textarea id=check6textarea>
+partial model Compliant  "Compliant coupling of 2 translational 1D flanges"
+  Flange_a flange_a                  "Driving flange";
+  Flange_b flange_b                  "Driven flange";
+  Modelica.SIunits.Distance s_rel     "Relative distance between flange_a and flange_b";
+  Modelica.SIunits.Force f   "Force between flanges, positive in direction of N";
+equation
+  s_rel = flange_b.s - flange_a.s;
+  0   = flange_b.f + flange_a.f;
+  f      = flange_b.f;
+end Compliant;                    // From Modelica.Mechanics.Interfaces    
+</textarea>  <div id=check6div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Spring</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> class below inherits all equations apart from the constitutive spring equation from its base </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">class Compliant</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check7textarea>
+model Spring                     "Linear 1D translational spring"
+  extends Compliant;
+  parameter Modelica.SIunits.Distance s_rel0 = 0  "Unstretched spring length";
+  parameter Real c(unit = "N/m") = 1        "Spring constant";
+equation
+  f = c*(s_rel - s_rel0);              // Spring equation
+end Spring;    
+</textarea>  <div id=check7div> </div> <br>
+<textarea id=check8textarea>
+loadModel(Modelica)
+</textarea>  <div id=check8div> </div> <br>
+<textarea id=check9textarea>
+instantiateModel(Spring)
+</textarea>  <div id=check9div> </div> <br>
+</div></body></html>

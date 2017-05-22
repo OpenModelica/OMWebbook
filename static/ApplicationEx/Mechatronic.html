@@ -1,0 +1,806 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Mechatronic Systems - A DC Motor
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The term </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">mechatronic</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is commonly used for systems consisting of both mechanical and electrical parts, i.e. a special kind of multi-domain system. An electric motor is a common example of such a system, and a DC-motor (DC = Direct Current) is the simplest kind of electrical motor. <br/>Modeling a DC-motor illustrates the ease of constructing multi-domain models in Modelica simply by connecting components from different domains. This particular model contains components from three domains: mechanical components such as </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">inertia1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, the electrical components </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">resistor1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">inductor1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">signalVoltage1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ground1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> as well as pure signal components such as </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">step1.<br/></span></p><br>
+<h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A multi-domain  DCMotorCircuit model with mechanical, electrical andsignal-block components.</span></p>
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">IMPORTANT: To simulate the DCMotorCircuit model, you first need to select all group cells containing all needed models below, and push shift-return.</span></p><br>
+<h2>
+1
+DCMotorCircuit Model
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">DCMotorCircuit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> class is declared below. What is different from previous examples is that certain connections couple components from different domains, e.g. the signal block </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">step1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is connected to the electrical component </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">signalVoltage1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and the electrical component </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">emf1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is connected to the mechanical component </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">inertia1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.<br/></span></p><br>
+<textarea id=check0textarea>
+model DCMotorCircuit
+  Resistor     resistor1(R = 10);
+  Inductor     inductor1(L = 0.2, i(fixed = true));
+  Ground       ground1;
+  Inertia      inertia1(J = 1, w(fixed = true));
+  EMF          emf1(rotFlange_b(phi(fixed = true)));
+  Step         step1;
+  SignalVoltage signalVoltage1;
+equation
+  connect(step1.outPort, signalVoltage1.inPort);
+  connect(signalVoltage1.p, resistor1.p);
+  connect(resistor1.n, inductor1.p);
+  connect(inductor1.n, emf1.p);
+  connect(emf1.rotFlange_b, inertia1.rotFlange_a);
+  connect(signalVoltage1.n, ground1.p);
+  connect(ground1.p, emf1.n);
+end DCMotorCircuit;
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>To avoid confusion with the translational </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Flange_a</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> connector class we have renamed the rotational flange connector class to be called </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">RotFlange_a</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> in this example, even though it is called </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Flange_a</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> in </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Mechanics.Rotational.Interfaces</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> library. Connectors have the same names as their classes apart from the first letter being lower-case, and a number being appended at the end.<br/><br/>In the following we present the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">DCMotorCircuit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> model including its parts and used classes in roughly a top-down manner, with the most interesting parts first. This gives the best overview and is also fine from a Modelica language point of view since classes can be used before they are defined.</span></p><br>
+<h2>
+2
+DC MotorCircuit Component Classes
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">DCMotorCircuit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> model contains instances of mechanical, electrical and signal classes, which are declared below.</span></p><br>
+<h3>
+2.1
+Mechanical Component Classes: Inertia, Rigid
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Inertia</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> class models the behavior of rotating masses. It inherits some properties from the base class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Rigid</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check1textarea>
+model Inertia    "1D rotational component with inertia"
+  extends Rigid;
+  parameter MomentOfInertia J = 1    "Moment of inertia";
+  AngularVelocity     w          "Absolute angular velocity of component";
+  AngularAcceleration a          "Absolute angular acceleration of component";
+equation
+  w = der(phi);
+  a = der(w);
+  J*a = rotFlange_a.tau + rotFlange_b.tau;
+end Inertia;              //From Modelica.Mechanics.Rotational
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+partial model Rigid           // Rotational class Rigid
+           "Base class for the rigid connection of two rotational 1D flanges"
+  Angle phi               "Absolute rotation angle of component";
+  RotFlange_a rotFlange_a  "(left) driving flange (axis directed into plane)";
+  RotFlange_b rotFlange_b  "(right) driven flange (axis directed out of plane)";
+equation
+  rotFlange_a.phi = phi;
+  rotFlange_b.phi = phi;
+end Rigid;                // From Modelica.Mechanics.Rotational.Interfaces
+</textarea>  <div id=check2div> </div> <br>
+<h3>
+2.2
+Electrical Component Classes
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">EMF</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> class below converts electrical energy to rotational mechanical energy. The instance </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">emf1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> of class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">EMF</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> (Electro Magnetic Force) is probably the most interesting component in the circuit since it converts electrical energy to mechanical rotational energy. This class is an idealized model of the most important properties of a voltage-to-rotation converter excluding resistance, inductance and inertia.<br/><br/>The rest of the declared classes are the usual simple electrical components which are presented once more for completeness.<br/></span></p><br>
+<textarea id=check3textarea>
+model EMF                 "Electromotoric force (electric/mechanic transformer)"
+  extends TwoPin;
+  parameter Real   k(unit = "N.m/A") = 1  "Transformation coefficient";
+  AngularVelocity    w          "Angular velocity of rotFlange_b";
+  RotFlange_b    rotFlange_b;    // Rotational Flange_b
+equation
+  w = der(rotFlange_b.phi);
+  v = k*w;
+  rotFlange_b.tau = - k*i;
+end EMF;                // From Modelica.Electrical.Analog.Basic 
+</textarea>  <div id=check3div> </div> <br>
+<textarea id=check4textarea>
+partial model TwoPin          // Same as OnePort in Modelica.Electrical.Analog.Interfaces
+                    "Component with two electrical pins p and n and current i from p to n"
+  Voltage v                "Voltage drop between the two pins (= p.v - n.v)";
+  Current i                "Current flowing from pin p to pin n";
+  PositivePin p;
+  NegativePin n;
+equation
+  v = p.v - n.v;
+  0 = p.i + n.i;
+  i = p.i;
+end TwoPin;          
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+class Resistor               "Ideal linear electrical Resistor"
+  extends TwoPin;            // Same as OnePort
+  parameter Real R(unit = "Ohm")     "Resistance";
+equation
+  R*i = v;
+end Resistor;                // From Modelica.Electrical.Analog.Basic 
+</textarea>  <div id=check5div> </div> <br>
+<textarea id=check6textarea>
+class Inductor               "Ideal linear electrical Inductor"
+  extends TwoPin;            // Same as OnePort
+  parameter Real L(unit = "H")       "Inductance";
+equation
+  v = L*der(i);
+end Inductor;              // From Modelica.Electrical.Analog.Basic 
+</textarea>  <div id=check6div> </div> <br>
+<textarea id=check7textarea>
+class Ground               "Ground node"
+  Pin p;
+equation
+  p.v = 0;
+end Ground;                // From Modelica.Electrical.Analog.Basic 
+</textarea>  <div id=check7div> </div> <br>
+<h3>
+2.3
+Signal and Signal Voltage Classes: SignalVoltage, MO, Step
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">signalVoltage</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> class converts an input signal to a voltage. This is used in the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">DCMotorCircuit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> to convert a step signal generated by the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">step1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> instance of the simplified </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Step</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> class below to a step voltage. The full version of the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Step</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> class that can handle any number of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">input</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">output</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> signals. The combination of the s</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">tep1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">signalVoltage1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> components is a voltage generator that feeds a step voltage into the rest of the circuit. The partial class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MO</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is simply a base class inherited by </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Step</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.<br/></span></p><br>
+<textarea id=check8textarea>
+model SignalVoltage            "Generic Voltage source using the input signal as source Voltage"
+  extends TwoPin;            // Same as OnePort
+  InPort inPort(n=1);
+equation
+  inPort.signal[1] = v;
+end SignalVoltage;            // From Modelica.Electrical.Analog.Sources
+</textarea>  <div id=check8div> </div> <br>
+<textarea id=check9textarea>
+partial block MO             "Multiple Output continuous control block"
+  parameter Integer nout = 1      "Number of outputs";
+  OutPort       outPort(n = nout)  "Connector of Real output signals";
+protected
+  Real n[nout] = outPort.signal;
+end MO;                  // From Modelica.Blocks.Interfaces
+</textarea>  <div id=check9div> </div> <br>
+<textarea id=check10textarea>
+block Step                "Generate step signals of type Real"
+  extends MO(nout = 1);
+  parameter Real height = 1        "Height of steps";
+  parameter Real offset = 0        "Offset of output signals";
+  parameter Time startTime = 0      "Output = offset for time < startTime";
+equation
+  outPort.signal[1] = offset + (if time < startTime then 0 else height);
+end Step;                // Version simplified from Step in Modelica.Blocks.Sources
+</textarea>  <div id=check10div> </div> <br>
+<h2>
+3
+DCMotorCircuit Connector Classes
+</h2>
+<h3>
+3.1
+Mechanical Connector Classes: RotFlange_a, RotFlange_b 
+</h3>
+<textarea id=check11textarea>
+connector RotFlange_a       "1D rotational flange (filled square)"
+   Angle phi           "Absolute rotational angle of flange";
+   flow Torque tau         "Torque in the flange";
+end RotFlange_a;        //From Modelica.Mechanical.Rotational.Interfaces
+</textarea>  <div id=check11div> </div> <br>
+<textarea id=check12textarea>
+connector RotFlange_b       "1D rotational flange (filled square)"
+   Angle phi           "Absolute rotational angle of flange";
+   flow Torque tau         "Torque in the flange";
+end RotFlange_b;        //From Modelica.Mechanical.Rotational.Interfaces
+</textarea>  <div id=check12div> </div> <br>
+<h3>
+3.2
+Electrical Connectors
+</h3>
+<textarea id=check13textarea>
+connector Pin           "Pin of an electrical component"
+   Voltage v           "Potential at the pin";
+   flow Current i         "Current flowing into the pin";
+end Pin;              //From Modelica.Electrical.Analog.Interfaces
+</textarea>  <div id=check13div> </div> <br>
+<textarea id=check14textarea>
+connector PositivePin       "Positive pin of an electrical component"
+   Voltage v           "Potential at the pin";
+   flow Current i         "Current flowing into the pin";
+end PositivePin;          //From Modelica.Electrical.Analog.Interfaces
+</textarea>  <div id=check14div> </div> <br>
+<textarea id=check15textarea>
+connector NegativePin       "Negative pin of an electrical component"
+   Voltage v           "Potential at the pin";
+   flow Current i         "Current flowing into the pin";
+end NegativePin;          //From Modelica.Electrical.Analog.Interfaces
+</textarea>  <div id=check15div> </div> <br>
+<h3>
+3.3
+Block Signal Connectors
+</h3>
+<textarea id=check16textarea>
+connector InPort        "Connector with input signals of type Real"
+  parameter Integer n = 1    "Dimension of signal vector";
+  input Real     signal[n]  "Real input signals";
+end InPort;            // From Modelica.Blocks.Interfaces
+</textarea>  <div id=check16div> </div> <br>
+<textarea id=check17textarea>
+connector OutPort        "Connector with output signals of type Real"
+  parameter Integer n = 1    "Dimension of signal vector";
+  output Real     signal[n]  "Real output signals";
+end OutPort;          // From Modelica.Blocks.Interfaces
+</textarea>  <div id=check17div> </div> <br>
+<h3>
+3.4
+Types from Modelica.SIunits
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The following are different types from the library </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Modelica.SIunits</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> used by the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">DCMotorCircuit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> model.</span></p><br>
+<textarea id=check18textarea>
+type Time = Real (final quantity="Time", final unit="s");
+</textarea>  <div id=check18div> </div> <br>
+<h4>
+3.4.1
+Electrical units
+</h4>
+<textarea id=check19textarea>
+type ElectricPotential     = Real;
+type ElectricCurrent     = Real(quantity = "ElectricCurrent", unit = "A");
+type Resistance       = Real(quantity = "Resistance", unit = "Ohm", min = 0);
+type Inductance       = Real(quantity = "Inductance", unit = "H", min = 0);
+type Voltage         = ElectricPotential;
+type Current         = ElectricCurrent;
+</textarea>  <div id=check19div> </div> <br>
+<h4>
+3.4.2
+Mechanical units
+</h4>
+<textarea id=check20textarea>
+type Force           = Real(quantity = "Force", unit = "N");
+type Angle           = Real(quantity = "Angle", unit = "rad", displayUnit = "deg");
+type Torque         = Real(quantity = "Torque", unit = "N.m");
+type AngularVelocity     = Real(quantity = "AngularVelocity", unit = "rad/s", displayUnit = "rev/min");
+type AngularAcceleration   = Real(quantity = "AngularAcceleration", unit = "rad/s2");
+type MomentOfInertia     = Real(quantity = "MomentOfInertia", unit = "kg.m2");
+</textarea>  <div id=check20div> </div> <br>
+<h4>
+3.4.3
+Other units
+</h4>
+<textarea id=check21textarea>
+type Length         = Real(quantity = "Length", unit = "m");
+type Time            = Real(quantity = "Time", unit = "s");
+type Distance        = Length(min = 0);
+type Position         = Length;
+</textarea>  <div id=check21div> </div> <br>
+<h2>
+4
+Simulation of DCMotorCircuit
+</h2>
+<textarea id=check22textarea>
+simulate( DCMotorCircuit, stopTime=150 )
+</textarea>  <div id=check22div> </div> <br>
+<textarea id=check23textarea>
+plot(signalVoltage1.i)
+</textarea> <br> <div id=check23div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check23div"),
+  [[  0.00000000e+00,  -0.00000000e+00],
+       [  3.00000000e-01,  -9.74291301e-02],
+       [  6.00000000e-01,  -9.45440136e-02],
+       [  9.00000000e-01,  -9.17442842e-02],
+       [  1.20000000e+00,  -8.90274681e-02],
+       [  1.50000000e+00,  -8.63910949e-02],
+       [  1.80000000e+00,  -8.38327982e-02],
+       [  2.10000000e+00,  -8.13502645e-02],
+       [  2.40000000e+00,  -7.89412459e-02],
+       [  2.70000000e+00,  -7.66035664e-02],
+       [  3.00000000e+00,  -7.43351103e-02],
+       [  3.30000000e+00,  -7.21338294e-02],
+       [  3.60000000e+00,  -6.99977338e-02],
+       [  3.90000000e+00,  -6.79248934e-02],
+       [  4.20000000e+00,  -6.59134349e-02],
+       [  4.50000000e+00,  -6.39615406e-02],
+       [  4.80000000e+00,  -6.20674477e-02],
+       [  5.10000000e+00,  -6.02294442e-02],
+       [  5.40000000e+00,  -5.84458688e-02],
+       [  5.70000000e+00,  -5.67151112e-02],
+       [  6.00000000e+00,  -5.50356061e-02],
+       [  6.30000000e+00,  -5.34058370e-02],
+       [  6.60000000e+00,  -5.18243321e-02],
+       [  6.90000000e+00,  -5.02896607e-02],
+       [  7.20000000e+00,  -4.88004361e-02],
+       [  7.50000000e+00,  -4.73553142e-02],
+       [  7.80000000e+00,  -4.59529855e-02],
+       [  8.10000000e+00,  -4.45921815e-02],
+       [  8.40000000e+00,  -4.32716786e-02],
+       [  8.70000000e+00,  -4.19902787e-02],
+       [  9.00000000e+00,  -4.07468209e-02],
+       [  9.30000000e+00,  -3.95401912e-02],
+       [  9.60000000e+00,  -3.83692931e-02],
+       [  9.90000000e+00,  -3.72330553e-02],
+       [  1.02000000e+01,  -3.61304656e-02],
+       [  1.05000000e+01,  -3.50605305e-02],
+       [  1.08000000e+01,  -3.40222795e-02],
+       [  1.11000000e+01,  -3.30147741e-02],
+       [  1.14000000e+01,  -3.20371001e-02],
+       [  1.17000000e+01,  -3.10883750e-02],
+       [  1.20000000e+01,  -3.01677575e-02],
+       [  1.23000000e+01,  -2.92744320e-02],
+       [  1.26000000e+01,  -2.84075528e-02],
+       [  1.29000000e+01,  -2.75663199e-02],
+       [  1.32000000e+01,  -2.67499552e-02],
+       [  1.35000000e+01,  -2.59577558e-02],
+       [  1.38000000e+01,  -2.51890504e-02],
+       [  1.41000000e+01,  -2.44431955e-02],
+       [  1.44000000e+01,  -2.37194204e-02],
+       [  1.47000000e+01,  -2.30170221e-02],
+       [  1.50000000e+01,  -2.23353212e-02],
+       [  1.53000000e+01,  -2.16738118e-02],
+       [  1.56000000e+01,  -2.10319891e-02],
+       [  1.59000000e+01,  -2.04092927e-02],
+       [  1.62000000e+01,  -1.98050552e-02],
+       [  1.65000000e+01,  -1.92185327e-02],
+       [  1.68000000e+01,  -1.86492815e-02],
+       [  1.71000000e+01,  -1.80969029e-02],
+       [  1.74000000e+01,  -1.75611014e-02],
+       [  1.77000000e+01,  -1.70412274e-02],
+       [  1.80000000e+01,  -1.65367187e-02],
+       [  1.83000000e+01,  -1.60468381e-02],
+       [  1.86000000e+01,  -1.55713781e-02],
+       [  1.89000000e+01,  -1.51100931e-02],
+       [  1.92000000e+01,  -1.46628502e-02],
+       [  1.95000000e+01,  -1.42290468e-02],
+       [  1.98000000e+01,  -1.38078565e-02],
+       [  2.01000000e+01,  -1.33987746e-02],
+       [  2.04000000e+01,  -1.30016330e-02],
+       [  2.07000000e+01,  -1.26165188e-02],
+       [  2.10000000e+01,  -1.22430257e-02],
+       [  2.13000000e+01,  -1.18807442e-02],
+       [  2.16000000e+01,  -1.15289772e-02],
+       [  2.19000000e+01,  -1.11875196e-02],
+       [  2.22000000e+01,  -1.08560700e-02],
+       [  2.25000000e+01,  -1.05345846e-02],
+       [  2.28000000e+01,  -1.02227097e-02],
+       [  2.31000000e+01,  -9.92006732e-03],
+       [  2.34000000e+01,  -9.62629980e-03],
+       [  2.37000000e+01,  -9.34112550e-03],
+       [  2.40000000e+01,  -9.06442504e-03],
+       [  2.43000000e+01,  -8.79603747e-03],
+       [  2.46000000e+01,  -8.53574250e-03],
+       [  2.49000000e+01,  -8.28301649e-03],
+       [  2.52000000e+01,  -8.03759655e-03],
+       [  2.55000000e+01,  -7.79949799e-03],
+       [  2.58000000e+01,  -7.56849458e-03],
+       [  2.61000000e+01,  -7.34441021e-03],
+       [  2.64000000e+01,  -7.12706383e-03],
+       [  2.67000000e+01,  -6.91606608e-03],
+       [  2.70000000e+01,  -6.71121707e-03],
+       [  2.73000000e+01,  -6.51242385e-03],
+       [  2.76000000e+01,  -6.31949497e-03],
+       [  2.79000000e+01,  -6.13234068e-03],
+       [  2.82000000e+01,  -5.95081876e-03],
+       [  2.85000000e+01,  -5.77464269e-03],
+       [  2.88000000e+01,  -5.60365139e-03],
+       [  2.91000000e+01,  -5.43770812e-03],
+       [  2.94000000e+01,  -5.27664447e-03],
+       [  2.97000000e+01,  -5.12038767e-03],
+       [  3.00000000e+01,  -4.96877662e-03],
+       [  3.03000000e+01,  -4.82164783e-03],
+       [  3.06000000e+01,  -4.67886829e-03],
+       [  3.09000000e+01,  -4.54032401e-03],
+       [  3.12000000e+01,  -4.40587843e-03],
+       [  3.15000000e+01,  -4.27541727e-03],
+       [  3.18000000e+01,  -4.14881342e-03],
+       [  3.21000000e+01,  -4.02595911e-03],
+       [  3.24000000e+01,  -3.90674048e-03],
+       [  3.27000000e+01,  -3.79104991e-03],
+       [  3.30000000e+01,  -3.67878327e-03],
+       [  3.33000000e+01,  -3.56983872e-03],
+       [  3.36000000e+01,  -3.46411945e-03],
+       [  3.39000000e+01,  -3.36153165e-03],
+       [  3.42000000e+01,  -3.26198452e-03],
+       [  3.45000000e+01,  -3.16538037e-03],
+       [  3.48000000e+01,  -3.07163696e-03],
+       [  3.51000000e+01,  -2.98067079e-03],
+       [  3.54000000e+01,  -2.89240126e-03],
+       [  3.57000000e+01,  -2.80674208e-03],
+       [  3.60000000e+01,  -2.72361993e-03],
+       [  3.63000000e+01,  -2.64296061e-03],
+       [  3.66000000e+01,  -2.56469256e-03],
+       [  3.69000000e+01,  -2.48873960e-03],
+       [  3.72000000e+01,  -2.41503590e-03],
+       [  3.75000000e+01,  -2.34351576e-03],
+       [  3.78000000e+01,  -2.27411558e-03],
+       [  3.81000000e+01,  -2.20676863e-03],
+       [  3.84000000e+01,  -2.14141571e-03],
+       [  3.87000000e+01,  -2.07799878e-03],
+       [  3.90000000e+01,  -2.01646143e-03],
+       [  3.93000000e+01,  -1.95674593e-03],
+       [  3.96000000e+01,  -1.89879880e-03],
+       [  3.99000000e+01,  -1.84256828e-03],
+       [  4.02000000e+01,  -1.78800371e-03],
+       [  4.05000000e+01,  -1.73505547e-03],
+       [  4.08000000e+01,  -1.68367568e-03],
+       [  4.11000000e+01,  -1.63381788e-03],
+       [  4.14000000e+01,  -1.58543682e-03],
+       [  4.17000000e+01,  -1.53848847e-03],
+       [  4.20000000e+01,  -1.49293000e-03],
+       [  4.23000000e+01,  -1.44871966e-03],
+       [  4.26000000e+01,  -1.40581677e-03],
+       [  4.29000000e+01,  -1.36418608e-03],
+       [  4.32000000e+01,  -1.32379044e-03],
+       [  4.35000000e+01,  -1.28459174e-03],
+       [  4.38000000e+01,  -1.24655468e-03],
+       [  4.41000000e+01,  -1.20964496e-03],
+       [  4.44000000e+01,  -1.17382930e-03],
+       [  4.47000000e+01,  -1.13907540e-03],
+       [  4.50000000e+01,  -1.10535187e-03],
+       [  4.53000000e+01,  -1.07262764e-03],
+       [  4.56000000e+01,  -1.04087269e-03],
+       [  4.59000000e+01,  -1.01005835e-03],
+       [  4.62000000e+01,  -9.80156373e-04],
+       [  4.65000000e+01,  -9.51139178e-04],
+       [  4.68000000e+01,  -9.22979868e-04],
+       [  4.71000000e+01,  -8.95652160e-04],
+       [  4.74000000e+01,  -8.69132208e-04],
+       [  4.77000000e+01,  -8.43402056e-04],
+       [  4.80000000e+01,  -8.18433781e-04],
+       [  4.83000000e+01,  -7.94204693e-04],
+       [  4.86000000e+01,  -7.70692728e-04],
+       [  4.89000000e+01,  -7.47876422e-04],
+       [  4.92000000e+01,  -7.25734878e-04],
+       [  4.95000000e+01,  -7.04247743e-04],
+       [  4.98000000e+01,  -6.83398468e-04],
+       [  5.01000000e+01,  -6.63166603e-04],
+       [  5.04000000e+01,  -6.43533589e-04],
+       [  5.07000000e+01,  -6.24481570e-04],
+       [  5.10000000e+01,  -6.05993167e-04],
+       [  5.13000000e+01,  -5.88051457e-04],
+       [  5.16000000e+01,  -5.70639951e-04],
+       [  5.19000000e+01,  -5.53744514e-04],
+       [  5.22000000e+01,  -5.37350191e-04],
+       [  5.25000000e+01,  -5.21441246e-04],
+       [  5.28000000e+01,  -5.06003256e-04],
+       [  5.31000000e+01,  -4.91022189e-04],
+       [  5.34000000e+01,  -4.76484383e-04],
+       [  5.37000000e+01,  -4.62376526e-04],
+       [  5.40000000e+01,  -4.48686262e-04],
+       [  5.43000000e+01,  -4.35402449e-04],
+       [  5.46000000e+01,  -4.22512033e-04],
+       [  5.49000000e+01,  -4.10003301e-04],
+       [  5.52000000e+01,  -3.97864846e-04],
+       [  5.55000000e+01,  -3.86085553e-04],
+       [  5.58000000e+01,  -3.74654582e-04],
+       [  5.61000000e+01,  -3.63561367e-04],
+       [  5.64000000e+01,  -3.52798149e-04],
+       [  5.67000000e+01,  -3.42353708e-04],
+       [  5.70000000e+01,  -3.32218545e-04],
+       [  5.73000000e+01,  -3.22383416e-04],
+       [  5.76000000e+01,  -3.12839314e-04],
+       [  5.79000000e+01,  -3.03577456e-04],
+       [  5.82000000e+01,  -2.94589276e-04],
+       [  5.85000000e+01,  -2.85867784e-04],
+       [  5.88000000e+01,  -2.77404986e-04],
+       [  5.91000000e+01,  -2.69192752e-04],
+       [  5.94000000e+01,  -2.61223602e-04],
+       [  5.97000000e+01,  -2.53490252e-04],
+       [  6.00000000e+01,  -2.45985610e-04],
+       [  6.03000000e+01,  -2.38702759e-04],
+       [  6.06000000e+01,  -2.31635484e-04],
+       [  6.09000000e+01,  -2.24778041e-04],
+       [  6.12000000e+01,  -2.18123608e-04],
+       [  6.15000000e+01,  -2.11666141e-04],
+       [  6.18000000e+01,  -2.05399762e-04],
+       [  6.21000000e+01,  -1.99318749e-04],
+       [  6.24000000e+01,  -1.93417529e-04],
+       [  6.27000000e+01,  -1.87690743e-04],
+       [  6.30000000e+01,  -1.82134065e-04],
+       [  6.33000000e+01,  -1.76741898e-04],
+       [  6.36000000e+01,  -1.71509355e-04],
+       [  6.39000000e+01,  -1.66431680e-04],
+       [  6.42000000e+01,  -1.61504245e-04],
+       [  6.45000000e+01,  -1.56722542e-04],
+       [  6.48000000e+01,  -1.52082178e-04],
+       [  6.51000000e+01,  -1.47579500e-04],
+       [  6.54000000e+01,  -1.43210286e-04],
+       [  6.57000000e+01,  -1.38970441e-04],
+       [  6.60000000e+01,  -1.34856111e-04],
+       [  6.63000000e+01,  -1.30863546e-04],
+       [  6.66000000e+01,  -1.26989089e-04],
+       [  6.69000000e+01,  -1.23229176e-04],
+       [  6.72000000e+01,  -1.19580647e-04],
+       [  6.75000000e+01,  -1.16040428e-04],
+       [  6.78000000e+01,  -1.12605045e-04],
+       [  6.81000000e+01,  -1.09271376e-04],
+       [  6.84000000e+01,  -1.06036376e-04],
+       [  6.87000000e+01,  -1.02897082e-04],
+       [  6.90000000e+01,  -9.98506030e-05],
+       [  6.93000000e+01,  -9.68942092e-05],
+       [  6.96000000e+01,  -9.40256917e-05],
+       [  6.99000000e+01,  -9.12421173e-05],
+       [  7.02000000e+01,  -8.85409549e-05],
+       [  7.05000000e+01,  -8.59197412e-05],
+       [  7.08000000e+01,  -8.33760769e-05],
+       [  7.11000000e+01,  -8.09076237e-05],
+       [  7.14000000e+01,  -7.85121008e-05],
+       [  7.17000000e+01,  -7.61877259e-05],
+       [  7.20000000e+01,  -7.39322248e-05],
+       [  7.23000000e+01,  -7.17434977e-05],
+       [  7.26000000e+01,  -6.96195532e-05],
+       [  7.29000000e+01,  -6.75584533e-05],
+       [  7.32000000e+01,  -6.55583101e-05],
+       [  7.35000000e+01,  -6.36172838e-05],
+       [  7.38000000e+01,  -6.17338565e-05],
+       [  7.41000000e+01,  -5.99064472e-05],
+       [  7.44000000e+01,  -5.81332607e-05],
+       [  7.47000000e+01,  -5.64127156e-05],
+       [  7.50000000e+01,  -5.47432777e-05],
+       [  7.53000000e+01,  -5.31234587e-05],
+       [  7.56000000e+01,  -5.15518133e-05],
+       [  7.59000000e+01,  -5.00269384e-05],
+       [  7.62000000e+01,  -4.85474704e-05],
+       [  7.65000000e+01,  -4.71120836e-05],
+       [  7.68000000e+01,  -4.57194883e-05],
+       [  7.71000000e+01,  -4.43684287e-05],
+       [  7.74000000e+01,  -4.30576813e-05],
+       [  7.77000000e+01,  -4.17860530e-05],
+       [  7.80000000e+01,  -4.05523786e-05],
+       [  7.83000000e+01,  -3.93555989e-05],
+       [  7.86000000e+01,  -3.81945542e-05],
+       [  7.89000000e+01,  -3.70681549e-05],
+       [  7.92000000e+01,  -3.59753364e-05],
+       [  7.95000000e+01,  -3.49150537e-05],
+       [  7.98000000e+01,  -3.38862791e-05],
+       [  8.01000000e+01,  -3.28880006e-05],
+       [  8.04000000e+01,  -3.19192201e-05],
+       [  8.07000000e+01,  -3.09789512e-05],
+       [  8.10000000e+01,  -3.00662177e-05],
+       [  8.13000000e+01,  -2.91800514e-05],
+       [  8.16000000e+01,  -2.83194905e-05],
+       [  8.19000000e+01,  -2.74835773e-05],
+       [  8.22000000e+01,  -2.66713571e-05],
+       [  8.25000000e+01,  -2.58835683e-05],
+       [  8.28000000e+01,  -2.51220091e-05],
+       [  8.31000000e+01,  -2.43830804e-05],
+       [  8.34000000e+01,  -2.36660930e-05],
+       [  8.37000000e+01,  -2.29703740e-05],
+       [  8.40000000e+01,  -2.22952654e-05],
+       [  8.43000000e+01,  -2.16401231e-05],
+       [  8.46000000e+01,  -2.10043163e-05],
+       [  8.49000000e+01,  -2.03872258e-05],
+       [  8.52000000e+01,  -1.97882435e-05],
+       [  8.55000000e+01,  -1.92067712e-05],
+       [  8.58000000e+01,  -1.86422195e-05],
+       [  8.61000000e+01,  -1.80940067e-05],
+       [  8.64000000e+01,  -1.75615581e-05],
+       [  8.67000000e+01,  -1.70443046e-05],
+       [  8.70000000e+01,  -1.65434405e-05],
+       [  8.73000000e+01,  -1.60579421e-05],
+       [  8.76000000e+01,  -1.55867675e-05],
+       [  8.79000000e+01,  -1.51294724e-05],
+       [  8.82000000e+01,  -1.46856210e-05],
+       [  8.85000000e+01,  -1.42547859e-05],
+       [  8.88000000e+01,  -1.38365474e-05],
+       [  8.91000000e+01,  -1.34304921e-05],
+       [  8.94000000e+01,  -1.30362128e-05],
+       [  8.97000000e+01,  -1.26533074e-05],
+       [  9.00000000e+01,  -1.22813783e-05],
+       [  9.03000000e+01,  -1.19200315e-05],
+       [  9.06000000e+01,  -1.15688760e-05],
+       [  9.09000000e+01,  -1.12275229e-05],
+       [  9.12000000e+01,  -1.08958397e-05],
+       [  9.15000000e+01,  -1.05756450e-05],
+       [  9.18000000e+01,  -1.02648554e-05],
+       [  9.21000000e+01,  -9.96318916e-06],
+       [  9.24000000e+01,  -9.67037100e-06],
+       [  9.27000000e+01,  -9.38613132e-06],
+       [  9.30000000e+01,  -9.11020579e-06],
+       [  9.33000000e+01,  -8.84233480e-06],
+       [  9.36000000e+01,  -8.58226295e-06],
+       [  9.39000000e+01,  -8.32973861e-06],
+       [  9.42000000e+01,  -8.08451334e-06],
+       [  9.45000000e+01,  -7.84634142e-06],
+       [  9.48000000e+01,  -7.61497933e-06],
+       [  9.51000000e+01,  -7.39018527e-06],
+       [  9.54000000e+01,  -7.17171860e-06],
+       [  9.57000000e+01,  -6.96001939e-06],
+       [  9.60000000e+01,  -6.75515487e-06],
+       [  9.63000000e+01,  -6.55634491e-06],
+       [  9.66000000e+01,  -6.36340935e-06],
+       [  9.69000000e+01,  -6.17617109e-06],
+       [  9.72000000e+01,  -5.99445581e-06],
+       [  9.75000000e+01,  -5.81809151e-06],
+       [  9.78000000e+01,  -5.64690824e-06],
+       [  9.81000000e+01,  -5.48073764e-06],
+       [  9.84000000e+01,  -5.31941266e-06],
+       [  9.87000000e+01,  -5.16276713e-06],
+       [  9.90000000e+01,  -5.01063541e-06],
+       [  9.93000000e+01,  -4.86285206e-06],
+       [  9.96000000e+01,  -4.71925141e-06],
+       [  9.99000000e+01,  -4.57966726e-06],
+       [  1.00200000e+02,  -4.44496741e-06],
+       [  1.00500000e+02,  -4.31439948e-06],
+       [  1.00800000e+02,  -4.18772327e-06],
+       [  1.01100000e+02,  -4.06481726e-06],
+       [  1.01400000e+02,  -3.94556117e-06],
+       [  1.01700000e+02,  -3.82983572e-06],
+       [  1.02000000e+02,  -3.71752236e-06],
+       [  1.02300000e+02,  -3.60850303e-06],
+       [  1.02600000e+02,  -3.50265993e-06],
+       [  1.02900000e+02,  -3.39987522e-06],
+       [  1.03200000e+02,  -3.30003078e-06],
+       [  1.03500000e+02,  -3.20300799e-06],
+       [  1.03800000e+02,  -3.10868745e-06],
+       [  1.04100000e+02,  -3.01694872e-06],
+       [  1.04400000e+02,  -2.92794814e-06],
+       [  1.04700000e+02,  -2.84221865e-06],
+       [  1.05000000e+02,  -2.75903504e-06],
+       [  1.05300000e+02,  -2.67831624e-06],
+       [  1.05600000e+02,  -2.59998227e-06],
+       [  1.05900000e+02,  -2.52395410e-06],
+       [  1.06200000e+02,  -2.45015352e-06],
+       [  1.06500000e+02,  -2.37850297e-06],
+       [  1.06800000e+02,  -2.30892544e-06],
+       [  1.07100000e+02,  -2.24134424e-06],
+       [  1.07400000e+02,  -2.17568296e-06],
+       [  1.07700000e+02,  -2.11186524e-06],
+       [  1.08000000e+02,  -2.04981467e-06],
+       [  1.08300000e+02,  -1.98945462e-06],
+       [  1.08600000e+02,  -1.93070812e-06],
+       [  1.08900000e+02,  -1.87395385e-06],
+       [  1.09200000e+02,  -1.81905866e-06],
+       [  1.09500000e+02,  -1.76576799e-06],
+       [  1.09800000e+02,  -1.71403234e-06],
+       [  1.10100000e+02,  -1.66380333e-06],
+       [  1.10400000e+02,  -1.61503364e-06],
+       [  1.10700000e+02,  -1.56767691e-06],
+       [  1.11000000e+02,  -1.52168768e-06],
+       [  1.11300000e+02,  -1.47702131e-06],
+       [  1.11600000e+02,  -1.43363390e-06],
+       [  1.11900000e+02,  -1.39148221e-06],
+       [  1.12200000e+02,  -1.35052361e-06],
+       [  1.12500000e+02,  -1.31071597e-06],
+       [  1.12800000e+02,  -1.27201760e-06],
+       [  1.13100000e+02,  -1.23439787e-06],
+       [  1.13400000e+02,  -1.19805346e-06],
+       [  1.13700000e+02,  -1.16276859e-06],
+       [  1.14000000e+02,  -1.12851283e-06],
+       [  1.14300000e+02,  -1.09525656e-06],
+       [  1.14600000e+02,  -1.06297094e-06],
+       [  1.14900000e+02,  -1.03162782e-06],
+       [  1.15200000e+02,  -1.00119974e-06],
+       [  1.15500000e+02,  -9.71659858e-07],
+       [  1.15800000e+02,  -9.42981876e-07],
+       [  1.16100000e+02,  -9.15140019e-07],
+       [  1.16400000e+02,  -8.88108967e-07],
+       [  1.16700000e+02,  -8.61863808e-07],
+       [  1.17000000e+02,  -8.36379986e-07],
+       [  1.17300000e+02,  -8.11633251e-07],
+       [  1.17600000e+02,  -7.87633170e-07],
+       [  1.17900000e+02,  -7.64382104e-07],
+       [  1.18200000e+02,  -7.41821874e-07],
+       [  1.18500000e+02,  -7.19932365e-07],
+       [  1.18800000e+02,  -6.98693755e-07],
+       [  1.19100000e+02,  -6.78086481e-07],
+       [  1.19400000e+02,  -6.58091184e-07],
+       [  1.19700000e+02,  -6.38688675e-07],
+       [  1.20000000e+02,  -6.19859886e-07],
+       [  1.20300000e+02,  -6.01585826e-07],
+       [  1.20600000e+02,  -5.83847541e-07],
+       [  1.20900000e+02,  -5.66626065e-07],
+       [  1.21200000e+02,  -5.49902382e-07],
+       [  1.21500000e+02,  -5.33657378e-07],
+       [  1.21800000e+02,  -5.17871799e-07],
+       [  1.22100000e+02,  -5.02697810e-07],
+       [  1.22400000e+02,  -4.88035689e-07],
+       [  1.22700000e+02,  -4.73841877e-07],
+       [  1.23000000e+02,  -4.60105173e-07],
+       [  1.23300000e+02,  -4.46814676e-07],
+       [  1.23600000e+02,  -4.33959750e-07],
+       [  1.23900000e+02,  -4.21530009e-07],
+       [  1.24200000e+02,  -4.09515289e-07],
+       [  1.24500000e+02,  -3.97905629e-07],
+       [  1.24800000e+02,  -3.86691243e-07],
+       [  1.25100000e+02,  -3.75862498e-07],
+       [  1.25400000e+02,  -3.65409893e-07],
+       [  1.25700000e+02,  -3.55324033e-07],
+       [  1.26000000e+02,  -3.45595606e-07],
+       [  1.26300000e+02,  -3.36215361e-07],
+       [  1.26600000e+02,  -3.27174083e-07],
+       [  1.26900000e+02,  -3.18462570e-07],
+       [  1.27200000e+02,  -3.10071611e-07],
+       [  1.27500000e+02,  -3.01991962e-07],
+       [  1.27800000e+02,  -2.94214319e-07],
+       [  1.28100000e+02,  -2.86729302e-07],
+       [  1.28400000e+02,  -2.79527425e-07],
+       [  1.28700000e+02,  -2.72599075e-07],
+       [  1.29000000e+02,  -2.65934490e-07],
+       [  1.29300000e+02,  -2.59523732e-07],
+       [  1.29600000e+02,  -2.53356669e-07],
+       [  1.29900000e+02,  -2.47422946e-07],
+       [  1.30200000e+02,  -2.41711965e-07],
+       [  1.30500000e+02,  -2.36212861e-07],
+       [  1.30800000e+02,  -2.30663782e-07],
+       [  1.31100000e+02,  -2.25111920e-07],
+       [  1.31400000e+02,  -2.19710098e-07],
+       [  1.31700000e+02,  -2.14449389e-07],
+       [  1.32000000e+02,  -2.09321029e-07],
+       [  1.32300000e+02,  -2.04316414e-07],
+       [  1.32600000e+02,  -1.99427098e-07],
+       [  1.32900000e+02,  -1.94644798e-07],
+       [  1.33200000e+02,  -1.89961390e-07],
+       [  1.33500000e+02,  -1.85368910e-07],
+       [  1.33800000e+02,  -1.80859555e-07],
+       [  1.34100000e+02,  -1.76425681e-07],
+       [  1.34400000e+02,  -1.72059806e-07],
+       [  1.34700000e+02,  -1.67754608e-07],
+       [  1.35000000e+02,  -1.63502923e-07],
+       [  1.35300000e+02,  -1.59297751e-07],
+       [  1.35600000e+02,  -1.55132248e-07],
+       [  1.35900000e+02,  -1.50999735e-07],
+       [  1.36200000e+02,  -1.46893689e-07],
+       [  1.36500000e+02,  -1.42807750e-07],
+       [  1.36800000e+02,  -1.38735717e-07],
+       [  1.37100000e+02,  -1.34671550e-07],
+       [  1.37400000e+02,  -1.30609368e-07],
+       [  1.37700000e+02,  -1.26543452e-07],
+       [  1.38000000e+02,  -1.22468242e-07],
+       [  1.38300000e+02,  -1.18378339e-07],
+       [  1.38600000e+02,  -1.14268503e-07],
+       [  1.38900000e+02,  -1.10133657e-07],
+       [  1.39200000e+02,  -1.05968881e-07],
+       [  1.39500000e+02,  -1.02318254e-07],
+       [  1.39800000e+02,  -9.96346303e-08],
+       [  1.40100000e+02,  -9.70347666e-08],
+       [  1.40400000e+02,  -9.45156472e-08],
+       [  1.40700000e+02,  -9.20742566e-08],
+       [  1.41000000e+02,  -8.97075792e-08],
+       [  1.41300000e+02,  -8.74125994e-08],
+       [  1.41600000e+02,  -8.51863016e-08],
+       [  1.41900000e+02,  -8.30256702e-08],
+       [  1.42200000e+02,  -8.09276896e-08],
+       [  1.42500000e+02,  -7.88893442e-08],
+       [  1.42800000e+02,  -7.69076185e-08],
+       [  1.43100000e+02,  -7.49794969e-08],
+       [  1.43400000e+02,  -7.31019638e-08],
+       [  1.43700000e+02,  -7.12720035e-08],
+       [  1.44000000e+02,  -6.94866006e-08],
+       [  1.44300000e+02,  -6.77427394e-08],
+       [  1.44600000e+02,  -6.60374043e-08],
+       [  1.44900000e+02,  -6.43675798e-08],
+       [  1.45200000e+02,  -6.27302503e-08],
+       [  1.45500000e+02,  -6.11224001e-08],
+       [  1.45800000e+02,  -5.95410137e-08],
+       [  1.46100000e+02,  -5.79830755e-08],
+       [  1.46400000e+02,  -5.64455700e-08],
+       [  1.46700000e+02,  -5.49254815e-08],
+       [  1.47000000e+02,  -5.34197944e-08],
+       [  1.47300000e+02,  -5.19254932e-08],
+       [  1.47600000e+02,  -5.04395623e-08],
+       [  1.47900000e+02,  -4.89589860e-08],
+       [  1.48200000e+02,  -4.74858094e-08],
+       [  1.48500000e+02,  -4.60597006e-08],
+       [  1.48800000e+02,  -4.46649023e-08],
+       [  1.49100000e+02,  -4.33014143e-08],
+       [  1.49400000e+02,  -4.19692367e-08],
+       [  1.49700000e+02,  -4.06683695e-08],
+       [  1.50000000e+02,  -3.93988127e-08],
+       [  1.50000000e+02,  -3.93988127e-08]] 
+,
+{
+legend:"always",
+labels:
+['Time', 'signalVoltage1.i']
+}
+)
+</script>
+</div></body></html>

@@ -1,0 +1,137 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Empty Arrays
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Empty arrays can function as a kind of null element for certain general operations such as concatenation operations or general formulations of certain kinds of equation systems. An empty array can not be constructed by { } or [ ]. Instead an empty array is created using some other constructor from which the type can be deduced, or explicilty declared as a variable. Array variables of unspecified size can be set equal to or assigned empty array values.<br/></span></p><br>
+<h2>
+1
+Empty Arrays
+</h2>
+<textarea id=check0textarea>
+class Empty
+  Real f[0] = fill(1.,0); //An empty vector of type Real[0] since 1. is Real
+  Real x[0];               // An empty vector variable x of type Real[0]
+
+  Real[0, 3] A;                    // An empty matrix variable A
+  Real B[5, 0], C[0, 0];           // Empty matrices B and C
+
+  //Real A[:, :]      = fill(0.0, 0, 1);      // A Real 0 x 1 matrix
+  //Boolean B[:, :, :]  = fill (false, 0, 1, 0);  // A Boolean 0 x 1 x 0 array
+
+  //The code used the previous two lines, and the omc compiler gave errors
+  //due to declaration of variables with same name with different type.
+  //After changing the variable names to A2 and B2 the problem was fixed.  
+  
+  Real A2[:, :]      = fill(0.0, 0, 1);      // A Real 0 x 1 matrix
+  Boolean B2[:, :, :]  = fill (false, 0, 1, 0);  // A Boolean 0 x 1 x 0 
+  
+end Empty;
+</textarea>  <div id=check0div> </div> <br>
+<h3>
+1.1
+Simulation of Empty
+</h3>
+<textarea id=check1textarea>
+simulate( Empty )    
+</textarea>  <div id=check1div> </div> <br>
+<h2>
+2
+Adding Empty Arrays
+</h2>
+<textarea id=check2textarea>
+class AddEmpty
+  Real[3, 0] A, B;
+  Real[0, 0] C;
+  Real ab[3, 0] = A + B;  // Fine, the result is an empty matrix of type Real[3, 0]
+  //Real ac = A + C;  // Error, incompatible types Real[3, 0] and Real[0, 0]
+end AddEmpty;
+</textarea>  <div id=check2div> </div> <br>
+<h3>
+2.1
+Simulation of AddEmpty
+</h3>
+<textarea id=check3textarea>
+simulate( AddEmpty )    
+</textarea>  <div id=check3div> </div> <br>
+<h2>
+3
+Using Empty Arrays
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ABCDsystem</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> model below shows how the equation section will shrink to </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">y = D*u</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> when some variables are empty arrays.</span></p><br>
+<textarea id=check4textarea>
+model ABCDsystem
+  parameter Integer n = 0;
+  Real u[5] = {15, 4, 3, 9, 11};
+  Real x[n];
+  Real y[3];
+  Real A[n, n], B[n, 5], C[3, n];
+  Real D[3, 5] = fill(1, 3, 5);
+equation
+  der(x) = A*x + B*u;             // This will disappear since x is empty
+  y = C*x + D*u;                  // Which is: y = D*u
+end ABCDsystem;
+</textarea>  <div id=check4div> </div> <br>
+<h3>
+3.1
+Simulation of ABCDsystem
+</h3>
+<textarea id=check5textarea>
+simulate( ABCDsystem)    
+</textarea>  <div id=check5div> </div> <br>
+<textarea id=check6textarea>
+plot({y[2],n})
+</textarea> <br> <div id=check6div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check6div"),
+ValueError
+,
+{
+legend:"always",
+labels:
+['Time', 'n', 'y[2]']
+}
+)
+</script>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Take a look at the results at time=0:</span></p><br>
+<textarea id=check7textarea>
+val(D[2, 2],0)   
+</textarea>  <div id=check7div> </div> <br>
+<textarea id=check8textarea>
+val(y[2],0)
+</textarea>  <div id=check8div> </div> <br>
+<textarea id=check9textarea>
+val(u[1],0)
+</textarea>  <div id=check9div> </div> <br>
+</div></body></html>

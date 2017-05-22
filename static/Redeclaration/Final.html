@@ -1,0 +1,113 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Modification Prevention Prefix Final
+</h1>
+<h2>
+1
+Simple Example
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A variable declared as final in a member modification cannot be further modified by another modification. All members of a </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">final</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> member are also </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">final</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">,  e.g. the fields of a </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">final</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> member that is a </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">record</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> are </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">final</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. <br/></span></p><br>
+<textarea id=check0textarea>
+type Angle = Real(final quantity = "Angle",
+          final unit       = "rad",
+          displayUnit       = "deg");
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+class AngleInst
+  parameter Angle a1(unit = "deg",fixed=true);  // Error, since unit declared as final
+  parameter Angle a2(displayUnit = "rad", fixed=true); // Fine
+end AngleInst;  
+</textarea>  <div id=check1div> </div> <br>
+<h2>
+2
+Simulation of Angle
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">When we simulate the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">AngleInst</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> we see that there is an error, since we try to modify the unit which is declared as final. We also get a warning because </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">a1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">a2</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> do not have any default values.</span></p><br>
+<textarea id=check2textarea>
+simulate( AngleInst ) // 2015-09-08: OMC bug - allows to modify units declared as final
+</textarea>  <div id=check2div> </div> <br>
+<h2>
+3
+More Advanced Example
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Here is another, slightly more advanced, example of the use of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">final</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. This example invovles a model that is used as a transfer function within a PI controller. </span></p><br>
+<textarea id=check3textarea>
+block TransferBlock               // Works like a transfer function
+  parameter Real a[:] = {1, 1}           "denominator coefficient vector";
+  parameter Real b[:] = {1}           "numerator coefficient vector";
+protected
+  parameter Integer nb(max = na) = size(b, 1);
+  parameter Integer na      = size(a, 1);
+  parameter Integer n      = na - 1;
+  parameter Real[n]       x              "State vector";
+  parameter Real[na]        b0       = cat(1, zeros(na - nb), b);
+end TransferBlock;
+</textarea>  <div id=check3div> </div> <br>
+<textarea id=check4textarea>
+model PI                     "PI controller"
+  parameter Real k = 1              "gain";
+  parameter Real T = 1              "time constant";
+  TransferBlock tf(final a = {T, 0}, final b = {T, 1});
+end PI;
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+model Test
+  PI c1(k = 2, T = 3);              // Fine
+  PI c2(tf.b = {1});              // Error: b is declared as final
+end Test;  
+</textarea>  <div id=check5div> </div> <br>
+<textarea id=check6textarea>
+model Test2
+  PI c1(k = 2, T = 3);              // Fine
+end Test2;  
+</textarea>  <div id=check6div> </div> <br>
+<h2>
+4
+Instantiation of PI
+</h2>
+<textarea id=check7textarea>
+instantiateModel( TransferBlock )  
+</textarea>  <div id=check7div> </div> <br>
+<textarea id=check8textarea>
+instantiateModel( PI )
+</textarea>  <div id=check8div> </div> <br>
+<textarea id=check9textarea>
+instantiateModel( Test ) // 2015-09-08: OMC bug - allows to modify final parameters
+</textarea>  <div id=check9div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">We see in the instantiaten of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Test</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> that an error occurs because we try to modify b, which is declared as final.</span></p><br>
+<textarea id=check10textarea>
+instantiateModel( Test2 )
+</textarea>  <div id=check10div> </div> <br>
+</div></body></html>

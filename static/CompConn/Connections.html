@@ -1,0 +1,84 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Connections
+</h1>
+<h2>
+1
+General Description
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">Connections</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> between components can be established between </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">connectors</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> of </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">equivalent type</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. The names must be identical. And corresponding types of declared </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">variable members</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> in the classes of the connectors must be equivalent, but the ordering between the member declarations in the connector classes need not be the same. It is important to note that connections can only be established between connectors (instances of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">connector</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> classes). Instances of the restricted classes </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">record, block, model, function</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">package</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> are not allowed in connections.<br/><br/>In connectors there are two kinds of variables, either non-flow variables that represent som kind of potential enegy level (ex. Voltage) or flow variables, with the prefix flow, that represent some kind of flow (ex. electric current). </span></p><br>
+<h2>
+2
+Connect Equations
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Connections between connectors are realized as equations in Modelica. Note that </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">connect</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> equations are regarded as </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">equations</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> despite the fact that the syntax is different from normal equations. The reason is that </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">connect</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> equations are eventually expanded into normal equations. The general form of a </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">connect</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> equation is as follows:</span></p><br>
+<h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> connect(connector1, connector2)</span></p>
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The two arguments of a </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">connect</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> equation must be references to connectors, each of which either has to be declared within the same class where the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">connect</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> equation occurs, or has to be a member of one of the declared variables in that class.</span></p><br>
+<h2>
+3
+Electrical Connections
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Now we connect the two connectors </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Pin1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Pin2</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> using a connect statement. The class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ConnectedPins</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> connects the two pins so that they form one node. This produces two equations, namely: </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">pin1.v = pin2.v and pin1.i + pin2.i = 0</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. The first says that the voltages at the connected wire ends are the same (</span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">equality coupling</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">). The second equation corresponds to Kirchhoff's current law saying that the currents </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">sum to zero</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> at a node .<br/></span></p><br>
+<textarea id=check0textarea>
+class ConnectedPins
+  Modelica.Electrical.Analog.Interfaces.Pin pin1;
+  Modelica.Electrical.Analog.Interfaces.Pin pin2;
+equation
+  connect(pin1, pin2);
+end ConnectedPins;
+</textarea>  <div id=check0div> </div> <br>
+<h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Connecting two electrical pins. The connected voltages are equal, and the sum of the corrents is zero.</span></p>
+</h1>
+<h2>
+4
+Mechanical Connections
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">filled</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">non-filled</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> squares of a component represent </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">mechanical flanges</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. We connect these flanges using a </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">connect</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> statement so that they form one node:</span></p><br>
+<textarea id=check1textarea>
+class ConnectedFlanges
+  Modelica.Mechanics.Translational.Interfaces.Flange_a flange1,flange2;
+equation
+  connect (flange1, flange2);
+end ConnectedFlanges;
+</textarea>  <div id=check1div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> </span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Which connects the two flanges so that they form one node. This produces two equations, namely: </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">flange1.s = flange2.s</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">flange1.f + flange2.f = 0</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.<br/> </span></p><br>
+<h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Connecting two mechanical flanges. The positions at the connection point are identical and the sum of the forces are zero.</span></p>
+</h1>
+</div></body></html>

@@ -1,0 +1,116 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 4
+</h1>
+<h2>
+1
+Using Inheritance and Access Control
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;">Write a class, <span style=" font-family:Courier New;">Person</span>, with the variables <span style=" font-family:Courier New;">name</span>, <span style=" font-family:Courier New;">weight</span> and <span style=" font-family:Courier New;">ID</span>, where <span style=" font-family:Courier New;">ID</span> should be protected. </p><br>
+<textarea id=check0textarea>
+
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;"><br/>The next class <span style=" font-family:Courier New;">Employed</span> should inherit from <span style=" font-family:Courier New;">Person</span> and have a protected variable, salary. </p><br>
+<textarea id=check1textarea>
+
+</textarea>  <div id=check1div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;"><br/>The last class, Programmer, contains the variables favProgLang(favorite programming language) and drinksJoltCola.</p><br>
+<textarea id=check2textarea>
+
+</textarea>  <div id=check2div> </div> <br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><textarea id=check3textarea>
+class Person
+  String name;
+  Real weight;
+protected
+  Integer ID;
+end Person;
+</textarea>  <div id=check3div> </div> <br>
+<textarea id=check4textarea>
+class Employed
+  extends Person;
+protected
+  Real salary;
+end Employed;
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+class Programmer
+  extends Employed;
+  String favProgLang;
+  Boolean drinksJoltCola;
+end Programmer;
+</textarea>  <div id=check5div> </div> <br>
+</div><h2>
+2
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;">Which protected variable(s) does the class <span style=" font-family:Courier New;">Employed</span> have?</p><br>
+<h3>
+2.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer1 > Answer</button>
+</h3>
+<div id=answer1 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;"><span style=" font-family:Courier New;">salary</span> and <span style=" font-family:Courier New;">ID</span></p><br>
+</div><h2>
+3
+A Different Exercise
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;">Use the same class <span style=" font-family:Courier New;">Person</span>, but write a new class, <span style=" font-family:Courier New;">Employed</span>, so that the variable <span style=" font-family:Courier New;">salary</span> still is protected and as well as the <span style=" font-family:Courier New;">extends clause</span>.</p><br>
+<h3>
+3.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer2 > Answer</button>
+</h3>
+<div id=answer2 class=collapse><textarea id=check6textarea>
+class Employed
+protected
+  extends Person;
+protected
+  Real salary;
+end Employed;
+</textarea>  <div id=check6div> </div> <br>
+</div><h2>
+4
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;">Now which protected variable(s) does the class <span style=" font-family:Courier New;">Employed</span> have?</p><br>
+<h3>
+4.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer3 > Answer</button>
+</h3>
+<div id=answer3 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;"><span style=" font-family:Courier New;">name</span>,  <span style=" font-family:Courier New;">weight, salary</span> and <span style=" font-family:Courier New;">ID</span></p><br>
+</div></div></body></html>

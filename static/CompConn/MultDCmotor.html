@@ -1,0 +1,807 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+A DC-Motor by Connecting Components from Multiple Domains
+</h1>
+<h2>
+1
+General Description
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">So far most of the presented models have been of the single domain type being constructed of components from a single application domain. However, one of the main advantages with Modelica is the ease of constructing multi-domain models simply by connecting components from different domains. A DC (direct current) motor is one of the simplest examples illustrating this capability. <br/> <br/>This particular model contains components from the three domains: mechanical components such as inertia1,the electrical components resistor1, inductor1, signalVoltage1 and ground1 as well as pure signal components such as step1. <br/></span></p><br>
+<h1>
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A multi-domain DC-MotorCircuit model with mechanical, electrical and signal block components</span></p>
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; font-weight:600; color:#000000;">NOTE</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">: In order to simulate the DCMotorCircuit model below, you first need to evaluate the declarations in sections 2-7 below. This is easily done by selecting these cells (to the right) and pushing shift-return as usual.</span></p><br>
+<h2>
+2
+Types from Modelica.SIunits
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The following are different types from the library </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Modelica.SIunits</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> used by the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">DCMotorCircuit</span></p><br>
+<h3>
+2.1
+Electrical units
+</h3>
+<textarea id=check0textarea>
+type ElectricPotential     = Real;
+type ElectricCurrent     = Real(quantity = "ElectricCurrent", unit = "A");
+type Resistance       = Real(quantity = "Resistance", unit = "Ohm", min = 0);
+type Inductance       = Real(quantity = "Inductance", unit = "H", min = 0);
+type Voltage         = ElectricPotential;
+type Current         = ElectricCurrent;
+</textarea>  <div id=check0div> </div> <br>
+<h3>
+2.2
+Mechanical units
+</h3>
+<textarea id=check1textarea>
+type Force           = Real(quantity = "Force", unit = "N");
+type Angle           = Real(quantity = "Angle", unit = "rad", displayUnit = "deg");
+type Torque         = Real(quantity = "Torque", unit = "N.m");
+type AngularVelocity     = Real(quantity = "AngularVelocity", unit = "rad/s", displayUnit = "rev/min");
+type AngularAcceleration   = Real(quantity = "AngularAcceleration", unit = "rad/s2");
+type MomentOfInertia     = Real(quantity = "MomentOfInertia", unit = "kg.m2");
+</textarea>  <div id=check1div> </div> <br>
+<h3>
+2.3
+Other units
+</h3>
+<textarea id=check2textarea>
+type Length         = Real(quantity = "Length", unit = "m");
+type Time            = Real(quantity = "Time", unit = "s");
+type Distance        = Length(min = 0);
+type Position         = Length;
+</textarea>  <div id=check2div> </div> <br>
+<h2>
+3
+Electrical Connectors
+</h2>
+<textarea id=check3textarea>
+connector Pin           "Pin of an electrical component"
+   Voltage v           "Potential at the pin";
+   flow Current i         "Current flowing into the pin";
+end Pin;              //From Modelica.Electrical.Analog.Interfaces
+</textarea>  <div id=check3div> </div> <br>
+<textarea id=check4textarea>
+connector PositivePin       "Positive pin of an electrical component"
+   Voltage v           "Potential at the pin";
+   flow Current i         "Current flowing into the pin";
+end PositivePin;          //From Modelica.Electrical.Analog.Interfaces
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+connector NegativePin       "Negative pin of an electrical component"
+   Voltage v           "Potential at the pin";
+   flow Current i         "Current flowing into the pin";
+end NegativePin;          //From Modelica.Electrical.Analog.Interfaces
+</textarea>  <div id=check5div> </div> <br>
+<h2>
+4
+ Mechanical Connectors
+</h2>
+<textarea id=check6textarea>
+connector RotFlange_a       "1D rotational flange (filled square)"
+   Angle phi           "Absolute rotational angle of flange";
+   flow Torque tau         "Torque in the flange";
+end RotFlange_a;        //From Modelica.Mechanics.Rotational.Interfaces
+</textarea>  <div id=check6div> </div> <br>
+<textarea id=check7textarea>
+connector RotFlange_b       "1D rotational flange (filled square)"
+   Angle phi(fixed=true)           "Absolute rotational angle of flange";
+   flow Torque tau         "Torque in the flange";
+end RotFlange_b;        //From Modelica.Mechanics.Rotational.Interfaces
+</textarea>  <div id=check7div> </div> <br>
+<h2>
+5
+Block Signal Connectors
+</h2>
+<textarea id=check8textarea>
+connector InPort        "Connector with input signals of type Real"
+  parameter Integer n = 1    "Dimension of signal vector";
+  input Real     signal[n]  "Real input signals";
+end InPort;            // From Modelica.Blocks.Interfaces
+</textarea>  <div id=check8div> </div> <br>
+<textarea id=check9textarea>
+connector OutPort        "Connector with output signals of type Real"
+  parameter Integer n = 1    "Dimension of signal vector";
+  output Real     signal[n]  "Real output signals";
+end OutPort;          // From Modelica.Blocks.Interfaces
+</textarea>  <div id=check9div> </div> <br>
+<h2>
+6
+Components
+</h2>
+<h3>
+6.1
+Electrical Components
+</h3>
+<textarea id=check10textarea>
+partial model TwoPin          // Same as OnePort in Modelica.Electrical.Analog.Interfaces
+                    "Component with two electrical pins p and n and current i from p to n"
+  Voltage v                "Voltage drop between the two pins (= p.v - n.v)";
+  Current i(fixed=true)                "Current flowing from pin p to pin n";
+  PositivePin p;
+  NegativePin n;
+equation
+  v = p.v - n.v;
+  0 = p.i + n.i;
+  i = p.i;
+end TwoPin;          
+</textarea>  <div id=check10div> </div> <br>
+<textarea id=check11textarea>
+class Resistor               "Ideal linear electrical Resistor"
+  extends TwoPin;            // Same as OnePort
+  parameter Real R(unit = "Ohm")     "Resistance";
+equation
+  R*i = v;
+end Resistor;                // From Modelica.Electrical.Analog.Basic 
+</textarea>  <div id=check11div> </div> <br>
+<textarea id=check12textarea>
+class Inductor               "Ideal linear electrical Inductor"
+  extends TwoPin;            // Same as OnePort
+  parameter Real L(unit = "H")       "Inductance";
+equation
+  v = L*der(i);
+end Inductor;              // From Modelica.Electrical.Analog.Basic 
+</textarea>  <div id=check12div> </div> <br>
+<textarea id=check13textarea>
+class Ground               "Ground node"
+  Pin p;
+equation
+  p.v = 0;
+end Ground;                // From Modelica.Electrical.Analog.Basic 
+</textarea>  <div id=check13div> </div> <br>
+<textarea id=check14textarea>
+model SignalVoltage            "Generic Voltage source using the input signal as source Voltage"
+  extends TwoPin;            // Same as OnePort
+  InPort inPort(n=1);
+equation
+  inPort.signal[1] = v;
+end SignalVoltage;            // From Modelica.Electrical.Analog.Sources
+</textarea>  <div id=check14div> </div> <br>
+<h3>
+6.2
+Mechanical Components
+</h3>
+<textarea id=check15textarea>
+partial model Rigid           // Rotational class Rigid
+                    "Base class for the rigid connection of two rotational 1D flanges"
+  Angle phi                "Absolute rotation angle of component";
+  RotFlange_a rotFlange_a        "(left) driving flange (axis directed into plane)";
+  RotFlange_b rotFlange_b        "(right) driven flange (axis directed out of plane)";
+equation
+  rotFlange_a.phi = phi;
+  rotFlange_b.phi = phi;
+end Rigid;                // From Modelica.Mechanics.Rotational.Interfaces
+
+</textarea>  <div id=check15div> </div> <br>
+<textarea id=check16textarea>
+model Inertia              "1D rotational component with inertia"
+  extends Rigid;
+  parameter MomentOfInertia J = 1    "Moment of inertia";
+  AngularVelocity     w(fixed=true)          "Absolute angular velocity of component";
+  AngularAcceleration a          "Absolute angular acceleration of component";
+equation
+  w = der(phi);
+  a = der(w);
+  J*a = rotFlange_a.tau + rotFlange_b.tau;
+end Inertia;              //From Modelica.Mechanics.Rotational
+</textarea>  <div id=check16div> </div> <br>
+<h3>
+6.3
+Electromechanical Components
+</h3>
+<textarea id=check17textarea>
+model EMF                 "Electromotoric force (electric/mechanic transformer)"
+  extends TwoPin;
+  parameter Real   k(unit = "N.m/A") = 1  "Transformation coefficient";
+  AngularVelocity    w          "Angular velocity of rotFlange_b";
+  RotFlange_b    rotFlange_b;      // Rotational Flange_b
+equation
+  w = der(rotFlange_b.phi);
+  v = k*w;
+  rotFlange_b.tau = - k*i;
+end EMF;                // From Modelica.Electrical.Analog.Basic 
+</textarea>  <div id=check17div> </div> <br>
+<h3>
+6.4
+Signal Block Components
+</h3>
+<textarea id=check18textarea>
+partial block MO             "Multiple Output continuous control block"
+  parameter Integer nout = 1      "Number of outputs";
+  OutPort       outPort(n = nout)  "Connector of Real output signals";
+protected
+  Real n[nout] = outPort.signal;
+end MO;                  // From Modelica.Blocks.Interfaces
+</textarea>  <div id=check18div> </div> <br>
+<textarea id=check19textarea>
+block Step                "Generate step signals of type Real"
+  extends MO(nout = 1);
+  parameter Real height = 1        "Height of steps";
+  parameter Real offset = 0        "Offset of output signals";
+  parameter Time startTime = 0      "Output = offset for time < startTime";
+equation
+  outPort.signal[1] = offset + (if time < startTime then 0 else height);
+end Step;                // Version simplified from Step in Modelica.Blocks.Sources
+</textarea>  <div id=check19div> </div> <br>
+<h2>
+7
+DCMotor
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">This</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;"> DC</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> (direct current) </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">motor</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> model contains component from three domains: mechanical, electrical and signal components. </span></p><br>
+<textarea id=check20textarea>
+loadModel(Modelica);
+</textarea>  <div id=check20div> </div> <br>
+<textarea id=check21textarea>
+model DCMotorCircuit
+  Resistor     resistor1(R=10);
+  Inductor     inductor1(L=0.2);
+  Ground     ground1;
+  Inertia     inertia1(J=1);
+  EMF       emf1;
+  Step       step1;
+  SignalVoltage signalVoltage1;
+equation
+  connect(step1.outPort, signalVoltage1.inPort);
+  connect(signalVoltage1.p, resistor1.p);
+  connect(resistor1.n, inductor1.p);
+  connect(inductor1.n, emf1.p);
+  connect(emf1.rotFlange_b, inertia1.rotFlange_a);
+  connect(signalVoltage1.n, ground1.p);
+  connect(ground1.p, emf1.n);
+end DCMotorCircuit;
+</textarea>  <div id=check21div> </div> <br>
+<h2>
+8
+Simulation of DCMotorCircuit 
+</h2>
+<textarea id=check22textarea>
+simulate( DCMotorCircuit, stopTime=150 )
+</textarea>  <div id=check22div> </div> <br>
+<textarea id=check23textarea>
+plot( inertia1.w )
+</textarea> <br> <div id=check23div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check23div"),
+  [[  0.00000000e+00,   0.00000000e+00],
+       [  3.00000000e-01,   2.76604327e-02],
+       [  6.00000000e-01,   5.64545334e-02],
+       [  9.00000000e-01,   8.43957348e-02],
+       [  1.20000000e+00,   1.11509443e-01],
+       [  1.50000000e+00,   1.37820343e-01],
+       [  1.80000000e+00,   1.63352040e-01],
+       [  2.10000000e+00,   1.88127628e-01],
+       [  2.40000000e+00,   2.12169536e-01],
+       [  2.70000000e+00,   2.35499484e-01],
+       [  3.00000000e+00,   2.58138584e-01],
+       [  3.30000000e+00,   2.80107279e-01],
+       [  3.60000000e+00,   3.01425428e-01],
+       [  3.90000000e+00,   3.22112292e-01],
+       [  4.20000000e+00,   3.42186567e-01],
+       [  4.50000000e+00,   3.61666394e-01],
+       [  4.80000000e+00,   3.80569364e-01],
+       [  5.10000000e+00,   3.98912565e-01],
+       [  5.40000000e+00,   4.16712577e-01],
+       [  5.70000000e+00,   4.33985469e-01],
+       [  6.00000000e+00,   4.50746863e-01],
+       [  6.30000000e+00,   4.67011892e-01],
+       [  6.60000000e+00,   4.82795247e-01],
+       [  6.90000000e+00,   4.98111206e-01],
+       [  7.20000000e+00,   5.12973610e-01],
+       [  7.50000000e+00,   5.27395869e-01],
+       [  7.80000000e+00,   5.41391052e-01],
+       [  8.10000000e+00,   5.54971816e-01],
+       [  8.40000000e+00,   5.68150379e-01],
+       [  8.70000000e+00,   5.80938702e-01],
+       [  9.00000000e+00,   5.93348371e-01],
+       [  9.30000000e+00,   6.05390493e-01],
+       [  9.60000000e+00,   6.17076002e-01],
+       [  9.90000000e+00,   6.28415586e-01],
+       [  1.02000000e+01,   6.39419384e-01],
+       [  1.05000000e+01,   6.50097330e-01],
+       [  1.08000000e+01,   6.60459082e-01],
+       [  1.11000000e+01,   6.70513949e-01],
+       [  1.14000000e+01,   6.80271001e-01],
+       [  1.17000000e+01,   6.89739131e-01],
+       [  1.20000000e+01,   6.98926845e-01],
+       [  1.23000000e+01,   7.07842428e-01],
+       [  1.26000000e+01,   7.16494075e-01],
+       [  1.29000000e+01,   7.24889548e-01],
+       [  1.32000000e+01,   7.33036288e-01],
+       [  1.35000000e+01,   7.40941903e-01],
+       [  1.38000000e+01,   7.48613527e-01],
+       [  1.41000000e+01,   7.56057897e-01],
+       [  1.44000000e+01,   7.63281836e-01],
+       [  1.47000000e+01,   7.70291838e-01],
+       [  1.50000000e+01,   7.77094204e-01],
+       [  1.53000000e+01,   7.83695122e-01],
+       [  1.56000000e+01,   7.90100570e-01],
+       [  1.59000000e+01,   7.96316305e-01],
+       [  1.62000000e+01,   8.02347972e-01],
+       [  1.65000000e+01,   8.08201051e-01],
+       [  1.68000000e+01,   8.13880812e-01],
+       [  1.71000000e+01,   8.19392376e-01],
+       [  1.74000000e+01,   8.24740709e-01],
+       [  1.77000000e+01,   8.29930667e-01],
+       [  1.80000000e+01,   8.34966936e-01],
+       [  1.83000000e+01,   8.39854060e-01],
+       [  1.86000000e+01,   8.44596466e-01],
+       [  1.89000000e+01,   8.49198439e-01],
+       [  1.92000000e+01,   8.53664119e-01],
+       [  1.95000000e+01,   8.57997553e-01],
+       [  1.98000000e+01,   8.62202656e-01],
+       [  2.01000000e+01,   8.66283186e-01],
+       [  2.04000000e+01,   8.70242842e-01],
+       [  2.07000000e+01,   8.74085203e-01],
+       [  2.10000000e+01,   8.77813722e-01],
+       [  2.13000000e+01,   8.81431846e-01],
+       [  2.16000000e+01,   8.84942834e-01],
+       [  2.19000000e+01,   8.88349820e-01],
+       [  2.22000000e+01,   8.91655957e-01],
+       [  2.25000000e+01,   8.94864181e-01],
+       [  2.28000000e+01,   8.97977448e-01],
+       [  2.31000000e+01,   9.00998588e-01],
+       [  2.34000000e+01,   9.03930280e-01],
+       [  2.37000000e+01,   9.06775176e-01],
+       [  2.40000000e+01,   9.09535866e-01],
+       [  2.43000000e+01,   9.12214794e-01],
+       [  2.46000000e+01,   9.14814369e-01],
+       [  2.49000000e+01,   9.17336973e-01],
+       [  2.52000000e+01,   9.19784884e-01],
+       [  2.55000000e+01,   9.22160294e-01],
+       [  2.58000000e+01,   9.24465355e-01],
+       [  2.61000000e+01,   9.26702160e-01],
+       [  2.64000000e+01,   9.28872727e-01],
+       [  2.67000000e+01,   9.30979021e-01],
+       [  2.70000000e+01,   9.33022941e-01],
+       [  2.73000000e+01,   9.35006339e-01],
+       [  2.76000000e+01,   9.36931002e-01],
+       [  2.79000000e+01,   9.38798671e-01],
+       [  2.82000000e+01,   9.40611027e-01],
+       [  2.85000000e+01,   9.42369718e-01],
+       [  2.88000000e+01,   9.44076306e-01],
+       [  2.91000000e+01,   9.45732310e-01],
+       [  2.94000000e+01,   9.47339282e-01],
+       [  2.97000000e+01,   9.48898621e-01],
+       [  3.00000000e+01,   9.50411819e-01],
+       [  3.03000000e+01,   9.51880162e-01],
+       [  3.06000000e+01,   9.53305070e-01],
+       [  3.09000000e+01,   9.54687741e-01],
+       [  3.12000000e+01,   9.56029514e-01],
+       [  3.15000000e+01,   9.57331513e-01],
+       [  3.18000000e+01,   9.58595008e-01],
+       [  3.21000000e+01,   9.59821080e-01],
+       [  3.24000000e+01,   9.61010870e-01],
+       [  3.27000000e+01,   9.62165459e-01],
+       [  3.30000000e+01,   9.63285893e-01],
+       [  3.33000000e+01,   9.64373158e-01],
+       [  3.36000000e+01,   9.65428234e-01],
+       [  3.39000000e+01,   9.66452055e-01],
+       [  3.42000000e+01,   9.67445525e-01],
+       [  3.45000000e+01,   9.68409629e-01],
+       [  3.48000000e+01,   9.69345184e-01],
+       [  3.51000000e+01,   9.70253023e-01],
+       [  3.54000000e+01,   9.71133952e-01],
+       [  3.57000000e+01,   9.71988827e-01],
+       [  3.60000000e+01,   9.72818383e-01],
+       [  3.63000000e+01,   9.73623360e-01],
+       [  3.66000000e+01,   9.74404471e-01],
+       [  3.69000000e+01,   9.75162479e-01],
+       [  3.72000000e+01,   9.75898039e-01],
+       [  3.75000000e+01,   9.76611807e-01],
+       [  3.78000000e+01,   9.77304418e-01],
+       [  3.81000000e+01,   9.77976538e-01],
+       [  3.84000000e+01,   9.78628757e-01],
+       [  3.87000000e+01,   9.79261656e-01],
+       [  3.90000000e+01,   9.79875796e-01],
+       [  3.93000000e+01,   9.80471754e-01],
+       [  3.96000000e+01,   9.81050064e-01],
+       [  3.99000000e+01,   9.81611243e-01],
+       [  4.02000000e+01,   9.82155795e-01],
+       [  4.05000000e+01,   9.82684216e-01],
+       [  4.08000000e+01,   9.83196984e-01],
+       [  4.11000000e+01,   9.83694563e-01],
+       [  4.14000000e+01,   9.84177404e-01],
+       [  4.17000000e+01,   9.84645947e-01],
+       [  4.20000000e+01,   9.85100618e-01],
+       [  4.23000000e+01,   9.85541836e-01],
+       [  4.26000000e+01,   9.85970005e-01],
+       [  4.29000000e+01,   9.86385478e-01],
+       [  4.32000000e+01,   9.86788625e-01],
+       [  4.35000000e+01,   9.87179826e-01],
+       [  4.38000000e+01,   9.87559434e-01],
+       [  4.41000000e+01,   9.87927792e-01],
+       [  4.44000000e+01,   9.88285231e-01],
+       [  4.47000000e+01,   9.88632073e-01],
+       [  4.50000000e+01,   9.88968633e-01],
+       [  4.53000000e+01,   9.89295219e-01],
+       [  4.56000000e+01,   9.89612132e-01],
+       [  4.59000000e+01,   9.89919658e-01],
+       [  4.62000000e+01,   9.90218079e-01],
+       [  4.65000000e+01,   9.90507669e-01],
+       [  4.68000000e+01,   9.90788698e-01],
+       [  4.71000000e+01,   9.91061427e-01],
+       [  4.74000000e+01,   9.91326095e-01],
+       [  4.77000000e+01,   9.91582881e-01],
+       [  4.80000000e+01,   9.91832064e-01],
+       [  4.83000000e+01,   9.92073869e-01],
+       [  4.86000000e+01,   9.92308518e-01],
+       [  4.89000000e+01,   9.92536223e-01],
+       [  4.92000000e+01,   9.92757195e-01],
+       [  4.95000000e+01,   9.92971636e-01],
+       [  4.98000000e+01,   9.93179711e-01],
+       [  5.01000000e+01,   9.93381624e-01],
+       [  5.04000000e+01,   9.93577561e-01],
+       [  5.07000000e+01,   9.93767699e-01],
+       [  5.10000000e+01,   9.93952213e-01],
+       [  5.13000000e+01,   9.94131270e-01],
+       [  5.16000000e+01,   9.94305036e-01],
+       [  5.19000000e+01,   9.94473652e-01],
+       [  5.22000000e+01,   9.94637267e-01],
+       [  5.25000000e+01,   9.94796037e-01],
+       [  5.28000000e+01,   9.94950108e-01],
+       [  5.31000000e+01,   9.95099618e-01],
+       [  5.34000000e+01,   9.95244705e-01],
+       [  5.37000000e+01,   9.95385501e-01],
+       [  5.40000000e+01,   9.95522129e-01],
+       [  5.43000000e+01,   9.95654701e-01],
+       [  5.46000000e+01,   9.95783347e-01],
+       [  5.49000000e+01,   9.95908184e-01],
+       [  5.52000000e+01,   9.96029325e-01],
+       [  5.55000000e+01,   9.96146882e-01],
+       [  5.58000000e+01,   9.96260962e-01],
+       [  5.61000000e+01,   9.96371672e-01],
+       [  5.64000000e+01,   9.96479089e-01],
+       [  5.67000000e+01,   9.96583324e-01],
+       [  5.70000000e+01,   9.96684472e-01],
+       [  5.73000000e+01,   9.96782627e-01],
+       [  5.76000000e+01,   9.96877876e-01],
+       [  5.79000000e+01,   9.96970309e-01],
+       [  5.82000000e+01,   9.97060011e-01],
+       [  5.85000000e+01,   9.97147051e-01],
+       [  5.88000000e+01,   9.97231509e-01],
+       [  5.91000000e+01,   9.97313467e-01],
+       [  5.94000000e+01,   9.97392999e-01],
+       [  5.97000000e+01,   9.97470177e-01],
+       [  6.00000000e+01,   9.97545073e-01],
+       [  6.03000000e+01,   9.97617756e-01],
+       [  6.06000000e+01,   9.97688287e-01],
+       [  6.09000000e+01,   9.97756724e-01],
+       [  6.12000000e+01,   9.97823135e-01],
+       [  6.15000000e+01,   9.97887580e-01],
+       [  6.18000000e+01,   9.97950119e-01],
+       [  6.21000000e+01,   9.98010807e-01],
+       [  6.24000000e+01,   9.98069701e-01],
+       [  6.27000000e+01,   9.98126854e-01],
+       [  6.30000000e+01,   9.98182309e-01],
+       [  6.33000000e+01,   9.98236123e-01],
+       [  6.36000000e+01,   9.98288344e-01],
+       [  6.39000000e+01,   9.98339019e-01],
+       [  6.42000000e+01,   9.98388194e-01],
+       [  6.45000000e+01,   9.98435915e-01],
+       [  6.48000000e+01,   9.98482226e-01],
+       [  6.51000000e+01,   9.98527163e-01],
+       [  6.54000000e+01,   9.98570767e-01],
+       [  6.57000000e+01,   9.98613081e-01],
+       [  6.60000000e+01,   9.98654141e-01],
+       [  6.63000000e+01,   9.98693987e-01],
+       [  6.66000000e+01,   9.98732654e-01],
+       [  6.69000000e+01,   9.98770178e-01],
+       [  6.72000000e+01,   9.98806590e-01],
+       [  6.75000000e+01,   9.98841921e-01],
+       [  6.78000000e+01,   9.98876206e-01],
+       [  6.81000000e+01,   9.98909476e-01],
+       [  6.84000000e+01,   9.98941761e-01],
+       [  6.87000000e+01,   9.98973091e-01],
+       [  6.90000000e+01,   9.99003495e-01],
+       [  6.93000000e+01,   9.99033000e-01],
+       [  6.96000000e+01,   9.99061627e-01],
+       [  6.99000000e+01,   9.99089407e-01],
+       [  7.02000000e+01,   9.99116365e-01],
+       [  7.05000000e+01,   9.99142525e-01],
+       [  7.08000000e+01,   9.99167910e-01],
+       [  7.11000000e+01,   9.99192545e-01],
+       [  7.14000000e+01,   9.99216452e-01],
+       [  7.17000000e+01,   9.99239650e-01],
+       [  7.20000000e+01,   9.99262159e-01],
+       [  7.23000000e+01,   9.99284003e-01],
+       [  7.26000000e+01,   9.99305200e-01],
+       [  7.29000000e+01,   9.99325769e-01],
+       [  7.32000000e+01,   9.99345731e-01],
+       [  7.35000000e+01,   9.99365102e-01],
+       [  7.38000000e+01,   9.99383899e-01],
+       [  7.41000000e+01,   9.99402136e-01],
+       [  7.44000000e+01,   9.99419832e-01],
+       [  7.47000000e+01,   9.99437003e-01],
+       [  7.50000000e+01,   9.99453664e-01],
+       [  7.53000000e+01,   9.99469830e-01],
+       [  7.56000000e+01,   9.99485515e-01],
+       [  7.59000000e+01,   9.99500733e-01],
+       [  7.62000000e+01,   9.99515498e-01],
+       [  7.65000000e+01,   9.99529823e-01],
+       [  7.68000000e+01,   9.99543721e-01],
+       [  7.71000000e+01,   9.99557205e-01],
+       [  7.74000000e+01,   9.99570286e-01],
+       [  7.77000000e+01,   9.99582977e-01],
+       [  7.80000000e+01,   9.99595289e-01],
+       [  7.83000000e+01,   9.99607233e-01],
+       [  7.86000000e+01,   9.99618820e-01],
+       [  7.89000000e+01,   9.99630061e-01],
+       [  7.92000000e+01,   9.99640968e-01],
+       [  7.95000000e+01,   9.99651549e-01],
+       [  7.98000000e+01,   9.99661816e-01],
+       [  8.01000000e+01,   9.99671779e-01],
+       [  8.04000000e+01,   9.99681448e-01],
+       [  8.07000000e+01,   9.99690831e-01],
+       [  8.10000000e+01,   9.99699941e-01],
+       [  8.13000000e+01,   9.99708784e-01],
+       [  8.16000000e+01,   9.99717373e-01],
+       [  8.19000000e+01,   9.99725715e-01],
+       [  8.22000000e+01,   9.99733821e-01],
+       [  8.25000000e+01,   9.99741683e-01],
+       [  8.28000000e+01,   9.99749283e-01],
+       [  8.31000000e+01,   9.99756658e-01],
+       [  8.34000000e+01,   9.99763813e-01],
+       [  8.37000000e+01,   9.99770757e-01],
+       [  8.40000000e+01,   9.99777494e-01],
+       [  8.43000000e+01,   9.99784032e-01],
+       [  8.46000000e+01,   9.99790378e-01],
+       [  8.49000000e+01,   9.99796536e-01],
+       [  8.52000000e+01,   9.99802514e-01],
+       [  8.55000000e+01,   9.99808317e-01],
+       [  8.58000000e+01,   9.99813951e-01],
+       [  8.61000000e+01,   9.99819422e-01],
+       [  8.64000000e+01,   9.99824736e-01],
+       [  8.67000000e+01,   9.99829898e-01],
+       [  8.70000000e+01,   9.99834897e-01],
+       [  8.73000000e+01,   9.99839742e-01],
+       [  8.76000000e+01,   9.99844445e-01],
+       [  8.79000000e+01,   9.99849008e-01],
+       [  8.82000000e+01,   9.99853438e-01],
+       [  8.85000000e+01,   9.99857738e-01],
+       [  8.88000000e+01,   9.99861912e-01],
+       [  8.91000000e+01,   9.99865964e-01],
+       [  8.94000000e+01,   9.99869899e-01],
+       [  8.97000000e+01,   9.99873720e-01],
+       [  9.00000000e+01,   9.99877432e-01],
+       [  9.03000000e+01,   9.99881039e-01],
+       [  9.06000000e+01,   9.99884543e-01],
+       [  9.09000000e+01,   9.99887950e-01],
+       [  9.12000000e+01,   9.99891260e-01],
+       [  9.15000000e+01,   9.99894455e-01],
+       [  9.18000000e+01,   9.99897557e-01],
+       [  9.21000000e+01,   9.99900568e-01],
+       [  9.24000000e+01,   9.99903490e-01],
+       [  9.27000000e+01,   9.99906327e-01],
+       [  9.30000000e+01,   9.99909081e-01],
+       [  9.33000000e+01,   9.99911754e-01],
+       [  9.36000000e+01,   9.99914349e-01],
+       [  9.39000000e+01,   9.99916870e-01],
+       [  9.42000000e+01,   9.99919317e-01],
+       [  9.45000000e+01,   9.99921694e-01],
+       [  9.48000000e+01,   9.99924003e-01],
+       [  9.51000000e+01,   9.99926246e-01],
+       [  9.54000000e+01,   9.99928427e-01],
+       [  9.57000000e+01,   9.99930539e-01],
+       [  9.60000000e+01,   9.99932584e-01],
+       [  9.63000000e+01,   9.99934568e-01],
+       [  9.66000000e+01,   9.99936493e-01],
+       [  9.69000000e+01,   9.99938362e-01],
+       [  9.72000000e+01,   9.99940176e-01],
+       [  9.75000000e+01,   9.99941936e-01],
+       [  9.78000000e+01,   9.99943644e-01],
+       [  9.81000000e+01,   9.99945302e-01],
+       [  9.84000000e+01,   9.99946912e-01],
+       [  9.87000000e+01,   9.99948476e-01],
+       [  9.90000000e+01,   9.99949994e-01],
+       [  9.93000000e+01,   9.99951469e-01],
+       [  9.96000000e+01,   9.99952902e-01],
+       [  9.99000000e+01,   9.99954295e-01],
+       [  1.00200000e+02,   9.99955639e-01],
+       [  1.00500000e+02,   9.99956942e-01],
+       [  1.00800000e+02,   9.99958207e-01],
+       [  1.01100000e+02,   9.99959433e-01],
+       [  1.01400000e+02,   9.99960623e-01],
+       [  1.01700000e+02,   9.99961778e-01],
+       [  1.02000000e+02,   9.99962899e-01],
+       [  1.02300000e+02,   9.99963987e-01],
+       [  1.02600000e+02,   9.99965044e-01],
+       [  1.02900000e+02,   9.99966069e-01],
+       [  1.03200000e+02,   9.99967066e-01],
+       [  1.03500000e+02,   9.99968034e-01],
+       [  1.03800000e+02,   9.99968975e-01],
+       [  1.04100000e+02,   9.99969891e-01],
+       [  1.04400000e+02,   9.99970779e-01],
+       [  1.04700000e+02,   9.99971635e-01],
+       [  1.05000000e+02,   9.99972465e-01],
+       [  1.05300000e+02,   9.99973271e-01],
+       [  1.05600000e+02,   9.99974052e-01],
+       [  1.05900000e+02,   9.99974811e-01],
+       [  1.06200000e+02,   9.99975548e-01],
+       [  1.06500000e+02,   9.99976263e-01],
+       [  1.06800000e+02,   9.99976957e-01],
+       [  1.07100000e+02,   9.99977631e-01],
+       [  1.07400000e+02,   9.99978287e-01],
+       [  1.07700000e+02,   9.99978924e-01],
+       [  1.08000000e+02,   9.99979543e-01],
+       [  1.08300000e+02,   9.99980145e-01],
+       [  1.08600000e+02,   9.99980732e-01],
+       [  1.08900000e+02,   9.99981298e-01],
+       [  1.09200000e+02,   9.99981846e-01],
+       [  1.09500000e+02,   9.99982378e-01],
+       [  1.09800000e+02,   9.99982894e-01],
+       [  1.10100000e+02,   9.99983395e-01],
+       [  1.10400000e+02,   9.99983882e-01],
+       [  1.10700000e+02,   9.99984355e-01],
+       [  1.11000000e+02,   9.99984814e-01],
+       [  1.11300000e+02,   9.99985259e-01],
+       [  1.11600000e+02,   9.99985692e-01],
+       [  1.11900000e+02,   9.99986113e-01],
+       [  1.12200000e+02,   9.99986522e-01],
+       [  1.12500000e+02,   9.99986919e-01],
+       [  1.12800000e+02,   9.99987305e-01],
+       [  1.13100000e+02,   9.99987681e-01],
+       [  1.13400000e+02,   9.99988043e-01],
+       [  1.13700000e+02,   9.99988396e-01],
+       [  1.14000000e+02,   9.99988737e-01],
+       [  1.14300000e+02,   9.99989069e-01],
+       [  1.14600000e+02,   9.99989392e-01],
+       [  1.14900000e+02,   9.99989704e-01],
+       [  1.15200000e+02,   9.99990008e-01],
+       [  1.15500000e+02,   9.99990303e-01],
+       [  1.15800000e+02,   9.99990589e-01],
+       [  1.16100000e+02,   9.99990867e-01],
+       [  1.16400000e+02,   9.99991137e-01],
+       [  1.16700000e+02,   9.99991399e-01],
+       [  1.17000000e+02,   9.99991653e-01],
+       [  1.17300000e+02,   9.99991900e-01],
+       [  1.17600000e+02,   9.99992139e-01],
+       [  1.17900000e+02,   9.99992372e-01],
+       [  1.18200000e+02,   9.99992597e-01],
+       [  1.18500000e+02,   9.99992815e-01],
+       [  1.18800000e+02,   9.99993027e-01],
+       [  1.19100000e+02,   9.99993233e-01],
+       [  1.19400000e+02,   9.99993432e-01],
+       [  1.19700000e+02,   9.99993626e-01],
+       [  1.20000000e+02,   9.99993814e-01],
+       [  1.20300000e+02,   9.99993996e-01],
+       [  1.20600000e+02,   9.99994173e-01],
+       [  1.20900000e+02,   9.99994345e-01],
+       [  1.21200000e+02,   9.99994512e-01],
+       [  1.21500000e+02,   9.99994674e-01],
+       [  1.21800000e+02,   9.99994832e-01],
+       [  1.22100000e+02,   9.99994983e-01],
+       [  1.22400000e+02,   9.99995129e-01],
+       [  1.22700000e+02,   9.99995271e-01],
+       [  1.23000000e+02,   9.99995408e-01],
+       [  1.23300000e+02,   9.99995541e-01],
+       [  1.23600000e+02,   9.99995669e-01],
+       [  1.23900000e+02,   9.99995793e-01],
+       [  1.24200000e+02,   9.99995913e-01],
+       [  1.24500000e+02,   9.99996029e-01],
+       [  1.24800000e+02,   9.99996141e-01],
+       [  1.25100000e+02,   9.99996249e-01],
+       [  1.25400000e+02,   9.99996353e-01],
+       [  1.25700000e+02,   9.99996454e-01],
+       [  1.26000000e+02,   9.99996551e-01],
+       [  1.26300000e+02,   9.99996645e-01],
+       [  1.26600000e+02,   9.99996735e-01],
+       [  1.26900000e+02,   9.99996822e-01],
+       [  1.27200000e+02,   9.99996905e-01],
+       [  1.27500000e+02,   9.99996986e-01],
+       [  1.27800000e+02,   9.99997064e-01],
+       [  1.28100000e+02,   9.99997138e-01],
+       [  1.28400000e+02,   9.99997210e-01],
+       [  1.28700000e+02,   9.99997279e-01],
+       [  1.29000000e+02,   9.99997346e-01],
+       [  1.29300000e+02,   9.99997410e-01],
+       [  1.29600000e+02,   9.99997472e-01],
+       [  1.29900000e+02,   9.99997531e-01],
+       [  1.30200000e+02,   9.99997588e-01],
+       [  1.30500000e+02,   9.99997643e-01],
+       [  1.30800000e+02,   9.99997698e-01],
+       [  1.31100000e+02,   9.99997753e-01],
+       [  1.31400000e+02,   9.99997807e-01],
+       [  1.31700000e+02,   9.99997860e-01],
+       [  1.32000000e+02,   9.99997911e-01],
+       [  1.32300000e+02,   9.99997961e-01],
+       [  1.32600000e+02,   9.99998010e-01],
+       [  1.32900000e+02,   9.99998057e-01],
+       [  1.33200000e+02,   9.99998104e-01],
+       [  1.33500000e+02,   9.99998150e-01],
+       [  1.33800000e+02,   9.99998195e-01],
+       [  1.34100000e+02,   9.99998239e-01],
+       [  1.34400000e+02,   9.99998283e-01],
+       [  1.34700000e+02,   9.99998326e-01],
+       [  1.35000000e+02,   9.99998368e-01],
+       [  1.35300000e+02,   9.99998410e-01],
+       [  1.35600000e+02,   9.99998452e-01],
+       [  1.35900000e+02,   9.99998493e-01],
+       [  1.36200000e+02,   9.99998534e-01],
+       [  1.36500000e+02,   9.99998575e-01],
+       [  1.36800000e+02,   9.99998615e-01],
+       [  1.37100000e+02,   9.99998656e-01],
+       [  1.37400000e+02,   9.99998697e-01],
+       [  1.37700000e+02,   9.99998737e-01],
+       [  1.38000000e+02,   9.99998778e-01],
+       [  1.38300000e+02,   9.99998819e-01],
+       [  1.38600000e+02,   9.99998860e-01],
+       [  1.38900000e+02,   9.99998901e-01],
+       [  1.39200000e+02,   9.99998942e-01],
+       [  1.39500000e+02,   9.99998979e-01],
+       [  1.39800000e+02,   9.99999006e-01],
+       [  1.40100000e+02,   9.99999032e-01],
+       [  1.40400000e+02,   9.99999057e-01],
+       [  1.40700000e+02,   9.99999081e-01],
+       [  1.41000000e+02,   9.99999105e-01],
+       [  1.41300000e+02,   9.99999128e-01],
+       [  1.41600000e+02,   9.99999150e-01],
+       [  1.41900000e+02,   9.99999171e-01],
+       [  1.42200000e+02,   9.99999192e-01],
+       [  1.42500000e+02,   9.99999213e-01],
+       [  1.42800000e+02,   9.99999232e-01],
+       [  1.43100000e+02,   9.99999252e-01],
+       [  1.43400000e+02,   9.99999270e-01],
+       [  1.43700000e+02,   9.99999289e-01],
+       [  1.44000000e+02,   9.99999307e-01],
+       [  1.44300000e+02,   9.99999324e-01],
+       [  1.44600000e+02,   9.99999341e-01],
+       [  1.44900000e+02,   9.99999358e-01],
+       [  1.45200000e+02,   9.99999374e-01],
+       [  1.45500000e+02,   9.99999390e-01],
+       [  1.45800000e+02,   9.99999406e-01],
+       [  1.46100000e+02,   9.99999421e-01],
+       [  1.46400000e+02,   9.99999437e-01],
+       [  1.46700000e+02,   9.99999452e-01],
+       [  1.47000000e+02,   9.99999467e-01],
+       [  1.47300000e+02,   9.99999482e-01],
+       [  1.47600000e+02,   9.99999497e-01],
+       [  1.47900000e+02,   9.99999511e-01],
+       [  1.48200000e+02,   9.99999526e-01],
+       [  1.48500000e+02,   9.99999540e-01],
+       [  1.48800000e+02,   9.99999554e-01],
+       [  1.49100000e+02,   9.99999568e-01],
+       [  1.49400000e+02,   9.99999581e-01],
+       [  1.49700000e+02,   9.99999594e-01],
+       [  1.50000000e+02,   9.99999607e-01],
+       [  1.50000000e+02,   9.99999607e-01],
+       [  1.50000000e+02,   9.99999607e-01]] 
+,
+{
+legend:"always",
+labels:
+['Time', 'inertia1.w']
+}
+)
+</script>
+</div></body></html>

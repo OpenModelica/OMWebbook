@@ -1,0 +1,286 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Graphical Annotations
+</h1>
+<h2>
+1
+Graphical Representation of Resistor 
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The example below shows the use of graphical attributes in the form of annotations to define the different parts of the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Resistor</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> icon.</span></p><br>
+<h3>
+1.1
+Electrical units
+</h3>
+<textarea id=check0textarea>
+type Voltage         = ElectricPotential;
+type Current         = ElectricCurrent;
+</textarea>  <div id=check0div> </div> <br>
+<h3>
+1.2
+Electrical Connectors
+</h3>
+<textarea id=check1textarea>
+connector Pin "Pin of an electrical component"
+   Voltage v       "Potential at the pin";
+   flow Current i  "Current flowing into the pin";
+end Pin;  //From Modelica.Electrical.Analog.Interfaces
+</textarea>  <div id=check1div> </div> <br>
+<h3>
+1.3
+Resistor
+</h3>
+<textarea id=check2textarea>
+model Resistor  //?? Uses old or new Modelica annotations
+  Pin p annotation(extent = [-110, -10, -90, 10], style(fillPattern = 1));
+  Pin n annotation(extent = [110, -10, 90, 10]);
+  parameter Real R        "Resistance in [Ohm]";
+equation
+  R*p.i = p.v - n.v;
+  n.i = p.i;
+public
+  annotation(Icon(
+    Rectangle(extent = [-70, -30, 70, 30], style(fillPattern = 1)),
+    Text(extent =[-100, 55; 100, 110], string = "%name = %R"),
+    Line(points = [-90, 0; -70, 0]),
+    Line(points = [70, 0; 90, 0])
+    ));
+end Resistor;
+
+</textarea>  <div id=check2div> </div> <br>
+<h2>
+2
+Graphical Annotation Attributes
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">There are a number of predefined graphical annotation attributes, which can be divided into basic attributes; built-in attributes to classes, instances, and connections; and attributes that are graphical elements to specify the appearance of class icons.</span></p><br>
+<h3>
+2.1
+Basic Attributes
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The basic attribute classes are </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Point</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Extent</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Style</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> with the corresponding attributes p</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">oint</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">extent</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">style</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. </span></p><br>
+<textarea id=check3textarea>
+type Point = Real[2];    // {x, y}
+</textarea>  <div id=check3div> </div> <br>
+<textarea id=check4textarea>
+type Extent = Real[2, 2];  // [x1, y1; x2, y2]
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+record Style
+  Integer color[3], fillColor[3];            // RGB
+  Integer pattern, fillPattern, thickness, gradient,  // ??Explanations
+        smooth, arrow, textStyle;
+  String font;
+end Style;
+</textarea>  <div id=check5div> </div> <br>
+<h3>
+2.2
+Built-in Attributes to Classes, Instances and Connections
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The annotation elements </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">CoordinateSystem</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Placement</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Route</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> below are by default associated with classes, instances, and connection equations respectively. This means that these elements including their attributes exist even if they are not mentioned explicitly in the annotations of these entities. The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Route</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> annotation element also has alternative names such as </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Line</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Polygon</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> defined in the next section. <br/></span></p><br>
+<textarea id=check6textarea>
+record CoordinateSystem      // Attribute to class
+  Extent extent;
+  Point grid;
+  Point size;
+end CoordinateSystem;
+</textarea>  <div id=check6div> </div> <br>
+<textarea id=check7textarea>
+record Placement        // Attribute for components
+  Extent extent;
+  Real rotation;
+end Placement;
+</textarea>  <div id=check7div> </div> <br>
+<textarea id=check8textarea>
+record Route          // Attribute for connect equations
+  Point points[:];
+  Style style;
+  String label;
+end Route;
+</textarea>  <div id=check8div> </div> <br>
+<h3>
+2.3
+Definitions of Graphical Elements
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The following predefined graphical elements are used as graphical annotation elements including annotation attributes when defining the appearance of class icons. The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Line</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> graphical element can also be used for connection lines.</span><span style=" font-family:'Times New Roman'; font-size:12pt; font-weight:600; color:#000000;"><br/></span></p><br>
+<textarea id=check9textarea>
+record Line = Route;
+</textarea>  <div id=check9div> </div> <br>
+<textarea id=check10textarea>
+record Polygon = Route;
+</textarea>  <div id=check10div> </div> <br>
+<textarea id=check11textarea>
+record GraphicItem
+  Extent extent;
+  Style style;
+end GraphicItem;
+</textarea>  <div id=check11div> </div> <br>
+<textarea id=check12textarea>
+record Rectangle = GraphicItem;
+</textarea>  <div id=check12div> </div> <br>
+<textarea id=check13textarea>
+record Ellipse = GraphicItem;
+</textarea>  <div id=check13div> </div> <br>
+<textarea id=check14textarea>
+record Text
+  extends GraphicItem;
+  String string;
+end Text;
+</textarea>  <div id=check14div> </div> <br>
+<textarea id=check15textarea>
+record BitMap
+  extends GraphicItem;
+  String URL;        // Name of Bitmap file
+end BitMap;
+</textarea>  <div id=check15div> </div> <br>
+<h3>
+2.4
+Choices Annotations for Variables and Enumerations Types
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The choices annotation is applicable to both replaceable and nonreplaceable elements. For example, consider the following Integer type called </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">KindOfController</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> used to represent a choice of controller in the modeling process. This choice is made from the following enumeration of three recommended alternatives:<br/></span></p><br>
+<textarea id=check16textarea>
+type KindOfController = Integer(min = 1,max = 3)
+   annotation(choices(
+                choice = 1 "P",
+                choice = 2 "PI",
+                choice = 3 "PID"));
+
+</textarea>  <div id=check16div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Assume that </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">KindOfController</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is used in a model A as below:<br/></span></p><br>
+<textarea id=check17textarea>
+model A
+  parameter KindOfController x;
+end A;
+
+</textarea>  <div id=check17div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>If you interactively choose the third alternative from the menu this corresponds to giving the default value 3 for the instantiated variable </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">x</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> in the following code for an instance </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">a2</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> of the model </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">A</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">:<br/></span></p><br>
+<textarea id=check18textarea>
+class AInst
+A a2(x=3 "PID");
+end AInst;
+</textarea>  <div id=check18div> </div> <br>
+<h3>
+2.5
+Choices Annotations for Replaceable Model Elements
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The choices annotation can also be used to generate menus with redeclaration alternatives for replaceable models. For example, consider the following replaceable model with a choices annotation:</span></p><br>
+<h3>
+2.6
+Resistor
+</h3>
+<textarea id=check19textarea>
+model Resistor
+  Pin p annotation(extent = [-110, -10, -90, 10], style(fillPattern = 1));
+  Pin n annotation(extent = [110, -10, 90, 10]);
+  parameter Real R        "Resistance in [Ohm]";
+equation
+  R*p.i = p.v - n.v;
+  n.i = p.i;
+public
+  annotation(Icon(
+    Rectangle(extent = [-70, -30, 70, 30], style(fillPattern = 1)),
+    Text(extent =[-100, 55; 100, 110], string = "%name = %R"),
+    Line(points = [-90, 0; -70, 0]),
+    Line(points = [70, 0; 90, 0])
+    ));
+end Resistor;        
+</textarea>  <div id=check19div> </div> <br>
+<h3>
+2.7
+MyResistor
+</h3>
+<textarea id=check20textarea>
+class ResistorAnnotation
+replaceable model MyResistor = Resistor
+  annotation(choices(
+      choice(redeclare model MyResistor = lib2.Resistor "Resistor 1"),
+      choice(redeclare model MyResistor = lib2.Resistor2 "Resistor 2")));
+end ResistorAnnotation;
+
+</textarea>  <div id=check20div> </div> <br>
+<h3>
+2.8
+MyCircuit
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">If the user would choose the first alternative, the following code might be produced if </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MyResistor</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is part of the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MyCircuit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and the chosen name of the instantiated component is </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">x</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">:</span></p><br>
+<textarea id=check21textarea>
+model MyCircuit
+
+  model MyResistorModel
+    extends Electrical.Interfaces.ResistorModel;
+      // declarations and equations
+  end MyResistorModel;
+
+  encapsulated package MyComponents =
+      Electrical.Components (redeclare model ResistorModel = MyResistorModel);
+
+  MyComponents.Transformer tr1;
+  MyComponents.Transducer td2;
+
+  // ...
+
+end MyCircuit;
+</textarea>  <div id=check21div> </div> <br>
+<textarea id=check22textarea>
+class MyCircuitInst
+  MyCircuit x(redeclare model MyResistor = lib2.Resistor);
+end MyCircuitInst;
+</textarea>  <div id=check22div> </div> <br>
+<h3>
+2.9
+Additional Examples of Replaceable Class Declarations
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Additional examples of replaceable class declarations with redeclaration choices are shown below. In the first example you can choose between a resistor and a capacitor as choices of components with two pins, and in the second example a friction function is implemented as a constant, a table, or defined as an exponentiation function depending on your choice.<br/></span></p><br>
+<textarea id=check23textarea>
+class NewResistor
+replaceable Resistor Load(R=2)
+  extends TwoPin;
+  annotation(choices(
+          choice(redeclare lib2.Resistor Load(a={2}) "Resistor"),
+          choice(redeclare Capacitor Load(L=3)       "Capacitor")));
+end NewResistor;
+
+</textarea>  <div id=check23div> </div> <br>
+<textarea id=check24textarea>
+class NewFrictionFunction
+  replaceable FrictionFunction a(func = exp)
+  extends TwoPin;
+  annotation(choices(
+      choice(redeclare ConstantFriction a(c = 1)    "Friction Constant"),
+      choice(redeclare TableFriction a(table = "...")  "Friction-table"),
+      choice(redeclare FunctionFriction a(func = exp)  "Friction-exp")
+     ));
+end NewFrictionFunction;
+
+</textarea>  <div id=check24div> </div> <br>
+</div></body></html>

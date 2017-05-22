@@ -1,0 +1,1182 @@
+  
+<!doctype html>
+<head>
+  <title>DrModelica</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../static/jquery.min1.10.2.js"></script>
+ <link rel="stylesheet" href="../static/bootstrap.min.css">
+ <script src="../static/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="../static/custom.css">
+</head>
+
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">DrModelica</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+<br> <br> <br>
+
+<p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">Version 2017-05-15 </span></p><br>
+
+<div>
+<p>
+<span style=" font-family:'Times New Roman'; font-size:14pt; font-style:italic; color:#000000;">
+For trying your own models by adding new cells or practise exercises by creating new cells and evaluate, click
+<a href="static/DynamicWebbook/index.html" >DynamicWebBook</a> </span> </p>
+</div> 
+
+<h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Arial'; font-size:38pt; font-weight:600; color:#000000;">DrModelica</span><span style=" font-family:'Arial'; font-size:24pt; font-weight:600; color:#000000; vertical-align:super;">Modelica Edition</span></p>
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">Copyrights: (c) 2003-now,Open Source Modelica Consortium Wiley-IEEE Press, Modelica Association.<br/>Contact: OpenModelica@ida.liu.se;  OpenModelica Project web site:  www.openmodelica.org<br/>Book web page:  www.openmodelica.org;  Book author: Peter.Fritzson@ida.liu.se<br/><br/>
+Getting started information for OMWebbook:<a href="#getstart"> OMWebbook</a> <br/><br/>
+DrModelica Authors: (2003 version) Susanna Monemar, Eva-Lena Lengquist Sandelin, Peter Fritzson, Peter Bunus <br/>DrModelica Authors: (2005 and later updates): Peter Fritzson, Adrian Pop, Alachew Shitahun, Arunkumar Palanisamy </span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-style:italic; color:#000000;">This DrModelica notebook has been developed to facilitate learning the Modelica language as well as providing an introduction to object-oriented modeling and simulation. It is based on and is supplementary material to the Modelica book: Peter Fritzson:  "Principles of Object-Oriented Modeling and Simulation with Modelica" (2004), 940 pages, Wiley-IEEE Press, ISBN 0-471-471631. All of the examples and exercises in DrModelica and the page references are from that book. Most of the text in DrModelica is also based on that book.</span></p><br>
+<h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times'; font-size:14pt; font-weight:600; color:#000000;">Detailed Copyright and Acknowledgment Information</span></p>
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">A number of the examples in this document (DrModelica) and in the Modelica book are reproduced from the Modelica Language specification and Users Guide, copyrighted by the Modelica Association, and are free to use under the Modelica License (www.modelica.org). A number of examples have been published in papers and contributed by researchers (gratefully acknowledged in the book) for free use in the Modelica book and supplementary teaching material such as DrModelica. The rest of the examples in DrModelica are only from the Modelica Book, (c) by Wiley-IEEE Press, and are allowed for free usage if you and/or the teacher using this material have acquired that book.<br/><br/></span><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;">General notice: </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">All rights reserved. Reproduction or use of editorial or pictorial content in any manner is prohibited without expressed permission, if such content is not available by permission from another source. No patent liability is assumed with respect to the use of the information contained herein. While every precaution has been taken in the preparation of this manual, the publisher assumes no responsibility for errors or omissions. Neither is any liability assumed for damages resulting from the use of the information contained.</span></p><br>
+
+<a name="getstart"></a> 
+<h2>
+1
+Getting Started Using OMWebbook
+</h2>
+<table class="table table-bordered">
+<tr>
+<th> Function </th>
+<th> Button-action </th>
+<th> Short-Cut-keys-action </th>
+
+</tr>
+
+<tr>
+<td> Evaluate Cell </td>
+<td> Click the Cell and Press "Evaluate Cell" </td>
+<td> Click the Cell and Press "Shift+Enter" </td>
+</tr>
+
+<tr>
+<td> Evaluate All Cells </td>
+<td> Press "Eval all" button </td>
+<td> Press "Shift+Ctrl" </td>
+</tr>
+
+<tr>
+<td> Add Cells </td>
+<td> Click "Add cells" button </td>
+<td> Press "Ctrl+i" </td>
+</tr>
+
+<tr>
+<td> Delete Cells </td>
+<td> Click the Cell and Press "Delete Cells" </td>
+<td> Click the Cell and Press "Delete" </td>
+</tr>
+
+<tr>
+<td> Insert Cells between </td>
+<td> Click the Cell and Press "Insert Between" </td>
+<td> Click the Cell and Press "Ctrl+b" </td>
+</tr>
+
+<tr>
+<td> Save to pdf </td>
+<td> Click the "Save" </td>
+<td> Press "Ctrl+s" </td>
+</tr>
+
+</table>
+<p>
+<span style=" font-family:'Times'; font-size:14pt; color:#000000;">
+A cell containing a Modelica model, class, or function has to be evaluated before it is possible to simulate it. To do this, click inside the cell and push shift-enter or click evaluate button. Then you have to evaluate a simulate command, e.g. by typing "simulate(modelname, startTime=0, stopTime=25 )", After simulating a class it is possible to plot or just look at the values of the variables in the class by using the plot command.<br/>
+The functionalities Add cells, Delete Cells , Insert Cells between and save to pdf are available only for DynamnicWebbook.
+</span>
+</p>
+
+<h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times'; font-size:14pt; font-weight:600; color:#000000;"><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#answer1">OpenModelica commands</button></span></p>
+</h1>
+<div id="answer1" class="collapse">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;"> Instantiates a model/class and returns a string <br/> containing the flat class definition.<br/> Ex: instantiateModel(dcmotor)<br/><br/>list()<br/> Return a string containing all class definitions.<br/><br/>list(modelname)<br/> Return a string containing the class definition of<br/> the named class.<br/> Ex: list(dcmotor)<br/><br/>listVariables()<br/> Return a vector of the currently defined variable <br/> names.<br/><br/>loadModel(name)<br/> Load model, function, or package relative to $MODELICAPATH.<br/> Ex: loadModel(Modelica.Electrical)<br/> Note: if e.g. loadModel(Modelica) fails, you may have<br/> MODELICAPATH pointing at the wrong location.<br/><br/>plot(var)<br/> Plot a variable from the most recently simulated model.<br/> Ex: plot(x)<br/><br/>plot(vars)<br/> Plot variables from the most recently simulated model<br/> given as a vector.<br/> Ex: plot({x,y})<br/><br/>
+plotParametric(var1, var2)<br/> Plot var2 relative to var1 from the most recently simulated model.<br/>
+Ex: plotParametric(x,y).<br/> <br/>simulate(modelname[,startTime=][,stopTime=][,numberOfIntervals=])<br/> Translates a model and simulates it.<br/> Ex: simulate(dcmotor)<br/> Ex: simulate(dcmotor,startTime=0, stopTime=10, numberOfIntervals=1000)<br/><br/></span></p><br>
+</div>
+<h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times'; font-size:14pt; font-weight:600; color:#000000;"><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#answer2">OSMC Public license </button></span></p>
+</h1>
+<div id="answer2" class="collapse">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"><br/>Contact:<br/>Web:  www.ida.liu.se/projects/OpenModelica<br/>Email OpenModelica@ida.liu.se<br/><br/>This file is part of OpenModelica.</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> </span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  Copyright (c) 1998-2010, Link ping University,</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  Department of Computer and Information Science,</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  SE-58183 Link ping, Sweden.</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> </span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> All rights reserved.</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> </span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  THIS PROGRAM IS PROVIDED UNDER THE TERMS OF GPL VERSION 3 </span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  AND THIS OSMC PUBLIC LICENSE (OSMC-PL). </span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  ANY USE, REPRODUCTION OR DISTRIBUTION OF THIS PROGRAM CONSTITUTES RECIPIENT'S  </span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  ACCEPTANCE OF THE OSMC PUBLIC LICENSE.</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> </span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  The OpenModelica software and the Open Source Modelica</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  Consortium (OSMC) Public License (OSMC-PL) are obtained</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  from Link ping University, either from the above address,</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  from the URLs: http://www.ida.liu.se/projects/OpenModelica or  </span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  http://www.openmodelica.org, and in the OpenModelica distribution. </span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  GNU version 3 is obtained from: http://www.gnu.org/copyleft/gpl.html.</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> </span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  This program is distributed WITHOUT ANY WARRANTY; without</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  even the implied warranty of  MERCHANTABILITY or FITNESS</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  FOR A PARTICULAR PURPOSE, EXCEPT AS EXPRESSLY SET FORTH</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  IN THE BY RECIPIENT SELECTED SUBSIDIARY LICENSE CONDITIONS</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  OF OSMC-PL.</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> </span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  See the full OSMC Public License conditions for more details.</span></p><br>
+</div>
+<h2>
+2
+A Quick Tour of Modelica
+</h2>
+<h3>
+2.1
+Getting Started - First Basic Examples
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">There is a long tradition that the first sample program in any computer language is a trivial program printing the string "</span><a href="static/QuickTour/HelloWorld.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Hello World</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">" (p. 19 in Peter Fritzson's book). Since Modelica is an equation based language, printing a string does not make much sence. Instead, our Hello World Modelica program solves a trivial differential equation. The next example </span><a href="static/QuickTour/PlanarPendulum.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Planar Pendulum</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p.21) a mathematical model of physical system shows how you can write a model that solves Differential Algebraic Equation The second example shows how you can write a model that solves a </span><a href="static/QuickTour/DiffEq.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Differential Algebraic Equation System</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 19). In the </span><a href="static/Variables/VanDerPol.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Van der Pol</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 22) example declaration as well as initialization and prefix usage are shown in a slightly more complicated way.</span></p><br>
+<h3>
+2.2
+Classes and Instances 
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">In Modelica objects are created implicitly just by </span><a href="static/QuickTour/CreateInst.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Declaring Instances of Classes</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 26). Almost anything in Modelica is a class, but there are some keywords for specific use of the class concept, called </span><a href="static/Classes/Restricted.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Restricted Classes</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 29). The concept </span><a href="static/Classes/ReuseMod.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Reuse of Modeling Knowledge</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 28) is an important part of Modelica. Modelica has several built-in types (like </span><span style=" font-family:'Times New Roman'; font-size:14pt; font-style:italic; color:#000000;">Real, Integer, Boolean</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> and </span><span style=" font-family:'Times New Roman'; font-size:14pt; font-style:italic; color:#000000;">String</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">), which has most of the properties a class has and it is possible to change the value of them during run-time. You can read more about classes in Chapter 3 below and in Chapter 3 in Peter Fritzson's book. Note that the chapter numbering in this electronic notebook corresponds to the numbering in Peter Fritzson's book in order to make it easy to use them together.</span></p><br>
+<h4>
+2.2.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/QuickTour/Exercise1classes.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1<br/> </span></a><a href="static/QuickTour/Exercise2-classes.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 2</span></a><a href="static/QuickTour/Exercise1classes.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;"><br/> </span></a><a href="static/QuickTour/Exercise3-classes.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 3</span></a></p><br>
+<h3>
+2.3
+Inheritance
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/QuickTour/Inheritance.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Inheritance</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 29) is the ability to extend the behavior and properties of an existing class. This way the properties of a specific class can be reused. See Chapter 4 below and in Peter Fritzson's book for additional details concerning inheritance.</span></p><br>
+<h4>
+2.3.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/QuickTour/Exercise1inheritance.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1<br/> </span></a><a href="static/QuickTour/Exercise2inheritance.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 2</span></a></p><br>
+<h3>
+2.4
+Generic Classes 
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">In many situations it is advantageous to be able to express </span><a href="static/QuickTour/Generic.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Generic Patterns</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p. 31) for programs. By doing so a substanitial amount of coding and software maintenance can be avoided by directly expressing the general structure of the problem and providing the special cases as parameters. In Modelica the class construct is general enough to handle generic modeling and programming. You can learn more about generic classes in Chapter 4 below and in Chapter 4 in Peter Fritzson's book .</span></p><br>
+<h3>
+2.5
+Equations
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">Modelica is an equation-based language. The key to the physical modeling capabilities and increased reuse potential of Modelica classes is that </span><a href="static/QuickTour/Equations.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Equations</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 33) are more flexible than assignments, since they do not prescribe a certain data flow direction. Modelica also provides repetitive equation structures, like for-loop equations. See Chapter 8 to learn more about equations.</span></p><br>
+<h4>
+2.5.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/QuickTour/Exercise1equations.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a></p><br>
+<h3>
+2.6
+Partial Classes
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/QuickTour/Partial.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Partial</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 43) is in Modelica the same as abstract in other object-oriented languages. A partial class is an incomplete class, i.e., not complete enough to be instantiated. Some more advanced examples concerning partial classes are presented in Chapter 3.</span></p><br>
+<h4>
+2.6.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/QuickTour/Exercise1partial.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a></p><br>
+<h3>
+2.7
+Arrays 
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">An </span><a href="static/QuickTour/Array.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Array</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 47) is a collection of variables, all of the same type. Elements of an array are accessed through simple integer indexes, ranging from 1 to the size of the respective dimension. You can read more about arrays in Chapter 7.</span></p><br>
+<h4>
+2.7.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/QuickTour/Exercise1arrays.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a></p><br>
+<h3>
+2.8
+Algorithmic Constructs
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">Even though equations are eminently suitable for modeling physical systems, and for a number of other tasks, there are situations where non-declarative algorithmic constructs are needed. This is typically case for algorithms, i.e., stepwise procedural descriptions on how to carry out specific computations. In Modelica an algorithmic statement can only occur within </span><a href="static/QuickTour/Algorithm.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Algorithm Sections</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">, starting with the keyword </span><span style=" font-family:'Courier New'; font-size:14pt; color:#000000;">algorithm</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 44). Apart for the assignment statement, there are several kinds of </span><a href="static/QuickTour/Statement.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Algorithmic Statements</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 50) in Modelica, including </span><span style=" font-family:'Courier New'; font-size:14pt; color:#000000;">if-then-else</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> statements, </span><span style=" font-family:'Courier New'; font-size:14pt; color:#000000;">for-loops, </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">and</span><span style=" font-family:'Courier New'; font-size:14pt; color:#000000;"> while-loops</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">.</span><span style=" font-family:'Courier New'; font-size:14pt; color:#000000;"> </span><a href="static/QuickTour/Functions.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Functions</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 51) are a natural part of any mathematical model. You can find more about Algorithms in Chapter 9.</span></p><br>
+<h4>
+2.8.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/QuickTour/Exercise1algorithm.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a></p><br>
+<h3>
+2.9
+Hybrid Modeling
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">In Modelica there are two different constructs for expressing hybrid models: </span><a href="static/QuickTour/IfClause.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Conditional Expressions or Equations</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 55) and  </span><a href="static/QuickTour/WhenClause.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">When-Equations</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> used for the Bouncing Ball (p. 57). Too read more about </span><span style=" font-family:'Courier New'; font-size:14pt; color:#000000;">if</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">- and </span><span style=" font-family:'Courier New'; font-size:14pt; color:#000000;">when</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">-equations see Chapter 8.</span></p><br>
+<h4>
+2.9.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/Hybrid/Exercise2.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;"> </span></a><a href="static/QuickTour/Exercise1hybrid.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a><a href="static/Hybrid/Exercise2.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;"><br/> </span></a><a href="static/QuickTour/Exercise2hybrid.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 2</span></a></p><br>
+<h3>
+2.10
+Synchronous Clocks and State Machines
+</h3>
+<p align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">Starting from Modelica version 3.3 two main groups of discrete-time and hybrid modeling features are available in the language: built-in synchronous clocks with constructs for clock-based modeling and </span><a href="static/QuickTour/BasicClockedSynchronous.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">synchronous clock-based state-machines</span></a><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<h3>
+2.11
+Packages
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/QuickTour/Packages.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Packages</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 58) in Modelica may contain definitions of constants and classes including all kinds of restricted classes, functions and subpackages. By </span><span style=" font-family:'Times New Roman'; font-size:14pt; font-style:italic; color:#000000;">subpackage</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> we mean that the package is declared inside another package, not any implied inheritance relationship. Regarding inheritance we talk about parent packages and child packages or derived packages. To learn more about packages, see Chapter 10.</span></p><br>
+<h4>
+2.11.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/QuickTour/Exercise1package.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a></p><br>
+<h2>
+3
+Classes, Types and Declarations 
+</h2>
+<h3>
+3.1
+Classes
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">The class concept is the most fundamental concept in Modelica. Different categories of class definitions, like </span><a href="static/Classes/Short.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Short Class Definitions</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 86) </span><a href="static/Classes/Nested.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Local Classes</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  (p.86), </span><a href="static/Classes/Restricted.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Restricted Classes</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 87) and </span><a href="static/Classes/Partial.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Partial Classes</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 39) are discussed in this section. </span></p><br>
+<h4>
+3.1.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/Classes/Exercise1.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"><br/> </span><a href="static/Classes/Exercise2.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 2<br/> </span></a><a href="static/Classes/Exercise3.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 3</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"><br/> </span><a href="static/Classes/Exercise4.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 4</span></a></p><br>
+<h3>
+3.2
+Variables
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">A variable is a class instance, always a member of (i.e., declared in) some other class instance or function. The </span><a href="static/Variables/Declaration.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Declaration of a Variable</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 88) states the type, access, variability, data flow and other properties of the variable. Both class and variable declarations can contain various </span><a href="static/Variables/VariabilityPrefixes.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Variability Prefixes</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 89), which  associate certain properties with the declaration and are placed at the beginning of the declaration. A variable can be </span><a href="static/Variables/Initialization.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Initialized</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p. 94) by using the start attribute. The variables that belong to a class are also called </span><a href="static/Variables/FieldVar.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Fields</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 74). </span></p><br>
+<h4>
+3.2.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/Variables/Exercise1.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1<br/> </span></a><a href="static/Variables/Exercise2.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 2</span></a></p><br>
+<h3>
+3.3
+Types, Supertypes and Subtypes 
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">What is a Type? A </span><a href="static/TypeSubtype/Type.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Type</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 100) can conceptually be viewed as a </span><span style=" font-family:'Times New Roman'; font-size:14pt; font-style:italic; color:#000000;">set of values</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">. When we say that the variable x has the type </span><span style=" font-family:'Courier New'; font-size:14pt; color:#000000;">Real</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> we mean that the value of x belongs to the set of values represented by the type </span><span style=" font-family:'Courier New'; font-size:14pt; color:#000000;">Real</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">. The concepts of </span><a href="static/TypeSubtype/Sub-SuperType.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Subtype and Supertype</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 100) are discussed further in Peter Fritzson's book.</span></p><br>
+<h4>
+3.3.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/TypeSubtype/Exercise1.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"><br/> </span><a href="static/TypeSubtype/Exercise2.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 2</span></a></p><br>
+<h3>
+3.4
+Access control 
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">Here </span><a href="static/AccessControl/AccessDemo.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Access Control</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 98) of variables are discussed. Both variables that are declared public and protected are used in the </span><a href="static/AccessControl/MoonLanding.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Moon Landing</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 82) example.</span></p><br>
+<h4>
+3.4.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/AccessControl/Exercise1.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a></p><br>
+<h2>
+4
+Inheritance, Modifications and Generics
+</h2>
+<h3>
+4.1
+Inheritance
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">One of the major benefits of object-orientation is </span><a href="static/Inheritance/Inheritance.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Inheritance</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p. 136), i.e., the ability to extend the behavior and properties of an existing class. A class can inherit from several classes, this is called </span><a href="static/Inheritance/Multiple.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Multiple Inheritance</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 137). How are </span><a href="static/Inheritance/ProtectedElements.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Public Respectively Protected Elements</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 145) inherited? All these concepts are used in the </span><a href="static/Inheritance/MoonLandingInher.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Moon Landing</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 143) example using inheritance.</span></p><br>
+<h4>
+4.1.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/Inheritance/Exercise1.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;"> Exercise 1<br/> </span></a><a href="static/Inheritance/Exercise2.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 2</span></a><a href="static/InherMod/Exercise1.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;"><br/> </span></a><a href="static/Inheritance/Exercise3.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 3</span></a></p><br>
+<h3>
+4.2
+Inheritance Through Modification 
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">There are three kinds of constructs in the Modelica language in which </span><a href="static/InherMod/Modification.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Modifications</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p. 148) can occur: variable declarations, </span><a href="static/InherMod/Short.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Short Class Definitions</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 151) and </span><a href="static/InherMod/Extend.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Extends Clauses</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 152). </span><a href="static/InherMod/Hierachical.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Hierarchical Modification</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 155) means that elements one or more levels down in the instantiation hierarchy are modified.</span></p><br>
+<h4>
+4.2.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/InherMod/Exercise1.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1<br/> </span></a><a href="static/InherMod/Exercise2.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 2</span></a><a href="static/InherMod/Exercise1.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;"><br/> </span></a><a href="static/InherMod/Exercise3.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 3</span></a></p><br>
+<h3>
+4.3
+Redeclaration
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">A more dramatic change than just changing the default value in a declaration, is to modify the type and/or the prefixes of a declared element. The original declaration is replaced by the "new declaration", by using the </span><a href="static/Redeclaration/ReplRed.html#Redeclare
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Prefix redeclare</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 160), merged with the modifiers of the original declaration. </span><a href="static/Redeclaration/Redeclaration.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Redeclarations</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 156) usually require the modified element to be declared with the </span><a href="static/Redeclaration/ReplRed.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">replaceable Prefix</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 156), but there are also kinds of redeclarations that do </span><a href="static/Redeclaration/RedNotRepl.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">not need the Prefix replaceable</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p. 158). In order to prevent certain modifications the </span><a href="static/Redeclaration/Final.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">final Prefix</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p. 161) can be used. The rules concerning the </span><a href="static/Redeclaration/Replaceable.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Constraining Type of Replaceable Elements</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 162) can be found in the book. Apart from textual Modelica programming, redeclarations may also be specified through a graphical user interface (GUI) of a Modelica modeling tool, e.g. via menu choices, in order to achieve this, </span><a href="static/Redeclaration/Annotation.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Annotation Choices</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (s. 167)  are used.</span></p><br>
+<h4>
+4.3.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/Redeclaration/Exercise1.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"><br/> </span><a href="static/Redeclaration/Exercise2.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 2<br/> </span></a><a href="static/Redeclaration/Exercise3.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 3</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"><br/> </span><a href="static/Redeclaration/Exercise4.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 4</span></a></p><br>
+<h3>
+4.4
+Parameterized Generic Classes
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">By expressing generic patterns for models or programs a large amount of coding and software maintenance can be avoided. This is done using </span><a href="static/Generic/Parameterized.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Parameterized Generic Classes</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p. 168). </span><a href="static/Generic/ParamInterfaces.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Parameterization and extension of Interfaces</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 171).</span></p><br>
+<h4>
+4.4.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/Generic/Exercise1.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a></p><br>
+<h3>
+4.5
+Extended
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">It is important to </span><a href="static/Generic/Extended.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Design a Class to be Extended</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 173), otherwise inheritance might lead to errors.</span></p><br>
+<h2>
+5
+Components, Connectors and Connections
+</h2>
+<h3>
+5.1
+Connectors and Connector Classes
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">Modelica </span><a href="static/CompConn/Connectors.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Connectors are instances of Connector Classes</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 188). Connectors specify the interface for interaction between a component and its surroundings.</span></p><br>
+<h3>
+5.2
+Connections
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/CompConn/Connections.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Connections</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 191) between components can only be established between connectors of equivalent type. </span></p><br>
+<h3>
+5.3
+Connectors, Components and Coordinate Systems
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">Each </span><a href="static/CompConn/MechTrans.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Mechanical Component</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 195) has an associated </span><span style=" font-family:'Times New Roman'; font-size:14pt; font-style:italic; color:#000000;">coordinate system</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">, called </span><span style=" font-family:'Times New Roman'; font-size:14pt; font-style:italic; color:#000000;">frame</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">. It is possible to connect several connections to one connector, this is called </span><a href="static/CompConn/MultToSingle.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Multiple Connections to a Single Connector</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 198). The model of an </span><a href="static/CompConn/Oscillator.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Oscillating Mass Connected to a Spring</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 199) gives rise to some dynamic movement when simulated. </span></p><br>
+<h3>
+5.4
+Detailed Connection Semantics
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">A </span><a href="static/CompConn/MultDCmotor.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">DC Motor Model</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 209) is one of the simplest examples illustrating the ease of constructing multi-domain models in Modelica by simply connecting components from different domains. The point of a </span><a href="static/CompConn/PartDCmotor.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Partial DC Motor</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 210) is to get a structured library component with inside and outside connectors that can be reused. The restrictions on how to connect </span><a href="static/CompConn/In-Output.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Input and Output Connectors</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 212) are also handled. </span><a href="static/CompConn/ConnConstraints.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Connection constraints regarding Array, Subscripts and Constants</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 214) are different from other connected connectors. By  </span><a href="static/CompConn/ConnEq.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Generating Connection Equations</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 219) we mean the conversion of connect equations to the two different forms of equations to be used for non-flow and flow variables respectively. The process of converting connect-equations can be divided into two steps, the first is building connections sets from connect-equations and the second is generating connection equations for the complete model. In certain cases there is a need to let the behavior of a model be dependent on the number of connections to certain connectors of the model. This can be achieved by using a built-in function </span><a href="static/CompConn/CardEq.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">cardinality</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 223) that returns the number of connections that have been made to a connector.</span></p><br>
+<h4>
+5.4.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/CompConn/Exercise1.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a></p><br>
+<h3>
+5.5
+Implicit Connection with inner and outer Construct
+</h3>
+<p align="justify" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">So far in we have focused on explicit connections between connectors where each connection is explicitly represented by a connect-equation and a corresponding line in a connection diagram. However, when modeling certain kinds of large models with many interacting components this approach becomes rather clumsy because of the large number of potential connections, a connection might be needed between each pair of components. These language constructs force lookup for implicit connections through the instance hierarchy instead of the usual nested lookup in the class hierarchy, as described briefly in the next section and more formally in Section 3.17.5, page 115. Another difference compared to explicit connections is that the inner/outer mechanism can be applied to any declared element in a class, not only to connectors. Now let us see an example of accessing </span><a href="static/CompConn/sharedinner.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">shared inner </span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#0000ff;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p.225) environment variable. As mentioned above, the inner/outer mechanism can be applied to any kind of element, not only to connectors. However, this mechanism is especially useful when applied to connectors to establish implicit connections between a single environment object and their components. Now let us see an example of </span><a href="static/CompConn/ImplicitVsExplicit.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Implicit versus Explicit Connection</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p.226) Structures. The next example shows how to model a nested Hierarchical Subsytems  with simulataneous </span><a href="static/CompConn/innerouter.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">inner outer</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 228) keyword. </span></p><br>
+<h2>
+6
+Literals, Operators and Expressions
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">The </span><a href="static/LitOpExp/EvalOrder.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Order of Evaluation</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 274) (e.g. regarding variable references and function calls in expressions) is not specified, since a Modelica tool is free to solve equations, to reorder expressions, and to avoid evaluating expressions if their values do not influence the result. The rules for </span><a href="static/LitOpExp/VariaSubt.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Subtyping and Variability</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 283) for declaration equations and normal equations are illustrated. All declared variables are functions of the independent variable </span><a href="static/LitOpExp/VarTime.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">time</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">, which is a built-in variable (p. 269) available in all kinds of classes. The variable time is treated as an input variable.</span></p><br>
+<h4>
+6.0.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/LitOpExp/Exercise1.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1<br/> </span></a><a href="static/LitOpExp/Exercise2.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 2</span></a></p><br>
+<h2>
+7
+Arrays
+</h2>
+<h3>
+7.1
+Array Declarations and Types
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">An </span><a href="static/Arrays/Declaration.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Array Variable can be Declared</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 311) by appending dimensions within square brackets after a type name or after a variable name. An </span><a href="static/Arrays/FlexSize.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Unspecified Dimension Size</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 313) is stated by using a colon (:) instead of the usual integer expression for dimension size. For the purpose of </span><a href="static/Arrays/TypeCheck.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Type Checking</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 313) and selecting the right version of overloaded array operators and functions it is important to determine the expanded type of a variable.  </span></p><br>
+<h4>
+7.1.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/Arrays/Exercise1.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"><br/> </span><a href="static/Arrays/Exercise2.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 2</span></a></p><br>
+<h3>
+7.2
+General Array Construction
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">An </span><a href="static/Arrays/Construction.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Array Constructor</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> provides a convenient way of constructing array values, giving concise and readable code (p. 315). </span></p><br>
+<h4>
+7.2.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/Arrays/Exercise1-7-2.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a></p><br>
+<h3>
+7.3
+Array Concatenation and Construction 
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/Arrays/ConcatConstruct.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">General Array concatenation</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> can be done through the array concatenation operator </span><span style=" font-family:'Courier New'; font-size:14pt; color:#000000;">cat</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(k,A,B,C,...) that concatenates the arrays A,B,C,... along the k:th dimension (p. 318).</span></p><br>
+<h4>
+7.3.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/Arrays/Exercise1-7-3.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a></p><br>
+<h3>
+7.4
+Array Indexing 
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">The </span><a href="static/Arrays/Indexing.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Array Indexing</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> operator (p. 321) is used to access array elements for retrieval of their values or for updating these values. When at least one of the index expressions in an array indexing operation is a vector expression, a slice or subsection of the array is accessed rather than a single element. </span></p><br>
+<h4>
+7.4.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/Arrays/Exercise1-7-4.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a></p><br>
+<h3>
+7.5
+Using Array Concatenation and Slices
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">The Modelica </span><a href="static/Arrays/ConcatSlice.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Array Concatenation and Slice Operations</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 325) have been designed for multidimensional arrays and can therefore produce arrays of various dimensions, from one-dimensional vectors to matrices and multidimensional arrays. </span></p><br>
+<h4>
+7.5.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/Arrays/Exercise1-7-5.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a></p><br>
+<h3>
+7.6
+Arithmetic Array Operators 
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/Arrays/ArithmeticOp.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Arithmetic Array Operators</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 329) on arrays and certain combinations of arrays and scalars are available through the standard arithmetic operators.</span></p><br>
+<h4>
+7.6.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/Arrays/Exercise1-7-6.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a></p><br>
+<h3>
+7.7
+Built-in Array Functions 
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">A number of  </span><a href="static/Arrays/Built-inFunc.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Built-in Functions</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 335) for array expressions are provided in Modelica. These functions are directly available and need not be imported from some package in the standard library before being used. </span></p><br>
+<h3>
+7.8
+Application of Scalar Functions to Arrays 
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">In certain situations it is useful to be able to apply a function to array values even if it has not been defined for such arguments. Modelica functions with one scalar return value can be </span><a href="static/Arrays/ScalarFunc.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Applied to Arrays</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  element-wise (p. 340).</span></p><br>
+<h3>
+7.9
+Empty Arrays
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/Arrays/Empty.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Empty Arrays</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> are sometimes used as a kind of null element (p. 341).</span></p><br>
+<h2>
+8
+Equations 
+</h2>
+<h3>
+8.1
+Equations in Declarations
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">That are two kinds of </span><a href="static/Equations/EqDeclarations.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Equations that occur as Parts of Declarations</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">: (p. 349) declaration equations and modifier equations. </span></p><br>
+<h3>
+8.2
+Equations in Equation Sections
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">The following kinds of equations can be present in equation sections: </span><a href="static/Equations/SimpleEquality.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Simple Equality Equations</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 351), </span><a href="static/Equations/RepStruct.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Repetitive Equation Structures with for-Equations</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 352), </span><a href="static/Equations/RepConnStruct.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">connect equations</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 355), </span><a href="static/Equations/IfEq.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Conditional Equations with if-Equations</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 355), </span><a href="static/Equations/WhenEq.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Conditional Equations with when-Equations</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 357)  </span><a href="static/Equations/Assert.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Assert</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 361) and </span><a href="static/Equations/MoonLandingTerminate.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Terminate</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p. 362). Terminate is described using the Moon Landing Example. Polynomial Equations using for-Equations is shown in </span><a href="static/Equations/Polynomial.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">XPowers</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 353) and </span><a href="static/Equations/PolynomialEvaluator.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Polynomial Evaluator</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 354). The class </span><a href="static/Equations/Step.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Step</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 352) includes a repetitive equation structure in the form of a </span><span style=" font-family:'Courier New'; font-size:14pt; color:#000000;">for</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">-equation. </span><a href="static/QuickTour/WhenClause.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Reinit</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 359) is described in the Bouncing Ball model.</span></p><br>
+<h4>
+8.2.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/Equations/Exercise1.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"><br/> </span><a href="static/Equations/Exercise2.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 2</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"><br/> </span><a href="static/Equations/Exercise3.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 3</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"><br/> </span><a href="static/Equations/Exercise4.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 4</span></a></p><br>
+<h2>
+9
+Algorithms and Functions
+</h2>
+<h3>
+9.1
+Algorithms 
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">In Modelica, algorithmic statements can only occur within </span><a href="static/Algorithms/Sections.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Algorithm Sections</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 423), starting with the keyword </span><span style=" font-family:'Courier New'; font-size:14pt; color:#000000;">algorithm</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">. </span><a href="static/Algorithms/AssignStat.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Simple Assignment Statements</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p. 425) is the most common kind of statements in algorithm sections. There is a special form of assignment statement that is only used when the right hand side contains a call to a </span><a href="static/Algorithms/MultRes.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Function with Multiple Results</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 426). <br/><br/>The </span><a href="static/Algorithms/ForStat.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">for-Statement</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (also called </span><span style=" font-family:'Courier New'; font-size:14pt; color:#000000;">for</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">-loop) is a convenient way of expressing iteration (p. 427). When using the </span><span style=" font-family:'Courier New'; font-size:14pt; color:#000000;">for</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">-loop for iteration we must be able to express the range of values over which the iteration variable should iterate in a clo</span><span style=" font-family:'Times New Roman'; font-size:14pt; font-style:italic; color:#000000;">sed</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> form as an iteration expression. For cases where this is not feasible there is also a </span><a href="static/Algorithms/WhileStat.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">while-loop</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> iteration construct in Modelica (p. 429). Breaking an iteration when executing for and while loop is done with </span><a href="static/Algorithms/Break.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">break</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#0000ff;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">statements (p.430). For conditional expressions the </span><a href="static/Algorithms/IfStat.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">if-Statement</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p. 431) is used.  </span><a href="static/Algorithms/WhenStat.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">When-Statements</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p. 433)  are used to express </span><span style=" font-family:'Times New Roman'; font-size:14pt; font-style:italic; color:#000000;">actions at event instants</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> and are closely related to </span><span style=" font-family:'Courier New'; font-size:14pt; color:#000000;">when</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">-equations. The </span><a href="static/Algorithms/Reinit.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">reinit</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 359) statement (see also </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#0000ff;">reinit</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> equations) can be used in </span><span style=" font-family:'Courier New'; font-size:14pt; color:#000000;">when</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">-statements</span><span style=" font-family:'Times New Roman'; font-size:14pt; font-style:italic; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">to define new values for continuous-time </span><span style=" font-family:'Times New Roman'; font-size:14pt; font-style:italic; color:#000000;">state variables</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> of a model at an event. <br/><br/>The </span><a href="static/Algorithms/Assert.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">assert</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 436) statement provides a convenient means for specifying checks on model validity within a model. <br/>The most common usage of </span><a href="static/Algorithms/Terminate.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">terminate</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 437) is to give more appropriate stopping criteria for terminating a simulation than a fixed point in time.</span></p><br>
+<h4>
+9.1.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/Algorithms/Exercise1.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"><br/> </span><a href="static/Algorithms/Exercise2.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 2<br/> </span></a><a href="static/Algorithms/Exercise3.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 3<br/> </span></a><a href="static/Algorithms/Exercise4.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 4</span></a><a href="static/Algorithms/Exercise3.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;"><br/> </span></a><a href="static/Algorithms/Exercise5.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 5</span></a></p><br>
+<h3>
+9.2
+Functions
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">The body of a Modelica function is a kind of algorithm section that contains procedural algorithmic code to be executed when the function is </span><a href="static/Functions/Call.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">called</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 439). Since a function is a restricted and enhanced kind of class, it is possible to inherit an existing function declaration in the declaration of a new function. In this way we can declare the common structure of a set of functions as a </span><a href="static/Functions/Extending.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Partial Base Function</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 446) which can be inherited into the functions we want to define. A function with more than one output formal parameter has </span><a href="static/Functions/MultipleRes.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Multiple Results</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 441).It is possible to call a function via </span><a href="static/Functions/callviainstance.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">instancename</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p.443). It is possible to </span><a href="static/Functions/functionreturn.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">return</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> a function from anywhere inside a function body (p.444). It is possible to pass a function as </span><a href="static/Functions/FunctionalInputArguments.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">arguments</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#0000ff;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">to another function (p.446). A function can also be declared as </span><a href="static/Functions/partialfunction.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">partial </span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">function (p.448).It is possible to define functions as</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#0000ff;"> </span><a href="static/Functions/RecordConstructorFunctions.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">record constructors</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p.452). It is possible to call functions defined outside of the Modelica language, so called </span><a href="static/Functions/External.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">External Functions</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 466).</span></p><br>
+<h4>
+9.2.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/Functions/Exercise1.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"><br/> </span><a href="static/Functions/Exercise2.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 2</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"><br/> </span><a href="static/Functions/Exercise3.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 3</span></a></p><br>
+<h2>
+10
+Packages
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">What is a </span><a href="static/QuickTour/Packages.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Package</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">?</span></p><br>
+<h3>
+10.1
+Packages as Abstract Datatypes
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">The notion of a package partly originates from the notion of </span><a href="static/Packages/PackasADTs.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Abstract Data Type</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 495).</span></p><br>
+<h4>
+10.1.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/Packages/Exercise1ADT.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a></p><br>
+<h3>
+10.2
+Package Access
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">There are essentially two ways of </span><a href="static/Packages/PackAccess.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Accessing</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 497) the definitions of a package: direct reference by prefixing the package name to definition names or importing definitions from the package.</span></p><br>
+<h3>
+10.3
+Package and Library Structuring 
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">A well-designed </span><a href="static/Packages/PackLibrStruct.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Package Structure</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 500) is one of the most important aspects that influences the complexity, understandability, and maintainability of a large software systems. </span></p><br>
+<h4>
+10.3.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><a href="static/Packages/Exercise1LibrStruct.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a></p><br>
+<h3>
+10.4
+Package Variants and Operations 
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">In the following sections we will examine certain variants of packages that can be created through operations such as instantiation of </span><a href="static/Packages/Generic.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Generic Packages</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 508), </span><a href="static/Packages/Inherited.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Inheritance of Packages</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 509), and manual editing. In addition will examine two special types of packages: </span><a href="static/Packages/Local.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Local Packages</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 510) and </span><a href="static/Packages/Nonencapsulated.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Nonencapsulated Packages</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 510). Also Copying or </span><a href="static/Packages/Moving.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Moving Packages</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 512) is discussed here.</span></p><br>
+<h4>
+10.4.1
+Exercises
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/Packages/Exercise2.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;"> </span></a><a href="static/Packages/Exercise1VarOp.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 1</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"><br/> </span><a href="static/Packages/Exercise2VarOp.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; text-decoration: underline; color:#0000ff;">Exercise 2</span></a></p><br>
+<h2>
+11
+Annotations, Units and Quantities
+</h2>
+<h3>
+11.1
+Annotations
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/AnnUnitsQuant/Annotations.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Annotations</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 519) are attributes that are not really part of the Modelica core language but still belongs to Modelica in a broad sense, and therefore are part of the Modelica language definition. Since annotations need to have a certain </span><a href="static/AnnUnitsQuant/SynPlac.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Syntax and Placement</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 521) in classes, rules about this are discussed here. </span><a href="static/AnnUnitsQuant/Graphical.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Graphical Annotations</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 524) is the most common form of annotation in typical Modelica models. </span><a href="static/AnnUnitsQuant/FuncAnn.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Function Annotations</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p. 554).</span></p><br>
+<h3>
+11.2
+Units and Quantities
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/AnnUnitsQuant/UnitsQuant.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Units and Quantities</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 558) are constructs that are also not part of the Modelica language, but are for the same reason as Annotations part of the Modelica definition.</span></p><br>
+<h2>
+12
+System Modeling Methodology and Continuous Model Representation
+</h2>
+<h3>
+12.1
+Modeling a Tank System
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">So far we have primarily discussed, and shown examples of, the principles of object-oriented mathematical modeling, a number of Modelica language constructs to support high-level model representations and a high degree of model reuse. But in this chapter we will instead present a systematic method on how to create system models.<br/><br/>To begin with, a tank system will be modeled, and there are different approaches. The </span><a href="static/SystemMod/FlatTank.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Traditional Methodology</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 571) for physical modeling can be roughly divided into three phases: basic structuring in terms of variables, stating equations and formulas, and converting the model to state space form. When using the </span><a href="static/SystemMod/PIControl.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Object Oriented Component-based</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 572) approach to modeling we first try to understand the system structure and decomposition in an hierarchical top-down manner. When the system components and interactions between these components have been roughly identified, we can apply the first two traditional modeling phases of identifying variables and equations on each of these model components.</span></p><br>
+<h2>
+13
+Modeling Discrete Events and Hybrid Systems
+</h2>
+<h3>
+13.1
+Events
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">An event is simply </span><span style=" font-family:'Times New Roman'; font-size:14pt; font-style:italic; color:#000000;">something that happens</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">, using everyday language. This is true in the real world as well as in the mathematical sense. Modelica provides a number of built-in functions and operators related to events and time. One function that can be used for generating repeated events is </span><a href="static/DiscreteHybrid/SampleClock.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">sample</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 602). <br/><br/>Events arise naturally external to a simulated system or are generated internally in the simulation model. These events should be handled, i.e. some </span><a href="static/DiscreteHybrid/EventBeh.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Behavior</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p. 613) should be executed  associated with each event. We also describe how to </span><a href="static/DiscreteHybrid/EventPriority.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Use Event Priority to Avoid Erroneous Multiple Definitions</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p. 617). Events often need to be </span><a href="static/DiscreteHybrid/Synchronization.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Synchronized</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 619) and propagated, though Modelica gives no guarantee of exact synchronization. Also discussed are </span><a href="static/DiscreteHybrid/MultEvents.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Multiple Events at the Same Point in Time and Event Internation</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p. 623).</span></p><br>
+<h3>
+13.2
+Discrete Model Examples and Related Formalisms
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">This section provides you with a number of model examples of different kinds of discrete systems, for example </span><a href="static/DiscreteHybrid/SampledSystems.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Sampled Systems</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 625), </span><a href="static/DiscreteHybrid/Automata.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Finite State Automata</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 635). The </span><a href="static/DiscreteHybrid/WatchDog.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">WatchDog System</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">. (p. 644). and the </span><a href="static/DiscreteHybrid/ModStochProc.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Models for Event Based Stochastic Processes</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 655). <br/><br/>The Discrete Event System Specification, abbreviated DEVS, is a modeling style and mathematical formalism. Examples of how DEVS models can be represented in Modelica is shown </span><a href="static/DiscreteHybrid/DEVS.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">here</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 658). <br/><br/>Petri Nets is a widely used formalism for modeling and analyzing discrete event systems, with an associated intuitive visual representation. The nets can be thought of as a graph containing two kinds of nodes, </span><a href="static/DiscreteHybrid/ClassesforCPT.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Places and Transitions</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 666). This section is completed with an example of a cellular automata</span><span style=" font-family:'Times New Roman'; font-size:14pt; font-weight:600; color:#000000;">,</span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> </span><a href="static/DiscreteHybrid/GameOfLife.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Game of Life</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 652).</span></p><br>
+<h3>
+13.3
+Hybrid System Modeling and Simulation
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">Hybrid Systems, systems that contain both continuous-time and discrete-time subsystems. This section describes an example of a Hybrid System, the </span><a href="static/DiscreteHybrid/HybridTank.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Hybrid Tank Model with a Discrete Controller</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p. 676). We end with an example of </span><a href="static/DiscreteHybrid/DCMotorwithBacklash.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">A Mode Switching Model</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p.682).</span></p><br>
+<h2>
+14
+Basic Laws of Nature
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/LawsOfNature/TransformerEMF.html
+
+
+"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Emf-Transformer</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">(p. 748)</span></p><br>
+<h2>
+15
+Application Examples
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/ApplicationEx/Mechatronic.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Mechatronic Systems- A DC Motor</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  (p.794)</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/ApplicationEx/chemicalreactions.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Chemical Reaction</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  (p.829) </span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/ApplicationEx/BioEcosystems.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Biological and Ecological Systems</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  (p.831)</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/ApplicationEx/Economicsystems.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Economic Systems</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#0000ff;"> </span><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p.853)</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/ApplicationEx/DesignOptimization.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Design Optimization</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p.869)</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/ApplicationEx/FourierAnalysis.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Fourier Analysis of Simulation Data</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p.873)</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/ApplicationEx/PressureDynamics.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Pressure Dynamics in 1D Ducts - Solving Wave Equations by Discrete PDEs</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p.875)</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/ApplicationEx/3DDoublePendulum.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">A 3D Double Pendulum</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;">  (p.891)</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/ApplicationEx/KinematicLoops.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Kinematic Loops</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p.895)</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><a href="static/ApplicationEx/InterfacingtoNonMechModComp.html"><span style=" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#0000ff;">Interfacing to Non-Mechanical Model Components</span></a><span style=" font-family:'Times New Roman'; font-size:14pt; color:#000000;"> (p.896)</span></p><br>
+</div></body></html>

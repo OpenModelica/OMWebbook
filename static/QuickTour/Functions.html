@@ -1,0 +1,65 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Functions
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A number of mathematical functions like </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">abs, sqrt, mod</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, etc. are predefined in the Modelica language whereas others such as </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">sin, cos, exp</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, etc. are available both in the language and in the Modelica standard math library </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Modelica.Math</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. The arithmetic operators +, -,*, / can be regarded as functions that are used through a convenient operator syntax. The body of a Modelica function is an algorithm section that contains procedural algorithmic code to be executed when the function is called. Formal parameters are specified using the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">input</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> keyword, whereas results are denoted using the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">output</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> keyword. This makes the syntax of function definitions quite close to Modelica block class definitions. <br/><br/>Modelica functions are mathematical functions (without global side-effects and with no memory). A Modelica function always returns the same results given the same arguments. Below we show the algorithmic code for polynomial evaluation in a function named </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">polynomialEvaluator</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.<br/></span></p><br>
+<textarea id=check0textarea>
+function polynomialEvaluator
+  input Real a[:];               // Array size defined at function call time
+  input Real x = 1.0;            // Default value 1.0 for x
+  output Real y;
+protected
+  Real xpower;
+algorithm
+  y := 0;
+  xpower := 1;
+  for i in 1:size(a, 1) loop
+    y := y + a[i]*xpower;
+    xpower := xpower*x;
+  end for;
+end polynomialEvaluator;
+</textarea>  <div id=check0div> </div> <br>
+<h2>
+1
+Calling polynomialEvaluator
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">We can now call the function with the inputs and get the value of the output(s) back.</span></p><br>
+<textarea id=check1textarea>
+polynomialEvaluator({1, 2}, 2)
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+polynomialEvaluator({1, 2, 3, 4}, 21)
+</textarea>  <div id=check2div> </div> <br>
+</div></body></html>

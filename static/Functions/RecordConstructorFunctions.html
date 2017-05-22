@@ -1,0 +1,76 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Record Constructor Functions
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A record constructor function is a function that creates and returns a record. For example, consider a record called Person with three fields: name, age, and children</span></p><br>
+<textarea id=check0textarea>
+record Person
+  String name;
+  Integer age;
+  String[2] children;
+end Person;
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+function Person1
+  input String name;
+  input Integer age;
+  input String[2] children;
+  output Person p;
+algorithm
+  p.name := name;
+  p.age := age;
+  p.children := children;
+end Person1;
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+Person1("John", 35, {"clara","Eva"})
+</textarea>  <div id=check2div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Another use of record constructors is to create complex numbers, as in the example model AddComplex below. The declaration of the record Complex also gives rise to a record constructor function, which in the add function is called to create and return a value for the w output formal parameter. It is also called in the equation involving the variable c2.</span></p><br>
+<textarea id=check3textarea>
+model AddComplex
+   record Complex "Complex number"
+     Real re "real part";
+     Real im "imaginary part";
+   end Complex;
+   function add
+     input Complex u, v;
+     output Complex w = Complex(re = u.re+v.re, im = u.im+v.re);
+   end add;
+   Complex c1, c2;
+equation
+   c2 = add(c1, Complex(sin(time), cos(time)));
+end AddComplex;
+</textarea>  <div id=check3div> </div> <br>
+</div></body></html>

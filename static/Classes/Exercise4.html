@@ -1,0 +1,94 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 4 - Instances
+</h1>
+<h2>
+1
+Creating Instances
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Consider the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Student</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> below.</span></p><br>
+<textarea id=check0textarea>
+class Student
+  constant Real legs = 2;
+  constant Real arms = 2;
+  parameter Real nrOfBooks;
+  parameter String name = "Dummy";
+end Student;
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/><br/>Create an instance of the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Student</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. </span></p><br>
+<textarea id=check1textarea>
+
+</textarea>  <div id=check1div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/><br/>Create another instance and give the student the name "Alice", who has 65 books.</span></p><br>
+<textarea id=check2textarea>
+
+</textarea>  <div id=check2div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/><br/>You also want to create a student called "Burt" with 32 books.</span></p><br>
+<textarea id=check3textarea>
+
+</textarea>  <div id=check3div> </div> <br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><textarea id=check4textarea>
+class StudentInst
+  Student s;
+end StudentInst;
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+class StudentAlice
+  Student stud(name = "Alice", nrOfBooks = 65);
+end StudentAlice;
+</textarea>  <div id=check5div> </div> <br>
+<textarea id=check6textarea>
+class StudentBurt
+  Student stud(name = "Burt", nrOfBooks = 32);
+end StudentBurt;
+</textarea>  <div id=check6div> </div> <br>
+<h4>
+1.1.1
+Simulation of Student, StudentAlice and StudentBurt
+</h4>
+<textarea id=check7textarea>
+simulate( StudentInst )
+</textarea>  <div id=check7div> </div> <br>
+<textarea id=check8textarea>
+simulate( StudentAlice )
+</textarea>  <div id=check8div> </div> <br>
+<textarea id=check9textarea>
+simulate( StudentBurt )
+</textarea>  <div id=check9div> </div> <br>
+</div></div></body></html>

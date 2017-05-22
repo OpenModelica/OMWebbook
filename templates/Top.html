@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+  <title>OMWebBook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../static/jquery.min1.10.2.js"></script>
+ <link rel="stylesheet" href="../static/bootstrap.min.css">
+ <script src="../static/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="../static/custom.css">
+</head>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+  </div>
+</nav>
+
+<body>
+<div class="container">
+<br> <br> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">Version: 2017-05-18</span></p>
+<h1>
+Introduction to Modelica with Examples in Modeling, Technology, and Applications
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">This is a web-based executable extensible Modelica book that has been created to allow students and practitioners easy access to learn Modelica, modeling, simulation, analysis, optimization, etc., allowing editing of models and running simulations in the book from a web page.</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The book is open for submissions of material for on-line publication, each part labeled with the corresponding authors. All material is open source, but different parts can have different open source licenses and copyrights. </span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#0000ff;">The Creative Commons Attribution-ShareAlike 4.0</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> International License is the default open source license if nothing else is specified. An editorial board of academic professionals handle submissions, improve the quality, and when needed provide material in relevant areas.</span></p>
+<h2> Web book editoral board </h2> 
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Peter Fritzson. Modelica language and technology</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Bernhard Bachmann. Mathematics, symbolics, numerics</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Kannan Moudgalya. Chemical engineering modeling, spoken-tutorials</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Francesco Casella. Power plants, control, fluid modeling</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Bernt Lie. Control, process industry, hydropower, Python</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Jiri Kofranek. Biochemistry and physiology modeling</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Anton Haumer,  Electric Drives and Mechatronics 
+</span></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Christoph Nytsch Geusen. Building modeling and simulation  </span></p> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Open for submission of material for on-line publication. Content is prepared and tested off-line using the OpenModelica OMNotebook tool; then sent in for html conversion and upload. For submission, send material to the editor-in-chief: peter.fritzson@liu.se 	</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The Book is divided into a number of parts where each part can contain chapters, sections, and subsections. Click on the respective part to reach its content. Practical hints on using the book are available below (<a href="#hints"> hints </a>).</span></p><br>
+<h1>
+Top Level Table of Contents
+</h1>
+<table class="table table-bordered">
+<tr>
+<td> 1 </td>
+<td> 
+<a href="{{ url_for('DrModelica') }}">
+Peter Fritzson. DrModelica – An Introduction to Modelica with interactive editable executable examples based on the book ”Principles of  Object-Oriented Modeling and Simulation with Modelica 3.3 - a Cyber-Physical Approach” </a>
+</td>
+</tr>
+
+<tr>
+<td> 2 </td>
+<td> 
+Bernhard Bachmann. Mathematical Aspects of Modelica and Simulation including Symbolic and Numeric Techniques. --- In the process of being converted for uploading.
+</td>
+</tr>
+
+<tr>
+<td> 3 </td>
+<td> 
+<a href="http://spoken-tutorial.org/tutorial-search/?search_foss=OpenModelica&search_language=English">
+Kannan Moudgalya.Step-by-step audio-video tutorials on OpenModelica using OMEdit and the spoken-tutorial pedagogic approach 
+</a>
+</td>
+</tr>
+
+<tr>
+<td> 4 </td>
+<td> 
+Francesco Casella.  Introduction to Control with Modelica.  --- Expected to be uploaded in September 2017. 
+</td>
+</tr>
+
+<tr>
+<td> 5 </td>
+<td> 
+Jiri Kofranek. Human Physiology Modeling. --- Expected uploading in the near future.
+</td>
+</tr>
+
+<tr>
+<td> 6 </td>
+<td> 
+Anton Haumer. Introduction to Control of Electric Drives.  --- Expected uploading in the near future.
+</td>
+</tr>
+
+<tr>
+<td> 7 </td>
+<td> 
+Christoph Nytsch Geusen. Introduction to Building modeling and Simulation. --- Expected uploading in the near future.
+</td>
+</tr>
+
+<tr>
+<td> 8 </td>
+<td> 
+Bernt Lie.  Model linearization and control analysis. --- Expected upload in June 2017.</td>
+</tr>
+
+<tr>
+<td> 9 </td>
+<td> 
+More submissions ....
+</td>
+</tr>
+</table>
+<br>
+<a name="hints"></a> 
+<h1> Hints on Using OMWebbook </h1>
+<table class="table table-bordered">
+<tr>
+<th> Function </th>
+<th> Button-action </th>
+<th> Short-Cut-keys-action </th>
+
+</tr>
+
+<tr>
+<td> Evaluate Cell </td>
+<td> Click the Cell and Press "Evaluate Cell" </td>
+<td> Click the Cell and Press "Shift+Enter" </td>
+</tr>
+
+<tr>
+<td> Evaluate All Cells </td>
+<td> Press "Eval all" button </td>
+<td> Press "Shift+Ctrl" </td>
+</tr>
+
+<tr>
+<td> Add Cells </td>
+<td> Click "Add cells" button </td>
+<td> Press "Ctrl+i" </td>
+</tr>
+
+<tr>
+<td> Delete Cells </td>
+<td> Click the Cell and Press "Delete Cells" </td>
+<td> Click the Cell and Press "Delete" </td>
+</tr>
+
+<tr>
+<td> Insert Cells between </td>
+<td> Click the Cell and Press "Insert Between" </td>
+<td> Click the Cell and Press "Ctrl+b" </td>
+</tr>
+
+<tr>
+<td> Save to pdf </td>
+<td> Click the "Save" </td>
+<td> Press "Ctrl+s" </td>
+</tr>
+
+</table>
+
+</div>
+</body>
+</html>

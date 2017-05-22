@@ -1,0 +1,122 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Connectors and Connector Classes
+</h1>
+<h2>
+1
+Pin
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The by now well-known class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Pin</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is a connector class that can be used to specify the external interface for electrical components that have pins as interaction points.</span></p><br>
+<textarea id=check0textarea>
+connector Pin
+  Voltage        v;
+  flow Current   i;
+end Pin;        // From Modelica.Electrical.Analog.Interfaces
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+class PinInst
+  Pin pin;        // An instance of class Pin
+end PinInst;  
+</textarea>  <div id=check1div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Another way to use the connector </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Pin</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is to refer to it from the library using the full path. This method can be used to create instances of all classes that belong to the Modelica library, instead of writing the whole classes every time.</span></p><br>
+<textarea id=check2textarea>
+class PinInst
+  Modelica.Electrical.Analog.Interfaces.Pin pin;
+end PinInst;
+</textarea>  <div id=check2div> </div> <br>
+<h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A component with an electrical pin connector.</span></p>
+</h1>
+<h2>
+2
+Flange
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Flange</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> connector class below, analogous to </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Pin</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, is used to describe interfaces for one-dimensional interaction in the mechanical domain by specifying the position s and force f at a point of interaction.</span></p><br>
+<textarea id=check3textarea>
+connector Flange
+  Position  s;
+  flow Force f;
+end Flange;        // From Modelica.Mechanical.Translational.Interfaces
+</textarea>  <div id=check3div> </div> <br>
+<textarea id=check4textarea>
+class FlangeInst
+  Flange flange;    // An instance of class Flange
+end FlangeInst;  
+</textarea>  <div id=check4div> </div> <br>
+<h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A component with a mechanical flange connector.</span></p>
+</h1>
+<h2>
+3
+InPort
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The connector class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">InPort</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> when instantiated as </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">inPort</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is a signal </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">input</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> port that can be connected to receive signals.</span></p><br>
+<textarea id=check5textarea>
+connector InPort
+  parameter Integer n = 1;
+  input Real signal[n];
+end InPort;            // From Modelica.Blocks.Interfaces
+</textarea>  <div id=check5div> </div> <br>
+<textarea id=check6textarea>
+class InPortInst
+  InPort inPort[n];        // An instance inPort with one signal (n = 1)
+end InPortInst;  
+</textarea>  <div id=check6div> </div> <br>
+<h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A component with an inPort connector for signals.</span></p>
+</h1>
+<h2>
+4
+Connector Classes
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Connector classes often use special types for standard physical quantities represented by </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Real</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> values, e.g. </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Voltage</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. The types </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Voltage, Current, Position, Force</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Distance</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> shown below are just five of the classes available in the Modelica Standard library </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Modelica.SIunits</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. <br/></span></p><br>
+<textarea id=check7textarea>
+type Voltage = Real(final quantity = "ElectricPotential",
+          final unit = "V");
+</textarea>  <div id=check7div> </div> <br>
+<textarea id=check8textarea>
+type Current = Real(final quantity = "ElectricCurrent",
+          final unit = "A");
+</textarea>  <div id=check8div> </div> <br>
+<textarea id=check9textarea>
+type Position = Real(final quantity = "Length", final unit = "m");
+</textarea>  <div id=check9div> </div> <br>
+<textarea id=check10textarea>
+type Force = Real(final quantity = "Force", final unit = "N");
+</textarea>  <div id=check10div> </div> <br>
+<textarea id=check11textarea>
+type Distance = Position(min = 0);
+</textarea>  <div id=check11div> </div> <br>
+</div></body></html>

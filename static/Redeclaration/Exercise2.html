@@ -1,0 +1,120 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 2
+</h1>
+<h2>
+1
+Using the Extends Clause in Redeclarations
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The next exercise will test if you know how to use an </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">extends clause</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> when redeclaring.</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>First write a class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">A</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> with a </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Real</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> parameter salt.</span></p><br>
+<textarea id=check0textarea>
+
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/><br/>We also need a class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Asub</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> , extending </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">A</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and having two </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Real</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> parameters: </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">pepper</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">basil</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. The parameter </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">salt</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> shall be set to 20.</span></p><br>
+<textarea id=check1textarea>
+
+</textarea>  <div id=check1div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/><br/>Then we need a class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">AInst</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, containing a variable </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">a</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, which is an instance of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">A</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, in which you should set </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">salt</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> to 100.</span></p><br>
+<textarea id=check2textarea>
+
+</textarea>  <div id=check2div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/><br/>Write a class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">AIred</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, extending </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">AInst</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. Also, change the </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">type</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> of the component </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">a</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> to </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">AIsub</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and set the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">pepper</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> parameter to 200.</span></p><br>
+<textarea id=check3textarea>
+
+</textarea>  <div id=check3div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/><br/>Write a similar class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">AIred</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">2 that instead of extending </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">AInst</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, declares a component of type </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">AInst</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. As above, the </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">type</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> of component </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">a</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> should be changed to </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">AIsub</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check4textarea>
+
+</textarea>  <div id=check4div> </div> <br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><h4>
+1.1.1
+Class A
+</h4>
+<textarea id=check5textarea>
+class A
+  parameter Real salt;
+end A;
+</textarea>  <div id=check5div> </div> <br>
+<h4>
+1.1.2
+Class Asub
+</h4>
+<textarea id=check6textarea>
+class Asub                    // A2 is a subtype of A
+  extends A(salt = 20);
+  parameter Real pepper;
+  parameter Real basil;
+end Asub;  
+</textarea>  <div id=check6div> </div> <br>
+<h4>
+1.1.3
+Class AInst
+</h4>
+<textarea id=check7textarea>
+class AInst
+  replaceable A a(salt = 100);
+end AInst;
+</textarea>  <div id=check7div> </div> <br>
+<h4>
+1.1.4
+Class AIred
+</h4>
+<textarea id=check8textarea>
+class AIred
+  extends AInst(redeclare Asub a(pepper = 200));  // The result after redeclaration is                                     // Asub a(salt = 1, pepper = 200)
+end AIred;
+</textarea>  <div id=check8div> </div> <br>
+<h4>
+1.1.5
+Class AIred2
+</h4>
+<textarea id=check9textarea>
+class AIred2
+   AInst t(redeclare Asub a(pepper = 200));
+end AIred2;
+</textarea>  <div id=check9div> </div> <br>
+<h4>
+1.1.6
+Simulation of AIred
+</h4>
+<textarea id=check10textarea>
+simulate( AIred )
+</textarea>  <div id=check10div> </div> <br>
+</div></div></body></html>

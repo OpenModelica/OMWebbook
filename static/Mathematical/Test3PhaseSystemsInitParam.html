@@ -1,0 +1,181 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<textarea id=check0textarea>
+loadModel(Modelica)
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+model Test3PhaseSystemsInitParam1
+  constant Real pi = Modelica.Constants.pi;
+  parameter Real shift(fixed = false, start = 0);
+  Real i_abc[3] = {I1.i, I2.i, I3.i};
+  Real i_dq0[3];
+  Real power;
+  Modelica.Electrical.Analog.Basic.Resistor R1(R = 0.5) annotation(Placement(transformation(extent = [20, 40; 40, 60])));
+  Modelica.Electrical.Analog.Basic.Inductor I1(L = 1) annotation(Placement(transformation(extent = [-20, 40; 0, 60])));
+  Modelica.Electrical.Analog.Basic.Resistor R2(R = 0.5) annotation(Placement(transformation(extent = [20, 0; 40, 20])));
+  Modelica.Electrical.Analog.Basic.Inductor I2(L = 1) annotation(Placement(transformation(extent = [-20, 0; 0, 20])));
+  Modelica.Electrical.Analog.Basic.Resistor R3(R = 0.5) annotation(Placement(transformation(extent = [20, -40; 40, -20])));
+  Modelica.Electrical.Analog.Basic.Inductor I3(L = 1) annotation(Placement(transformation(extent = [-20, -40; 0, -20])));
+  Modelica.Electrical.Analog.Sources.SineVoltage S1(freqHz = 1, V = 1, phase = 0) annotation(Placement(transformation(extent = [-60, 40; -40, 60], rotation = 0)));
+  Modelica.Electrical.Analog.Sources.SineVoltage S3(freqHz = 1, V = 1, phase = 4 * pi / 3) annotation(Placement(transformation(extent = [-60, -40; -40, -20], rotation = 0)));
+  Modelica.Electrical.Analog.Sources.SineVoltage S2(freqHz = 1, V = 1, phase = 2 * pi / 3) annotation(Placement(transformation(extent = [-60, 0; -40, 20], rotation = 0)));
+  Modelica.Electrical.Analog.Basic.Ground G annotation(Placement(transformation(extent = [70, -84; 90, -64])));
+  Modelica.Electrical.Analog.Sources.SineVoltage SS1(freqHz = 1, V = 1, phase = shift) annotation(Placement(transformation(extent = [60, 40; 80, 60], rotation = 0)));
+  Modelica.Electrical.Analog.Sources.SineVoltage SS2(freqHz = 1, V = 1, phase = 2 * pi / 3 + shift) annotation(Placement(transformation(extent = [60, 0; 80, 20], rotation = 0)));
+  Modelica.Electrical.Analog.Sources.SineVoltage SS3(freqHz = 1, V = 1, phase = 4 * pi / 3 + shift) annotation(Placement(transformation(extent = [60, -40; 80, -20], rotation = 0)));
+protected
+  Real theta;
+  Real P[3, 3];
+  Real u_abc[3] = {S1.v, S2.v, S3.v};
+  Real u_dq0[3];
+initial equation
+  der(i_dq0) = {0, 0, 0};
+  power = -0.12865;
+equation
+  theta = 2 * pi * time;
+  P = sqrt(2) / sqrt(3) * [sin(theta), sin(theta + 2 * pi / 3), sin(theta + 4 * pi / 3); cos(theta), cos(theta + 2 * pi / 3), cos(theta + 4 * pi / 3); 1 / sqrt(2), 1 / sqrt(2), 1 / sqrt(2)];
+  u_dq0 = P * u_abc;
+  i_dq0 = P * i_abc;
+  power = u_dq0 * i_dq0;
+  connect(I2.n, R2.p) annotation(Line(points = [0, 10; 20, 10], style(color = 3, rgbcolor = {0, 0, 255})));
+  connect(I1.n, R1.p) annotation(Line(points = [0, 50; 20, 50], style(color = 3, rgbcolor = {0, 0, 255})));
+  connect(I3.n, R3.p) annotation(Line(points = [0, -30; 20, -30], style(color = 3, rgbcolor = {0, 0, 255})));
+  connect(I1.p, S1.n) annotation(Line(points = [-20, 50; -40, 50], style(color = 3, rgbcolor = {0, 0, 255})));
+  connect(S3.n, I3.p) annotation(Line(points = [-40, -30; -20, -30], style(color = 3, rgbcolor = {0, 0, 255})));
+  connect(S2.n, I2.p) annotation(Line(points = [-40, 10; -20, 10], style(color = 3, rgbcolor = {0, 0, 255})));
+  connect(S1.p, S2.p) annotation(Line(points = [-60, 50; -60, 10], style(color = 3, rgbcolor = {0, 0, 255})));
+  connect(S2.p, S3.p) annotation(Line(points = [-60, 10; -60, -30], style(color = 3, rgbcolor = {0, 0, 255})));
+  connect(S3.p, G.p) annotation(Line(points = [-60, -30; -60, -64; 80, -64], style(color = 3, rgbcolor = {0, 0, 255})));
+  connect(R3.n, SS3.p) annotation(Line(points = [40, -30; 60, -30], style(color = 3, rgbcolor = {0, 0, 255})));
+  connect(R2.n, SS2.p) annotation(Line(points = [40, 10; 60, 10], style(color = 3, rgbcolor = {0, 0, 255})));
+  connect(R1.n, SS1.p) annotation(Line(points = [40, 50; 60, 50], style(color = 3, rgbcolor = {0, 0, 255})));
+  connect(SS1.n, SS2.n) annotation(Line(points = [80, 50; 80, 10], style(color = 3, rgbcolor = {0, 0, 255})));
+  connect(SS2.n, SS3.n) annotation(Line(points = [80, 10; 80, -30], style(color = 3, rgbcolor = {0, 0, 255})));
+  connect(SS3.n, G.p) annotation(Line(points = [80, -30; 80, -64], style(color = 3, rgbcolor = {0, 0, 255})));
+end Test3PhaseSystemsInitParam1;
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+simulate(Test3PhaseSystemsInitParam1, stopTime=10)
+</textarea>  <div id=check2div> </div> <br>
+<textarea id=check3textarea>
+plot(shift)
+</textarea> <br> <div id=check3div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check3div"),
+  [[  0.        ,   0.40000999],
+       [ 10.        ,   0.40000999]] 
+,
+{
+legend:"always",
+labels:
+['Time', 'shift']
+}
+)
+</script>
+<textarea id=check4textarea>
+model Test3PhaseSystemsInitParam2
+  extends Test3PhaseSystemsInitParam1(shift(start=-3));
+end Test3PhaseSystemsInitParam2;  
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+simulate(Test3PhaseSystemsInitParam2, stopTime=10, simflags="-lv=LOG_INIT")
+</textarea>  <div id=check5div> </div> <br>
+<textarea id=check6textarea>
+plot(shift) 
+</textarea> <br> <div id=check6div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check6div"),
+  [[  0.       ,  -3.7004229],
+       [ 10.       ,  -3.7004229]] 
+,
+{
+legend:"always",
+labels:
+['Time', 'shift']
+}
+)
+</script>
+<textarea id=check7textarea>
+model Test3PhaseSystemsInitParam3
+  extends Test3PhaseSystemsInitParam2(i_abc(each stateSelect=StateSelect.always));
+end Test3PhaseSystemsInitParam3;  
+</textarea>  <div id=check7div> </div> <br>
+<textarea id=check8textarea>
+simulate(Test3PhaseSystemsInitParam3, stopTime=10, simflags="-lv=LOG_INIT")
+</textarea>  <div id=check8div> </div> <br>
+<textarea id=check9textarea>
+plot(shift) 
+</textarea> <br> <div id=check9div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check9div"),
+  [[  0.       ,  -3.7004229],
+       [ 10.       ,  -3.7004229]] 
+,
+{
+legend:"always",
+labels:
+['Time', 'shift']
+}
+)
+</script>
+<textarea id=check10textarea>
+model Test3PhaseSystemsInitParam4
+  extends Test3PhaseSystemsInitParam2(i_dq0(each stateSelect=StateSelect.always));
+end Test3PhaseSystemsInitParam4;  
+</textarea>  <div id=check10div> </div> <br>
+<textarea id=check11textarea>
+simulate(Test3PhaseSystemsInitParam4, stopTime=10, simflags="-lv=LOG_INIT")
+</textarea>  <div id=check11div> </div> <br>
+<textarea id=check12textarea>
+plot(shift) 
+</textarea> <br> <div id=check12div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check12div"),
+  [[  0.       ,  -3.7004229],
+       [ 10.       ,  -3.7004229]] 
+,
+{
+legend:"always",
+labels:
+['Time', 'shift']
+}
+)
+</script>
+<textarea id=check13textarea>
+simulate(Test3PhaseSystemsInitParam3, stopTime=100, simflags="-lv=LOG_STATS -noemit")
+</textarea>  <div id=check13div> </div> <br>
+<textarea id=check14textarea>
+simulate(Test3PhaseSystemsInitParam4, stopTime=100, simflags="-lv=LOG_STATS -noemit")
+</textarea>  <div id=check14div> </div> <br>
+</div></body></html>

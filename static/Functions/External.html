@@ -1,0 +1,127 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+External Functions
+</h1>
+<h2>
+1
+General Description
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">It is possible to call functions defined outside the Modelica language. The body of an external function is marked with the keyword </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">external</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> possibly followed by any of he optional items </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">language_spec, external_function_call_spec or external_function_annotation</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. If you just user the keyword external without any of the optional items a number of default rules apply, e.g. , if no external language is specified the implementation language for the function is assumed to be C.</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">(??Note- should also give examples of executable external calls)</span></p><br>
+<h2>
+2
+Default Call
+</h2>
+<textarea id=check0textarea>
+clear()
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">In the function </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">log</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, the default mapping rules apply.</span></p><br>
+<textarea id=check1textarea>
+function log
+  input Real x;
+  output Real y;
+external;
+end log;
+</textarea>  <div id=check1div> </div> <br>
+<h2>
+3
+Specified Call
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The leastSquares function uses an external function. Here the language is specified to be Fortran 77.</span></p><br>
+<textarea id=check2textarea>
+function leastSquares    "Solves a linear least squares problem"
+  input Real A[:,:];
+  input Real B[:,:];
+
+  output Real Ares[size(A,1),size(A,2)] := A;
+                      // Factorization is returned in Ares for later use
+  output Real x[size(A,2), size(B,2)];
+
+protected
+  Integer lwork =   min(size(A,1), size(A,2)) +
+                  max(max(size(A,1), size(A,2)), size(B,2))*32;
+  Real work[lwork];
+  Integer info;
+  String transposed = "NNNN"; // Workaround for passing character data to Fortran routine
+  external "FORTRAN 77"
+    dgels(  transposed, 100, size(A,1), size(A,2), size(B,2),
+        Ares, size(A,1), B, size(B,1), work, lwork, info
+        );
+end leastSquares;
+</textarea>  <div id=check2div> </div> <br>
+<h2>
+4
+A Large Example
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The external function interface supports a number of advanced features such as in-out parameters and declaration of temporary work variables, which are illustrated by the following rather complicated example.</span></p><br>
+<textarea id=check3textarea>
+function BilinearSampling
+"Function for Discrete-time <--> continuous-time systems conversion by a bilinear transformation"
+  input  Real alpha := 1, beta := 1;
+  input  Real A[:, size(A, 1)], B[size(A, 1), :], C[:, size(A, 1)],
+              D[size(C, 1), size(B, 2)];
+  input  Boolean isContinuous := true;
+  output Real   Ares[size(A, 1), size(A, 2)] := A,  // Ares is in-out to the Fortran function
+          Bres[size(B, 1), size(B, 2)] := B,
+          Cres[size(C, 1), size(C, 2)] := C,
+          Dres[size(D, 1), size(D, 2)] := D;
+  output Integer info;
+protected
+  Integer iwork[size(A, 1)];    // Work arrays
+  Real    dwork[size(A, 1)];
+  String  c2dstring := if isContinuous then "C" else "D";
+external "FORTRAN 77" abo4md(c2dstring, size(A,1), size(B,2), size(C,1),
+   alpha, beta, Ares, size(Ares, 1), Bres, size(Bres, 1), Cres,
+   size(Cres, 1), Dres, size(Dres, 1), iwork, dwork, size(dwork, 1), info);
+end BilinearSampling;
+</textarea>  <div id=check3div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The following Modelica class contains an example call to BilinearSampling, which via the external function interface is transformed to a call to </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ab04md</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check4textarea>
+class BilinearSamplingTest
+  parameter Real alpha = 1, beta = 1;
+  parameter Real A[:, :] = [0, 1; 2, 4],    // Coefficients
+           B[:, :] = [5, 6; 7, 8],
+           C[:, :] = [9, 10; 11, 12],
+           D[:, :] = [13, 14; 15, 16];
+  Real  Ares [size(A, 1), size(A, 2)],
+      Bres [size(B, 1), size(B, 2)],
+      Cres [size(C, 1), size(C, 2)],
+      Dres [size(D, 1), size(D, 2)];
+  Integer info;
+equation
+  (Ares, Bres, Cres, Dres, info) = BilinearSampling(alpha, beta, A, B, C, D, true);
+end BilinearSamplingTest;
+</textarea>  <div id=check4div> </div> <br>
+</div></body></html>

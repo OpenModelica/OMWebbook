@@ -1,0 +1,119 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 2
+</h1>
+<h2>
+1
+Create Subclasses and Superclasses
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">In this exercise you should create a partial class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Vehicle</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> with the variable speed. You should also create four classes; </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Car</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Boat</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Train</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Bicycle</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> which inherit from </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Vehicle</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. Remember the variables for each subclass, which you can see in the picture below:<br/></span></p><br>
+<h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The Vehicle class and different classes inheriting from Vehicle.</span></p>
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Vehicle class:</span></p><br>
+<textarea id=check0textarea>
+
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Car class:</span></p><br>
+<textarea id=check1textarea>
+
+</textarea>  <div id=check1div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Boat class:</span></p><br>
+<textarea id=check2textarea>
+
+</textarea>  <div id=check2div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Train class:</span></p><br>
+<textarea id=check3textarea>
+
+</textarea>  <div id=check3div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Bicycle class:</span></p><br>
+<textarea id=check4textarea>
+
+</textarea>  <div id=check4div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Let's write an instance of Train!</span></p><br>
+<textarea id=check5textarea>
+
+</textarea>  <div id=check5div> </div> <br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><h4>
+1.1.1
+Vehicle
+</h4>
+<textarea id=check6textarea>
+partial class Vehicle
+  Real speed;
+end Vehicle;
+</textarea>  <div id=check6div> </div> <br>
+<h4>
+1.1.2
+Car, Boat, Train and Bicycle
+</h4>
+<textarea id=check7textarea>
+class Car
+  extends Vehicle;
+  Real motorEffect;
+end Car;
+</textarea>  <div id=check7div> </div> <br>
+<textarea id=check8textarea>
+class Boat
+  extends Vehicle;
+  Real boatWeight;
+end Boat;
+</textarea>  <div id=check8div> </div> <br>
+<textarea id=check9textarea>
+class Train
+  extends Vehicle;
+  Real nrOfCarriages;
+end Train;
+</textarea>  <div id=check9div> </div> <br>
+<textarea id=check10textarea>
+class Bicycle
+  extends Vehicle;
+  Real nrOfGears;
+end Bicycle;
+</textarea>  <div id=check10div> </div> <br>
+<h4>
+1.1.3
+Instance of Train
+</h4>
+<textarea id=check11textarea>
+class SuperTrain
+  Train superTrain(nrOfCarriages = 55);
+end SuperTrain;
+</textarea>  <div id=check11div> </div> <br>
+</div></div></body></html>

@@ -1,0 +1,71 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 1
+</h1>
+<h2>
+1
+If-Equation
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Write a class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Lights</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> that sets the variable switch (integer) to one if the lights are on and zero if the lights are off.</span></p><br>
+<textarea id=check0textarea>
+
+</textarea>  <div id=check0div> </div> <br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><textarea id=check1textarea>
+class Lights
+  Integer switch;
+  Boolean off = true;
+equation
+  if off then
+    switch = 0;
+  else
+    switch = 1;
+  end if;
+end Lights;
+</textarea>  <div id=check1div> </div> <br>
+<h4>
+1.1.1
+Simulation of Lights
+</h4>
+<textarea id=check2textarea>
+simulate( Lights )
+</textarea>  <div id=check2div> </div> <br>
+<textarea id=check3textarea>
+plot(switch)
+</textarea> <br> <div id=check3div> </div> <br>
+</div></div></body></html>

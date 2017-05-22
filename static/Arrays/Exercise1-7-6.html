@@ -1,0 +1,179 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 1 - Arithmetic Array Operators 
+</h1>
+<h2>
+1
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Is this allowed?  If no, why not? If yes, what is the result?</span></p><br>
+<textarea id=check0textarea>
+class Add1
+  Real A1[2] = {2, 3} + 1;
+end Add1;
+</textarea>  <div id=check0div> </div> <br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">No,  elementwise operations for the combination of an array and a scalar operand are not defined for addition.</span></p><br>
+</div><h2>
+2
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Is this allowed? If no, why not? If yes, what is the result?</span></p><br>
+<textarea id=check1textarea>
+class Sub5
+  Real A5[3] = {3, 45, 6} - 5;
+end Sub5;
+</textarea>  <div id=check1div> </div> <br>
+<h3>
+2.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer1 > Answer</button>
+</h3>
+<div id=answer1 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">No,  elementwise operations for the combination of an array and a scalar operand are not defined for subtraction.</span></p><br>
+</div><h2>
+3
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Is this allowed?  If no, why not? If yes, what is the result?</span></p><br>
+<textarea id=check2textarea>
+class Mult2
+  Real A2[3] = {11, 14, 12} * 2;
+end Mult2;
+</textarea>  <div id=check2div> </div> <br>
+<h3>
+3.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer2 > Answer</button>
+</h3>
+<div id=answer2 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Oh yes! The result is {22, 28, 24}.</span></p><br>
+</div><h2>
+4
+Matrix Multiplication
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Write a class that multiplies two matrices using the multiplication operator for matrices.</span></p><br>
+<textarea id=check3textarea>
+
+</textarea>  <div id=check3div> </div> <br>
+<h3>
+4.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer3 > Answer</button>
+</h3>
+<div id=answer3 class=collapse><textarea id=check4textarea>
+class MatrixMultiplication
+  Real M1[2, 3] = [2, 3, 4; 5, 6, 7];
+  Real M2[3, 2] = [5, 6; 3, 2; 1, 7];
+  Real prod[2, 2];
+equation
+  prod = M1*M2;
+end MatrixMultiplication;
+</textarea>  <div id=check4div> </div> <br>
+<h4>
+4.1.1
+Simulation of MatrixMultiplication
+</h4>
+<textarea id=check5textarea>
+simulate( MatrixMultiplication )
+</textarea>  <div id=check5div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Take a look at a value:</span></p><br>
+<textarea id=check6textarea>
+val(M1[1,2],0)   //??val is needed
+</textarea>  <div id=check6div> </div> <br>
+</div><h2>
+5
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Is this allowed? If no,why not? If yes,what is the result?</span></p><br>
+<textarea id=check7textarea>
+class MultMany
+  Real mult1 = {1, 1, 1, 1} * {1, 1, 1, 1};
+  Real mult2[2] = {{2, 2}, {2, 2}} * {2, 2};
+  Real mult3[2, 2] = {{1, 1}, {1, 1}} * {{2, 2}, {2, 2}};
+  Real mult4[1] = {1, 3, 5, 7} * {{1}, {3}, {5}, {7}};
+end MultMany;
+</textarea>  <div id=check7div> </div> <br>
+<h3>
+5.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer4 > Answer</button>
+</h3>
+<div id=answer4 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The result of mult1 is 4.<br/>The result of mult1 is {8, 8}.<br/>The result of mult1 is {{4, 4}, {4, 4}}.<br/>The result of mult1 is {84}.</span></p><br>
+</div><h2>
+6
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Is this allowed? If yes, what is the result?</span></p><br>
+<textarea id=check8textarea>
+class Div4
+  Real A4[5] = {16, 14, 10, 18, 12} / 4;
+end Div4;
+</textarea>  <div id=check8div> </div> <br>
+<h3>
+6.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer5 > Answer</button>
+</h3>
+<div id=answer5 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Oh yes! The result is {4, 3.5, 2.5, 4.25, 3}.</span></p><br>
+</div><h2>
+7
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Is this allowed? If yes, what is the result?</span></p><br>
+<textarea id=check9textarea>
+class Div7
+  Real A4[5] = 7 / {16, 14, 10, 18, 12};
+end Div7;
+</textarea>  <div id=check9div> </div> <br>
+<h3>
+7.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer6 > Answer</button>
+</h3>
+<div id=answer6 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">No. Elementwise operations for dividing a scalar operand with an array is not defined for division.</span></p><br>
+</div><h2>
+8
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">How would you write {{1, 3}, {4, 5}}^2 in Modelica? Write the expression in a class. What is the result?</span></p><br>
+<h3>
+8.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer7 > Answer</button>
+</h3>
+<div id=answer7 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The result is {{13, 18}, {24, 37}}.</span></p><br>
+<textarea id=check10textarea>
+class Exponent
+  Real m[2, 2];
+equation
+  m = {{1, 3}, {4, 5}} ^ 2;
+end Exponent;
+</textarea>  <div id=check10div> </div> <br>
+</div></div></body></html>

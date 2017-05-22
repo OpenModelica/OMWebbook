@@ -1,0 +1,99 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Generic Packages
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Generic packages are packages with some kind of formal parameter, e.g. a replaceable type. They are really a special case of <a href="static/../Generic/Parameterized.html"><span style=" text-decoration: underline; color:#0000ff;">Parametrized Generic Classes</span></a>. Another way of regarding generic classes is as parameterized <a href="static/PackasADTs.html
+"><span style=" text-decoration: underline; color:#0000ff;">Abstract Data Types</span></a>, e.g. package <span style=" font-family:'Courier New';">GeneralStack</span> below, which is parameterized in terms of the type of the elements in the stack - the type parameter <span style=" font-family:'Courier New';">Element</span>. <br/></p><br>
+<textarea id=check0textarea>
+package GeneralStack
+
+  replaceable class Element
+  end Element;
+
+  record Stack
+    parameter Integer maxsize = 0;
+    Integer       size = 0;
+    Element[maxsize]   vec;
+  end Stack;
+
+  function Push
+    input Stack si;
+    input Element e;
+    output Stack so;
+  algorithm
+    so := si;
+    so.size := so.size+1;
+    so.vec[so.size] := e;
+  end Push;
+
+  function Pop
+    input Stack si;
+    output Stack so;
+  algorithm
+    so := si;
+    so.size := so.size-1;
+  end Pop;
+
+  function Top
+    input Stack si;
+    output Element e;
+  algorithm
+    e := si.vec[si.size];
+  end Top;
+
+end GeneralStack;
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>By "instantiating" the package <span style=" font-family:'Courier New';">GeneralStack</span> with different values of the type parameter <span style=" font-family:'Courier New';">Element</span> we can create specialized stack packages containing elements of a specified type. In this case instantiation means the creation of a more <span style=" font-style:italic;">specialized package</span>. For example, we have instantiated <span style=" font-family:'Courier New';">GeneralStack</span> below, with a type argument <span style=" font-family:'Courier New';">Integer</span> creating the specialized stack called <span style=" font-family:'Courier New';">IntegerStack</span>, and with <span style=" font-family:'Courier New';">Real</span> giving the stack <span style=" font-family:'Courier New';">RealStack</span>.<br/></p><br>
+<textarea id=check1textarea>
+package IntegerStack = GeneralStack(redeclare type Element = Integer);
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+package RealStack = GeneralStack(redeclare type Element = Real);
+</textarea>  <div id=check2div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Finally the stack <span style=" font-family:'Courier New';">IntegerStack</span> is used in the class <span style=" font-family:'Courier New';">IntStackUser</span> into which it is imported.</p><br>
+<textarea id=check3textarea>
+class IntStackUser
+  import IS = IntegerStack;
+  IS.Stack stk(maxsize = 200);
+  Integer item;
+algorithm
+  stk := IS.Push(stk, 35);
+  stk := IS.Push(stk, 400);
+  stk := IS.Push(stk, 44);
+  item := IS.Top(stk);
+  stk := IS.Pop(stk);
+end IntStackUser;
+</textarea>  <div id=check3div> </div> <br>
+</div></body></html>

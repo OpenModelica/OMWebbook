@@ -1,0 +1,105 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 3
+</h1>
+<h2>
+1
+Checking Orthogonal Vectors
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Write a function, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">scalarProduct</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, that calculates the scalar product of two arbitrary vectors (u1, u2, u3, ..., un) and (v1, v2, v3, ... , vn). The result should be:  u1*v1 + u2*v2 + ... + un*vn.</span></p><br>
+<textarea id=check0textarea>
+
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Two vectors (u1, u2, u3, ..., un) and (v1, v2, v3, ... , vn) are ortogonal if the scalar product: is equal to 0. <br/>Write a class, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Orthogonal</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, that decides if two integer vectors are orthogonal. The vectors must have the same number of elements, but the number of elements should be arbitrary. </span></p><br>
+<textarea id=check1textarea>
+
+</textarea>  <div id=check1div> </div> <br>
+<h3>
+1.1
+Hint
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Applying the multiplication operator between two vectors gives the scalar product.</span></p><br>
+<h3>
+1.2
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><h4>
+1.2.1
+scalarProduct
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">First we check if the vectors are of the same size and if they are we calculate the scalar product.</span></p><br>
+<textarea id=check2textarea>
+function scalarProduct
+  input Integer V1[:];
+  input Integer V2[size(V1,1)];
+  output Integer scalarProduct;
+algorithm
+  scalarProduct := V1*V2;
+end scalarProduct;
+</textarea>  <div id=check2div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Call it:</span></p><br>
+<textarea id=check3textarea>
+scalarProduct({1,2},{-3,1})
+</textarea>  <div id=check3div> </div> <br>
+<h4>
+1.2.2
+Orthogonal
+</h4>
+<textarea id=check4textarea>
+class Orthogonal
+  Integer V1[:] = {1, 2, 3};
+  Integer V2[:] = {-3, 0, 1};
+  Integer scalarProduct1;
+  Boolean orthogonal;
+algorithm
+  scalarProduct1 := scalarProduct(V1, V2);
+  if scalarProduct1 == 0 then
+    orthogonal := true;
+  end if;
+end Orthogonal;
+</textarea>  <div id=check4div> </div> <br>
+<h4>
+1.2.3
+Simulation of Orthogonal
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Since the value in the variable orthogonal is 1 the two vectors are orthogonal. </span></p><br>
+<textarea id=check5textarea>
+simulate(Orthogonal)
+</textarea>  <div id=check5div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Check the value.</span></p><br>
+<textarea id=check6textarea>
+val(orthogonal,0)
+</textarea>  <div id=check6div> </div> <br>
+</div></div></body></html>

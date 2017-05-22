@@ -1,0 +1,108 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Multiple Inheritance
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Multiple inheritance (several extends statements) is useful when a class wishes to include several orthogonal kinds of behavior and data, e.g. combining geometry and color. By writing several extends statements, multiple inheritance is achieved.</span></p><br>
+<textarea id=check0textarea>
+record ColorData
+  parameter Real red=4;
+  parameter Real blue=3;
+  Real green;
+end ColorData;
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+class Color
+  extends ColorData;
+equation
+  red + blue + green=1;
+end Color;
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+class Point
+  public Real x;
+  Real y, z;
+end Point;
+</textarea>  <div id=check2div> </div> <br>
+<textarea id=check3textarea>
+class ColoredPoint
+  extends Point;
+  extends Color;
+end ColoredPoint;  
+</textarea>  <div id=check3div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Show the flattened class with inheritance expanded:</span></p><br>
+<textarea id=check4textarea>
+instantiateModel(ColoredPoint)
+</textarea>  <div id=check4div> </div> <br>
+<h2>
+1
+Diamond Inheritance
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A special kind of multiple inheritance is diamond inheritance, which is a problem that can arise when using multiple inheritance. </span></p><br>
+<textarea id=check5textarea>
+class Point2
+  parameter Real x = 2;
+  parameter Real y = 3;
+end Point2;
+</textarea>  <div id=check5div> </div> <br>
+<textarea id=check6textarea>
+class VerticalLine
+  extends Point2;
+  parameter Real vlength = 5;
+end VerticalLine;
+</textarea>  <div id=check6div> </div> <br>
+<textarea id=check7textarea>
+class HorizontalLine
+  extends Point2;
+  parameter Real hlength = 7;
+end HorizontalLine;
+</textarea>  <div id=check7div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The potential problem is that we have diamond inheritance since the coordinate position defined by the fields </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">x</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">y</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is inherited twice. In Modelica this is not a problem, since there is a rule stating that if several identical declarations or equations are inherited, only one of them is kept.</span></p><br>
+<textarea id=check8textarea>
+class Rectangle
+  extends VerticalLine;
+  extends HorizontalLine;
+  Point p1(x = x - vlength, y = y - hlength);
+  Point p2(x = x + vlength, y = y + hlength);
+end Rectangle;
+</textarea>  <div id=check8div> </div> <br>
+<h2>
+2
+Flattened Version of Rectangle with Diamond Inheritance
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The Point2 definitions x, y, etc. are only present once despite being inherited twice, via VerticalLine and HorizontalLine.</span></p><br>
+<textarea id=check9textarea>
+instantiateModel(Rectangle)
+</textarea>  <div id=check9div> </div> <br>
+</div></body></html>

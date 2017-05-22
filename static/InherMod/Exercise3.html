@@ -1,0 +1,93 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 3
+</h1>
+<h2>
+1
+Applying Hierarchical Modification
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Today you are going on a lunch date! To help you, several classes are created below. <br/><br/>The </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">first</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> class is </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">DayName</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, contains the parameter </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">nameOfDay</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, a certain day written as a </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">String</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. <br/>The </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">second</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> class, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">LunchAppointment</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, contains the variables </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">lunchTime</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> (what time you are going to lunch) and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">lunchDate</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> (who you are going on the lunch date with). <br/>And at last the class, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Date</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, with parameters </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">dayName</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> (where you can set the variable in the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">DayName</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, for fun it is now Funday) as well as d</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ate</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">month</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">year</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.<br/></span></p><br>
+<textarea id=check0textarea>
+class DayName
+  parameter String nameOfDay;
+end DayName;
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+class LunchAppointment
+  parameter Integer lunchTime;
+  parameter String lunchDate;
+end LunchAppointment;
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+class Date
+  DayName dayName(nameOfDay = "Funday");
+  parameter Integer date;
+  parameter String month;
+  parameter Integer year;
+end Date;
+</textarea>  <div id=check2div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>What you are going to do now is create a class, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Today</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, in which you can modify the values in the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Date</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> as well as in the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">LunchAppointment</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. First, write the class using </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">nested notation</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check3textarea>
+
+</textarea>  <div id=check3div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Now write the class, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Tomorrow</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, going with another date, using </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">dot notation</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check4textarea>
+
+</textarea>  <div id=check4div> </div> <br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><textarea id=check5textarea>
+class Today
+  Date date(dayName(nameOfDay = "Wednesday"),
+            date = 2,
+            month = "October",
+            year = 2002);
+  LunchAppointment lunchApp(lunchTime = 12,
+                            lunchDate = "Frederick");
+end Today;
+</textarea>  <div id=check5div> </div> <br>
+<textarea id=check6textarea>
+class Tomorrow
+  Date date(dayName.nameOfDay = "Thursday",
+            date = 3,
+            month = "October",
+            year = 2002);
+  LunchAppointment lunchApp(lunchTime = 12,
+                            lunchDate = "Steven");
+end Tomorrow;
+</textarea>  <div id=check6div> </div> <br>
+</div></div></body></html>

@@ -1,0 +1,60 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Nonencapsulated Packages
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;"><br/>A nonencapsulated package is a package declared without the prefix <span style=" font-family:Courier New;">encapsulated</span>. Also large encapsulated packages, containing <span style=" font-family:Courier New;">protected</span> declarations, can be internally structured into nonencapsulated packages. <br/><br/>In the example below, the encapsulated package <span style=" font-family:Courier New;">Blocks</span> has been internally structured into three nonencapsulated packages <span style=" font-family:Courier New;">Interfaces</span>, <span style=" font-family:Courier New;">Continuous</span>, and <span style=" font-family:Courier New;">Examples</span> that all can access the protected type <span style=" font-family:Courier New;">MySecret</span>.<br/></p><br>
+<textarea id=check0textarea>
+encapsulated package Modelica
+  encapsulated package Blocks
+
+    protected
+      type MySecret = Integer;
+
+    public
+      package Interfaces
+      end Interfaces;
+
+      package Continuous
+        MySecret x;
+      end Continuous;
+
+      package Examples
+      end Examples;
+
+    end Blocks;
+
+end Modelica;
+</textarea>  <div id=check0div> </div> <br>
+</div></body></html>

@@ -1,0 +1,62 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Packages
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Name conflicts is a major problem when developing reusable code, for example libraries of reusable Modelica classes and functions for various application domains. A package is simply a container or namespace for names of classes, functions, constants, and other allowed definitions. The package name is prefixed to all definitions in the package using standard dot notation. An import language construct is provided for Modelica packages. <span style=" font-family:'Courier New';">An import</span> statement occur in one of the following four syntactic forms <a href="../Packages/PackAccess.html"><span style=" text-decoration: underline; color:#0000ff;">qualified import</span></a>, <a href="../Packages/PackAccess.html"><span style=" text-decoration: underline; color:#0000ff;">single definition import</span></a>, <a href="../Packages/PackAccess.html"><span style=" text-decoration: underline; color:#0000ff;">unqualified import</span></a> or <a href="../Packages/PackAccess.html"><span style=" text-decoration: underline; color:#0000ff;">renaming import</span></a>.<br/><br/>The type name <span style=" font-family:'Courier New';">Voltage</span> together with all other definitions in Modelica.SIunits is imported in the example below, which makes it possible to use it without prefix for declaration of the variable v. By contrast, the declaration of the variable i uses the fully qualified name <span style=" font-family:'Courier New';">Modelica.SIunits.Ampere</span> of the type <span style=" font-family:'Courier New';">Ampere</span>, even though the short version also would have been possible. The fully qualified long name for <span style=" font-family:'Courier New';">Ampere</span> can be used since it is found using the standard nested lookup of the Modelica standard library placed in a conceptual top level package.<br/></p><br>
+<textarea id=check0textarea>
+package MyPack
+  import Modelica.SIunits.*;
+
+class Foo
+  Voltage v;
+  Modelica.SIunits.Ampere i;
+end Foo;
+
+end MyPack;
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Importing definitions from one package into another package as in the above example has the drawback that the introduction of new definitions into a package may cause name clashes with definitions in packages using that package. Instead, a well-designed package should state all its dependences explicitly through import statements which are easy to find. <br/><br/>Such a package is created by adding the prefix <span style=" font-family:'Courier New';">encapsulated</span> in front of the package keyword. This prevents nested lookup outside the package boundary, insuring that all dependences on other packages outside the current package have to be explicitly stated as import statements.<br/></p><br>
+<textarea id=check1textarea>
+encapsulated package MyPack
+  import SI = Modelica.SIunits;
+  import Modelica;
+
+class Foo
+  SI.Voltage v;
+  Modelica.SIunits.Ampere i;
+end Foo;
+
+end MyPack;
+</textarea>  <div id=check1div> </div> <br>
+</div></body></html>

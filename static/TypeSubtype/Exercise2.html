@@ -1,0 +1,102 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 2 - Subtype and Supertype
+</h1>
+<h2>
+1
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">What is a type?</span></p><br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A type can conceptually be viewed as a set of values. If x has the type Real, this means that x belongs to the set of values represented by the type Real.</span></p><br>
+</div><h2>
+2
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">What is a subtype?</span></p><br>
+<h3>
+2.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer1 > Answer</button>
+</h3>
+<div id=answer1 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The subtype relation between types is analogous to the subset relation between sets. If a type A1 is a subtype of A, the set of values corresponding to type A1 is a subset of the set of values corresponding to type A. </span></p><br>
+</div><h2>
+3
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">What is a supertype?</span></p><br>
+<h3>
+3.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer2 > Answer</button>
+</h3>
+<div id=answer2 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The supertype relation is the inverse of the subtype relation.</span></p><br>
+</div><h2>
+4
+Subtype and Supertype
+</h2>
+<textarea id=check0textarea>
+class House
+  Real length;
+  Real width;
+end House;
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/><br/>Define a class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Room</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> that is a Subtype of the class House. Which also means that House is a Supertype of Room. Also give the variables some values. </span></p><br>
+<textarea id=check1textarea>
+
+</textarea>  <div id=check1div> </div> <br>
+<h3>
+4.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer3 > Answer</button>
+</h3>
+<div id=answer3 class=collapse><textarea id=check2textarea>
+class Room
+  Real length   = 5;
+  Real width   = 4.3;
+  Real hieght   = 2.1;
+end Room;
+</textarea>  <div id=check2div> </div> <br>
+<h4>
+4.1.1
+Simulation of Room
+</h4>
+<textarea id=check3textarea>
+simulate( Room )
+</textarea>  <div id=check3div> </div> <br>
+<textarea id=check4textarea>
+val(length,1.)
+</textarea>  <div id=check4div> </div> <br>
+</div></div></body></html>

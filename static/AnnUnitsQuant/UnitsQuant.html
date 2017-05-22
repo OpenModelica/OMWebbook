@@ -1,0 +1,120 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Units and Quantities
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>What is the meaning of unit and quantity? <br/>Well, </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">quantity</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, also called </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">dimension</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, is </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">what</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> you measure, i.e. any measurable extent or magnitude such as length, mass, time, etc. A </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">unit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is a "yardstick" by which you </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">express</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> your measurements. For example, a measurement of the length quantity can be expressed as a number of meter units.</span></p><br>
+<h2>
+1
+Quantity, Unit, and displayUnit in Modelica
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The Modelica notions of quantity and unit with a concrete representation as string attributes to the Real predefined class, are seen below. <br/></span></p><br>
+<textarea id=check0textarea>
+type Real
+  parameter String quantity    = "";
+  parameter String unit     = "";
+  parameter String displayUnit   = "";
+end Real;    
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Below are examples of definitions and uses of types corresponding to some physical quantities. Remember that the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">final</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> prefix on </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">quantity</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">unit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> means that these attributes cannot be changed by further modification of the types </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Force</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Angle</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.<br/><br/><br/>Definintion of quantity types:</span></p><br>
+<textarea id=check1textarea>
+type Force = Real(final quantity = "Force", final unit = "N");
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+type Angle = Real(final quantity = "Angle", final unit = "rad",
+                    displayUnit    = "deg");
+</textarea>  <div id=check2div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Use of the quantity types</span></p><br>
+<textarea id=check3textarea>
+class QuantityTypes
+  Force  f1;
+  Force  f2(displayUnit="kp");
+  Angle  alpha;
+  Angle  beta(displayUnit="rad");
+end QuantityTypes;
+</textarea>  <div id=check3div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The quantity attribute can be used as a grouping mechanism in interactive Modelica environments. The quantity name is needed because it is in general not possible to determine just from the unit whether two different units belong to the same physical quantity. For example, consider the following two types:<br/></span></p><br>
+<textarea id=check4textarea>
+type Energy = Real(final quantity = "Energy", final unit = "J");
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+type Torque = Real(final quantity = "MomentOfForce", final unit = "N.m");
+
+</textarea>  <div id=check5div> </div> <br>
+<h2>
+2
+Modelica.SIunits
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The Modelica standard library package Modelica.SIunits contains predefined quantity and connector types in the form shown in the above examples. This library contains approximately 450 predefined types comprising the complete set of ISO SI standard units, which is quite helpful when defining the interfaces of a model. Some additional examples from this library are shown below:<br/></span></p><br>
+<textarea id=check6textarea>
+type ElectricCurrent   = Real(final quantity="ElectricCurrent",
+                              final unit= "A");
+</textarea>  <div id=check6div> </div> <br>
+<textarea id=check7textarea>
+type Current           = ElectricCurrent;
+</textarea>  <div id=check7div> </div> <br>
+<textarea id=check8textarea>
+type Resistance        = Real(final quantity="Resistance",
+                              final unit="Ohm", min=0);
+</textarea>  <div id=check8div> </div> <br>
+<textarea id=check9textarea>
+type Inductance        = Real(final quantity="Inductance",
+                              final unit="H", min=0);
+</textarea>  <div id=check9div> </div> <br>
+<textarea id=check10textarea>
+type Time     = Real(final quantity="Time",   final unit="s" );
+
+</textarea>  <div id=check10div> </div> <br>
+<textarea id=check11textarea>
+type Length   = Real(final quantity="Length", final unit="m" );
+
+</textarea>  <div id=check11div> </div> <br>
+<textarea id=check12textarea>
+type Position = Real(final quantity="Length", final unit="m");
+
+</textarea>  <div id=check12div> </div> <br>
+<textarea id=check13textarea>
+type AngularVelocity     = Real(final quantity="AngularVelocity",
+                                final unit="rad/s",
+                                displayUnit="rev/min");
+</textarea>  <div id=check13div> </div> <br>
+<textarea id=check14textarea>
+type AngularAcceleration = Real(final quantity="AngularAcceleration",
+                                final unit="rad/s2");
+</textarea>  <div id=check14div> </div> <br>
+<textarea id=check15textarea>
+type MomentOfInertia     = Real(final quantity="MomentOfInertia",
+                                final unit="kg.m2");
+</textarea>  <div id=check15div> </div> <br>
+</div></body></html>

@@ -1,0 +1,101 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Inheritance of Protected Elements
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>If the keyword </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">protected</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is used in front of an </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">extends</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> clause, all inherited elements from the superclass become protected elements of the subclass. If an extends clause is a public element, all elements of the superclass are inherited with their original protection.<br/></span></p><br>
+<textarea id=check0textarea>
+record ColorData
+protected
+  Real red;
+  parameter Real blue;
+  parameter Real green;
+end ColorData;
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+class Color
+  extends ColorData(blue = 3.5, green = 5);
+equation
+  red + blue + green = 1;
+end Color;
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+class Point
+public
+  parameter Real x = 1;
+protected
+  parameter Real y = 2;
+  parameter Real z = 3;
+end Point;
+</textarea>  <div id=check2div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The color fields </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">red,</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">green</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">blue</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> that are inherited from Color become protected fields of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ColoredPoint2</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, since the extends clause is preceded by the protected keyword. The inherited fields from </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Point</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> keep their protection status since that extends clause is preceded by public.<br/><br/>The prefixes </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">protected</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">public</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> are not inherited. A protected element cannot be accessed via dot notation - this is the essence of being protected. Additionally, protected elements may not be modified or redeclared in class modifications.<br/></span></p><br>
+<textarea id=check3textarea>
+class ColoredPoint
+protected
+  extends Color;    // red, blue and green from ColorData become
+public              // protected fields
+  extends Point;    // y and z from Point stay protected
+end ColoredPoint;
+</textarea>  <div id=check3div> </div> <br>
+<h2>
+1
+Flattening and Simulation of ColoredPoint
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Flatten it:</span></p><br>
+<textarea id=check4textarea>
+instantiateModel(ColoredPoint)
+</textarea>  <div id=check4div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Simulate it:</span></p><br>
+<textarea id=check5textarea>
+simulate(ColoredPoint, simflags = "-emit_protected")
+</textarea>  <div id=check5div> </div> <br>
+<textarea id=check6textarea>
+plot({red, blue, green, x})
+</textarea> <br> <div id=check6div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check6div"),
+ValueError
+,
+{
+legend:"always",
+labels:
+['Time', 'blue', 'green', 'red', 'x']
+}
+)
+</script>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Look at a variable:</span></p><br>
+<textarea id=check7textarea>
+val(red,1.)
+</textarea>  <div id=check7div> </div> <br>
+</div></body></html>

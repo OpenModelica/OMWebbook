@@ -1,0 +1,83 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Moving Packages
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Copying or moving a </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">nonencapsulated</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> subpackage might be a bit problematic since used declarations may not be available in the new location for that subclass. When copying or moving an encapsulated package or class at most the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">import</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> statements inside this package or class, including subpackages and local classes, need to be updated.<br/></span></p><br>
+<textarea id=check0textarea>
+encapsulated package Modelica
+
+  encapsulated package Blocks
+    encapsulated package Interfaces
+      connector InPort
+      end InPort;
+    end Interfaces;
+  end Blocks;
+
+  encapsulated package Mechanics
+    encapsulated package Rotational
+      import Modelica.Blocks.Interfaces;    // Import
+
+      model Torque
+        Interfaces.InPort inPort;        // Use
+      end Torque;
+    end Rotational;
+  end Mechanics;
+
+end Modelica;
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>If you move the package </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Rotational</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> inside </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">YourModelica</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> as below, it will continue to work without changes since its </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">import</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> statements still refers to </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">YourModelica.Blocks.Interfaces</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. Maybe if you instead would like to refer the package </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">YourModelica.Blocks.Interfaces</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, just update the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">import</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> statement as we have done below.<br/></span></p><br>
+<textarea id=check1textarea>
+encapsulated package YourModelica
+
+  encapsulated package Blocks
+    encapsulated package Interfaces
+      connector InPort
+      end InPort;
+    end Interfaces;
+  end Blocks;
+
+  encapsulated package Mechanics
+    encapsulated package Rotational
+      import YourModelica.Blocks.Interfaces;  // Import
+      model Torque
+        Interfaces.InPort inPort;        // Use
+      end Torque;
+    end Rotational;
+  end Mechanics;
+
+end YourModelica;
+
+</textarea>  <div id=check1div> </div> <br>
+</div></body></html>

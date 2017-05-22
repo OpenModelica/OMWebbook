@@ -1,0 +1,145 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Redeclaration
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>By using the keyword </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">redeclare</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> it is possible to modify the type and/or the prefixes and possibly the dimension sizes of a declared element. This kind of modification is called a redeclaration. In most cases a declaration that can be redeclared must include the prefix </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">replaceable</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.<br/><br/>The element in a redeclaration must have a type that is either a subtype of the replaceable element in the modified class or a subtype of a constraining type. An example is shown below with the concepts of redeclaration.</span></p><br>
+<h2>
+1
+Connector Classes
+</h2>
+<textarea id=check0textarea>
+type Voltage = Real(unit = "V");
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+type Current = Real(unit = "A");
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+connector Pin
+  Voltage     v;
+  flow Current   i;
+end Pin;        
+</textarea>  <div id=check2div> </div> <br>
+<h2>
+2
+Resistor and TempResistor
+</h2>
+<textarea id=check3textarea>
+model Resistor
+  Pin       p, n                "Positive and Negative Pins";
+  Voltage     v;
+  Current     i;
+  parameter Real R(unit = "Ohm")          "Resistance";
+equation
+  v = R*i;
+end Resistor;
+</textarea>  <div id=check3div> </div> <br>
+<textarea id=check4textarea>
+model TempResistor                  "Temperature dependent Resistor"
+  Pin       p, n                "Positive and Negative Pins";
+  Voltage     v;
+  Current     i;
+  parameter Real R(unit = "Ohm")          "Resistance at reference Temperature";
+  parameter Real RT(unit = "Ohm/degC")   = 0     "Temperature dependent Resistance";
+  parameter Real Tref(unit = "degC")   = 20    "Reference Temperature";
+  Real        Temp           = 20    "Actual Temperature";
+equation
+  v = i*(R + RT*(Temp - Tref));
+end TempResistor;
+</textarea>  <div id=check4div> </div> <br>
+<h2>
+3
+MiniCircuit
+</h2>
+<textarea id=check5textarea>
+class MiniCircuit
+  replaceable discrete Resistor R1;
+end MiniCircuit;
+</textarea>  <div id=check5div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The redeclaration of the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">R1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> element changes its type from </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Resistor</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> to </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">TempResisto</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">r and its prefix from discrete to parameter. </span></p><br>
+<textarea id=check6textarea>
+class MiniCircuitRed
+  MiniCircuit tempcircuit(redeclare parameter TempResistor R1);
+end MiniCircuitRed;
+</textarea>  <div id=check6div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The MiniCircuitRed class can be rewritten as the MiniCircuit2</span></p><br>
+<textarea id=check7textarea>
+class MiniCircuit2
+  parameter TempResistor R1;
+end MiniCircuit2;
+</textarea>  <div id=check7div> </div> <br>
+<h2>
+4
+Redeclaration with Extends Clause
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The next example illustrates a redeclaration used in an </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">extends clause</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check8textarea>
+class RedA
+  parameter Real x;
+end RedA;
+</textarea>  <div id=check8div> </div> <br>
+<textarea id=check9textarea>
+class RedA2                    // A2 is a subtype of A
+  parameter Real x = 3.14;
+  parameter Real y;
+end RedA2;  
+</textarea>  <div id=check9div> </div> <br>
+<textarea id=check10textarea>
+class RedB
+  replaceable RedA a(x = 1);
+end RedB;
+</textarea>  <div id=check10div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The redeclaration </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">redeclare RedA2 a(y=2)</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is used in an extends clause to replace the original declaration Red</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">A a(x=1)</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> from class RedB, but merging the original nested modifier </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">(x=1)</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> with the modifiers in the redeclaration to effectively get Red</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">A2 a(x=1,y=2)</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. The type of the redeclared field </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">a</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> in class RedB is changed from RedA to RedA2 in class RedB2 which is correct since RedA2 is a subtype of RedA.<br/></span></p><br>
+<textarea id=check11textarea>
+class RedB2
+  extends RedB(redeclare RedA2 a(y = 2));    // The result after redeclaration is RedA2 a(x = 1, y = 2)
+end RedB2;
+</textarea>  <div id=check11div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The class RedB, is equivalent to the class B2expanded below.</span></p><br>
+<textarea id=check12textarea>
+class B2expanded
+  RedA2 a(x = 1, y = 2);
+end B2expanded;
+</textarea>  <div id=check12div> </div> <br>
+<h3>
+4.1
+Flattening RedB, B2expanded
+</h3>
+<textarea id=check13textarea>
+instantiateModel(RedB2)
+</textarea>  <div id=check13div> </div> <br>
+<textarea id=check14textarea>
+instantiateModel(B2expanded)
+</textarea>  <div id=check14div> </div> <br>
+</div></body></html>

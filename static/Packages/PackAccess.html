@@ -1,0 +1,145 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Package Access
+</h1>
+<h2>
+1
+General Description
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">There are essentially two ways of accessing the definitions of a package either </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">direct reference</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> by prefixing the package name to the definition names or </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">importing definitions</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> from the package. We have already used the first method in the </span><a href="./PackasADTs.html#Complex Example
+"><span style=" font-family:'Times New Roman'; font-size:12pt; text-decoration: underline; color:#0000ff;">Complex Example</span></a><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. It is usually more convenient and often necessary to use the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">import</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> mechanism, which is the subject for the next section.</span></p><br>
+<h2>
+2
+Importing Definitions from a Package
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Import</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> statements in a package or class fill the two needs of either making definitions from other packages available for use in a package or class or explicit declaration of usage dependences on other packages. An </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">import</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> statement can occur in several syntactic forms. In the examples below we want to access the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Add</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> operation of the package Modelica.Math.ComplexNumbers.<br/></span></p><br>
+<textarea id=check0textarea>
+loadModel(Modelica)
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+model A
+  import Modelica.Math.ComplexNumbers;        // Access by ComplexNumbers.Add
+end A;
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+model B
+  import Modelica.Math.ComplexNumbers.Add;     // Access by Add
+end B;
+</textarea>  <div id=check2div> </div> <br>
+<textarea id=check3textarea>
+model C
+  import Modelica.Math.ComplexNumbers.*;       // Access by Add
+end C;
+</textarea>  <div id=check3div> </div> <br>
+<textarea id=check4textarea>
+model D
+  import Co = Modelica.Math.ComplexNumbers;    // Access by Co.Add
+end D;
+</textarea>  <div id=check4div> </div> <br>
+<h3>
+2.1
+Qualified Import
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The</span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;"> qualified import </span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">statement of the form </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">import</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> ; imports all definitions in a package, which subsequently can be referred to by names </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">simplepackagename.definitionname</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, where the </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">simplepackagename</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is the </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">packagename</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> without its prefix. This is the most common form of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">import</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">(</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">see </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ComplexUser1) </span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">that eliminates the risk for name collisions when importing from several packages.<br/></span></p><br>
+<textarea id=check5textarea>
+encapsulated package ComplexUser1
+  import ComplexNumbers;
+
+  class User
+    ComplexNumbers.Complex  a(x = 1.0, y = 2.0);
+    ComplexNumbers.Complex  b(x = 1.0, y = 2.0);
+    ComplexNumbers.Complex  z, w;
+  equation
+    z = ComplexNumbers.Multiply(a, b);
+    z = ComplexNumbers.Add(a, b);
+  end User;
+
+end ComplexUser1;
+</textarea>  <div id=check5div> </div> <br>
+<h3>
+2.2
+Single Definition Import
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The</span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;"> single definition import </span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">statement of the form </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">import</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">.</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">; allows you to import a single specific definition from a package and use that definition referred to by its </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">definitionname</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> without the package prefix. This allows you to only write </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Add</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> (see </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ComplexUser2</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> below) but still you have to write an </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">import</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> statement for each imported definition which can be a bit cumbersome. There is no risk for name collision as long as you do not try to import two definitions with the same short name.<br/></span></p><br>
+<textarea id=check6textarea>
+encapsulated package ComplexUser2
+  import ComplexNumbers.Complex;
+  import ComplexNumbers.Multiply;
+  import ComplexNumbers.Add;
+
+  class User
+    Complex  a(x = 1.0, y = 2.0);
+    Complex  b(x = 1.0, y = 2.0);
+    Complex  z, w;
+  equation
+    z = Multiply(a, b);
+    z = Add(a, b);
+  end User;
+
+end ComplexUser2;
+</textarea>  <div id=check6div> </div> <br>
+<h3>
+2.3
+Unqualified Import
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The</span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;"> unqualified import </span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">statement of the form </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">import</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">packagename.*</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">; imports all definitions from the package using their short names without qualification prefixes. This is shown in </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ComplexUser3</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> below. There is a high risk of name collisions as well as future compilation errors, but nice for the lazy programmer.<br/></span></p><br>
+<textarea id=check7textarea>
+class ComplexUser3
+  import ComplexNumbers.*;
+  Complex  a(x = 1.0, y = 2.0);
+  Complex  b(x = 1.0, y = 2.0);
+  Complex  z, w;
+equation
+  z = Multiply(a, b);
+  z = Add(a, b);
+end ComplexUser3;
+</textarea>  <div id=check7div> </div> <br>
+<h3>
+2.4
+Renaming Import
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The</span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;"> renaming import </span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">statement of the form </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">import</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;"> = </span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">; imports a package and renames it locally to </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">shortpackagename</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. You can refer to imported definitions using  </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">shortpackagename </span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">as a presumably shorter package prefix. In the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ComplexUser4</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> below, Co is used instead of the longer name </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ComplexNumbers</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.<br/></span></p><br>
+<textarea id=check8textarea>
+class ComplexUser4
+  import Co = ComplexNumbers;
+  Co.Complex  a(x = 1.0, y = 2.0);
+  Co.Complex  b(x = 1.0, y = 2.0);
+  Co.Complex  z, w;
+equation
+  z = Co.Multiply(a, b);
+  z = Co.Add(a, b);
+end ComplexUser4;
+</textarea>  <div id=check8div> </div> <br>
+</div></body></html>

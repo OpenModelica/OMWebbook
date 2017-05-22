@@ -1,0 +1,82 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Assert
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">assert</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> statement provides a convenient means for specifying checks on model validity within a model. The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">assert</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> expression in an assert statement or equation should normally evaluate to true. When the assertion evaluates to false, the message in the second argument will be displayed to the user and the simulation will stop. The class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">AssertTest</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> contains an example of the use of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">assert</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.<br/></span></p><br>
+<textarea id=check0textarea>
+class AssertTest
+  parameter Real lowlimit;
+  parameter Real highlimit;
+  Real x = 5;
+algorithm
+  assert(x >= lowlimit and x <= highlimit, "Variable x out of limit");
+end AssertTest;
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+class Test1
+  AssertTest assertTest(lowlimit = 4, highlimit = 8);
+end Test1;
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+class Test2
+  AssertTest assertTest(lowlimit = 6, highlimit = 20);
+end Test2;
+</textarea>  <div id=check2div> </div> <br>
+<h2>
+1
+Simulation of Test1 and Test2 
+</h2>
+<textarea id=check3textarea>
+simulate( Test1 )  
+</textarea>  <div id=check3div> </div> <br>
+<textarea id=check4textarea>
+plot( { assertTest.x, assertTest.highlimit, assertTest.lowlimit })
+</textarea> <br> <div id=check4div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check4div"),
+ValueError
+,
+{
+legend:"always",
+labels:
+['Time', 'assertTest.highlimit', 'assertTest.lowlimit', 'assertTest.x']
+}
+)
+</script>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">In the simulation of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Test2</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> we see that an error occurs and by looking in the file ??dslog.txt we see that the assertion fails and returns the message "Variable x out of limit".</span></p><br>
+<textarea id=check5textarea>
+simulate( Test2, stopTime=10 ) 
+</textarea>  <div id=check5div> </div> <br>
+</div></body></html>

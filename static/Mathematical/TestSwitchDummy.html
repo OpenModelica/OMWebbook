@@ -1,0 +1,258 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<textarea id=check0textarea>
+loadModel(Modelica)
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+model IdealSwitchStiff "Ideal electrical switch" 
+  extends Modelica.Electrical.Analog.Interfaces.OnePort;
+  Boolean off(start=false);
+  parameter Real t0=5;
+  discrete Integer sign_i(start=0);
+  parameter Real Roff(final min=0) = 1.E-5 "Closed switch resistance";
+  parameter Real Gon(final min=0) = 1.E-5 "Opened switch conductance";
+protected 
+  Real s "Auxiliary variable";
+equation 
+  when (time>t0) then
+    sign_i = if (i>0) then 1 else -1;
+  end when;
+  when (time>t0 and sign_i*i<0) then
+    off = true;
+  end when;
+  v = s*(if off then 1 else Roff);
+  i = s*(if off then Gon else 1);
+end IdealSwitchStiff;
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+model IdealSwitchDummy "Ideal electrical switch"
+  extends Modelica.Electrical.Analog.Interfaces.OnePort;
+  Boolean off(start = false);
+  discrete Integer sign_i(start = 0);
+  parameter Real t0 = 0.5;
+equation
+  when time > t0 then
+    sign_i = if i > 0 then 1 else -1;
+  end when;
+  when time > t0 and sign_i * i < 0 then
+    off = true;
+  end when;
+  0 = if off then der(i) else v;
+  annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2}), graphics = {Rectangle(origin = {-33.55, 0}, fillPattern = FillPattern.Solid, extent = {{-42.27, 3.05}, {42.27, -3.05}}), Polygon(points = {{0.43573, 37.4728}, {0.43573, 37.4728}}), Polygon(origin = {49.6616, 25.6549}, fillPattern = FillPattern.Solid, points = {{-48.35, -2.12456}, {28.7742, -30.4469}, {31.3886, -23.4753}, {-44.4285, 5.28288}, {-44.4285, 5.71858}, {-48.35, -2.12456}})}));
+end IdealSwitchDummy;
+</textarea>  <div id=check2div> </div> <br>
+<textarea id=check3textarea>
+model TestSwitch1 
+  Modelica.Electrical.Analog.Basic.Ground G 
+    annotation (extent=[0,-28; 20,-8]);
+  Modelica.Electrical.Analog.Basic.Inductor I(i(start=0.075)) 
+    annotation (extent=[-48,18; -28,38]);
+  Modelica.Electrical.Analog.Sources.SineVoltage U 
+    annotation (extent=[-66,-2; -46,18], rotation=90);
+  IdealSwitchDummy S          annotation (extent=[-18,18; 2,38]);
+equation 
+  connect(U.n, I.p)                    annotation (points=[-56,18; -56,28; -48,
+        28], style(color=3, rgbcolor={0,0,255}));
+  connect(U.p, G.p) 
+    annotation (points=[-56,-2; -56,-8; 10,-8],
+                                        style(color=3, rgbcolor={0,0,255}));
+  connect(I.n, S.p) 
+    annotation (points=[-28,28; -18,28], style(color=3, rgbcolor={0,0,255}));
+  connect(S.n, G.p)      annotation (points=[2,28; 10,28; 10,-8], style(color=3,
+        rgbcolor={0,0,255}));
+end TestSwitch1;
+</textarea>  <div id=check3div> </div> <br>
+<textarea id=check4textarea>
+model TestSwitch2 
+  Modelica.Electrical.Analog.Basic.Ground G 
+    annotation (extent=[0,-28; 20,-8]);
+  Modelica.Electrical.Analog.Basic.Inductor I(i(start=0.075)) 
+    annotation (extent=[-48,18; -28,38]);
+  Modelica.Electrical.Analog.Sources.SineVoltage U 
+    annotation (extent=[-66,-2; -46,18], rotation=90);
+  IdealSwitchStiff S(t0=0.75)   annotation (extent=[-18,18; 2,38]);
+equation 
+  connect(U.n, I.p)                    annotation (points=[-56,18; -56,28; -48,
+        28], style(color=3, rgbcolor={0,0,255}));
+  connect(U.p, G.p) 
+    annotation (points=[-56,-2; -56,-8; 10,-8],
+                                        style(color=3, rgbcolor={0,0,255}));
+  connect(I.n, S.p) 
+    annotation (points=[-28,28; -18,28], style(color=3, rgbcolor={0,0,255}));
+  connect(S.n, G.p)      annotation (points=[2,28; 10,28; 10,-8], style(color=3,
+        rgbcolor={0,0,255}));
+end TestSwitch2;
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+simulate(TestSwitch1, stopTime=2, stepSize=0.1, method="euler")
+</textarea>  <div id=check5div> </div> <br>
+<textarea id=check6textarea>
+
+plot({S.v, S.i})
+</textarea> <br> <div id=check6div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check6div"),
+  [[  0.00000000e+00,   7.50000000e-02,  -0.00000000e+00],
+       [  1.00000000e-01,   7.50000000e-02,   0.00000000e+00],
+       [  2.00000000e-01,   1.62214748e-02,   0.00000000e+00],
+       [  3.00000000e-01,  -7.88841769e-02,   0.00000000e+00],
+       [  4.00000000e-01,  -1.73989828e-01,   0.00000000e+00],
+       [  5.00000000e-01,  -2.32768354e-01,  -1.14383329e-17],
+       [  5.00000000e-01,  -2.32768354e-01,   0.00000000e+00],
+       [  5.00000000e-01,  -2.32768354e-01,   0.00000000e+00],
+       [  6.00000000e-01,  -2.32768354e-01,   0.00000000e+00],
+       [  7.00000000e-01,  -1.73989828e-01,   0.00000000e+00],
+       [  8.00000000e-01,  -7.88841768e-02,   0.00000000e+00],
+       [  8.82943732e-01,   1.00220534e-10,   0.00000000e+00],
+       [  8.82943732e-01,   1.00220534e-10,   6.70947771e-01],
+       [  9.00000000e-01,   1.00220534e-10,   5.87785252e-01],
+       [  1.00000000e+00,   1.00220534e-10,   2.44921271e-16],
+       [  1.10000000e+00,   1.00220534e-10,  -5.87785252e-01],
+       [  1.20000000e+00,   1.00220534e-10,  -9.51056516e-01],
+       [  1.30000000e+00,   1.00220534e-10,  -9.51056516e-01],
+       [  1.40000000e+00,   1.00220534e-10,  -5.87785252e-01],
+       [  1.50000000e+00,   1.00220534e-10,  -3.67381906e-16],
+       [  1.60000000e+00,   1.00220534e-10,   5.87785252e-01],
+       [  1.70000000e+00,   1.00220534e-10,   9.51056516e-01],
+       [  1.80000000e+00,   1.00220534e-10,   9.51056516e-01],
+       [  1.90000000e+00,   1.00220534e-10,   5.87785252e-01],
+       [  2.00000000e+00,   1.00220534e-10,   4.89842542e-16],
+       [  2.00000000e+00,   1.00220534e-10,   4.89842542e-16]] 
+,
+{
+legend:"always",
+labels:
+['Time', 'S.i', 'S.v']
+}
+)
+</script>
+<textarea id=check7textarea>
+simulate(TestSwitch2, stopTime=2, stepSize=0.1, method="euler", simflags="")
+</textarea>  <div id=check7div> </div> <br>
+<textarea id=check8textarea>
+
+plot({S.v,S.i}) 
+
+</textarea> <br> <div id=check8div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check8div"),
+  [[  0.00000000e+00,   7.50000000e-02,   7.50000000e-07],
+       [  1.00000000e-01,   7.49999250e-02,   7.49999250e-07],
+       [  2.00000000e-01,   1.62213248e-02,   1.62213248e-07],
+       [  3.00000000e-01,  -7.88843431e-02,  -7.88843431e-07],
+       [  4.00000000e-01,  -1.73989916e-01,  -1.73989916e-06],
+       [  5.00000000e-01,  -2.32768267e-01,  -2.32768267e-06],
+       [  6.00000000e-01,  -2.32768034e-01,  -2.32768034e-06],
+       [  7.00000000e-01,  -1.73989276e-01,  -1.73989276e-06],
+       [  7.50000000e-01,  -1.26436363e-01,  -1.26436363e-06],
+       [  7.50000000e-01,  -1.26436363e-01,  -1.26436363e-06],
+       [  8.00000000e-01,  -7.64363003e-02,  -7.64363003e-07],
+       [  8.80369818e-01,   1.00028987e-10,   9.93370020e-16],
+       [  8.80369818e-01,   1.00028987e-10,   1.00028987e-05],
+       [  9.00000000e-01,   1.34043012e-02,   1.34043012e+03],
+       [  9.00010004e-01,  -2.36530817e-10,   7.38332786e-05],
+       [  9.00010004e-01,  -2.36530817e-10,  -2.36530817e-05],
+       [  9.00010005e-01,   1.00423879e-10,   9.99962718e-06],
+       [  9.00010005e-01,   1.00423879e-10,   1.00423879e-05],
+       [  1.00000000e+00,   5.87665551e-02,   5.87665551e+03],
+       [  1.00001000e+00,  -2.79126164e-09,   1.48456800e-04],
+       [  1.00001000e+00,  -2.79126164e-09,  -2.79126164e-04],
+       [  1.00002337e+00,   1.00000041e-10,   9.99998838e-06],
+       [  1.00002337e+00,   1.00000041e-10,   1.00000041e-05],
+       [  1.00002464e+00,  -1.00000087e-10,  -9.99999730e-06],
+       [  1.00002464e+00,  -1.00000087e-10,  -1.00000087e-05],
+       [  1.10000000e+00,  -1.44799319e-05,  -1.44799319e+00],
+       [  1.10001683e+00,   1.00404395e-10,   9.97785109e-06],
+       [  1.10001683e+00,   1.00404395e-10,   1.00404395e-05],
+       [  1.10001683e+00,  -1.00171718e-10,  -9.97440501e-06],
+       [  1.10001683e+00,  -1.00171718e-10,  -1.00171718e-05],
+       [  1.20000000e+00,  -5.87761843e-02,  -5.87761843e+03],
+       [  1.20001000e+00,   1.69042790e-09,  -2.58541038e-04],
+       [  1.20001000e+00,   1.69042790e-09,   1.69042790e-04],
+       [  1.20001000e+00,  -1.00604202e-10,  -9.99121493e-06],
+       [  1.20001000e+00,  -1.00604202e-10,  -1.00604202e-05],
+       [  1.30000000e+00,  -9.50970738e-02,  -9.50970738e+03],
+       [  1.30001000e+00,   6.93110038e-09,   1.25695784e-06],
+       [  1.30001000e+00,   6.93110038e-09,   6.93110038e-04],
+       [  1.30001001e+00,  -1.00278591e-10,  -9.95861858e-06],
+       [  1.30001001e+00,  -1.00278591e-10,  -1.00278591e-05],
+       [  1.40000000e+00,  -9.50931873e-02,  -9.50931873e+03],
+       [  1.40001000e+00,   4.80849755e-10,  -6.43766257e-04],
+       [  1.40001000e+00,   4.80849755e-10,   4.80849755e-05],
+       [  1.40001000e+00,  -1.00293010e-10,  -9.98653850e-06],
+       [  1.40001000e+00,  -1.00293010e-10,  -1.00293010e-05],
+       [  1.50000000e+00,  -5.87665601e-02,  -5.87665601e+03],
+       [  1.50001000e+00,   2.79126188e-09,  -1.48456812e-04],
+       [  1.50001000e+00,   2.79126188e-09,   2.79126188e-04],
+       [  1.50002337e+00,  -1.00000122e-10,  -9.99999649e-06],
+       [  1.50002337e+00,  -1.00000122e-10,  -1.00000122e-05],
+       [  1.50002464e+00,   1.00000016e-10,   9.99999023e-06],
+       [  1.50002464e+00,   1.00000016e-10,   1.00000016e-05],
+       [  1.60000000e+00,   1.44799326e-05,   1.44799326e+00],
+       [  1.60001683e+00,  -1.00261593e-10,  -9.96357096e-06],
+       [  1.60001683e+00,  -1.00261593e-10,  -1.00261593e-05],
+       [  1.60001683e+00,   1.00314514e-10,   9.98868465e-06],
+       [  1.60001683e+00,   1.00314514e-10,   1.00314514e-05],
+       [  1.70000000e+00,   5.87761829e-02,   5.87761829e+03],
+       [  1.70001000e+00,  -1.69019684e-09,   2.58564133e-04],
+       [  1.70001000e+00,  -1.69019684e-09,  -1.69019684e-04],
+       [  1.70001000e+00,   1.00143167e-10,   9.94511144e-06],
+       [  1.70001000e+00,   1.00143167e-10,   1.00143167e-05],
+       [  1.80000000e+00,   9.50970784e-02,   9.50970784e+03],
+       [  1.80001000e+00,  -6.93156178e-09,  -1.30306429e-06],
+       [  1.80001000e+00,  -6.93156178e-09,  -6.93156178e-04],
+       [  1.80001001e+00,   1.00509938e-10,   9.98175323e-06],
+       [  1.80001001e+00,   1.00509938e-10,   1.00509938e-05],
+       [  1.90000000e+00,   9.50931850e-02,   9.50931850e+03],
+       [  1.90001000e+00,  -4.80706702e-10,   6.43780546e-04],
+       [  1.90001000e+00,  -4.80706702e-10,  -4.80706702e-05],
+       [  1.90001000e+00,   1.00008423e-10,   9.95807979e-06],
+       [  1.90001000e+00,   1.00008423e-10,   1.00008423e-05],
+       [  2.00000000e+00,   5.87665629e-02,   5.87665629e+03],
+       [  2.00000000e+00,   5.87665629e-02,   5.87665629e+03]] 
+,
+{
+legend:"always",
+labels:
+['Time', 'S.i', 'S.v']
+}
+)
+</script>
+<textarea id=check9textarea>
+simulate(TestSwitch1, stopTime=1000, simflags="-lv=LOG_STATS -noemit")
+</textarea>  <div id=check9div> </div> <br>
+<textarea id=check10textarea>
+simulate(TestSwitch2, stopTime=1000, simflags="-lv=LOG_STATS -noemit")
+</textarea>  <div id=check10div> </div> <br>
+</div></body></html>

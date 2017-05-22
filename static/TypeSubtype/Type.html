@@ -1,0 +1,63 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Type
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>There are several different kinds of types. Record/Class Types and Array Types are described below. Also there are function types and types of classes that contain local classes.</span></p><br>
+<h2>
+1
+Record/Class Type
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">record/class type</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> in Modelica is conceptually the set of all record values of that record type, where each value contains named field values for the fields of that record.</span></p><br>
+<textarea id=check0textarea>
+record Person
+  String name;
+  Real   weight;
+  Real   length;
+end Person;
+</textarea>  <div id=check0div> </div> <br>
+<h2>
+2
+Array Type
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">An array type is conceptually a set of array values, where each array value can be considered as a set of pairs (array-element-index, array-value) analogous to the set of pairs (field-name, field value) that make up a record value.<br/></span></p><br>
+<textarea id=check1textarea>
+type vector2 = Real[2];   // Vector type with specified dimension size
+type vector  = Real[:];   // Vector type with unspecified dimension size 
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+type matrix23 = Real[2, 3];  // Matrix type with specified dimension size
+type matrix   = Real[:, :];  // Matrix type with unspecified dimension size
+</textarea>  <div id=check2div> </div> <br>
+</div></body></html>

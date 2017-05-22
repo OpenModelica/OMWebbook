@@ -1,0 +1,210 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+A Coupled Pipelined DEVS Model (p. 400)
+</h1>
+<h2>
+1
+The Random Package
+</h2>
+<textarea id=check0textarea>
+package Random
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+import Modelica.Math;
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+constant Real NV_MAGICCONST=4*exp(-0.5)/sqrt(2.0);
+</textarea>  <div id=check2div> </div> <br>
+<textarea id=check3textarea>
+type Seed=Integer[3];
+</textarea>  <div id=check3div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;"><br/>DymolaBUG: for some strange  reason Dymola crashes when the following statement is initialized<br/>type Seed=Integer[3](min=zeros(3),max=ones(3)*255);<br/>this will also cause MathModelica to loop forever in the evaluation of the model.<br/>The follwing statement should be used instead<br/>type Seed;<br/></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;">??Error - not yet implemented.</p><br>
+<textarea id=check4textarea>
+function random "input random number generator with external storage of the seed"
+  input Seed si "input random seed";
+  output Real x "uniform random variate between 0 and 1";
+  output Seed so "output random seed";
+algorithm
+  so[1] := rem((171 * si[1]),30269);
+  so[2] := rem((172 * si[2]),30307);
+  so[3] := rem((170 * si[3]),30323);
+  // zero is a poor Seed, therfore substitute 1;
+  if so[1] == 0 then
+    so[1] := 1;
+  end if;
+  if so[2] == 0 then
+    so[2] := 1;
+  end if;
+  if so[3] == 0 then
+    so[3] := 1;
+  end if;
+  x := rem((so[1]/30269.0 +so[2]/30307.0 + so[3]/30323.0),1.0);
+end random;
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+function normalvariate "normally distributed random variable"
+  input Real mu "mean value";
+  input Real sigma "standard deviation";
+  input Seed si "input random seed";
+  output Real x "gaussian random variate";
+  output Seed so "output random seed";
+protected
+  Seed s1, s2;
+  Real z, zz, u1, u2;
+  Boolean break=false;
+algorithm
+  s1 := si;
+  u2 := 1;
+  while not break loop
+    (u1,s2) := random(s1);
+    (u2,s1) := random(s2);
+    z := NV_MAGICCONST*(u1-0.5)/u2;
+    zz := z*z/4.0;
+    break := zz <= (- Math.log(u2));
+  end while;
+  x := mu + z*sigma;
+  so := s1;
+end normalvariate;
+</textarea>  <div id=check5div> </div> <br>
+<textarea id=check6textarea>
+connector discreteConnector
+   discrete Boolean dcon;
+end discreteConnector;
+</textarea>  <div id=check6div> </div> <br>
+<textarea id=check7textarea>
+end Random;
+</textarea>  <div id=check7div> </div> <br>
+<h2>
+2
+SimpleDEVSServer
+</h2>
+<textarea id=check8textarea>
+connector EventPort
+  Boolean signal;
+end EventPort;
+</textarea>  <div id=check8div> </div> <br>
+<textarea id=check9textarea>
+model SimpleDEVSServer
+  import Modelica.Constants.inf; // ?? check if import specified constant
+  extends BasicDEVSTwoPort;
+  Boolean   internalEvent;
+  Boolean   externalEvent;
+  parameter Real  mean  = 2.0  "mean of job service time";
+  parameter Real  stdev = 0.5;
+  discrete  Real  servTime;  // time needed to service current job
+ discrete  Random.Seed randomSeed(start={23,87,187});
+
+equation
+  internalEvent = pre(tNextEvent)<=time;
+  externalEvent = inp.signal;
+  //outp.signal   = internalEvent;
+  when {externalEvent,internalEvent} then
+    (servTime,randomSeed) = Random.normalvariate(mean,stdev, pre(randomSeed));
+    if edge(externalEvent) and not pre(DEVSactive) then
+      DEVSactive = true;
+      tNextEvent  = time + abs(servTime);
+    elseif edge(externalEvent) and pre(DEVSactive) then
+      DEVSactive = true;
+      tNextEvent  = pre(tNextEvent);
+    else
+      DEVSactive = false;
+      tNextEvent = pre(tNextEvent);
+    end if;
+  end when;
+
+  outp.signal = if pre(DEVSactive) and edge(internalEvent) then true else false;
+end SimpleDEVSServer;
+</textarea>  <div id=check9div> </div> <br>
+<textarea id=check10textarea>
+model SignalView  "Increase width of sample trigger signals" // ?? update
+  EventPort    inp;
+  EventPort    outp;
+  parameter Real width=0.001;
+  discrete  Real T0;
+equation
+  when inp.signal then
+    T0=time;
+  end when;
+  outp.signal=(time>=T0) and (time<T0+width);
+end TriggerSignalView;
+</textarea>  <div id=check10div> </div> <br>
+<textarea id=check11textarea>
+class Conn1
+equation
+  connect(simpleDEVSServer.outp, viewSignal2.inp);
+end Conn1;
+</textarea>  <div id=check11div> </div> <br>
+<textarea id=check12textarea>
+class Conn2
+equation
+  connect(generateJobEvents.outp, viewSignal1.inp);
+end Conn2;
+</textarea>  <div id=check12div> </div> <br>
+<h2>
+3
+ThreeServerPipeline Model
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;">Several basic DEVS model components can be connected together to form a coupled model, which itself is a DEVS model. This is illustrated by the Modelica realization of a simple DEVS coupled model by placing three simple servers in series to form a three server pipeline, see Figure ?? In the further down the job generator has been attached to the three server pipeline.  The generator outputs events that are considered to be jobs that need some time to be processed by the server.Inside the basic server model only the time needed to complete a job is represented,not the detailed manner in which the processing is done.When a server receives a job it goes into busy mode (<span style=" font-family:Courier New;">DEVSactive = true</span>). Since the server has no buffering capabilities,if it is already busy,it ignores incoming jobs.When a server has finished processing a job, a job completed event is emitted and the server returns to passive mode (<span style=" font-family:Courier New;">DEVSactive = false</span>).</p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;"><span style=" font-family:Courier New; font-weight:600;">Figure ??:</span><span style=" font-family:Courier New;"> Coupled model consisting of three servers S1, S2, and S3, connected in a pipeline.</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;">The coupled pipelined DEVS model class represented in Modelica can be described as follows:</p><br>
+<textarea id=check13textarea>
+model ThreeServerPipeline
+  input  EventPort   extInSignal;
+  output EventPort   outSignal;
+  SimpleDEVSServer   S1(mean=2.0);
+  SimpleDEVSServer   S2(mean=2.5);
+  SimpleDEVSServer   S3(mean=1.5);
+equation
+   connect(extInSignal, S1.inp);
+   connect(S1.outp, S2.inp);
+   connect(S2.outp, S3.inp);
+   connect(S3.outp, outSignal);
+end ThreeServerPipeline;
+</textarea>  <div id=check13div> </div> <br>
+<textarea id=check14textarea>
+model testPipeline
+   ThreeServerPipeline  pipeLine;
+   GenerateJobEvents    jobgenerator(period=4);
+equation
+  connect(jobgenerator.outp, pipeLine.extInput);
+end testPipeline;
+</textarea>  <div id=check14div> </div> <br>
+<h3>
+3.1
+Simulate
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;"><span style=" font-family:Courier New; font-weight:600;">Diagram ??:</span><span style=" font-family:Courier New;"> Signals for the testPipeline model including a ThreeServerPipeline containing the servers S1, S2, and S3.</span></p><br>
+</div></body></html>

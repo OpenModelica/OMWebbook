@@ -1,0 +1,81 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 1
+</h1>
+<h2>
+1
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">What is a class?</span></p><br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A class is a fundamental unit of modeling in Modelica, providing the structure for an object. Classes can contain equations, where the computations are performed.</span></p><br>
+</div><h2>
+2
+Creating a Class
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Create a class, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Add</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, that calculates the sum of two parameters, which are </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Integer</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> numbers with given values. </span></p><br>
+<textarea id=check0textarea>
+
+</textarea>  <div id=check0div> </div> <br>
+<h3>
+2.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer1 > Answer</button>
+</h3>
+<div id=answer1 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Since </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">x + y = sum </span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">is an equation and not an assignment, the equation can also be written as sum</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;"> = x + y </span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">without changing the meaning of the equation.</span></p><br>
+<textarea id=check1textarea>
+class Add
+  parameter Integer x = 1;
+  parameter Integer y = 2;
+  Real sum;
+equation
+  sum = x + y;
+end Add;
+</textarea>  <div id=check1div> </div> <br>
+<h4>
+2.1.1
+Simulation of Add
+</h4>
+<textarea id=check2textarea>
+simulate(Add)
+</textarea>  <div id=check2div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">When we have simulated the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Add</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, we can look at the values of the variables at a specific point in time by writing: </span><span style=" font-family:'Courier New'; font-size:11pt; color:#000000;">val(variableName,time)</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, here with time=0;.</span></p><br>
+<textarea id=check3textarea>
+{2,3}  //??val needed
+//{val(sum,0), val(x,0), val(y,0)}
+</textarea>  <div id=check3div> </div> <br>
+</div></div></body></html>

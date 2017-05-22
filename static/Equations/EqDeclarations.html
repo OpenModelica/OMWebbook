@@ -1,0 +1,63 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Equations in Declarations
+</h1>
+<h2>
+1
+Declaration Equations
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Declaration equations are usually given as part of declarations of constants or parameters. Such equations are actually required for constants, but are optional for parameters. An equation always holds, which means that the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">mass</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> never changes value during simulation. It is also possible to specify a declaration equation for a normal state variable, but this will make the variable bahave as a kind of constant.</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;"><br/></span></p><br>
+<textarea id=check0textarea>
+class DecEq
+  constant Integer one   = 1;     // Declaration equation
+  parameter Real mass   = 22.5;  // -"-
+  Real speed       = 72.4;   // Declaration equation for a normal state variable
+end DecEq;
+</textarea>  <div id=check0div> </div> <br>
+<h2>
+2
+Modifier Equations
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Modifier equations occur for example in a variable declaration when there is a need to modify the default value of an attribute of the variable. A modifier equation replaces the declaration equation, if present, for an attribute of the specific type. A common usage is modifier equations for the start attribute of variables, the equations also occur in type definitions.<br/></span></p><br>
+<textarea id=check1textarea>
+class ModEq
+  Real speed(start = 72.4);            // Modifier equation
+end ModEq;
+</textarea>  <div id=check1div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Here is another example of a modifier equation:</span></p><br>
+<textarea id=check2textarea>
+type Voltage = Real(unit = "V", min = -220.0, max = 220.0);
+</textarea>  <div id=check2div> </div> <br>
+</div></body></html>

@@ -1,0 +1,64 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Physical Connector Classes Based on Energy Flow
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;"><br/>In addition to the previously presented translational <span style=" font-family:Courier New;">Flange_a</span> there is also a rotational Flange_a connector class., shown renamed below, from the library called <span style=" font-family:Courier New;">Modelica.Mechanics.Rotational.Intefaces</span> for one-dimensional rotational mechanical systems. <br/></p><br>
+<textarea id=check0textarea>
+connector RotFlange_a      "1D rotational flange"
+  Angle phi            "Absolute rotational angle";
+  flow Torque tau;
+end RotFlange_a;
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+type Angle = Real(final quantity = "Angle", final unit = "rad", displayUnit = "deg");
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+type Torque = Real(final quantity = "Torque", final unit = "N.m");
+</textarea>  <div id=check2div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;"><br/>The connector class <span style=" font-family:Courier New;">Frame_b</span> below from the <span style=" font-style:italic;">Modelica multibody systems</span> (MBS) library is an example of a connector class of the kind that contains extra potential variables to get around problems caused by connections that cause higher index systems. <br/></p><br>
+<textarea id=check3textarea>
+connector Frame_b              "Frame b of a 3D mechanical element"
+  import Modelica.SIunits;
+  output SIunits.Position     r0[3]    "Frame origin in inertial system";
+  Real                S[3, 3]    "Transformation matrix";
+  SIunits.Velocity         v[3]    "Absolute velocity of frame origin";
+  SIunits.AngularVelocity     w[3]    "Absolute angular velocity of frame a";
+  SIunits.Acceleration        a[3]    "Absolute acceleration of frame origin";
+  SIunits.AngularAcceleration   z[3]    "Absolute angular acceleration";
+  flow SIunits.Force       f[3];
+  flow SIunits.Torque       t[3];
+end Frame_b;                  // From ModelicaAdditions.MultiBody.Intefaces
+</textarea>  <div id=check3div> </div> <br>
+</div></body></html>

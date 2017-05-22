@@ -1,0 +1,86 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Generation of Connection Equations
+</h1>
+<h2>
+1
+General Description
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">By generating connection equations we mean the conversion of connect statements to the two different forms of equations to be used for non-flow and flow variables respectively. The process of converting </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">connect</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> statements can be divided into two steps: Building </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">connections sets</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> from </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">connect</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> statements and Generating </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">connection equations</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> for the complete model. </span><span style=" font-family:'Times New Roman'; font-size:11pt; color:#000000;">Connections sets are needed to generate the connection equations of a model.</span></p><br>
+<h2>
+2
+ResistorCircuit
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A practical way to generate these sets is to first create a small connection set from each connect statement consisting of its two arguments. If any of these connector arguments are members of other connections sets, the corresponding connection sets are merged.<br/></span></p><br>
+<h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ResistorCircuit</span></p>
+</h1>
+<textarea id=check0textarea>
+model ResistorCircuit
+  Modelica.Electrical.Analog.Basic.Resistor R1, R2, R3;
+equation
+  connect(R1.p, R2.p);
+  connect(R2.p, R3.p);
+end ResistorCircuit;
+</textarea>  <div id=check0div> </div> <br>
+<h2>
+3
+ECircuit
+</h2>
+<h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ECircuit</span></p>
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The situation is somewhat different regarding the ECircuit model below since it contains a structured c</span></p><br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">omponent E1 that contains both inside and outside connectors.</span></p><br>
+<textarea id=check1textarea>
+class E
+  Modelica.Electrical.Analog.Basic.Resistor R2, R3;
+  Modelica.Electrical.Analog.Basic.Pin p, n;
+equation
+  connect(p, R2.p);
+  connect(R2.n, R3.p);
+  connect(R3.n, n);
+end E;
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+model ECircuit
+  Modelica.Electrical.Analog.Basic.Resistor R1, R4;
+  E E1;
+equation
+  connect(R1.n, E1.p);
+  connect(E1.n, R4.p);
+end ECircuit;
+</textarea>  <div id=check2div> </div> <br>
+</div></body></html>

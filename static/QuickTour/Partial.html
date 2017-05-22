@@ -1,0 +1,62 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Partial Classes
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;"><br/>TwoPin is a partial model of components that has two pins. Since most electrical components have two pins, this information is collected into a base class. A partial class is incomplete and can not be simulated alone.  In <span style=" font-family:Courier New;">TwoPin</span> there are six variables (p.v, p.i, n.i, n.v, v, i) and only three equations, which makes the system unsolvable (no unique solution can be found).<br/></p><br>
+<textarea id=check0textarea>
+partial class TwoPin        "Superclass of elements with two electrical pins"
+  Pin p, n;
+  Voltage v;
+  Current i;
+equation
+  v = p.v - n.v;
+  p.i + n.i = 0;
+  i = p.i;
+end TwoPin;
+</textarea>  <div id=check0div> </div> <br>
+<h2>
+1
+Reuse of Partial Classes
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:Times New Roman; font-size:12pt; color:#000000;">Now that we have the partial class TwoPin we can use that to create a Resistor, by adding the constitutive equation: <span style=" font-family:Courier New;">R*i = v, which </span>describes the specific physical characteristics of the relation between voltage and current for resistors.<br/></p><br>
+<textarea id=check1textarea>
+class Resistor               "Ideal linear electrical Resistor"
+  extends TwoPin;
+  parameter Real R(unit = "Ohm")     "Resistance";
+equation
+  R*i = v;
+end Resistor;                // From Modelica.Electrical.Analog.Basic 
+</textarea>  <div id=check1div> </div> <br>
+</div></body></html>

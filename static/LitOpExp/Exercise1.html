@@ -1,0 +1,117 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 1 - Quiz
+</h1>
+<h2>
+1
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">What is a keyword?</span></p><br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A keyword is a reserved word that cannot be used as a name of some entity in a model.</span></p><br>
+</div><h2>
+2
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">What is so special about those?</span></p><br>
+<h3>
+2.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer1 > Answer</button>
+</h3>
+<div id=answer1 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Because they are reserved for constructing elements in the Modelica language, they cannot be used as identifiers,  e.g., cannot be used as a variable name, class name, type name, etc..</span></p><br>
+</div><h2>
+3
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Name some keywords that you have come across.</span></p><br>
+<h3>
+3.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer2 > Answer</button>
+</h3>
+<div id=answer2 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">For example: end, class, and, connect, else and parameter.  But there are over 40 of them, so you can find many more.</span></p><br>
+</div><h2>
+4
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Certainly you have by now come across some of the predefined types of Modelica, if not all of them. Which are they?</span></p><br>
+<h3>
+4.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer3 > Answer</button>
+</h3>
+<div id=answer3 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Real, Integer, Boolean and String.</span></p><br>
+</div><h2>
+5
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">What is a literal constant?</span></p><br>
+<h3>
+5.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer4 > Answer</button>
+</h3>
+<div id=answer4 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">An unnamed constant that has different form depending on their type.</span></p><br>
+</div><h2>
+6
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Give an example of a literal constant.</span></p><br>
+<h3>
+6.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer5 > Answer</button>
+</h3>
+<div id=answer5 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">true</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, one of the two Boolean literal values.</span></p><br>
+</div><h2>
+7
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Describe what the variability of an expression means.</span></p><br>
+<h3>
+7.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer6 > Answer</button>
+</h3>
+<div id=answer6 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The freedom of the expression to change value during simulation. </span></p><br>
+</div><h2>
+8
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Which are the degrees of expression variability? Describe the properties of the expressions having the different degrees.</span></p><br>
+<h3>
+8.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer7 > Answer</button>
+</h3>
+<div id=answer7 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The degrees of variability are </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">constant, parameter, discrete-time</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">continuous-time</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> variability.</span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;"><br/><br/>Constant expressions</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> have constant variability, i.e. </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">never change value</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. In constant expressions the </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">time derivative is equal to zero.<br/>Parameter expressions</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> have parameter variability, </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">remain constant</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> during time-dependent simulation and have </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">time derivative equal to zero</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.<br/><br/></span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">Discrete-time expressions:</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> <br/>They have discrete-time variability meaning that they are piecewise constant and change their values only at event instants during simulation. <br/>Time derivative is equal to zero. <br/>These expressions may include constant or parameter expressions or discrete-time variables, as well as applications of operators and functions with discrete-time arguments.<br/><br/></span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">Continuous-time expressions:<br/></span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">They have continuous-time variability and may </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">change</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> their </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">values</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> at any time during simulation.<br/>They may include constant, parameter and discrete-time expressions as well as continuous-time Real variables, as well as applications of operators and functions.</span></p><br>
+</div></div></body></html>

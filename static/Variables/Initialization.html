@@ -1,0 +1,132 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Initial Values of Variables
+</h1>
+<h2>
+1
+Point
+</h2>
+<textarea id=check0textarea>
+class Point                "Point in a three-dimensional space"
+  parameter Real x;
+  parameter Real y;
+  parameter Real z;
+end Point;    
+</textarea>  <div id=check0div> </div> <br>
+<h2>
+2
+MyPoints
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A Modelica variable is either statically allocated and instantiated or is dynamically instantiated. The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">start</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> value of a variable is the default initial value of the variable. A start value can be specified for the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Points</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> in </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MyPoints</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. On the other hand, since x, y, and z are parameters, it is not very relevant to specify start values since they are constant. However, we do that anyway.<br/> </span></p><br>
+<textarea id=check1textarea>
+class MyPoints
+  Point point1(x=1,y=2,z=3);
+  Point point2(x=1,y=2,z=3);
+  Point point3(x=1,y=2,z=3);
+end MyPoints;
+</textarea>  <div id=check1div> </div> <br>
+<h2>
+3
+Flatten MyPoints
+</h2>
+<textarea id=check2textarea>
+instantiateModel(MyPoints)
+</textarea>  <div id=check2div> </div> <br>
+<h2>
+4
+Simulation of MyPoints
+</h2>
+<textarea id=check3textarea>
+simulate( MyPoints )
+</textarea>  <div id=check3div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Try to plot the constant parameter point1.x:</span></p><br>
+<textarea id=check4textarea>
+plot(point1.x)   
+</textarea> <br> <div id=check4div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check4div"),
+  [[ 0.,  1.],
+       [ 1.,  1.]] 
+,
+{
+legend:"always",
+labels:
+['Time', 'point1.x']
+}
+)
+</script>
+<h2>
+5
+Using Modifiers to Set Parameter Values of MyPoints
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Instead of specifying the value of parameters in </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">point1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> in M</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">yPoints</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> this can be done using modifiers in M</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">yPoints2Inst</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. This can be done in two different ways, which is shown in the classes </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MyPoints2Inst</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MyPoints2Inst</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">2 below.<br/></span></p><br>
+<textarea id=check5textarea>
+class MyPoints2
+  Point point1;
+  Point point2;
+  Point point3;
+end MyPoints2;
+</textarea>  <div id=check5div> </div> <br>
+<textarea id=check6textarea>
+class MyPoints2Inst
+  MyPoints2 pts(point1.x = 1, point1.y = 2, point1.z = 3);
+end MyPoints2Inst;
+</textarea>  <div id=check6div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Flatten it to observe the result:</span></p><br>
+<textarea id=check7textarea>
+instantiateModel(MyPoints2Inst)
+</textarea>  <div id=check7div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Here is another example using nested modifiers</span></p><br>
+<textarea id=check8textarea>
+class MyPoints2Inst2
+  MyPoints2 pts(point1(x = 1, y = 2, z = 3));
+end MyPoints2Inst2;
+</textarea>  <div id=check8div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Flatten that one too:</span></p><br>
+<textarea id=check9textarea>
+instantiateModel(MyPoints2Inst2)
+</textarea>  <div id=check9div> </div> <br>
+<h2>
+6
+Arrays 
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The class Arrays below contains a few declarations with different of combinations of array dimension descriptors and modifiers.</span></p><br>
+<textarea id=check10textarea>
+class Arrays
+  Real A3[2,2];                  // Array variable
+  Real A4[2,2](start = {{1,0}, {0,1}}); // Array with explicit start value
+end Arrays;
+</textarea>  <div id=check10div> </div> <br>
+</div></body></html>

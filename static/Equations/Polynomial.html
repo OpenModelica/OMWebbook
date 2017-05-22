@@ -1,0 +1,157 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Repetitive Equation Structures
+</h1>
+<h2>
+1
+Xpowers1
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The polynomial equation where n = 4 can be expressed as a set of equations:</span></p><br>
+<textarea id=check0textarea>
+class Xpowers1
+  parameter Real x=10;
+  Real a = 1;
+  parameter Integer n = 5;
+  Real xpowers[n];
+  Real y;
+equation
+  xpowers[1] = 1;
+  xpowers[2] = xpowers[1]*x;
+  xpowers[3] = xpowers[2]*x;
+  xpowers[4] = xpowers[3]*x;
+  xpowers[4 + 1] = xpowers[4]*x;
+  y = a * xpowers[5];
+end Xpowers1;
+</textarea>  <div id=check0div> </div> <br>
+<h2>
+2
+Simulation of Xpowers1
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Here the simulation of the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">XPowers1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is shown. The variables can then be plotted as below.</span></p><br>
+<textarea id=check1textarea>
+simulate( Xpowers1 )
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+plot( { xpowers[1], xpowers[2], xpowers[3], xpowers[4], xpowers[5] } )
+</textarea> <br> <div id=check2div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check2div"),
+ValueError
+,
+{
+legend:"always",
+labels:
+['Time', 'xpowers[1]', 'xpowers[2]', 'xpowers[3]', 'xpowers[4]', 'xpowers[5]']
+}
+)
+</script>
+<h2>
+3
+Xpowers2
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The same thing can be expressed more compactly as a simple equation together with a for-clause equation:</span></p><br>
+<textarea id=check3textarea>
+class Xpowers2
+  parameter Real x=10;
+  Real xpowers[n];
+  parameter Integer i=1;
+  parameter Integer n = 5;
+equation
+  xpowers[1]=1;
+  for i in 1:n-1 loop
+    xpowers[i + 1] = xpowers[i]*x;
+  end for;
+end Xpowers2;  
+</textarea>  <div id=check3div> </div> <br>
+<h2>
+4
+Simulation of Xpowers2
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Here the simulation of the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">XPowers2</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is shown. The variables can then be plotted as below.</span></p><br>
+<textarea id=check4textarea>
+simulate( Xpowers2 )
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+plot( { xpowers[1], xpowers[2], xpowers[3], xpowers[4], xpowers[5] } )
+</textarea> <br> <div id=check5div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check5div"),
+ValueError
+,
+{
+legend:"always",
+labels:
+['Time', 'xpowers[1]', 'xpowers[2]', 'xpowers[3]', 'xpowers[4]', 'xpowers[5]']
+}
+)
+</script>
+<h2>
+5
+Xpowers3
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A very compact notation:</span></p><br>
+<textarea id=check6textarea>
+class Xpowers3
+  parameter Real x=10;
+  Real xpowers[n+1];
+  parameter Integer n = 5;
+equation
+  xpowers[1]=1;
+  xpowers[2:n+1] = xpowers[1:n]*x;
+end Xpowers3;    
+</textarea>  <div id=check6div> </div> <br>
+<h2>
+6
+Simulation of Xpowers3
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Here the simulation of the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">XPowers3</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is shown. The variables can then be plotted as below.</span></p><br>
+<textarea id=check7textarea>
+simulate( Xpowers3 )
+</textarea>  <div id=check7div> </div> <br>
+<textarea id=check8textarea>
+plot( { xpowers[1], xpowers[2], xpowers[3], xpowers[4], xpowers[5] } )
+</textarea> <br> <div id=check8div> </div> <br>
+<script type="text/javascript">
+g = new Dygraph(document.getElementById("check8div"),
+ValueError
+,
+{
+legend:"always",
+labels:
+['Time', 'xpowers[1]', 'xpowers[2]', 'xpowers[3]', 'xpowers[4]', 'xpowers[5]']
+}
+)
+</script>
+</div></body></html>

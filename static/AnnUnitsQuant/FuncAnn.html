@@ -1,0 +1,107 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Function Annotations
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Two rather special annotations are defined for functions. These are the function </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">derivative</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> annotation and the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">arrayLayout</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> annotation. The function derivative annotation allows you to explicitly specify the computation of the derivatives of a function to any order, e.g. in order to gain performance and/or numerical accuracy. The external function annotation </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">arrayLayout</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> can be used to explicitly give the layout of arrays</span></p><br>
+<h2>
+1
+Function Derivative Annotations 
+</h2>
+<textarea id=check0textarea>
+function h0                 // exp(x(t)+i1)
+  annotation(derivative=h1);
+  input  Integer i1;
+  input  Real    x;
+  input  Boolean linear;        // not used
+  output Real    y;
+ algorithm
+  y := exp(x)+i1;
+end h0;
+
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+function h1                 // (d/dt)(exp(x(t))
+  annotation(derivative(order=2)=h2);
+  input  Integer i1;
+  input  Real    x;
+  input  Boolean linear;
+  input  Real    der_x;
+  output Real    der_y;
+algorithm
+  der_y := exp(x)*der_x;
+end h1;
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+function h2                 // (d/dt)(exp(x(t)*der_x(t))
+  input  Integer i1;
+  input  Real    x;
+  input  Boolean linear;
+  input  Real    der_x;
+  input  Real    der_2_x;
+  output Real    der_2_y;
+algorithm
+  der_2_y := exp(x)*der_x*der_x + exp(x)*der_2_x;
+end h2;
+</textarea>  <div id=check2div> </div> <br>
+<h2>
+2
+Calling functions h0, h1 and h2
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Below are examples of calling the h0, h1, and h2 functions.</span></p><br>
+<textarea id=check3textarea>
+fn0 := h0(2,5,true)
+</textarea>  <div id=check3div> </div> <br>
+<textarea id=check4textarea>
+fn1 := h1(2,5,true,fn0)
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+fn2 := h2(2,5,true,fn0,fn1)
+</textarea>  <div id=check5div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">We could for example make a plot of the h0 function from x=4 to x=6:</span></p><br>
+<h2>
+3
+External Function Annotations
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Regarding specific annotations only for external function declarations there is an optional </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">arrayLayout</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> annotation, which can be either </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">"rowMajor"</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> or </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">"columnMajor"</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. This annotation causes additional information to be passed to the compiler when necessary. It is only needed when the array storage layout deviates from the default for the external language. This is the case for the function </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">joinThreeVectors2</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> below where the C function uses column-major array representation which is different from the default row-major layout that normally is used for C.<br/></span></p><br>
+<textarea id=check6textarea>
+function joinThreeVectors2   "External C function with column-major arrays"
+  input  Real v1[:],v2[:],v3[:];
+  output Real vres[size(v1,1)+size(v2,1)+size(v3,1)];
+ external "C" join3vec(v1,v2,v3,vres,size(v1,1),size(v2,1),size(v3,1));
+         annotation(arrayLayout = "columnMajor");
+end joinThreeVectors2;
+
+</textarea>  <div id=check6div> </div> <br>
+</div></body></html>

@@ -1,0 +1,63 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Multiple Connections to a Single Connector
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>In almost all previous examples we only connected two connectors. In fact, there is in general no limitation to the number of connections that can be made to a single connector, apart from connector classes that very specifically limits the cardinality of the connections. In the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ResistorCircuit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> three resistors are connected at one node.<br/></span></p><br>
+<textarea id=check0textarea>
+model ResistorCircuit
+  Modelica.Electrical.Analog.Basic.Resistor R1(R = 100);
+  Modelica.Electrical.Analog.Basic.Resistor R2(R = 200);
+  Modelica.Electrical.Analog.Basic.Resistor R3(R = 300);
+equation
+  connect(R1.p, R2.p);
+  connect(R1.p, R3.p);
+end ResistorCircuit;
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>As usual the special operator </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">connect</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> produces equations by taking into account what kind of variables , </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">flow</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> or </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">non-flow</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, that are involved. The generated equations, based on equal potential at a connection point and Kirchhoff's current law, are as follows for this particular example:</span></p><br>
+<h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> R1.p.v = R2.p.v;<br/> R1.p.v = R3.p.v;<br/><br/> R1.p.i + R2.p.i + R3.p.i = 0;</span></p>
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The model </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">TripleSprings</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> has three connected springs.</span></p><br>
+<textarea id=check1textarea>
+model TripleSprings
+  Modelica.Mechanics.Rotational.Spring spring1(c = 1, s_rel0 = 0.1);
+  Modelica.Mechanics.Rotational.Spring spring2(c = 1, s_rel0 = 0.1);
+  Modelica.Mechanics.Rotational.Spring spring3(c = 1, s_rel0 = 0.1);
+equation
+  connect(spring1.flange_a, spring2.flange_a);
+  connect(spring1.flange_a, spring3.flange_a);
+end TripleSprings;  
+</textarea>  <div id=check1div> </div> <br>
+</div></body></html>

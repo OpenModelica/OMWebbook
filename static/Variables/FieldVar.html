@@ -1,0 +1,111 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Fields and Variables
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>In the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">CelestialBody</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">radius</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">name</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">mass</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> are examples of fields/variables. Every object of the type </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">CelestialBody</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> has its own instances of these fields. Changing the mass field in one object will not affect the mass in another object.<br/></span></p><br>
+<textarea id=check0textarea>
+class CelestialBody
+  constant Real g = 6.672e-11;
+  parameter Real radius;
+  parameter String name;
+  Real mass;
+end CelestialBody;
+</textarea>  <div id=check0div> </div> <br>
+<h2>
+1
+Duplicate Field Names
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Duplicate field names is not allowed in class declarations. The name of a declared element must be different from the names of all other declared elements in the class.<br/></span></p><br>
+<textarea id=check1textarea>
+class IllegalDuplicate
+  parameter Real duplicate = 4.0;
+  parameter Integer duplicate = 6;   // Error! Illegal duplicate field name.
+end IllegalDuplicate;
+</textarea>  <div id=check1div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Only the syntax is Ok, but not the semantics, i.e., typing and declarations have not yet been checked.</span></p><br>
+<h3>
+1.1
+Simulation of IllegalDuplicate to Perform Checking
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">As we can see when simulating </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">IllegalDuplicate</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, the class generates an error for trying to redefine the field </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">duplicate</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
+<textarea id=check2textarea>
+simulate(IllegalDuplicate)
+
+</textarea>  <div id=check2div> </div> <br>
+<h2>
+2
+Identical Field Names and Type Names
+</h2>
+<h3>
+2.1
+Voltage
+</h3>
+<textarea id=check3textarea>
+type Voltage = Real(unit = "V");
+</textarea>  <div id=check3div> </div> <br>
+<h3>
+2.2
+IllegalTypeAsField
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">It is not allowed to have the same name of a field/variable and its type specifier.</span></p><br>
+<textarea id=check4textarea>
+class IllegalTypeAsField
+  Voltage Voltage;   // Error!
+  Voltage voltage;   // Legal, Voltage and voltage are two different names
+end IllegalTypeAsField;
+</textarea>  <div id=check4div> </div> <br>
+<h3>
+2.3
+Checking of IllegalTypeAsField
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Semantic checking is also performed during flattening. As we can see when simulating IllegalTypeAsField we get a warning for trying to name our variable Voltage, which is the same as the type name.</span></p><br>
+<textarea id=check5textarea>
+instantiateModel( IllegalTypeAsField );
+</textarea>  <div id=check5div> </div> <br>
+<h3>
+2.4
+Fixing the Error
+</h3>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">By changing the name of the first field/variable to voltage1, we fix the problem.</span></p><br>
+<textarea id=check6textarea>
+class LegalVoltage
+  Voltage voltage1;  // Legal!
+  Voltage voltage;   // Legal, Voltage and voltage are two different names
+end LegalVoltage;
+</textarea>  <div id=check6div> </div> <br>
+<textarea id=check7textarea>
+instantiateModel( LegalVoltage )
+</textarea>  <div id=check7div> </div> <br>
+</div></body></html>

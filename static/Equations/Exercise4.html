@@ -1,0 +1,82 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Repetitive Equation Structures
+</h1>
+<h2>
+1
+Nested for-loop
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Write a function, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MatrixAddition</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, for adding two two-dimensional matrices.</span></p><br>
+<textarea id=check0textarea>
+
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/> Do a function call to </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">MatrixAddition</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> with two arrays. Then simulate the class with the function call and plot the result.</span></p><br>
+<textarea id=check1textarea>
+
+</textarea>  <div id=check1div> </div> <br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><textarea id=check2textarea>
+function MatrixAddition
+  input Integer matrix1[:, :];
+  input Integer matrix2[:, :];
+  output Integer matrixSum[2, 2];
+algorithm
+  for i in 1:size(matrix1, 1) loop
+    for j in 1:size(matrix2, 2) loop
+      matrixSum[i, j] := matrix1[i, j] + matrix2[i, j];
+    end for;
+  end for;
+end MatrixAddition;
+</textarea>  <div id=check2div> </div> <br>
+<textarea id=check3textarea>
+class MatrixAdditionCall
+  Real[2, 2] MA = MatrixAddition([1, 2; 3, 4], [1, 2; 3, 4]);
+end MatrixAdditionCall;
+</textarea>  <div id=check3div> </div> <br>
+<h4>
+1.1.1
+ Simulation of MatrixAddition
+</h4>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">We simulate the MatrixAdditionCall and then plot to see the result.</span></p><br>
+<textarea id=check4textarea>
+simulate( MatrixAdditionCall )
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+plot( { MA[1,1], MA[1,2], MA[2,1], MA[2,2] } )
+</textarea> <br> <div id=check5div> </div> <br>
+</div></div></body></html>

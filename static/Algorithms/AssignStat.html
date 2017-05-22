@@ -1,0 +1,55 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Simple Assignment Statements
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>Assignment statements may also occur as initializers in the declaration of local variables (after the keyword </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">protected</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">) or formal parameters of Modelica functions. The function </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">foo</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> contains a declaration of the local variable </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">y1</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> with an initializing assignment and the formal parameter </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">x</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> with a default value assignment.<br/></span></p><br>
+<textarea id=check0textarea>
+function foo
+  input Real x = 2.0;
+  output Real res;
+protected
+  Real y1 = cos(1.84) + x - 1.2E-2;
+algorithm
+  res := y1;
+end foo;    
+</textarea>  <div id=check0div> </div> <br>
+<h2>
+1
+Calling foo
+</h2>
+<textarea id=check1textarea>
+foo(3.0)  
+</textarea>  <div id=check1div> </div> <br>
+</div></body></html>

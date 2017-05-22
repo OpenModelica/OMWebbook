@@ -1,0 +1,97 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Exercise 3
+</h1>
+<h2>
+1
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">What is a hybrid model?</span></p><br>
+<h3>
+1.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer0 > Answer</button>
+</h3>
+<div id=answer0 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A hybrid model is a model with mixed continuous and discrete parts.</span></p><br>
+</div><h2>
+2
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">What do hybrid models have to do with if- and when-equations?</span></p><br>
+<h3>
+2.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer1 > Answer</button>
+</h3>
+<div id=answer1 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Well, the thing is that one can use both constructs for hybrid models. The if-equations may contain continuous-time expressions and when-equations may only contain discrete-time expressions.</span></p><br>
+</div><h2>
+3
+Question
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">But why is that?</span></p><br>
+<h3>
+3.1
+<button type= button class="btn btn-info" data-toggle="collapse" data-target= #answer2 > Answer</button>
+</h3>
+<div id=answer2 class=collapse><p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The if-equations or if-expressions are used for conditional models with </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">different behavior</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> in </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">different operating regions</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. Consider for example the code below (you're not able to run it). <br/><br/>The if-equation in the ideal Diode Example below specifies different equations for the variable v in two different operating regions: the v = s in the region s = 0.<br/></span></p><br>
+<textarea id=check0textarea>
+model Diode           "Ideal diode"
+  extends Modelica.Electrical.Analog.Interfaces.TwoPin;
+  Real s;
+  Boolean off;
+equation
+  off = s < 0;
+  if off then                   // conditional if-equation
+    v = s;
+  else
+    v = 0;
+    end if;
+    i = if off then 0 else s;   // equation with conditional expression
+end Diode;
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The when-equations, on the other hand, are used to express instantaneous equations that are only </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">valid</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> (become active) </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">at events</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, e.g. at discontinuities or when certain conditions become true. Discrete-time expressions only become active at event instants.<br/><br/>This model has only one kind of event, the sampling event. We use the built-in function </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">sample</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> in the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">when</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">-condition </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">sample(0, T)</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> to periodically generate the sampling events with a period time </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">T</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. (Read more about sampling events in chapter 13.)<br/></span></p><br>
+<textarea id=check1textarea>
+model SimplePeriodicSampler
+  parameter Real T = 1        "Sample period";
+  input Real u            "Input used at sample events";
+  discrete output Real y      "Output computed at sample events";
+protected
+  discrete Real x;          // discrete state variable
+equation
+  when sample(0, T) then
+    x = f(pre(x), u);        // state update expression
+    x = h(pre(x), u);        // output expression
+    end when;
+end SimplePeriodicSampler;
+</textarea>  <div id=check1div> </div> <br>
+</div></div></body></html>

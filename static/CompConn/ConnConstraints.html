@@ -1,0 +1,77 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Connection Constraints regarding Arrays, Subscripts and Constants
+</h1>
+<h2>
+1
+Array Dimensionality Matching
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The rule that connected connectors must have equivalent type is less strict concerning arrays that are members of connectors. If matching arrays in connected connectors have the same number of elements but different dimensionality, the dimensionality of the array with the lowest number of dimensions is increased by adding one-sized dimensions to the left until both arrays have the same dimensionality.<br/></span></p><br>
+<textarea id=check0textarea>
+connector SOutPort        "Simplified OutPort connector"
+  output Real signal;
+end SOutPort;
+</textarea>  <div id=check0div> </div> <br>
+<textarea id=check1textarea>
+connector InPort        "InPort connector"
+  parameter Integer n = 1;
+  input Real  signal[n];
+end InPort;
+</textarea>  <div id=check1div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The connectors </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ip</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">op</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> do not have the same dimensionality, but the connect statement is still correct. This works since the dimensionality of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">op.signal</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is increased by one to become</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;"> op.signal[1]</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> before the connect statement is expanded to conventional equations. One-sized dimensions are added to the left in the list of dimensions, e.g. an </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">array x[2,3]</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> could be converted to </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">x[1,1,2,3]</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span><span style=" font-family:'Times New Roman'; font-size:11pt; color:#000000;"><br/></span></p><br>
+<textarea id=check2textarea>
+class ConnectArray
+  SOutPort    op;
+  InPort    ip;
+equation
+  connect(ip, op);
+end ConnectArray; 
+</textarea>  <div id=check2div> </div> <br>
+<h2>
+2
+Constant Subscript Constraints
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">In order to simplify the analysis of connections and making the generation of connection equations possible at compile time, the following constraint applies:<br/>Subscripts in a connector reference must be constant expressions. </span></p><br>
+<textarea id=check3textarea>
+class ConnectTest
+  Pin x[3];
+  Pin y[3];
+  Integer i = 2;
+equation
+  connect(x[2], y[2]);    // Ok, constant subscripts.
+  connect(x[i], y[2]);    // Error, non-constant subscript.
+end ConnectTest;
+</textarea>  <div id=check3div> </div> <br>
+</div></body></html>

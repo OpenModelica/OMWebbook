@@ -1,0 +1,133 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Modification Prefix Replaceable and Redeclare
+</h1>
+<h2>
+1
+Replaceable
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">A declared element of a class must have the prefix replaceable in order to be redeclared, apart from redeclarations that only change the attribute value and/or restricts the variability and possibly the dimension sizes. The main motivation for this rule is that a class needs to be </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">designed</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> for inheritance that includes redeclaration. Otherwise unexpected errors may occur. <br/></span></p><br>
+<textarea id=check0textarea>
+class MicroCircuit
+  replaceable Resistor R1 (R = 4.0);
+end MicroCircuit;
+</textarea>  <div id=check0div> </div> <br>
+<h2>
+2
+Connector Classes
+</h2>
+<textarea id=check1textarea>
+type Voltage = Real(unit = "V");
+</textarea>  <div id=check1div> </div> <br>
+<textarea id=check2textarea>
+type Current = Real(unit = "A");
+</textarea>  <div id=check2div> </div> <br>
+<textarea id=check3textarea>
+connector Pin
+  Voltage     v;
+  flow Current   i;
+end Pin;        
+</textarea>  <div id=check3div> </div> <br>
+<h2>
+3
+Resistor and TempResistor
+</h2>
+<textarea id=check4textarea>
+model Resistor
+  Pin       p, n                "Positive and Negative Pins";
+  Voltage     v;
+  Current     i;
+  parameter Real R(unit = "Ohm")          "Resistance";
+equation
+  v = R*i;
+end Resistor;
+</textarea>  <div id=check4div> </div> <br>
+<textarea id=check5textarea>
+model TempResistor                  "Temperature dependent Resistor"
+  Pin       p, n                "Positive and Negative Pins";
+  Voltage     v;
+  Current     i;
+  parameter Real R(unit = "Ohm")          "Resistance at reference Temperature";
+  parameter Real RT(unit = "Ohm/degC")   = 0     "Temperature dependent Resistance";
+  parameter Real Tref(unit = "degC")   = 20    "Reference Temperature";
+  Real        Temp           = 20    "Actual Temperature";
+equation
+  v = i*(R + RT*(Temp - Tref));
+end TempResistor;
+</textarea>  <div id=check5div> </div> <br>
+<textarea id=check6textarea>
+model SuperTempResistor                "Temperature dependent Resistor"
+  Pin       p, n                "Positive and Negative Pins";
+  Voltage     v;
+  Current     i;
+  parameter Real R(unit = "Ohm")          "Resistance at reference Temperature";
+  parameter Real RT(unit = "Ohm/degC")   = 0     "Temperature dependent Resistance";
+  parameter Real Tref(unit = "degC")   = 20    "Reference Temperature";
+  Real        Temp           = 20    "Actual Temperature";
+  parameter Boolean Super         = true;
+equation
+  v = i*(R + RT*(Temp - Tref));
+end SuperTempResistor;
+</textarea>  <div id=check6div> </div> <br>
+<h2>
+4
+Redeclare
+</h2>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">redeclare</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> prefix is used at the front of a modifier containing a new variable or type declaration</span><span style=" font-family:'TimesNewRoman'; font-size:12pt; color:#000000;"> t</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">hat </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">replaces</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> the original variable or type declaration element in the modified class.The reason for requiring a special keyword like </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">redeclare</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is to reduce the risk for accidental programming errors that otherwise might occur when whole declarations are replaced by declarations of different types. <br/></span></p><br>
+<textarea id=check7textarea>
+class TempMicroCiruit = MicroCircuit(redeclare TempResistor R1);
+</textarea>  <div id=check7div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>In order to allow further redeclaration of a redeclared element the replaceable prefix should be present also in the modifier.</span></p><br>
+<textarea id=check8textarea>
+class TempMicroCiruit2 = MicroCircuit(redeclare replaceable TempResistor R1);
+</textarea>  <div id=check8div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>In the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">SuperTempMicroCircuit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> the keyword </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">replaceable</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is left out, which means that no further redeclaration is possible.</span></p><br>
+<textarea id=check9textarea>
+class SuperTempMicroCiruit = TempMicroCiruit2(redeclare SuperTempResistor R1);
+</textarea>  <div id=check9div> </div> <br>
+<h3>
+4.1
+Flattening of MicroCircuit, TempMicroCiruit2
+</h3>
+<textarea id=check10textarea>
+instantiateModel(MicroCircuit)  
+</textarea>  <div id=check10div> </div> <br>
+<textarea id=check11textarea>
+instantiateModel(TempMicroCiruit2)   
+</textarea>  <div id=check11div> </div> <br>
+<textarea id=check12textarea>
+instantiateModel(SuperTempMicroCiruit)  
+</textarea>  <div id=check12div> </div> <br>
+</div></body></html>

@@ -1,0 +1,71 @@
+  
+<!doctype html>
+<head>
+  <title>OMWEBbook</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../jquery.min1.10.2.js"></script>
+  <script src='../dygraph-combined.js'></script>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <script src="../bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../codemirror.css">
+ <script src="../codemirror.js"></script>
+ <script src="../modelica.js"></script>
+ <link rel="stylesheet" href="../custom.css">
+  <script src="../autorefresh.js"></script>
+  <script src="../evalnotebook.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">OMWebBook</a>
+    </div>
+     <button id="evaluate" type="button" class="btn btn-success navbar-btn">Evaluate Cell</button>
+    <button id="evaluateall" type="button" class="btn btn-success navbar-btn">Eval All</button>
+    <img id="progressbar" src="../ajax-loader.gif" class="img-rounded" alt="Cinque Terre">
+  </div>
+</div>
+<div class="container">
+<br> <br> <br>
+
+<h1>
+Local Packages
+</h1>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>A local package is simply a package that is declared directly inside a <span style=" font-style:italic;">class</span> that is not a package. In the model <span style=" font-family:'Courier New';">MyCircuit</span> below we use a local specialized version of the package <span style=" font-family:'Courier New';">Electrical.Components</span> being replaced by the local type <span style=" font-family:'Courier New';">MyResistorModel</span>. Several classes from the local package <span style=" font-family:'Courier New';">MyComponents</span> are used for instantiating variables.<br/></p><br>
+<textarea id=check0textarea>
+model MyCircuit
+
+  model MyResistorModel
+    extends Electrical.Interfaces.ResistorModel;
+      // declarations and equations
+  end MyResistorModel;
+
+  encapsulated package MyComponents =
+      Electrical.Components(redeclare model ResistorModel = MyResistorModel);
+
+  MyComponents.Transformer tr1;
+  MyComponents.Transducer td2;
+
+end MyCircuit;
+</textarea>  <div id=check0div> </div> <br>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The class <span style=" font-family:'Courier New';">DeQueueLocalUser</span> below uses the local package <span style=" font-family:'Courier New';">P</span> that is a version of the package <span style=" font-family:'Courier New';">DoubleEndedQueue</span> from the section <a href="static/Inherited.html
+"><span style=" text-decoration: underline; color:#0000ff;">Inherited Packages</span></a> parameterized by the local type <span style=" font-family:'Courier New';">VerySecret</span>.<br/></p><br>
+<textarea id=check1textarea>
+class DeQueueLocalUser
+  protected
+    type VerySecret = Integer;
+    package P = DoubleEndedQueue(redeclare type Element = VerySecret);
+    P.Stack q(maxsize = 200);
+    Integer item;
+algorithm
+    q := P.Push(q, 65);        // Insert two numbers at the beginning
+    q := P.Push(q, 500);
+    q := P.AddBottom(q, 455);  // Insert at the end of the queue
+    item := P.Bottom(q);       // Get the end element, i.e. 455
+    q := P.Pop(q);             // Remove the first element from the queue
+end DeQueueLocalUser;
+</textarea>  <div id=check1div> </div> <br>
+</div></body></html>
