@@ -49,8 +49,9 @@ import numpy
 from numpy import array
 import struct
 import base64
+from PySide.QtCore import QBuffer, QIODevice, QDataStream, QByteArray
 from PySide import QtGui, QtCore
-
+import uuid
 
 def runparser(filelistdirs,logdir):
   print 'Start running the Translator'
@@ -122,97 +123,125 @@ def runparser(filelistdirs,logdir):
         g1=1        
         for node in tree.iter():
            if (node.tag=='TextCell'):
+              imagelist=node.findall('Image')
               html=node.find('Text').text
               soup = BeautifulSoup(html)
               for a in soup.findAll('a'):
                  staticlink="".join(['static','/',a['href']]).replace('.onb','.html')
                  a['href']=a['href'].replace(a['href'], staticlink)                 
                  #print staticlink
-              
-              #findp=soup.find_all('p')
-              
+                  
               findp=[]
               for p in soup.findAll('p'):
                  checkempty=p['style'].replace(' ','').split(";")
                  val="-qt-paragraph-type:empty" in checkempty
                  if (val==False):
-                    if (p.find('img')==None):
+                    # if (p.find('img')==None):
+                        # findp.append(p)
+                    # else:
                         findp.append(p)
-               
               for i in xrange(len(findp)):
                    #x=findp[i].text
                    x=findp[i]
-                   x=re.sub(r'[^\x00-\x7F]+',' ', str(x))
-                   if(x!=''):
-                     if(node.attrib['style']=='Text'):
-                        #partext='\n'.join(['<p align="justify" contenteditable=False>',str(x),'</p>'])
-                        partext='\n'.join([str(x)])
-                        f.write(partext)
-                        f.write('<br>')
-                        f.write('\n')
-                     
-                     elif(node.attrib['style']=='Title'):
-                        print 'title'
-                        t=findp[i].text
-                        t=re.sub(r'[^\x00-\x7F]+',' ', str(t))
-                        htmltext='\n'.join(['<h1>',t,'</h1>'])
-                        #htmltext='\n'.join([str(x)])
-                        f.write(htmltext)
-                        f.write('\n')
-                     
-                     elif(node.attrib['style']=='Section'):
-                        print 'section'
-                        t=findp[i].text
-                        t=re.sub(r'[^\x00-\x7F]+',' ', str(t))
-                        sectioncheck=True
-                        htmltext='\n'.join(['<h2>',str(sectioncount),t,'</h2>'])
-                        sectioncount+=1
-                        #htmltext='\n'.join([str(x)])
-                        f.write(htmltext)
-                        f.write('\n')
-                     elif(node.attrib['style']=='Subsection'):
-                        if(sectioncheck==True):
-                            g=1
-                        g+=1
-                        sectioncheck=False
-                        #print 'subsection',sectioncheck,(sectioncount-1),'.',(g-1)
-                        subsec=findp[i].text
-                        subsec=re.sub(r'[^\x00-\x7F]+',' ', str(subsec))
-                        #scount=(sectioncount-1)+subsectioncount
-                        scount=str((sectioncount-1))+'.'+str((g-1))
-                        subsectioncheck=True
-                        currentlevel=scount
-                        #print str((sectioncount-1)),'.',g
-                        #print 'subsection',scount
-                        htmltext='\n'.join(['<h3>',str(scount),subsec,'</h3>'])
-                        subsectioncount+=0.01
-                        #htmltext='\n'.join([str(x)])
-                        f.write(htmltext)
-                        f.write('\n')
-                     elif(node.attrib['style']=='Subsubsection'):
-                        if(subsectioncheck==True):
-                            g1=1
-                        g1+=1
-                        subsectioncheck=False
-                        #print 'subsection',sectioncheck,(sectioncount-1),'.',(g-1)
-                        subsec=findp[i].text
-                        subsec=re.sub(r'[^\x00-\x7F]+',' ', str(subsec))
-                        #scount=(sectioncount-1)+subsectioncount
-                        scount=str(currentlevel)+'.'+str((g1-1))
-                        print 'subsubsection',scount
-                        #print str((sectioncount-1)),'.',g
-                        #print 'subsection',scount
-                        htmltext='\n'.join(['<h4>',str(scount),subsec,'</h4>'])
-                        subsectioncount+=0.01
-                        #htmltext='\n'.join([str(x)])
-                        f.write(htmltext)
-                        f.write('\n')
-                     else:
-                        htmltext='\n'.join(['<h1>',str(x),'</h1>'])
-                        #htmltext='\n'.join([str(x)])
-                        f.write(htmltext)
-                        f.write('\n')
-
+                   if(x.find('img')is None):
+                       if(x!=''):
+                         if(node.attrib['style']=='Text'):
+                            #partext='\n'.join(['<p align="justify" contenteditable=False>',str(x),'</p>'])
+                            #x["align"]='justify'
+                            x=re.sub(r'[^\x00-\x7F]+',' ', str(x))
+                            partext='\n'.join([str(x)])
+                            f.write(partext)
+                            f.write('<br>')
+                            f.write('\n')
+                         
+                         elif(node.attrib['style']=='Title'):
+                            print 'title'
+                            t=findp[i].text
+                            t=re.sub(r'[^\x00-\x7F]+',' ', str(t))
+                            htmltext='\n'.join(['<h1>',t,'</h1>'])
+                            #htmltext='\n'.join([str(x)])
+                            f.write(htmltext)
+                            f.write('\n')
+                         
+                         elif(node.attrib['style']=='Section'):
+                            print 'section'
+                            t=findp[i].text
+                            t=re.sub(r'[^\x00-\x7F]+',' ', str(t))
+                            sectioncheck=True
+                            htmltext='\n'.join(['<h2>',str(sectioncount),t,'</h2>'])
+                            sectioncount+=1
+                            #htmltext='\n'.join([str(x)])
+                            f.write(htmltext)
+                            f.write('\n')
+                         elif(node.attrib['style']=='Subsection'):
+                            if(sectioncheck==True):
+                                g=1
+                            g+=1
+                            sectioncheck=False
+                            #print 'subsection',sectioncheck,(sectioncount-1),'.',(g-1)
+                            subsec=findp[i].text
+                            subsec=re.sub(r'[^\x00-\x7F]+',' ', str(subsec))
+                            #scount=(sectioncount-1)+subsectioncount
+                            scount=str((sectioncount-1))+'.'+str((g-1))
+                            subsectioncheck=True
+                            currentlevel=scount
+                            #print str((sectioncount-1)),'.',g
+                            #print 'subsection',scount
+                            htmltext='\n'.join(['<h3>',str(scount),subsec,'</h3>'])
+                            subsectioncount+=0.01
+                            #htmltext='\n'.join([str(x)])
+                            f.write(htmltext)
+                            f.write('\n')
+                         elif(node.attrib['style']=='Subsubsection'):
+                            if(subsectioncheck==True):
+                                g1=1
+                            g1+=1
+                            subsectioncheck=False
+                            #print 'subsection',sectioncheck,(sectioncount-1),'.',(g-1)
+                            subsec=findp[i].text
+                            subsec=re.sub(r'[^\x00-\x7F]+',' ', str(subsec))
+                            #scount=(sectioncount-1)+subsectioncount
+                            scount=str(currentlevel)+'.'+str((g1-1))
+                            print 'subsubsection',scount
+                            #print str((sectioncount-1)),'.',g
+                            #print 'subsection',scount
+                            htmltext='\n'.join(['<h4>',str(scount),subsec,'</h4>'])
+                            subsectioncount+=0.01
+                            #htmltext='\n'.join([str(x)])
+                            f.write(htmltext)
+                            f.write('\n')
+                         else:
+                            htmltext='\n'.join(['<h1>',str(x),'</h1>'])
+                            #htmltext='\n'.join([str(x)])
+                            f.write(htmltext)
+                            f.write('\n')
+                   else:
+                       try:
+                           imagedir=os.path.join(newdir,"Images").replace('\\','/')
+                           if not os.path.exists(imagedir): 
+                               os.mkdir(imagedir)
+                           os.chdir(imagedir)
+                           y=imagelist[0]
+                           image=y.text
+                           unique_filename = str(uuid.uuid4())
+                           img = QtGui.QImage()
+                           #image=node.find('Image').text
+                           byteArray = QByteArray.fromBase64(image)
+                           buffer = QBuffer(byteArray)
+                           buffer.open(QIODevice.ReadOnly)
+                           data   = QDataStream(buffer)
+                           data >> img
+                           buffer.close()
+                           filename=".".join([unique_filename,"png"])
+                           imgpath="/".join(['static',os.path.basename(newdir),'Images/'])
+                           imgsrc=imgpath+filename
+                           img.save(filename)
+                           imgtag="".join(["<div align=\"center\">","<img src=",imgsrc,">","</div>"])
+                           #print filename
+                           f.write(imgtag)
+                           del imagelist[0]
+                       except:
+                           pass                   
            if (node.tag=='GraphCell' or node.tag=='InputCell'):
               ## catch the input text
             inputtext=node.find('Input').text

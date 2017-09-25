@@ -35,7 +35,7 @@ __license__ = """
  Author : Arunkumar Palanisamy, arunkumar.palanisamy@liu.se
 """
 
-from flask import Flask, jsonify, render_template, request,session
+from flask import Flask, jsonify, render_template, request,session,current_app
 import os
 import sys
 reload(sys)
@@ -66,6 +66,16 @@ def DrModelica():
     # show the form, it wasn't submitted
     return render_template('index.html')    
 
+@app.route('/SMEHV', methods=['GET','POST'])
+def SMEHV():
+    #if request.method == 'POST':
+        # do stuff when the form is submitted
+        # redirect to end the POST handling
+        # the redirect can be to the same route or somewhere else
+        # return redirect(url_for('index'))
+    # show the form, it wasn't submitted
+    return render_template('Massimo/SMEHV.html')    
+    
 @app.route('/evalexpression', methods=['POST'])
 def evalexpression():
     #print 'inside eval'
