@@ -32,10 +32,6 @@ RUN sudo pip install git+https://github.com/arun3688/OMPython
 # Install webdevelopment tools and webservers
 RUN pip install flask futures gunicorn
 
-# Copy the Project and setup workdir
-ADD . /OMWebbook
-WORKDIR /OMWebbook
-
 #EXPOSE 5000
 
 # Setup nginx
@@ -44,9 +40,12 @@ COPY flask.conf /etc/nginx/sites-available/
 RUN ln -s /etc/nginx/sites-available/flask.conf /etc/nginx/sites-enabled/flask.conf
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-
 # Setup supervisord
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Copy the Project and setup workdir
+ADD . /OMWebbook
+WORKDIR /OMWebbook
 
 # Start processes
 CMD ["supervisord","-c","/etc/supervisor/conf.d/supervisord.conf"]
