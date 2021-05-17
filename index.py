@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-OMWebbook is a An OpenModelica interactive notebook online. The Webbook is generated 
+OMWebbook is a An OpenModelica interactive notebook online. The Webbook is generated
 with the help of Flask framework.
 """
 
@@ -31,19 +31,17 @@ __license__ = """
  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE, EXCEPT AS
  EXPRESSLY SET FORTH IN THE BY RECIPIENT SELECTED SUBSIDIARY LICENSE
  CONDITIONS OF OSMC-PL.
- 
+
  Author : Arunkumar Palanisamy, arunkumar.palanisamy@liu.se
 """
 
 from flask import Flask, jsonify, render_template, request,session,current_app
 import os
 import sys
-reload(sys)
-sys.setdefaultencoding("utf-8")
 import numpy
 from numpy import array
 import shutil
-from OMPython import OMCSession
+from OMPython import OMCSessionZMQ
 import tempfile
 import re
 app = Flask(__name__)
@@ -64,7 +62,7 @@ def DrModelica():
         # the redirect can be to the same route or somewhere else
         # return redirect(url_for('index'))
     # show the form, it wasn't submitted
-    return render_template('index.html')    
+    return render_template('index.html')
 
 @app.route('/SMEHV', methods=['GET','POST'])
 def SMEHV():
@@ -74,25 +72,27 @@ def SMEHV():
         # the redirect can be to the same route or somewhere else
         # return redirect(url_for('index'))
     # show the form, it wasn't submitted
-    return render_template('Massimo/SMEHV.html')    
-    
+    return render_template('Massimo/SMEHV.html')
+
 @app.route('/evalexpression', methods=['POST'])
 def evalexpression():
-    #print 'inside eval'
     try:
         text_content=request.form['input']
         div_content =request.form['output']
-        sidcheck=request.form['sid'] 
-        #print sidcheck 
+        sidcheck=request.form['sid']
+        #print(text_content)
+        #print(sidcheck)
         getomcobj=sessionobj[sidcheck]
-        #sys.stdout.flush()    
-        eval(text_content,div_content,getomcobj)    
+        #print(getomcobj.sendExpression("getVersion()"))
+        #sys.stdout.flush()
+        eval(text_content,div_content,getomcobj)
         data="\n".join(session['msg'])
-        del session['msg'][:]     
-        return data 
+        #print(data)
+        del session['msg'][:]
+        return data
     except:
-        return "failed"    
-	
+        return "failed"
+
 @app.route('/createsession', methods=['POST'])
 def createsession():
         ## Create a new omc session for the users and allot a seperate working directory for the session ##
@@ -101,11 +101,11 @@ def createsession():
         session['mat']=[]
         sid=request.form['sid']
         session['tmpdir'] = tempfile.mkdtemp()
-        #print session['tmpdir'] 
+        #print(session['tmpdir'])
         os.chdir(session['tmpdir'])
-        sess=OMCSession()
+        sess=OMCSessionZMQ()
         sessionobj[sid]=sess
-        #print sessionobj
+        #print(sessionobj)
         #sys.stdout.flush()
         return "success"
 
@@ -123,117 +123,104 @@ def deletesession():
            try:
                shutil.rmtree(session['tmpdir'],True)
            except Exception as e:
-               print e
+               print (e)
        #sys.stdout.flush()
        return "deleted"
 
-    
-def eval(var1,var2,omc):
-   ##run the evaluations in temp directory  ##
-   #print 'evalexpression'
-   
-   x1=var1.split('#')
-   y1=var2.split(',')
-   x=filter(None,x1)
-   y=filter(None,y1)
-  
-   for i in xrange(len(x)):
-      z="\n".join(x[i].splitlines())
-      z1 = filter(lambda x: not re.match(r'^\s*$', x), z)
-      #z1="".join(x[i].splitlines())
-      #simcommand=z1.replace(' ','').startswith('simulate(')and z1.replace(' ','').endswith(')')
-      #plotcommand=z1.replace(' ','').startswith('plot(')and z1.replace(' ','').endswith(')')
-      #plotparametriccommand=z1.replace(' ','').startswith('plotParametric(')and z1.replace(' ','').endswith(')')
-      simcommand=z1.replace(' ','').startswith('simulate(')
-      plotcommand=z1.replace(' ','').startswith('plot(')
-      plotparametriccommand=z1.replace(' ','').startswith('plotParametric(')
 
-      if (simcommand==True):
-        ## look for comments in the string
-        s=remove_comments(z1)
-        sim=s.replace(' ','').startswith('simulate(')and s.replace(' ','').endswith(')')
-        if(sim==True):
-		try:
-		  s=omc.sendExpression(z1)
-		  name=s['resultFile']
-		  addmsg=s['messages']
-		  if (name!=''):
-		     #session['mat'].append(name)
-		     mat.append(name)             
-		     tempres="".join(['Simulation Success: Temp/',os.path.basename(name)])
-		     divcontent=" ".join(['<div id='+y[i]+'>','<b>',str(tempres),'</b>','</div>'])
-		  else:
-		     error=omc.sendExpression("getErrorString()")
-		     finalmsg=error+addmsg
-		     divcontent=" ".join(['<div id='+y[i]+' align="justify" >','<b>',str(finalmsg),'</b>','</div>'])
-		except:
-		   divcontent=" ".join(['<div id='+y[i]+'>','<b>','failed()','</b>','</div>'])         
-	
-		session['msg'].append(divcontent)
+def eval(var1, var2, omc):
+    #run the evaluations in temp directory  ##
+    x1 = var1.split('#')
+    y1 = var2.split(',')
+    x = list(filter(None, x1))
+    y = list(filter(None, y1))
+    for i in range(len(x)):
+        z = '\n'.join(x[i].splitlines())
+        z1 = re.sub(r'\s+', '', z) ## remove all spaces in the string
+        simcommand = z1.replace(' ', '').startswith('simulate(')
+        plotcommand = z1.replace(' ', '').startswith('plot(')
+        plotparametriccommand = z1.replace(' ', '' ).startswith('plotParametric(')
 
+        if simcommand == True:
+            # # look for comments in the string
+            s = remove_comments(z1)
+            sim = s.replace(' ', '').startswith('simulate(') and s.replace(' ', '').endswith(')')
+            if sim == True:
+                try:
+                    s = omc.sendExpression(z1)
+                    name = s['resultFile']
+                    addmsg = s['messages']
+                    if name != '':
+                        # session['mat'].append(name)
+                        mat.append(name)
+                        tempres = ''.join(['Simulation Success: Temp/', os.path.basename(name)])
+                        divcontent = ' '.join(['<div id=' + y[i] + '>','<b>', str(tempres), '</b>', '</div>'])
+                    else:
+                        error = omc.sendExpression('getErrorString()')
+                        finalmsg = error + addmsg
+                        divcontent = ' '.join(['<div id=' + y[i]+ ' align="justify" >', '<b>',str(finalmsg), '</b>', '</div>'])
+                except:
+                    divcontent = ' '.join(['<div id=' + y[i] + '>','<b>', 'failed()', '</b>', '</div>'])
+
+                session['msg'].append(divcontent)
+            else:
+                try:
+                    l = omc.sendExpression(z)
+                except:
+                    # l="failed()"
+                    l = omc.sendExpression(z, parsed=False)
+                divcontent = ' '.join(['<div id=' + y[i] + '>', '<b>',str(l).replace('<', '&lt;').replace('>', '&gt;'), '</b>', '</div>'])
+                session['msg'].append(divcontent)
+        elif plotparametriccommand == True:
+            p = remove_comments(z1)
+            pltpar = p.replace(' ', '').startswith('plotParametric(') and p.replace(' ', '').endswith(')')
+            if pltpar == True:
+                l1 = p.replace(' ', '')
+                l = l1[0:-1]
+                plotvar = l[15:].replace('{', '').replace('}', '')
+                divcontent = ' '.join(['<div id=' + y[i] + '>'])
+                session['msg'].append(divcontent)
+                plotdivid = y[i]
+                # print('plotparm',plotvar)
+                plotgraph(plotvar, plotdivid, omc, 'plotParametric')
+            else:
+                try:
+                    l = omc.sendExpression(z)
+                except:
+                    # l="failed()"
+                    l = omc.sendExpression(z, parsed=False)
+                divcontent = ' '.join(['<div id=' + y[i] + '>', '<b>',str(l).replace('<', '&lt;').replace('>', '&gt;'), '</b>', '</div>'])
+                session['msg'].append(divcontent)
+        elif plotcommand == True:
+            p = remove_comments(z1)
+            plt = p.replace(' ', '').startswith('plot(') and p.replace(' ', '').endswith(')')
+            if plt == True:
+                l1 = p.replace(' ', '')
+                l = l1[0:-1]
+                plotvar = l[5:].replace('{', '').replace('}', '')
+                divcontent = ' '.join(['<div id=' + y[i] + '>'])
+                session['msg'].append(divcontent)
+                plotdivid = y[i]
+                plotgraph(plotvar, plotdivid, omc, 'plot')
+            else:
+                try:
+                    l = omc.sendExpression(z)
+                except:
+                    # l="failed()"
+                    l = omc.sendExpression(z, parsed=False)
+                divcontent = ' '.join(['<div id=' + y[i] + '>', '<b>',str(l).replace('<', '&lt;').replace('>', '&gt;'), '</b>', '</div>'])
+                session['msg'].append(divcontent)
         else:
-          try:
-            l=omc.sendExpression(z)
-          except:
-            #l="failed()"
-            l=omc.sendExpression(z,parsed=False)            
-          divcontent=" ".join(['<div id='+y[i]+'>','<b>',str(l).replace('<','&lt;').replace('>','&gt;'),'</b>','</div>'])
-          session['msg'].append(divcontent)
-      
-      elif (plotparametriccommand==True):
-          p=remove_comments(z1)
-          pltpar=p.replace(' ','').startswith('plotParametric(')and p.replace(' ','').endswith(')')
-          if (pltpar==True):
-		  l1=p.replace(' ','')
-		  l=l1[0:-1]
-		  plotvar=l[15:].replace('{','').replace('}','')
-		  divcontent=" ".join(['<div id='+y[i]+'>'])
-		  session['msg'].append(divcontent)
-		  plotdivid=y[i]
-                  #print 'plotparm',plotvar
-		  plotgraph(plotvar,plotdivid,omc,"plotParametric")
-          else:
-		  try:
-		    l=omc.sendExpression(z)
-		  except:
-		    #l="failed()"
-		    l=omc.sendExpression(z,parsed=False)            
-		  divcontent=" ".join(['<div id='+y[i]+'>','<b>',str(l).replace('<','&lt;').replace('>','&gt;'),'</b>','</div>'])
-		  session['msg'].append(divcontent)
-
-      elif (plotcommand==True):
-          p=remove_comments(z1)
-          plt=p.replace(' ','').startswith('plot(')and p.replace(' ','').endswith(')')
-          if(plt==True):
-		  l1=p.replace(' ','')
-		  l=l1[0:-1]
-		  plotvar=l[5:].replace('{','').replace('}','')
-		  divcontent=" ".join(['<div id='+y[i]+'>'])
-		  session['msg'].append(divcontent)
-		  plotdivid=y[i]
-		  plotgraph(plotvar,plotdivid,omc,"plot")
-          else:
-               try:
-		    l=omc.sendExpression(z)
-	       except:
-		    #l="failed()"
-		    l=omc.sendExpression(z,parsed=False)            
-	       divcontent=" ".join(['<div id='+y[i]+'>','<b>',str(l).replace('<','&lt;').replace('>','&gt;'),'</b>','</div>'])
-	       session['msg'].append(divcontent)
-
-      else:
-          try:
-            l=omc.sendExpression(z)
-          except:
-            #l="failed()"
-            l=omc.sendExpression(z,parsed=False)
-            
-          divcontent=" ".join(['<div id='+y[i]+'>','<b>',str(l).replace('<','&lt;').replace('>','&gt;'),'</b>','</div>'])
-          session['msg'].append(divcontent)
-   
+            try:
+                l = omc.sendExpression(z)
+            except:
+                # l="failed()"
+                l = omc.sendExpression(z, parsed=False)
+            divcontent = ' '.join(['<div id=' + y[i] + '>', '<b>',str(l).replace('<', '&lt;').replace('>', '&gt;'), '</b>','</div>'])
+            session['msg'].append(divcontent)
    ## delete the process ##
    ##omc.__del__()
-   #os.chdir("..")   
+   #os.chdir("..")
 
 
 def remove_comments(text):
@@ -251,9 +238,9 @@ def remove_comments(text):
                             ##    but do end with '*'
            /                ##  End of /* ... */ comment
          |                  ## OR it is a line comment with //
-          \s*//.*           ## Single line comment  
+          \s*//.*           ## Single line comment
          |                  ##  -OR-  various things which aren't comments:
-           (                ## 
+           (                ##
                             ##  ------ " ... " STRING ------
              "              ##  Start of " ... " string
              (              ##
@@ -285,63 +272,78 @@ def remove_comments(text):
 
     return "".join(noncomments)
 
-   
-def plotgraph(plotvar,divid,omc,command):
-  
-  ## Function to handle plotting in browser ##
-  if (len(mat)!=0):
-     res=mat[-1]
-     try:
-       if(command=="plotParametric"):
-           readResult = omc.sendExpression("readSimulationResult(\"" + os.path.basename(res) + "\",{" + plotvar + "})")
-           scaledxrange="["+str(min(readResult[0]))+","+str(max(readResult[0]))+"]"
-           plotlabels=[]
-       else:
-           readResult = omc.sendExpression("readSimulationResult(\"" + os.path.basename(res) + "\",{time," + plotvar + "})")
-           plotlabels=['Time']
-   
-       omc.sendExpression("closeSimulationResultFile()")
 
-       exp='(\s?,\s?)(?=[^\[]*\])|(\s?,\s?)(?=[^\(]*\))'
-       #print 'inside_plot1'
-       subexp=re.sub(exp,'$#',plotvar)
-       plotvalsplit=subexp.split(',')
-       #print plotvalsplit
-       for z in xrange(len(plotvalsplit)):
-           val= plotvalsplit[z].replace('$#',',')
-           plotlabels.append(val)
-       #print plotlabels  
-       plotlabel1=[x.encode('UTF8') for x in plotlabels]
-       
-       plots=[]
-       for i in xrange(len(readResult)):   
-         x=readResult[i]
-         d=[]
-         for z in xrange(len(x)):
-            tu=x[z]
-            d.append((tu,))
-         plots.append(d)            
-       n=numpy.array(plots)
-       numpy.set_printoptions(threshold='nan')
-       dygraph_array= repr(numpy.hstack(n)).replace('array',' ').replace('(' ,' ').replace(')' ,' ')
-       if(command=="plotParametric"):
-           dygraphoptions=" ".join(['{', 'legend:"always",','dateWindow:',scaledxrange,',','labels:',str(plotlabel1),'}'])
-       else:
-           dygraphoptions=" ".join(['{', 'legend:"always",','labels:',str(plotlabel1),'}'])
+def plotgraph(plotvar, divid, omc, command):
+    # Function to handle plotting in browser ##
+    if len(mat) != 0:
+        res = mat[-1]
+        try:
+            if command == 'plotParametric':
+                readResult = omc.sendExpression('readSimulationResult("' + os.path.basename(res) + '",{' + plotvar + '})')
+                scaledxrange = '[' + str(min(readResult[0])) + ',' + str(max(readResult[0])) + ']'
+                plotlabels = []
+            else:
+                readResult = omc.sendExpression('readSimulationResult("'+ os.path.basename(res) + '",{time,' + plotvar + '})')
+                plotlabels = ['Time']
 
-       data="".join(['<script type="text/javascript"> g = new Dygraph(document.getElementById('+'"'+str(divid)+'"'+'),',str(dygraph_array),',',dygraphoptions,')','</script>']) 
-       divcontent="\n".join([str(data),"</div>"])
-       session['msg'].append(divcontent)
-     except:
-       error=omc.sendExpression("getErrorString()")
-       divcontent="".join(['<b>',error,'</b>',"</div>"])
-       session['msg'].append(divcontent)
-      
-  else:
-     divcontent="".join(['<b>','No result File Generated','</b>',"</div>"])
-     session['msg'].append(divcontent)
-    
-    
+            omc.sendExpression('closeSimulationResultFile()')
+
+            exp = '(\s?,\s?)(?=[^\[]*\])|(\s?,\s?)(?=[^\(]*\))'
+            subexp = re.sub(exp, '$#', plotvar)
+
+            plotvalsplit = subexp.split(',')
+            for z in range(len(plotvalsplit)):
+                val = plotvalsplit[z].replace('$#', ',')
+                plotlabels.append(val)
+
+            plots = []
+            for i in range(len(readResult)):
+                x = readResult[i]
+                d = []
+                for z in range(len(x)):
+                    tu = x[z]
+                    d.append((tu, ))
+                plots.append(d)
+
+            n = numpy.array(plots)
+            numpy.set_printoptions(threshold=numpy.inf)
+            dygraph_array = repr(numpy.hstack(n)).replace('array', ' ').replace('(', ' ').replace(')', ' ')
+
+            if command == 'plotParametric':
+                dygraphoptions = ' '.join(['{',
+                    'legend:"always",',
+                    'dateWindow:',
+                    scaledxrange,
+                    ',',
+                    'labels:',
+                    str(plotlabels),
+                    '}',
+                    ])
+            else:
+                dygraphoptions = ' '.join(['{', 'legend:"always",', 'labels:', str(plotlabels), '}'])
+
+            data = ''.join([
+                '<script type="text/javascript"> g = new Dygraph(document.getElementById('
+                     + '"' + str(divid) + '"' + '),',
+                str(dygraph_array),
+                ',',
+                dygraphoptions,
+                ')',
+                '</script>',
+                ])
+            divcontent = '\n'.join([str(data), '</div>'])
+            session['msg'].append(divcontent)
+        except Exception as e:
+            error = omc.sendExpression('getErrorString()')
+            if not error:
+                divcontent = ''.join(['<b>', str(e), '</b>', '</div>'])
+            else:
+                divcontent = ''.join(['<b>', error, '</b>', '</div>'])
+            session['msg'].append(divcontent)
+    else:
+        divcontent = ''.join(['<b>', 'No result File Generated', '</b>', '</div>'])
+        session['msg'].append(divcontent)
+
 
 if __name__ == '__main__':
     #app.run(debug=True,use_reloader=True)
