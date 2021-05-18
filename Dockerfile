@@ -26,7 +26,7 @@ RUN apt-get install -y git nginx supervisor
 RUN pip3 install --upgrade pip
 
 # Install OMPython
-RUN pip3 install git+git://github.com/OpenModelica/OMPython.git
+RUN pip3 install git+https://github.com/OpenModelica/OMPython.git
 
 # Install webdevelopment tools and webservers
 RUN pip3 install flask futures gunicorn
