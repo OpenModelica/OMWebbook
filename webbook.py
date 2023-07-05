@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-OMWebbook is a An OpenModelica interactive notebook online. The Webbook is generated 
-with the help of Flask framework.This file is used for the conversion of DrModelica files 
+OMWebbook is a An OpenModelica interactive notebook online. The Webbook is generated
+with the help of Flask framework.This file is used for the conversion of DrModelica files
 to HTML Files.
 """
 
@@ -33,7 +33,7 @@ __license__ = """
  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE, EXCEPT AS
  EXPRESSLY SET FORTH IN THE BY RECIPIENT SELECTED SUBSIDIARY LICENSE
  CONDITIONS OF OSMC-PL.
- 
+
  Author : Arunkumar Palanisamy, arunkumar.palanisamy@liu.se
 """
 
@@ -41,8 +41,8 @@ import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 import os
 import sys
-reload(sys)  # Reload does the trick!
-sys.setdefaultencoding("utf-8")
+#reload(sys)  # Reload does the trick!
+#sys.setdefaultencoding("utf-8")
 import re
 import string
 import numpy
@@ -54,36 +54,36 @@ from PySide import QtGui, QtCore
 import uuid
 
 def runparser(filelistdirs,logdir):
-  print 'Start running the Translator'
+  print ('Start running the Translator')
   #os.chdir(logdir)
   filelistdirs=filter(None,filelistdirs)
-  print 'D1',filelistdirs
+  print ('D1',filelistdirs)
   for dir in xrange(len(filelistdirs)):
     curdir=filelistdirs[dir]
-    print 'D2',curdir
+    print ('D2',curdir)
     newdir=os.path.join(logdir,os.path.basename(curdir)).replace('\\','/')
-    if not os.path.exists(newdir): 
+    if not os.path.exists(newdir):
           os.mkdir(newdir)
-    filelist = os.listdir(curdir) 
-    print filelist 
+    filelist = os.listdir(curdir)
+    print (filelist)
     os.chdir(curdir)
     for z in xrange(len(filelist)):
-        ### Start the xml parser 
+        ### Start the xml parser
         tree = ET.parse(filelist[z])
         root = tree.getroot()
-        
+
         '''create a html result file '''
         filename= os.path.basename(filelist[z])
-        logfile=os.path.join(newdir,filename.replace('.onb','.html')).replace('\\','/')   
-        print logfile  
+        logfile=os.path.join(newdir,filename.replace('.onb','.html')).replace('\\','/')
+        print (logfile)
         f=open(logfile,'w')
-        headers='''  
+        headers='''
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -114,13 +114,13 @@ def runparser(filelistdirs,logdir):
         f.write(headers)
         count=0
         check=0
-        sectioncount=1      
+        sectioncount=1
         subsectioncount=0.01
         sectioncheck=False
         subsectioncheck=False
         currentlevel=''
         g=1
-        g1=1        
+        g1=1
         for node in tree.iter():
            if (node.tag=='TextCell'):
               imagelist=node.findall('Image')
@@ -128,9 +128,9 @@ def runparser(filelistdirs,logdir):
               soup = BeautifulSoup(html)
               for a in soup.findAll('a'):
                  staticlink="".join(['static','/',a['href']]).replace('.onb','.html')
-                 a['href']=a['href'].replace(a['href'], staticlink)                 
-                 #print staticlink
-                  
+                 a['href']=a['href'].replace(a['href'], staticlink)
+                 #print (staticlink)
+
               findp=[]
               for p in soup.findAll('p'):
                  checkempty=p['style'].replace(' ','').split(";")
@@ -153,18 +153,18 @@ def runparser(filelistdirs,logdir):
                             f.write(partext)
                             f.write('<br>')
                             f.write('\n')
-                         
+
                          elif(node.attrib['style']=='Title'):
-                            print 'title'
+                            print ('title')
                             t=findp[i].text
                             t=re.sub(r'[^\x00-\x7F]+',' ', str(t))
                             htmltext='\n'.join(['<h1>',t,'</h1>'])
                             #htmltext='\n'.join([str(x)])
                             f.write(htmltext)
                             f.write('\n')
-                         
+
                          elif(node.attrib['style']=='Section'):
-                            print 'section'
+                            print ('section')
                             t=findp[i].text
                             t=re.sub(r'[^\x00-\x7F]+',' ', str(t))
                             sectioncheck=True
@@ -202,7 +202,7 @@ def runparser(filelistdirs,logdir):
                             subsec=re.sub(r'[^\x00-\x7F]+',' ', str(subsec))
                             #scount=(sectioncount-1)+subsectioncount
                             scount=str(currentlevel)+'.'+str((g1-1))
-                            print 'subsubsection',scount
+                            print ('subsubsection',scount)
                             #print str((sectioncount-1)),'.',g
                             #print 'subsection',scount
                             htmltext='\n'.join(['<h4>',str(scount),subsec,'</h4>'])
@@ -218,7 +218,7 @@ def runparser(filelistdirs,logdir):
                    else:
                        try:
                            imagedir=os.path.join(newdir,"Images").replace('\\','/')
-                           if not os.path.exists(imagedir): 
+                           if not os.path.exists(imagedir):
                                os.mkdir(imagedir)
                            os.chdir(imagedir)
                            y=imagelist[0]
@@ -241,36 +241,36 @@ def runparser(filelistdirs,logdir):
                            f.write(imgtag)
                            del imagelist[0]
                        except:
-                           pass                   
+                           pass
            if (node.tag=='GraphCell' or node.tag=='InputCell'):
               ## catch the input text
             inputtext=node.find('Input').text
             '''
             if ('simulate' in inputtext):
-                  text='\n'.join(['<p> <b>',inputtext,'</b> </p>']) 
+                  text='\n'.join(['<p> <b>',inputtext,'</b> </p>'])
                   f.write(text)
-                  f.write('\n')''' 
+                  f.write('\n')'''
             #print 'arun', inputtext
             if(inputtext!=None):
-                  linecount=string.split(inputtext, '\n')            
+                  linecount=string.split(inputtext, '\n')
                   '''
                   if ('plot(' in inputtext):
-                  text='\n'.join(['<p> <b>',inputtext,'</b> </p> <br>'])  
+                  text='\n'.join(['<p> <b>',inputtext,'</b> </p> <br>'])
                   f.write(text)
-                  f.write('\n') 
-                  ## code to automatically generate plot variable and button in html  
+                  f.write('\n')
+                  ## code to automatically generate plot variable and button in html
                   plotvar=inputtext.replace('plot','').replace('(','').replace(')','').replace('{','').replace('}','')
-                  listplotvar=plotvar.split(',')  
+                  listplotvar=plotvar.split(',')
                   plotid='simulatebutton'+str(count)+'plot'
                   buttonid='simulatebutton'+str(count)
                   graphdivid='simulatebutton'+str(count)+'graphdiv'
-                  plotheader="\n".join(['<div>','<select id='+ plotid +' size=5 multiple>', '<option ><b>Select Plot Variables</b> </option>'])       
+                  plotheader="\n".join(['<div>','<select id='+ plotid +' size=5 multiple>', '<option ><b>Select Plot Variables</b> </option>'])
                   f.write(str(plotheader))
                   f.write('\n')
                   for i in xrange(len(listplotvar)):
                      varname='<option selected>'+ str(listplotvar[i]) + '</option>'
                      f.write(varname)
-                     f.write('\n')             
+                     f.write('\n')
                   closeoption="\n".join(['</select> <br>','<button id='+buttonid+'>Simulate</button> <br> <br>' ,'</div>'])
                   f.write(closeoption)
                   count=count+1;
@@ -286,10 +286,10 @@ def runparser(filelistdirs,logdir):
                   f.write('\n')
                   ## catch the OMCPLOT datas
                   curve=node.find('OMCPlot')
-                  
+
                   if curve!=None:
                      #count=count+1;
-                     print count
+                     print (count)
                      try:
                        #scriptdata=makeplot(curve,count)
                        scriptdata=makeplot(curve,divid)
@@ -307,10 +307,10 @@ def runparser(filelistdirs,logdir):
               f.write(text)
               f.write('\n')
 
-              print "Empty Graph cells"
+              print ("Empty Graph cells")
         f.write('</div></body></html>')
-        f.close()         
-    print 'Completed'
+        f.close()
+    print ('Completed')
 
 
 
@@ -331,36 +331,36 @@ def makeplot(curve,graphdivid):
           plotdata.append(xdata)
        plotdata.append(ydata)
        labeldata.append(label)
-       
+
      if (len(plotdata) !=0):
         n=array(plotdata)
         #print 'plotdata', plotdata
         numpy.set_printoptions(threshold='nan')
         #print repr(numpy.hstack(n))
-        try:        
+        try:
            dygraph_array= repr(numpy.hstack(n)).replace('array',' ').replace('(' ,' ').replace(')' ,' ')
            return writedygraphscript(dygraph_array,labeldata,graphdivid)
         except ValueError:
-           print 'Value Error'
+           print ('Value Error')
            return writedygraphscript('ValueError',labeldata,graphdivid)
 
-        
+
 def writedygraphscript(dygraphdata,labeldata,graphdivid):
-   
+
      #divheader= '''<script type="text/javascript" src="../dygraph-combined.js"></script>'''
-     #<div id="graphdiv"></div>                
+     #<div id="graphdiv"></div>
      #<script type="text/javascript">
      #g = new Dygraph(document.getElementById("graphdiv"),'''
      #divid='<div id=graphdiv'+str(count)+'>'+'</div>'
      #divid='<div id='+ graphdivid + '> </div>'
-     #divgraph='g = new Dygraph(document.getElementById("graphdiv'+str(count)+'"),' 
+     #divgraph='g = new Dygraph(document.getElementById("graphdiv'+str(count)+'"),'
      divgraph='g = new Dygraph(document.getElementById('+'"'+str(graphdivid)+'"'+'),'
      scriptheader='\n'.join(['<script type="text/javascript">',divgraph])
      options='\n'.join(['{', 'legend:"always",','labels:',str(labeldata),'}'])
      s = '\n'.join([scriptheader,str(dygraphdata),',',options,')','</script>'])
-     return s     
-        
-       
+     return s
+
+
 class CompareListControl(QtGui.QDialog):
         ''' Class for taking onb files '''
         def __init__(self):
@@ -371,35 +371,35 @@ class CompareListControl(QtGui.QDialog):
             self.setdir=''
             changeDir = QtGui.QPushButton("setworkdir", self)
             mainGrid.addWidget(changeDir, 0, 1)
-            
+
             self.listdir = QtGui.QLabel("List of Notebook files:", self)
             mainGrid.addWidget(self.listdir , 1, 0, QtCore.Qt.AlignRight)
             self.filelist = QtGui.QListWidget(self)
             self.filelist.setSelectionMode(QtGui.QAbstractItemView.ExtendedSelection)
             #self.directory.setFixedHeight(80)
             mainGrid.addWidget(self.filelist, 1, 1, 2, 1)
-            
+
             browseDir1 = QtGui.QPushButton("Select", self)
             mainGrid.addWidget(browseDir1, 1, 2)
-            
+
             self.removeButton = QtGui.QPushButton("Remove", self)
             mainGrid.addWidget(self.removeButton, 2, 2)
             self.removeButton.clicked.connect(self.remove)
-            
+
             result = QtGui.QLabel("Report Directory:", self)
             mainGrid.addWidget(result, 3, 0, QtCore.Qt.AlignRight)
             self.resultEdit = QtGui.QLineEdit("", self)
             mainGrid.addWidget(self.resultEdit, 3, 1)
             browseResult = QtGui.QPushButton("Select", self)
             mainGrid.addWidget(browseResult, 3, 2)
-            
+
             self.runButton = QtGui.QPushButton("Run", self)
             mainGrid.addWidget(self.runButton, 4, 1)
             self.runButton.clicked.connect(self.run)
             self.closeButton = QtGui.QPushButton("Close", self)
             mainGrid.addWidget(self.closeButton, 4, 2)
             self.closeButton.clicked.connect(self.close)
-            
+
             def _browseDir1Do():
                #(fileNames, trash) = QtGui.QFileDialog().getOpenFileNames(self, 'Open Notebook File', os.getcwd(), '(*.onb)')
                dirName = QtGui.QFileDialog().getExistingDirectory(self, 'Select Directory of Results',self.setdir)
@@ -416,28 +416,28 @@ class CompareListControl(QtGui.QDialog):
                 dirName = dirName.replace('\\', '/')
                 if dirName != '':
                     self.resultEdit.setText(dirName)
-            
+
             def changedirdo():
                 #(fileName, trash) = QtGui.QFileDialog().getSaveFileName(self, 'Define Analysis Result File', os.getcwd(), '(*.log);;All Files(*.*)')
                 dirName = QtGui.QFileDialog().getExistingDirectory(self, 'Select workdir')
                 self.setdir=dirName
                 #os.chdir(dirName)
-            
+
             changeDir.clicked.connect(changedirdo)
             browseDir1.clicked.connect(_browseDir1Do)
             browseResult.clicked.connect(_browseResultDo)
-            
+
             self.show()
-            
+
         def run(self):
-        
+
             # Get data from GUI
             logDir = self.resultEdit.text()
-            
+
             notebookfilelist=[]
             sitems=self.filelist.selectedItems()
             if(len(sitems)!=0):
-               for item in self.filelist.selectedItems():        
+               for item in self.filelist.selectedItems():
                   notebookfilelist.append(item.text())
             else:
                for i in xrange(self.filelist.count()):
@@ -449,16 +449,16 @@ class CompareListControl(QtGui.QDialog):
                 #gui._compareThreadTesting = runCompareResultsInDirectories(gui.rootDir, dir1, listdirs, tol, logDir)
                 runparser(notebookfilelist,logDir)
             else:
-                print 'No files Selected'
+                print ('No files Selected')
 
-         
+
         def remove(self):
            listItems=self.filelist.selectedItems()
-           if not listItems: return        
+           if not listItems: return
            for item in listItems:
-               self.filelist.takeItem(self.filelist.row(item))  
-        
-                
+               self.filelist.takeItem(self.filelist.row(item))
+
+
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     ex = CompareListControl()
@@ -467,4 +467,3 @@ if __name__ == "__main__":
     dir1=["C:\\Users\\rain1_000\\Desktop\\pythonscript\\test"]
     dir2="C:\\Users\\rain1_000\\Desktop\\pythonscript\\static"
     runparser(dir1,dir2)'''
-       

@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -50,7 +50,7 @@ model DCMotor
 equation
    connect(Resistor1.n, Inductor1.p);
    connect(Inductor1.n, EMF1.p);
-   connect(EMF1.flange, Inertia1.flange_a);  
+   connect(EMF1.flange, Inertia1.flange_a);
    connect(EMF1.n, Ground1.p);
    connect(ConstantVoltage1.n, Ground1.p);
    connect(ConstantVoltage1.p, Resistor1.p);
@@ -568,7 +568,7 @@ g = new Dygraph(document.getElementById("check4div"),
        [  2.49000000e+01,   2.68238107e-06],
        [  2.49500000e+01,   2.47388400e-06],
        [  2.50000000e+01,   2.26797772e-06],
-       [  2.50000000e+01,   2.26797772e-06]] 
+       [  2.50000000e+01,   2.26797772e-06]]
 ,
 {
 legend:"always",
@@ -1083,7 +1083,7 @@ g = new Dygraph(document.getElementById("check5div"),
        [  2.49000000e+01,   2.38999953e+01],
        [  2.49500000e+01,   2.39499954e+01],
        [  2.50000000e+01,   2.39999956e+01],
-       [  2.50000000e+01,   2.39999956e+01]] 
+       [  2.50000000e+01,   2.39999956e+01]]
 ,
 {
 legend:"always",

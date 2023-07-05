@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -32,7 +32,7 @@
 <br> <br> <br>
 
 <h1>
-Acausal Physical Modeling - Simple Circuit 
+Acausal Physical Modeling - Simple Circuit
 </h1>
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; font-weight:600; color:#000000;">Diagram 1:</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">  Connection diagram of the acausal simple circuit  model.</span></p><br>
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/></span></p><br>
@@ -56,15 +56,15 @@ equation
   connect(Capacitor1.n, Ground1.p);
   connect(Resistor1.p, Resistor2.p);
   connect(SineVoltage1.n, Ground1.p);
-end SimpleCircuit;  
+end SimpleCircuit;
 </textarea>  <div id=check1div> </div> <br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Flatten the model before simulation. (This command is not really needed since flattening is part of the compilation of the model performed by the simulate command).</span></p><br>
 <textarea id=check2textarea>
-instantiateModel(SimpleCircuit)  // Take a look at the flattened model - not needed  
+instantiateModel(SimpleCircuit)  // Take a look at the flattened model - not needed
 </textarea>  <div id=check2div> </div> <br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Simulate it:</span></p><br>
 <textarea id=check3textarea>
-simulate(SimpleCircuit, startTime=0, stopTime=5) 
+simulate(SimpleCircuit, startTime=0, stopTime=5)
 </textarea>  <div id=check3div> </div> <br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Plot it:</span></p><br>
 <textarea id=check4textarea>
@@ -574,7 +574,7 @@ g = new Dygraph(document.getElementById("check4div"),
        [  4.99000000e+00,  -1.55411898e-01,   9.26213780e-02],
        [  5.00000000e+00,  -1.54177284e-01,   1.54177284e-01],
        [  5.00000000e+00,  -1.54177284e-01,   1.54177284e-01],
-       [  5.00000000e+00,  -1.54177284e-01,   1.54177284e-01]] 
+       [  5.00000000e+00,  -1.54177284e-01,   1.54177284e-01]]
 ,
 {
 legend:"always",

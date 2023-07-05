@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -52,7 +52,7 @@ model Resistor "Electrical resistor"
    parameter Real R(unit="Ohm") "Resistance";
 equation
    v = i*R;
-end Resistor; 
+end Resistor;
 </textarea>  <div id=check0div> </div> <br>
 <h2>
 3
@@ -63,7 +63,7 @@ Record
 record person
   Real age;
   String name;
-end person;  
+end person;
 </textarea>  <div id=check1div> </div> <br>
 <h2>
 4
@@ -96,7 +96,7 @@ block Multiply
   output Real result;
 equation
   result = x*y;
-end Multiply;  
+end Multiply;
 </textarea>  <div id=check4div> </div> <br>
 <h2>
 7
@@ -114,7 +114,7 @@ function multiply
   output Real result;
 algorithm
   result := x*y;
-end multiply;    
+end multiply;
 </textarea>  <div id=check5div> </div> <br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>The function </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">multiply</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> can be called from within a class:</span></p><br>
 <textarea id=check6textarea>
@@ -122,7 +122,7 @@ class MultCall
   Real res;
 equation
   res = multiply(3.5, 2.0);        // Function call
-end MultCall;  
+end MultCall;
 </textarea>  <div id=check6div> </div> <br>
 <h3>
 7.2
@@ -143,11 +143,11 @@ class MultCall2
   Real res;
 equation
   res = multiply(x = 5);
-end MultCall2;  
+end MultCall2;
 </textarea>  <div id=check8div> </div> <br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Simulate MultCall2:</span></p><br>
 <textarea id=check9textarea>
-simulate(MultCall2)  
+simulate(MultCall2)
 </textarea>  <div id=check9div> </div> <br>
 <textarea id=check10textarea>
 plot(res)
@@ -655,7 +655,7 @@ g = new Dygraph(document.getElementById("check10div"),
        [ 0.996,  0.   ],
        [ 0.998,  0.   ],
        [ 1.   ,  0.   ],
-       [ 1.   ,  0.   ]] 
+       [ 1.   ,  0.   ]]
 ,
 {
 legend:"always",
@@ -666,7 +666,7 @@ labels:
 </script>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The function multiply can also be called directly with named arguments: </span></p><br>
 <textarea id=check11textarea>
-multiply(x=5.0)  
+multiply(x=5.0)
 </textarea>  <div id=check11div> </div> <br>
 <h2>
 8

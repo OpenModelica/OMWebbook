@@ -4,7 +4,7 @@
   <title>OMWebBook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../static/jquery.min1.10.2.js"></script>
+  <script src="../static/jquery-3.7.0.min.js"></script>
  <link rel="stylesheet" href="../static/bootstrap.min.css">
  <script src="../static/bootstrap.min.js"></script>
  <link rel="stylesheet" href="../static/custom.css">
@@ -30,16 +30,16 @@ Introduction to Modelica with Examples in Modeling, Technology, and Applications
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The book is open for submissions of material for on-line publication, each part labeled with the corresponding authors. All material is open source, but different parts can have different open source licenses and copyrights. </span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#0000ff;">The Creative Commons Attribution-ShareAlike 4.0</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> International License is the default open source license if nothing else is specified. An editorial board of academic professionals handle submissions, improve the quality, and when needed provide material in relevant areas.</span></p><br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The book is published by Linköping University Electronic Press in the series ”Linköping University Interdisciplinary Studies” with ISSN 1650-9625. Citations of the whole book or separate chapters are possible. Pdf snapshots of the book contents will be taken regularly and published on-line in addition to the live editable/executable version.</span></p>
 
-<h2> Web book editoral board </h2> 
+<h2> Web book editoral board </h2>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Peter Fritzson. Modelica language and technology</span></p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Bernhard Bachmann. Mathematics, symbolics, numerics</span></p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Kannan Moudgalya. Chemical engineering modeling, spoken-tutorials</span></p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Francesco Casella. Power plants, control, fluid modeling</span></p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Bernt Lie. Control, process industry, hydropower, Python</span></p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Jiri Kofranek. Biochemistry and physiology modeling</span></p>
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Massimo Ceraolo,  Electric Drives and Mechatronics 
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Massimo Ceraolo,  Electric Drives and Mechatronics
 </span></p>
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Christoph Nytsch Geusen. Building modeling and simulation  </span></p> 
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Christoph Nytsch Geusen. Building modeling and simulation  </span></p>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Prof. Luigi Vanfretti,  Electrical power systems  </span></p> <br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Open for submission of material for on-line publication. Content is prepared and tested off-line using the OpenModelica OMNotebook tool; then sent in for html conversion and upload. For submission, send material to the editor-in-chief: peter.fritzson@liu.se 	</span></p><br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The Book is divided into a number of parts where each part can contain chapters, sections, and subsections. Click on the respective part to reach its content. Practical hints on using the book are available below (<a href="#hints"> hints </a>).</span></p><br>
@@ -49,7 +49,7 @@ Top Level Table of Contents
 <table class="table table-bordered">
 <tr>
 <td> 1 </td>
-<td> 
+<td>
 <a href="{{ url_for('DrModelica') }}">
 Peter Fritzson. DrModelica – An Introduction to Modelica with interactive editable executable examples based on the book ”Principles of  Object-Oriented Modeling and Simulation with Modelica 3.3 - a Cyber-Physical Approach” </a>
 </td>
@@ -57,77 +57,77 @@ Peter Fritzson. DrModelica – An Introduction to Modelica with interactive edit
 
 <tr>
 <td> 2 </td>
-<td> 
+<td>
 Bernhard Bachmann. Mathematical Aspects of Modelica and Simulation including Symbolic and Numeric Techniques. --- Expected uploading in the near future.
 </td>
 </tr>
 
 <tr>
 <td> 3 </td>
-<td> 
+<td>
 <a href="http://spoken-tutorial.org/tutorial-search/?search_foss=OpenModelica&search_language=English">
-Kannan Moudgalya.Step-by-step audio-video tutorials on OpenModelica using OMEdit and the spoken-tutorial pedagogic approach 
+Kannan Moudgalya.Step-by-step audio-video tutorials on OpenModelica using OMEdit and the spoken-tutorial pedagogic approach
 </a>
 </td>
 </tr>
 
 <tr>
 <td> 4 </td>
-<td> 
-Francesco Casella.  Introduction to Control with Modelica.  --- Expected uploading in the near future. 
+<td>
+Francesco Casella.  Introduction to Control with Modelica.  --- Expected uploading in the near future.
 </td>
 </tr>
 
 <tr>
 <td> 5 </td>
-<td> 
+<td>
 Jiri Kofranek. Human Physiology Modeling. --- Expected uploading in the near future.
 </td>
 </tr>
 
 <tr>
 <td> 6 </td>
-<td> 
+<td>
 Anton Haumer. Introduction to Control of Electric Drives.  --- Expected uploading in the near future.
 </td>
 </tr>
 
 <tr>
 <td> 7 </td>
-<td> 
+<td>
 Christoph Nytsch Geusen. Introduction to Building modeling and Simulation. --- Expected uploading in the near future.
 </td>
 </tr>
 
 <tr>
 <td> 8 </td>
-<td> 
+<td>
 Bernt Lie.  Model linearization and control analysis. --- Expected uploading in the near future.</td>
 </tr>
 
 <tr>
 <td> 9 </td>
-<td> 
+<td>
 <a href="{{ url_for('SMEHV') }}">
 Massimo Ceraolo. Simplified Modelling of Electric and Hybrid Vehicles. </td>
 </tr>
 
 <tr>
 <td> 10 </td>
-<td> 
+<td>
 Luigi Vanfretti. Introduction to Power System Dynamics and Control using the OpenIPSL Library. --- Expected upload in the near future. </td>
 </tr>
 
 
 <tr>
 <td> 11 </td>
-<td> 
+<td>
 More submissions ....
 </td>
 </tr>
 </table>
 <br>
-<a name="hints"></a> 
+<a name="hints"></a>
 <h1> Hints on Using OMWebbook </h1>
 <table class="table table-bordered">
 <tr>

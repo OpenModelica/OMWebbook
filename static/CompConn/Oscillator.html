@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -61,7 +61,7 @@ model Spring     "Linear 1D translational spring"
   parameter Real c(unit = "N/m") = 1        "Spring constant";
 equation
   f = c*(s_rel - s_rel0);              // Spring equation
-end Spring;   
+end Spring;
 </textarea>  <div id=check2div> </div> <br>
 <textarea id=check3textarea>
 model Mass        "Hanging mass object"
@@ -74,7 +74,7 @@ equation
   v = der(s);
   a = der(v);
   flange_b.f = m*a - m*g;
-end Mass;  
+end Mass;
 </textarea>  <div id=check3div> </div> <br>
 <textarea id=check4textarea>
 partial model Rigid  "Rigid connection of two translational 1D flanges"
@@ -110,7 +110,7 @@ model Oscillator
 equation
   connect(spring1.flange_b, fixed1.flange_b);
   connect(mass1.flange_b, spring1.flange_a);
-end Oscillator;   
+end Oscillator;
 </textarea>  <div id=check6div> </div> <br>
 <h2>
 3
@@ -625,7 +625,7 @@ g = new Dygraph(document.getElementById("check8div"),
        [  4.98000000e-01,  -6.06333248e-01],
        [  4.99000000e-01,  -5.66030036e-01],
        [  5.00000000e-01,  -5.35048955e-01],
-       [  5.00000000e-01,  -5.35048955e-01]] 
+       [  5.00000000e-01,  -5.35048955e-01]]
 ,
 {
 legend:"always",
@@ -1141,7 +1141,7 @@ g = new Dygraph(document.getElementById("check9div"),
        [  4.98000000e-01,   4.48376659e+01],
        [  4.99000000e-01,   3.57016744e+01],
        [  5.00000000e-01,   2.62089642e+01],
-       [  5.00000000e-01,   2.62089642e+01]] 
+       [  5.00000000e-01,   2.62089642e+01]]
 ,
 {
 legend:"always",

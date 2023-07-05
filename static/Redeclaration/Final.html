@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -48,7 +48,7 @@ type Angle = Real(final quantity = "Angle",
 class AngleInst
   parameter Angle a1(unit = "deg",fixed=true);  // Error, since unit declared as final
   parameter Angle a2(displayUnit = "rad", fixed=true); // Fine
-end AngleInst;  
+end AngleInst;
 </textarea>  <div id=check1div> </div> <br>
 <h2>
 2
@@ -86,19 +86,19 @@ end PI;
 model Test
   PI c1(k = 2, T = 3);              // Fine
   PI c2(tf.b = {1});              // Error: b is declared as final
-end Test;  
+end Test;
 </textarea>  <div id=check5div> </div> <br>
 <textarea id=check6textarea>
 model Test2
   PI c1(k = 2, T = 3);              // Fine
-end Test2;  
+end Test2;
 </textarea>  <div id=check6div> </div> <br>
 <h2>
 4
 Instantiation of PI
 </h2>
 <textarea id=check7textarea>
-instantiateModel( TransferBlock )  
+instantiateModel( TransferBlock )
 </textarea>  <div id=check7div> </div> <br>
 <textarea id=check8textarea>
 instantiateModel( PI )

@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -94,7 +94,7 @@ plot(shift)
 <script type="text/javascript">
 g = new Dygraph(document.getElementById("check3div"),
   [[  0.        ,   0.40000999],
-       [ 10.        ,   0.40000999]] 
+       [ 10.        ,   0.40000999]]
 ,
 {
 legend:"always",
@@ -106,18 +106,18 @@ labels:
 <textarea id=check4textarea>
 model Test3PhaseSystemsInitParam2
   extends Test3PhaseSystemsInitParam1(shift(start=-3));
-end Test3PhaseSystemsInitParam2;  
+end Test3PhaseSystemsInitParam2;
 </textarea>  <div id=check4div> </div> <br>
 <textarea id=check5textarea>
 simulate(Test3PhaseSystemsInitParam2, stopTime=10, simflags="-lv=LOG_INIT")
 </textarea>  <div id=check5div> </div> <br>
 <textarea id=check6textarea>
-plot(shift) 
+plot(shift)
 </textarea> <br> <div id=check6div> </div> <br>
 <script type="text/javascript">
 g = new Dygraph(document.getElementById("check6div"),
   [[  0.       ,  -3.7004229],
-       [ 10.       ,  -3.7004229]] 
+       [ 10.       ,  -3.7004229]]
 ,
 {
 legend:"always",
@@ -129,18 +129,18 @@ labels:
 <textarea id=check7textarea>
 model Test3PhaseSystemsInitParam3
   extends Test3PhaseSystemsInitParam2(i_abc(each stateSelect=StateSelect.always));
-end Test3PhaseSystemsInitParam3;  
+end Test3PhaseSystemsInitParam3;
 </textarea>  <div id=check7div> </div> <br>
 <textarea id=check8textarea>
 simulate(Test3PhaseSystemsInitParam3, stopTime=10, simflags="-lv=LOG_INIT")
 </textarea>  <div id=check8div> </div> <br>
 <textarea id=check9textarea>
-plot(shift) 
+plot(shift)
 </textarea> <br> <div id=check9div> </div> <br>
 <script type="text/javascript">
 g = new Dygraph(document.getElementById("check9div"),
   [[  0.       ,  -3.7004229],
-       [ 10.       ,  -3.7004229]] 
+       [ 10.       ,  -3.7004229]]
 ,
 {
 legend:"always",
@@ -152,18 +152,18 @@ labels:
 <textarea id=check10textarea>
 model Test3PhaseSystemsInitParam4
   extends Test3PhaseSystemsInitParam2(i_dq0(each stateSelect=StateSelect.always));
-end Test3PhaseSystemsInitParam4;  
+end Test3PhaseSystemsInitParam4;
 </textarea>  <div id=check10div> </div> <br>
 <textarea id=check11textarea>
 simulate(Test3PhaseSystemsInitParam4, stopTime=10, simflags="-lv=LOG_INIT")
 </textarea>  <div id=check11div> </div> <br>
 <textarea id=check12textarea>
-plot(shift) 
+plot(shift)
 </textarea> <br> <div id=check12div> </div> <br>
 <script type="text/javascript">
 g = new Dygraph(document.getElementById("check12div"),
   [[  0.       ,  -3.7004229],
-       [ 10.       ,  -3.7004229]] 
+       [ 10.       ,  -3.7004229]]
 ,
 {
 legend:"always",

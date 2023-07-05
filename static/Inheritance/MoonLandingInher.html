@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -43,7 +43,7 @@ Body
 model Body   "Generic body"
   Real mass;
   String name;
-end Body;  
+end Body;
 </textarea>  <div id=check0div> </div> <br>
 <h2>
 2
@@ -74,7 +74,7 @@ equation
   der(mass) = -massLossRate * abs(thrust);
   der(altitude) = velocity;
   der(velocity) = acceleration;
-end Rocket;  
+end Rocket;
 </textarea>  <div id=check2div> </div> <br>
 <h2>
 4
@@ -93,14 +93,14 @@ equation
              else if (time < thrustEndTime) then force2
              else 0;
   apollo.gravity = moon.g*moon.mass/(apollo.altitude + moon.radius)^2;
-end MoonLanding;  
+end MoonLanding;
 </textarea>  <div id=check3div> </div> <br>
 <h2>
 5
 Moonlanding Simulation
 </h2>
 <textarea id=check4textarea>
-simulate( MoonLanding, stopTime=230 ) 
+simulate( MoonLanding, stopTime=230 )
 </textarea>  <div id=check4div> </div> <br>
 <textarea id=check5textarea>
 plot( apollo.altitude )
@@ -612,7 +612,7 @@ g = new Dygraph(document.getElementById("check5div"),
        [  2.29080000e+02,  -3.16630185e+02],
        [  2.29540000e+02,  -3.31749791e+02],
        [  2.30000000e+02,  -3.47214551e+02],
-       [  2.30000000e+02,  -3.47214551e+02]] 
+       [  2.30000000e+02,  -3.47214551e+02]]
 ,
 {
 legend:"always",
@@ -1132,7 +1132,7 @@ g = new Dygraph(document.getElementById("check6div"),
        [  2.29080000e+02,   0.00000000e+00],
        [  2.29540000e+02,   0.00000000e+00],
        [  2.30000000e+02,   0.00000000e+00],
-       [  2.30000000e+02,   0.00000000e+00]] 
+       [  2.30000000e+02,   0.00000000e+00]]
 ,
 {
 legend:"always",
@@ -1652,7 +1652,7 @@ g = new Dygraph(document.getElementById("check7div"),
        [  2.29080000e+02,   5.42945051e+02],
        [  2.29540000e+02,   5.42945051e+02],
        [  2.30000000e+02,   5.42945051e+02],
-       [  2.30000000e+02,   5.42945051e+02]] 
+       [  2.30000000e+02,   5.42945051e+02]]
 ,
 {
 legend:"always",
@@ -2172,7 +2172,7 @@ g = new Dygraph(document.getElementById("check8div"),
        [ 229.08      ,    1.6311308 ],
        [ 229.54      ,    1.63115919],
        [ 230.        ,    1.63118822],
-       [ 230.        ,    1.63118822]] 
+       [ 230.        ,    1.63118822]]
 ,
 {
 legend:"always",
@@ -2692,7 +2692,7 @@ g = new Dygraph(document.getElementById("check9div"),
        [  2.29080000e+02,  -3.24935437e+01],
        [  2.29540000e+02,  -3.32438705e+01],
        [  2.30000000e+02,  -3.39942104e+01],
-       [  2.30000000e+02,  -3.39942104e+01]] 
+       [  2.30000000e+02,  -3.39942104e+01]]
 ,
 {
 legend:"always",

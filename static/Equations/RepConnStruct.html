@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -34,7 +34,8 @@
 <h1>
 Connection Equations
 </h1>
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>In Modelica we use </span><a href="static/CompConn/Connections.html
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>In Modelica we use </span><a href="static/CompConn/Connections.html
+
 "><span style=" font-family:'Times New Roman'; font-size:12pt; text-decoration: underline; color:#0000ff;">connect equations</span></a><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> to establish connections between components via connectors. The two arguments of a connect equation must be references to connectors, each of which either has to be declared directly within the same class where the connect equation occurs, or has to be a member of one of the declared variables in that class. The </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ResistorCircuit</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> fulfills the locality constraint mentioned above.<br/></span></p><br>
 <textarea id=check0textarea>
 model ResistorCircuit
@@ -50,16 +51,17 @@ end ResistorCircuit;
 1
 Repetitive Connection Structures
 </h2>
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">You can use </span><a href="static/CompConn/Connections.html
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">You can use </span><a href="static/CompConn/Connections.html
+
 "><span style=" font-family:'Times New Roman'; font-size:12pt; text-decoration: underline; color:#0000ff;">connect equations</span></a><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> together with the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">for</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">-equation construct described previously to establish </span><span style=" font-family:'Times New Roman'; font-size:12pt; font-style:italic; color:#000000;">repetitive connection structures</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> consisting of a number of connections between connectors belonging to array elements. This is a quite important use of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">for</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">-equations in combination with connect equations.<br/></span></p><br>
 <textarea id=check1textarea>
 class RegComponent
   parameter Integer n;
-  
+
  //Modelica.Electrical.Analog.Basic.Resistor[n] r_components (each R=3)
   //We can replace the next line with the previous line if we want to
   //have the same resistance in all the resistors. Otherwise we can
-  //manually put it in a vector like the one below.  
+  //manually put it in a vector like the one below.
   Modelica.Electrical.Analog.Basic.Resistor[n]r_components(R={1,2,3,4,5,6});
   Modelica.Electrical.Analog.Basic.Capacitor C(C = 1, v(fixed = true));
   Modelica.Electrical.Analog.Basic.Ground G;
@@ -72,7 +74,7 @@ equation
   connect(C.p,r_components[n].n);
   connect(r_components[1].p,src.p);
   connect(src.n,G.p);
-end RegComponent;    
+end RegComponent;
 </textarea>  <div id=check1div> </div> <br>
 <textarea id=check2textarea>
 model Test
@@ -87,7 +89,7 @@ loadModel(Modelica)
 Simulation of Test
 </h2>
 <textarea id=check4textarea>
-simulate( Test ) 
+simulate( Test )
 </textarea>  <div id=check4div> </div> <br>
 <textarea id=check5textarea>
 plot(rc.n)
@@ -95,7 +97,7 @@ plot(rc.n)
 <script type="text/javascript">
 g = new Dygraph(document.getElementById("check5div"),
   [[ 0.,  6.],
-       [ 1.,  6.]] 
+       [ 1.,  6.]]
 ,
 {
 legend:"always",

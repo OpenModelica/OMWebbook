@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -58,7 +58,7 @@ equation
    connect(body1.frame_b, worldForce1.frame_b);
    worldForce1.force = Frames.resolve1(worldForce1.frame_b.R,constant1.y);
 end ExtForcePendulum;
-  
+
 </textarea>  <div id=check0div> </div> <br>
 <textarea id=check1textarea>
 loadModel(Modelica)
@@ -633,7 +633,7 @@ g = new Dygraph(document.getElementById("check9div"),
        [  9.96000000e-01,  -6.22998853e-03],
        [  9.98000000e-01,  -7.11553579e-03],
        [  1.00000000e+00,  -8.05990632e-03],
-       [  1.00000000e+00,  -8.05990632e-03]] 
+       [  1.00000000e+00,  -8.05990632e-03]]
 ,
 {
 legend:"always",
@@ -675,7 +675,7 @@ equation
   connect(step1.y, ctrl.u);
   connect(ctrl.flange_b, revolute1.axis);
   connect(world.frame_b, revolute1.frame_a);
-end PendulumWithPDController;  
+end PendulumWithPDController;
 </textarea>  <div id=check11div> </div> <br>
 <textarea id=check12textarea>
 loadModel(Modelica)
@@ -1191,7 +1191,7 @@ g = new Dygraph(document.getElementById("check14div"),
        [  9.96000000e-01,  -4.82668962e-03],
        [  9.98000000e-01,  -5.60692124e-03],
        [  1.00000000e+00,  -6.44557157e-03],
-       [  1.00000000e+00,  -6.44557157e-03]] 
+       [  1.00000000e+00,  -6.44557157e-03]]
 ,
 {
 legend:"always",

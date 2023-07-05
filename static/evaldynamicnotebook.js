@@ -16,9 +16,9 @@ $(document).ready(function () {
   }
 
   /* create a unique omc session object */
-  $(window).load(function () {
+  $(window).on('load', function() {
     //alert("loading")
-    console.log('loading');
+    //console.log('loading');
     var uuid = guid();
     //console.log(value);
     value = uuid
@@ -30,7 +30,7 @@ $(document).ready(function () {
         type: 'POST',
         data: { sid: uuid },
         success: function (result) {
-          console.log('success');
+          //console.log('success');
           //alert(result)
         }
       });

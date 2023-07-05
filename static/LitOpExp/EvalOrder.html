@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -54,7 +54,7 @@ end GuardTest;
 Simulation of GuardTest
 </h2>
 <textarea id=check1textarea>
-simulate( GuardTest )  
+simulate( GuardTest )
 </textarea>  <div id=check1div> </div> <br>
 <h2>
 3
@@ -106,13 +106,13 @@ Simulation of GuardContinuousVar
 </h2>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The simulation shows that the value of h decreases and at t=2 is becomes a small negative number.</span></p><br>
 <textarea id=check6textarea>
-simulate( GuardContinuousVar, stopTime = 5, /* outputInterval=1, */ numberOfIntervals=5 )   
+simulate( GuardContinuousVar, stopTime = 5, /* outputInterval=1, */ numberOfIntervals=5 )
 </textarea>  <div id=check6div> </div> <br>
 <textarea id=check7textarea>
 val(h,0.1)
 </textarea>  <div id=check7div> </div> <br>
 <textarea id=check8textarea>
-plot( h ) // plot( h, xrange={1,5} );  
+plot( h ) // plot( h, xrange={1,5} );
 </textarea> <br> <div id=check8div> </div> <br>
 <script type="text/javascript">
 g = new Dygraph(document.getElementById("check8div"),
@@ -125,7 +125,7 @@ g = new Dygraph(document.getElementById("check8div"),
        [  3.50000000e+00,  -1.00000000e-10],
        [  4.50000000e+00,  -1.00000000e-10],
        [  5.00000000e+00,  -1.00000000e-10],
-       [  5.00000000e+00,  -1.00000000e-10]] 
+       [  5.00000000e+00,  -1.00000000e-10]]
 ,
 {
 legend:"always",
@@ -142,7 +142,7 @@ labels:
 Simulation of GuardContinuousVarCorrect
 </h2>
 <textarea id=check10textarea>
-simulate( GuardContinuousVarCorrect, stopTime = 5, numberOfIntervals=5 ) 
+simulate( GuardContinuousVarCorrect, stopTime = 5, numberOfIntervals=5 )
 </textarea>  <div id=check10div> </div> <br>
 <textarea id=check11textarea>
 plot( h )
@@ -155,7 +155,7 @@ g = new Dygraph(document.getElementById("check11div"),
        [  3.00000000e+00,  -5.74844690e-07],
        [  4.00000000e+00,  -5.74844690e-07],
        [  5.00000000e+00,  -5.74844690e-07],
-       [  5.00000000e+00,  -5.74844690e-07]] 
+       [  5.00000000e+00,  -5.74844690e-07]]
 ,
 {
 legend:"always",

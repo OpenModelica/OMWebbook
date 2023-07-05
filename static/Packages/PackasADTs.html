@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -95,7 +95,7 @@ end ComplexUser;
 </textarea>  <div id=check1div> </div> <br>
 <h2>
 3
-What about information hiding in the package? 
+What about information hiding in the package?
 </h2>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Times New Roman'; font-size:12pt; color:#000000;">The type <span style=" font-family:'Courier New';">Complex</span> must be made available for allocation and initialization of variables of that type, e.g the variables <span style=" font-family:'Courier New';">a, b, z </span>and <span style=" font-family:'Courier New';">w</span> in <span style=" font-family:'Courier New';">ComplexUser</span>. It would not work if you declared x and y <span style=" font-family:'Courier New';">protected</span> in the variables <span style=" font-family:'Courier New';">Complex</span> since then these fields would not be available for the implementation of <span style=" font-family:'Courier New';">Add</span> and <span style=" font-family:'Courier New';">Multiply</span>, etc. However, by declaring the operations on <span style=" font-family:'Courier New';">Complex</span> inside the class <span style=" font-family:'Courier New';">Complex</span> itself, as in the package <span style=" font-family:'Courier New';">ComplexNumbersA</span> further below, these fields can be accessed even if they are protected. <br/><br/>We can increase the degree of data abstaction by using the function <span style=" font-family:'Courier New';">MakeComplex</span> for initialization instead of modifiers, e.g. as in <span style=" font-family:'Courier New';">ComplexUser2</span> below, thus avoiding exposing the fields x and y.</p><br>
 <textarea id=check2textarea>

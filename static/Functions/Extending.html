@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -44,7 +44,7 @@ Base Function
 partial function OneArgBaseFunction
   input  Real x;
   output Real result;
-end OneArgBaseFunction;  
+end OneArgBaseFunction;
 </textarea>  <div id=check0div> </div> <br>
 <h2>
 2
@@ -56,18 +56,18 @@ function myTan
   extends OneArgBaseFunction;
 algorithm
   result := sin(x)/cos(x);
-end myTan;  
+end myTan;
 </textarea>  <div id=check1div> </div> <br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Call it</span></p><br>
 <textarea id=check2textarea>
-myTan(1.0)  
+myTan(1.0)
 </textarea>  <div id=check2div> </div> <br>
 <textarea id=check3textarea>
 function addTen
   extends OneArgBaseFunction;
 algorithm
   result := x + 10;
-end addTen;  
+end addTen;
 </textarea>  <div id=check3div> </div> <br>
 <textarea id=check4textarea>
  addTen(5.0)
@@ -85,7 +85,7 @@ end myTanCall;
 </textarea>  <div id=check5div> </div> <br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Call it</span></p><br>
 <textarea id=check6textarea>
-simulate( myTanCall ) 
+simulate( myTanCall )
 </textarea>  <div id=check6div> </div> <br>
 <textarea id=check7textarea>
 plot(t)
@@ -593,7 +593,7 @@ g = new Dygraph(document.getElementById("check7div"),
        [ 0.996     ,  1.55740772],
        [ 0.998     ,  1.55740772],
        [ 1.        ,  1.55740772],
-       [ 1.        ,  1.55740772]] 
+       [ 1.        ,  1.55740772]]
 ,
 {
 legend:"always",
@@ -618,7 +618,7 @@ end addTenCall;
 </textarea>  <div id=check9div> </div> <br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Call it:</span></p><br>
 <textarea id=check10textarea>
-simulate( addTenCall ) 
+simulate( addTenCall )
 </textarea>  <div id=check10div> </div> <br>
 <textarea id=check11textarea>
 plot(sum)
@@ -1126,7 +1126,7 @@ g = new Dygraph(document.getElementById("check11div"),
        [  9.96000000e-01,   1.50000000e+01],
        [  9.98000000e-01,   1.50000000e+01],
        [  1.00000000e+00,   1.50000000e+01],
-       [  1.00000000e+00,   1.50000000e+01]] 
+       [  1.00000000e+00,   1.50000000e+01]]
 ,
 {
 legend:"always",

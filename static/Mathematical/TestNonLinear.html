@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -79,15 +79,15 @@ equation
 end TestNonLinear1;
 </textarea>  <div id=check4div> </div> <br>
 <textarea id=check5textarea>
-model TestNonLinear2  
-  NonLinearResistor2 R(a=0.16666666, b=6) 
+model TestNonLinear2
+  NonLinearResistor2 R(a=0.16666666, b=6)
     annotation (extent=[10,30; 30,50], rotation=-90);
-  Modelica.Electrical.Analog.Basic.Inductor I(i(start=0.15)) 
+  Modelica.Electrical.Analog.Basic.Inductor I(i(start=0.15))
     annotation (extent=[-20,50; 0,70]);
-  SineVoltage S 
+  SineVoltage S
     annotation (extent=[-50,30; -30,50], rotation=90);
   Modelica.Electrical.Analog.Basic.Ground G annotation (extent=[10,-2; 30,18]);
-equation 
+equation
   connect(I.n, R.p) annotation (points=[0,60; 20,60; 20,50], style(color=3,
         rgbcolor={0,0,255}));
   connect(R.n, G.p) annotation (points=[20,30; 20,18],                  style(
@@ -10107,7 +10107,7 @@ g = new Dygraph(document.getElementById("check7div"),
        [  9.99800000e+00,   1.49820528e-01,   2.44430140e-01],
        [  9.99900000e+00,   1.49588664e-01,   2.43229918e-01],
        [  1.00000000e+01,   1.49351717e-01,   2.42019207e-01],
-       [  1.00000000e+01,   1.49351717e-01,   2.42019207e-01]] 
+       [  1.00000000e+01,   1.49351717e-01,   2.42019207e-01]]
 ,
 {
 legend:"always",
@@ -20122,7 +20122,7 @@ g = new Dygraph(document.getElementById("check8div"),
        [  9.99800000e+00,   5.07786514e-02],
        [  9.99900000e+00,   5.08033764e-02],
        [  1.00000000e+01,   5.08075750e-02],
-       [  1.00000000e+01,   7.01975855e-02]] 
+       [  1.00000000e+01,   7.01975855e-02]]
 ,
 {
 legend:"always",
@@ -20136,7 +20136,7 @@ simulate(TestNonLinear2, stopTime=10, stepSize=0.001, method="euler", simflags="
 </textarea>  <div id=check9div> </div> <br>
 <textarea id=check10textarea>
 
-plot({R.v, R.i}) 
+plot({R.v, R.i})
 
 </textarea> <br> <div id=check10div> </div> <br>
 <script type="text/javascript">
@@ -30142,7 +30142,7 @@ g = new Dygraph(document.getElementById("check10div"),
        [  9.99800000e+00,   1.49820528e-01,   2.44430140e-01],
        [  9.99900000e+00,   1.49588664e-01,   2.43229918e-01],
        [  1.00000000e+01,   1.49351717e-01,   2.42019207e-01],
-       [  1.00000000e+01,   1.49351717e-01,   2.42019207e-01]] 
+       [  1.00000000e+01,   1.49351717e-01,   2.42019207e-01]]
 ,
 {
 legend:"always",
@@ -40157,7 +40157,7 @@ g = new Dygraph(document.getElementById("check11div"),
        [  9.99800000e+00,   5.12376970e-02],
        [  9.99900000e+00,   5.12544913e-02],
        [  1.00000000e+01,   5.12568239e-02],
-       [  1.00000000e+01,   7.11054135e-02]] 
+       [  1.00000000e+01,   7.11054135e-02]]
 ,
 {
 legend:"always",

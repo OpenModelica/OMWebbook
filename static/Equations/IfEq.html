@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -43,7 +43,7 @@ IfEquation
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">The if-equation below specifies different equations for the variable y in three different operating regions, limiting values of y such that: uMin &lt;= y &lt;= uMax.</span></p><br>
 <textarea id=check0textarea>
 class IfEquation
-  //Parameters need to be initialized before simulation. Otherwise, it gives 
+  //Parameters need to be initialized before simulation. Otherwise, it gives
   //compilation error.
   parameter Real u = 4;
   parameter Real uMax = 10;
@@ -65,7 +65,7 @@ Simulation of IfEquation
 </h2>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Here the simulation of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">IfEquation</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is shown.</span></p><br>
 <textarea id=check1textarea>
-simulate( IfEquation ) 
+simulate( IfEquation )
 </textarea>  <div id=check1div> </div> <br>
 <textarea id=check2textarea>
 plot({u,y})
@@ -73,7 +73,7 @@ plot({u,y})
 <script type="text/javascript">
 g = new Dygraph(document.getElementById("check2div"),
   [[ 0.,  4.,  4.],
-       [ 1.,  4.,  4.]] 
+       [ 1.,  4.,  4.]]
 ,
 {
 legend:"always",

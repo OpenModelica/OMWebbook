@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -35,16 +35,16 @@
 loadModel(Modelica)
 </textarea>  <div id=check0div> </div> <br>
 <textarea id=check1textarea>
-model IdealSwitchStiff "Ideal electrical switch" 
+model IdealSwitchStiff "Ideal electrical switch"
   extends Modelica.Electrical.Analog.Interfaces.OnePort;
   Boolean off(start=false);
   parameter Real t0=5;
   discrete Integer sign_i(start=0);
   parameter Real Roff(final min=0) = 1.E-5 "Closed switch resistance";
   parameter Real Gon(final min=0) = 1.E-5 "Opened switch conductance";
-protected 
+protected
   Real s "Auxiliary variable";
-equation 
+equation
   when (time>t0) then
     sign_i = if (i>0) then 1 else -1;
   end when;
@@ -73,42 +73,42 @@ equation
 end IdealSwitchDummy;
 </textarea>  <div id=check2div> </div> <br>
 <textarea id=check3textarea>
-model TestSwitch1 
-  Modelica.Electrical.Analog.Basic.Ground G 
+model TestSwitch1
+  Modelica.Electrical.Analog.Basic.Ground G
     annotation (extent=[0,-28; 20,-8]);
-  Modelica.Electrical.Analog.Basic.Inductor I(i(start=0.075)) 
+  Modelica.Electrical.Analog.Basic.Inductor I(i(start=0.075))
     annotation (extent=[-48,18; -28,38]);
-  Modelica.Electrical.Analog.Sources.SineVoltage U 
+  Modelica.Electrical.Analog.Sources.SineVoltage U
     annotation (extent=[-66,-2; -46,18], rotation=90);
   IdealSwitchDummy S          annotation (extent=[-18,18; 2,38]);
-equation 
+equation
   connect(U.n, I.p)                    annotation (points=[-56,18; -56,28; -48,
         28], style(color=3, rgbcolor={0,0,255}));
-  connect(U.p, G.p) 
+  connect(U.p, G.p)
     annotation (points=[-56,-2; -56,-8; 10,-8],
                                         style(color=3, rgbcolor={0,0,255}));
-  connect(I.n, S.p) 
+  connect(I.n, S.p)
     annotation (points=[-28,28; -18,28], style(color=3, rgbcolor={0,0,255}));
   connect(S.n, G.p)      annotation (points=[2,28; 10,28; 10,-8], style(color=3,
         rgbcolor={0,0,255}));
 end TestSwitch1;
 </textarea>  <div id=check3div> </div> <br>
 <textarea id=check4textarea>
-model TestSwitch2 
-  Modelica.Electrical.Analog.Basic.Ground G 
+model TestSwitch2
+  Modelica.Electrical.Analog.Basic.Ground G
     annotation (extent=[0,-28; 20,-8]);
-  Modelica.Electrical.Analog.Basic.Inductor I(i(start=0.075)) 
+  Modelica.Electrical.Analog.Basic.Inductor I(i(start=0.075))
     annotation (extent=[-48,18; -28,38]);
-  Modelica.Electrical.Analog.Sources.SineVoltage U 
+  Modelica.Electrical.Analog.Sources.SineVoltage U
     annotation (extent=[-66,-2; -46,18], rotation=90);
   IdealSwitchStiff S(t0=0.75)   annotation (extent=[-18,18; 2,38]);
-equation 
+equation
   connect(U.n, I.p)                    annotation (points=[-56,18; -56,28; -48,
         28], style(color=3, rgbcolor={0,0,255}));
-  connect(U.p, G.p) 
+  connect(U.p, G.p)
     annotation (points=[-56,-2; -56,-8; 10,-8],
                                         style(color=3, rgbcolor={0,0,255}));
-  connect(I.n, S.p) 
+  connect(I.n, S.p)
     annotation (points=[-28,28; -18,28], style(color=3, rgbcolor={0,0,255}));
   connect(S.n, G.p)      annotation (points=[2,28; 10,28; 10,-8], style(color=3,
         rgbcolor={0,0,255}));
@@ -148,7 +148,7 @@ g = new Dygraph(document.getElementById("check6div"),
        [  1.80000000e+00,   1.00220534e-10,   9.51056516e-01],
        [  1.90000000e+00,   1.00220534e-10,   5.87785252e-01],
        [  2.00000000e+00,   1.00220534e-10,   4.89842542e-16],
-       [  2.00000000e+00,   1.00220534e-10,   4.89842542e-16]] 
+       [  2.00000000e+00,   1.00220534e-10,   4.89842542e-16]]
 ,
 {
 legend:"always",
@@ -162,7 +162,7 @@ simulate(TestSwitch2, stopTime=2, stepSize=0.1, method="euler", simflags="")
 </textarea>  <div id=check7div> </div> <br>
 <textarea id=check8textarea>
 
-plot({S.v,S.i}) 
+plot({S.v,S.i})
 
 </textarea> <br> <div id=check8div> </div> <br>
 <script type="text/javascript">
@@ -240,7 +240,7 @@ g = new Dygraph(document.getElementById("check8div"),
        [  1.90001000e+00,   1.00008423e-10,   9.95807979e-06],
        [  1.90001000e+00,   1.00008423e-10,   1.00008423e-05],
        [  2.00000000e+00,   5.87665629e-02,   5.87665629e+03],
-       [  2.00000000e+00,   5.87665629e-02,   5.87665629e+03]] 
+       [  2.00000000e+00,   5.87665629e-02,   5.87665629e+03]]
 ,
 {
 legend:"always",

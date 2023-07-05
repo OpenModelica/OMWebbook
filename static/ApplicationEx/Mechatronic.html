@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -112,7 +112,7 @@ equation
   w = der(rotFlange_b.phi);
   v = k*w;
   rotFlange_b.tau = - k*i;
-end EMF;                // From Modelica.Electrical.Analog.Basic 
+end EMF;                // From Modelica.Electrical.Analog.Basic
 </textarea>  <div id=check3div> </div> <br>
 <textarea id=check4textarea>
 partial model TwoPin          // Same as OnePort in Modelica.Electrical.Analog.Interfaces
@@ -125,7 +125,7 @@ equation
   v = p.v - n.v;
   0 = p.i + n.i;
   i = p.i;
-end TwoPin;          
+end TwoPin;
 </textarea>  <div id=check4div> </div> <br>
 <textarea id=check5textarea>
 class Resistor               "Ideal linear electrical Resistor"
@@ -133,7 +133,7 @@ class Resistor               "Ideal linear electrical Resistor"
   parameter Real R(unit = "Ohm")     "Resistance";
 equation
   R*i = v;
-end Resistor;                // From Modelica.Electrical.Analog.Basic 
+end Resistor;                // From Modelica.Electrical.Analog.Basic
 </textarea>  <div id=check5div> </div> <br>
 <textarea id=check6textarea>
 class Inductor               "Ideal linear electrical Inductor"
@@ -141,14 +141,14 @@ class Inductor               "Ideal linear electrical Inductor"
   parameter Real L(unit = "H")       "Inductance";
 equation
   v = L*der(i);
-end Inductor;              // From Modelica.Electrical.Analog.Basic 
+end Inductor;              // From Modelica.Electrical.Analog.Basic
 </textarea>  <div id=check6div> </div> <br>
 <textarea id=check7textarea>
 class Ground               "Ground node"
   Pin p;
 equation
   p.v = 0;
-end Ground;                // From Modelica.Electrical.Analog.Basic 
+end Ground;                // From Modelica.Electrical.Analog.Basic
 </textarea>  <div id=check7div> </div> <br>
 <h3>
 2.3
@@ -187,7 +187,7 @@ DCMotorCircuit Connector Classes
 </h2>
 <h3>
 3.1
-Mechanical Connector Classes: RotFlange_a, RotFlange_b 
+Mechanical Connector Classes: RotFlange_a, RotFlange_b
 </h3>
 <textarea id=check11textarea>
 connector RotFlange_a       "1D rotational flange (filled square)"
@@ -794,7 +794,7 @@ g = new Dygraph(document.getElementById("check23div"),
        [  1.49400000e+02,  -4.19692367e-08],
        [  1.49700000e+02,  -4.06683695e-08],
        [  1.50000000e+02,  -3.93988127e-08],
-       [  1.50000000e+02,  -3.93988127e-08]] 
+       [  1.50000000e+02,  -3.93988127e-08]]
 ,
 {
 legend:"always",

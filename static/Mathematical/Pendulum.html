@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -550,7 +550,7 @@ g = new Dygraph(document.getElementById("check2div"),
        [ 2.988,  0.   ],
        [ 2.994,  0.   ],
        [ 3.   ,  0.   ],
-       [ 3.   ,  0.   ]] 
+       [ 3.   ,  0.   ]]
 ,
 {
 legend:"always",
@@ -1076,7 +1076,7 @@ g = new Dygraph(document.getElementById("check6div"),
        [  2.98800000e+00,   9.88591216e-01],
        [  2.99400000e+00,   9.91971837e-01],
        [  3.00000000e+00,   9.94761215e-01],
-       [  3.00000000e+00,   9.94761215e-01]] 
+       [  3.00000000e+00,   9.94761215e-01]]
 ,
 {
 legend:"always",
@@ -1088,15 +1088,15 @@ labels:
 <textarea id=check7textarea>
 model Pendulum3
   extends Pendulum1;
-  Real x (start = L); 
+  Real x (start = L);
   Real y;
   initial equation
     y = 0;
-    der(y)=0;  
+    der(y)=0;
   equation
     x = L*sin(phi);
-    y = -L*cos(phi);   
-end Pendulum3; 
+    y = -L*cos(phi);
+end Pendulum3;
 </textarea>  <div id=check7div> </div> <br>
 <textarea id=check8textarea>
 instantiateModel(Pendulum3)
@@ -2115,7 +2115,7 @@ g = new Dygraph(document.getElementById("check11div"),
        [  3.00000000e+00,   4.31220965e-01,   2.08990153e-01,
          -4.54228044e-01],
        [  3.00000000e+00,   4.31220965e-01,   2.08990153e-01,
-         -4.54228044e-01]] 
+         -4.54228044e-01]]
 ,
 {
 legend:"always",
@@ -2127,15 +2127,15 @@ labels:
 <textarea id=check12textarea>
 model Pendulum3
   extends Pendulum1(phi(start=3.14142/2));
-  Real x (start = L); 
+  Real x (start = L);
   Real y;
   initial equation
     y = 0;
-    der(y)=0;  
+    der(y)=0;
   equation
     x = L*sin(phi);
-    y = -L*cos(phi);   
-end Pendulum3; 
+    y = -L*cos(phi);
+end Pendulum3;
 </textarea>  <div id=check12div> </div> <br>
 <textarea id=check13textarea>
 simulate(Pendulum3, stopTime=3, simflags="-lv=LOG_INIT")
@@ -3148,7 +3148,7 @@ g = new Dygraph(document.getElementById("check14div"),
        [  3.00000000e+00,   4.31220965e-01,   2.08990153e-01,
          -4.54228044e-01],
        [  3.00000000e+00,   4.31220965e-01,   2.08990153e-01,
-         -4.54228044e-01]] 
+         -4.54228044e-01]]
 ,
 {
 legend:"always",
@@ -3687,7 +3687,7 @@ g = new Dygraph(document.getElementById("check17div"),
        [  2.98800000e+00,   1.75676043e-01,  -4.68121702e-01],
        [  2.99400000e+00,   1.92521610e-01,  -4.61449271e-01],
        [  3.00000000e+00,   2.08990839e-01,  -4.54227728e-01],
-       [  3.00000000e+00,   2.08990839e-01,  -4.54227728e-01]] 
+       [  3.00000000e+00,   2.08990839e-01,  -4.54227728e-01]]
 ,
 {
 legend:"always",
@@ -3699,7 +3699,7 @@ labels:
 <textarea id=check18textarea>
 model Pendulum5
   extends Pendulum4(y(stateSelect=StateSelect.always),vy(stateSelect=StateSelect.always));
-end Pendulum5;  
+end Pendulum5;
 </textarea>  <div id=check18div> </div> <br>
 <textarea id=check19textarea>
 instantiateModel(Pendulum5)

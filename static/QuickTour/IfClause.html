@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -52,7 +52,7 @@ Electrical Connectors
 connector Pin
   Voltage v;
   flow Current i;
-end Pin;  
+end Pin;
 </textarea>  <div id=check2div> </div> <br>
 <h2>
 3
@@ -99,7 +99,7 @@ loadModel(Modelica)
 model Circuit
   import Modelica.Electrical.Analog.Basic.*;
   import Modelica.Electrical.Analog.Sources.*;
-  Diode d(s(start = 0));  
+  Diode d(s(start = 0));
   Resistor R1 (R = 2.0);
   Ground G;
   SineVoltage src (V = 3.0, freqHz = 5.0);
@@ -115,7 +115,7 @@ end Circuit;
 Simulation of circuit
 </h3>
 <textarea id=check7textarea>
-simulate( Circuit, stopTime=10 ) 
+simulate( Circuit, stopTime=10 )
 </textarea>  <div id=check7div> </div> <br>
 <textarea id=check8textarea>
 plot(d.off)
@@ -923,7 +923,7 @@ g = new Dygraph(document.getElementById("check8div"),
        [  9.96000000e+00,   0.00000000e+00],
        [  9.98000000e+00,   0.00000000e+00],
        [  1.00000000e+01,   0.00000000e+00],
-       [  1.00000000e+01,   0.00000000e+00]] 
+       [  1.00000000e+01,   0.00000000e+00]]
 ,
 {
 legend:"always",

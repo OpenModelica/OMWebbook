@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -72,7 +72,7 @@ class ErrorColor
   Integer red;    // Illegal, since same name but different type
 equation
   red + blue + green = 1;
-end ErrorColor;  
+end ErrorColor;
 </textarea>  <div id=check3div> </div> <br>
 <textarea id=check4textarea>
 class CorrectColor
@@ -80,7 +80,7 @@ class CorrectColor
   parameter MyReal blue = 3; // Legal, since identical to the inherited field blue
 equation
   red + blue + green = 1;
-end CorrectColor;  
+end CorrectColor;
 </textarea>  <div id=check4div> </div> <br>
 <h2>
 4
@@ -98,7 +98,7 @@ plot({red, blue })
 <script type="text/javascript">
 g = new Dygraph(document.getElementById("check7div"),
   [[ 0.,  3.,  4.],
-       [ 1.,  3.,  4.]] 
+       [ 1.,  3.,  4.]]
 ,
 {
 legend:"always",
@@ -155,7 +155,7 @@ plot({red, blue })
 <script type="text/javascript">
 g = new Dygraph(document.getElementById("check14div"),
   [[ 0.,  3.,  4.],
-       [ 1.,  3.,  4.]] 
+       [ 1.,  3.,  4.]]
 ,
 {
 legend:"always",

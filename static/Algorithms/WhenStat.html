@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -67,7 +67,7 @@ setDebugFlags("initialization")
 Simulation of WhenStat
 </h2>
 <textarea id=check2textarea>
-simulate( WhenStat )  
+simulate( WhenStat )
 </textarea>  <div id=check2div> </div> <br>
 <textarea id=check3textarea>
 plot( y1 )
@@ -577,7 +577,7 @@ g = new Dygraph(document.getElementById("check3div"),
        [ 0.996     ,  0.90929743],
        [ 0.998     ,  0.90929743],
        [ 1.        ,  0.90929743],
-       [ 1.        ,  0.90929743]] 
+       [ 1.        ,  0.90929743]]
 ,
 {
 legend:"always",
@@ -1094,7 +1094,7 @@ g = new Dygraph(document.getElementById("check4div"),
        [  9.96000000e-01,   9.00000000e+00],
        [  9.98000000e-01,   9.00000000e+00],
        [  1.00000000e+00,   9.00000000e+00],
-       [  1.00000000e+00,   9.00000000e+00]] 
+       [  1.00000000e+00,   9.00000000e+00]]
 ,
 {
 legend:"always",
@@ -1128,7 +1128,7 @@ end WhenStat2;
 Simulation of WhenStat2
 </h2>
 <textarea id=check6textarea>
-simulate( WhenStat2 )  
+simulate( WhenStat2 )
 </textarea>  <div id=check6div> </div> <br>
 <textarea id=check7textarea>
 plot( y1 )
@@ -1642,7 +1642,7 @@ g = new Dygraph(document.getElementById("check7div"),
        [ 0.996     ,  0.90929743],
        [ 0.998     ,  0.90929743],
        [ 1.        ,  0.90929743],
-       [ 1.        ,  0.90929743]] 
+       [ 1.        ,  0.90929743]]
 ,
 {
 legend:"always",
@@ -2163,7 +2163,7 @@ g = new Dygraph(document.getElementById("check8div"),
        [  9.96000000e-01,   9.90929743e+00],
        [  9.98000000e-01,   9.90929743e+00],
        [  1.00000000e+00,   9.90929743e+00],
-       [  1.00000000e+00,   9.90929743e+00]] 
+       [  1.00000000e+00,   9.90929743e+00]]
 ,
 {
 legend:"always",
@@ -2202,7 +2202,7 @@ end WhenStat3;
 Simulation of WhenStat3
 </h2>
 <textarea id=check10textarea>
-simulate( WhenStat3 )  
+simulate( WhenStat3 )
 </textarea>  <div id=check10div> </div> <br>
 <textarea id=check11textarea>
 plot( y1 )
@@ -2712,7 +2712,7 @@ g = new Dygraph(document.getElementById("check11div"),
        [ 0.996     ,  0.90929743],
        [ 0.998     ,  0.90929743],
        [ 1.        ,  0.90929743],
-       [ 1.        ,  0.90929743]] 
+       [ 1.        ,  0.90929743]]
 ,
 {
 legend:"always",
@@ -3229,7 +3229,7 @@ g = new Dygraph(document.getElementById("check12div"),
        [  9.96000000e-01,   4.78907234e+00],
        [  9.98000000e-01,   4.78907234e+00],
        [  1.00000000e+00,   4.78907234e+00],
-       [  1.00000000e+00,   4.78907234e+00]] 
+       [  1.00000000e+00,   4.78907234e+00]]
 ,
 {
 legend:"always",
@@ -3279,7 +3279,7 @@ DoubleWhenSequential
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">One possible way to resolve the conflict would be to put both </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">when</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">-statements within the same algorithm section, as in the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">DoubleWhenSequential</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> model below. The sequential execution semantics of algorithm sections allow several assignments to the same variable. If there are several </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">when</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">-statements with assignments active at the same time instant, they will be executed in sequential order and the result of the last assignment will prevail.<br/><br/>However, this method is not recommended since the modeling style is less clear than the alternative method presented in the next section. Another disadvantage is the nondeclarative style of using </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">when</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">-constructs by relying on multiple sequential assignments.<br/></span></p><br>
 <textarea id=check14textarea>
 model DoubleWhenSequential
-  Boolean close(fixed=true);   // Possible conflicting definitions resolved 
+  Boolean close(fixed=true);   // Possible conflicting definitions resolved
                        // by sequential assignments in an algorithm section
 algorithm
   when time <= 2 then
@@ -3289,14 +3289,14 @@ algorithm
   when time <= 2 then
     close := false;
   end when;
-end DoubleWhenSequential;      
+end DoubleWhenSequential;
 </textarea>  <div id=check14div> </div> <br>
 <h3>
 9.2
 Simulation of DoubleWhenSequential
 </h3>
 <textarea id=check15textarea>
-simulate( DoubleWhenSequential )  
+simulate( DoubleWhenSequential )
 
 </textarea>  <div id=check15div> </div> <br>
 <h3>
@@ -3321,6 +3321,6 @@ end WhenPriority;
 Simulation of WhenPriority
 </h3>
 <textarea id=check17textarea>
-simulate( WhenPriority )  
+simulate( WhenPriority )
 </textarea>  <div id=check17div> </div> <br>
 </div></body></html>

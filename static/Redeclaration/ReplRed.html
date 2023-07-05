@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -58,7 +58,7 @@ type Current = Real(unit = "A");
 connector Pin
   Voltage     v;
   flow Current   i;
-end Pin;        
+end Pin;
 </textarea>  <div id=check3div> </div> <br>
 <h2>
 3
@@ -122,12 +122,12 @@ class SuperTempMicroCiruit = TempMicroCiruit2(redeclare SuperTempResistor R1);
 Flattening of MicroCircuit, TempMicroCiruit2
 </h3>
 <textarea id=check10textarea>
-instantiateModel(MicroCircuit)  
+instantiateModel(MicroCircuit)
 </textarea>  <div id=check10div> </div> <br>
 <textarea id=check11textarea>
-instantiateModel(TempMicroCiruit2)   
+instantiateModel(TempMicroCiruit2)
 </textarea>  <div id=check11div> </div> <br>
 <textarea id=check12textarea>
-instantiateModel(SuperTempMicroCiruit)  
+instantiateModel(SuperTempMicroCiruit)
 </textarea>  <div id=check12div> </div> <br>
 </div></body></html>

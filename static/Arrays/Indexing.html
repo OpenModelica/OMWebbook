@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -61,7 +61,7 @@ Simulation of ArrayIndex
 </h3>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Here we simulate the class </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">ArrayIndex</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> above.</span></p><br>
 <textarea id=check1textarea>
-simulate( ArrayIndex )  
+simulate( ArrayIndex )
 </textarea>  <div id=check1div> </div> <br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">We see that </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">B[2, 1]</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> now has the value 8.</span></p><br>
 <textarea id=check2textarea>
@@ -570,7 +570,7 @@ g = new Dygraph(document.getElementById("check2div"),
        [  9.96000000e-01,   8.00000000e+00,   2.00000000e+00],
        [  9.98000000e-01,   8.00000000e+00,   2.00000000e+00],
        [  1.00000000e+00,   8.00000000e+00,   2.00000000e+00],
-       [  1.00000000e+00,   8.00000000e+00,   2.00000000e+00]] 
+       [  1.00000000e+00,   8.00000000e+00,   2.00000000e+00]]
 ,
 {
 legend:"always",
@@ -581,7 +581,7 @@ labels:
 </script>
 <h2>
 2
-Indexing with Scalar Index Expressions 
+Indexing with Scalar Index Expressions
 </h2>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Array indexing using scalar integer index expressions is usually used to retrieve or update single array elements. The value of the index expression for the i:th dimension of an array </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">X</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> must be within the bounds of the size of that dimension, i.e. </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">1.</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Since multi-dimensional arrays are defined as arrays of arrays in Modelica, it is also possible to access sub-arrays using simple scalar indexing. For example, the array b can also be regarded as a one-dimensional array of vectors</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">.<br/></span></p><br>
 <textarea id=check3textarea>
@@ -611,7 +611,7 @@ simulate(ScalarIndex)
 </textarea>  <div id=check5div> </div> <br>
 <h2>
 3
-Accessing Array Slices with Index Vectors 
+Accessing Array Slices with Index Vectors
 </h2>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">When at least one of the index expressions in an array indexing operation is a vector expression, a subsection (slice) of the array is accessed rather than a single element. Such an index vector must be a vector of integer values, where each value must be within the size bounds for the particular array dimension. An index vector can be constructed in any way but it is often convenient to use the colon operator to construct a range vector of index values. A single colon without operands used as an index expression at a dimension k of an array of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">X</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> denotes all indices of that dimension and is equivalent to the index vector </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">1:size(X, k)</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.<br/></span></p><br>
 <textarea id=check6textarea>
@@ -641,7 +641,7 @@ simulate(ArraySlice)
 </textarea>  <div id=check7div> </div> <br>
 <h2>
 4
-Array Field Slices of Record Arrays 
+Array Field Slices of Record Arrays
 </h2>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">If </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">A</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is an array of records and m is a field of that record type, the expression </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">A.m</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is interpreted as an array field slice operation of that record array. It returns the array of fields: </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">{A[1].m, A[2].m, A[3].m, ...}</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">. For example, given a record </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Person</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> with three fields: </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">name</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">, </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">age</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> and </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">children</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">.</span></p><br>
 <h3>
@@ -653,7 +653,7 @@ record Person
   String       name;
   Integer       age;
   String[2]      children;
-end Person;  
+end Person;
 </textarea>  <div id=check8div> </div> <br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"><br/>We have defined a record constructor function: </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">mkperson(name, age, children)</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> in Modelica returning a Person record, which is used to define the contents of a small array </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">persons</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> consisting of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Person</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> records. </span></p><br>
 <textarea id=check9textarea>
@@ -666,7 +666,7 @@ algorithm
   p.name       := name;
   p.age       := age;
   p.children     := children;
-end mkperson;    
+end mkperson;
 </textarea>  <div id=check9div> </div> <br>
 <h3>
 4.2
@@ -700,6 +700,6 @@ equation
   children   = pList.persons.children;  // Returns: {{"Carl", "Eva"},
                                             //       {"Anders", "Dan"},
                                             //       {"John", "Daniel"}}
-end getPerson;  
+end getPerson;
 </textarea>  <div id=check12div> </div> <br>
 </div></body></html>

@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -46,7 +46,7 @@ algorithm
   r1 := x;
   r2 := y;
   r3 := x*y;
-end f;    
+end f;
 </textarea>  <div id=check0div> </div> <br>
 <textarea id=check1textarea>
 model fCall
@@ -77,10 +77,10 @@ Simulation of the fCall model
 </h2>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">We simulate </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">fCall</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> in the interval from 0 to 1, then we can look at the values of the variables.</span></p><br>
 <textarea id=check5textarea>
-simulate (fCall )  
+simulate (fCall )
 </textarea>  <div id=check5div> </div> <br>
 <textarea id=check6textarea>
-{val(a,0), val(b,0), val(c,0)} 
+{val(a,0), val(b,0), val(c,0)}
 </textarea>  <div id=check6div> </div> <br>
 <textarea id=check7textarea>
 plot( {x[1],x[2],x[3]} )
@@ -1090,7 +1090,7 @@ g = new Dygraph(document.getElementById("check7div"),
        [  1.00000000e+00,   3.00000000e+00,   4.00000000e+00,
           1.20000000e+01],
        [  1.00000000e+00,   3.00000000e+00,   4.00000000e+00,
-          1.20000000e+01]] 
+          1.20000000e+01]]
 ,
 {
 legend:"always",

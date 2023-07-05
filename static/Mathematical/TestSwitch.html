@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -56,21 +56,21 @@ equation
 end IdealSwitchStiff;
 </textarea>  <div id=check1div> </div> <br>
 <textarea id=check2textarea>
-model TestSwitch2 
-  Modelica.Electrical.Analog.Basic.Ground G 
+model TestSwitch2
+  Modelica.Electrical.Analog.Basic.Ground G
     annotation (extent=[0,-28; 20,-8]);
-  Modelica.Electrical.Analog.Basic.Inductor I(i(start=0.075)) 
+  Modelica.Electrical.Analog.Basic.Inductor I(i(start=0.075))
     annotation (extent=[-48,18; -28,38]);
-  Modelica.Electrical.Analog.Sources.SineVoltage U 
+  Modelica.Electrical.Analog.Sources.SineVoltage U
     annotation (extent=[-66,-2; -46,18], rotation=90);
   IdealSwitchStiff S(t0=0.75)   annotation (extent=[-18,18; 2,38]);
-equation 
+equation
   connect(U.n, I.p)                    annotation (points=[-56,18; -56,28; -48,
         28], style(color=3, rgbcolor={0,0,255}));
-  connect(U.p, G.p) 
+  connect(U.p, G.p)
     annotation (points=[-56,-2; -56,-8; 10,-8],
                                         style(color=3, rgbcolor={0,0,255}));
-  connect(I.n, S.p) 
+  connect(I.n, S.p)
     annotation (points=[-28,28; -18,28], style(color=3, rgbcolor={0,0,255}));
   connect(S.n, G.p)      annotation (points=[2,28; 10,28; 10,-8], style(color=3,
         rgbcolor={0,0,255}));
@@ -293,7 +293,7 @@ g = new Dygraph(document.getElementById("check4div"),
        [  1.98000000e+00,   1.28632489e-06,   1.28632489e-01],
        [  1.99000000e+00,   6.90055729e-07,   6.90055729e-02],
        [  2.00000000e+00,   8.65022947e-08,   8.65022947e-03],
-       [  2.00000000e+00,   8.65022947e-08,   8.65022947e-03]] 
+       [  2.00000000e+00,   8.65022947e-08,   8.65022947e-03]]
 ,
 {
 legend:"always",
@@ -516,7 +516,7 @@ g = new Dygraph(document.getElementById("check5div"),
        [  1.98000000e+00,   1.28632489e-06],
        [  1.99000000e+00,   6.90055729e-07],
        [  2.00000000e+00,   8.65022947e-08],
-       [  2.00000000e+00,   8.65022947e-08]] 
+       [  2.00000000e+00,   8.65022947e-08]]
 ,
 {
 legend:"always",
@@ -1186,7 +1186,7 @@ g = new Dygraph(document.getElementById("check7div"),
        [  1.99001001e+00,   1.00022983e-10,   9.99864987e-06],
        [  1.99001001e+00,   1.00022983e-10,   1.00022983e-05],
        [  2.00000000e+00,   6.26549899e-04,   6.26549899e+01],
-       [  2.00000000e+00,   6.26549899e-04,   6.26549899e+01]] 
+       [  2.00000000e+00,   6.26549899e-04,   6.26549899e+01]]
 ,
 {
 legend:"always",
@@ -1200,7 +1200,7 @@ simulate(TestSwitch2, stopTime=2, stepSize=0.00002001, method="euler", simflags=
 </textarea>  <div id=check8div> </div> <br>
 <textarea id=check9textarea>
 
-plot({S.v,S.i}) 
+plot({S.v,S.i})
 
 </textarea> <br> <div id=check9div> </div> <br>
 No data found
@@ -1208,12 +1208,12 @@ No data found
 simulate(TestSwitch2, stopTime=2, stepSize=0.00001999, method="euler", simflags="")
 </textarea>  <div id=check10div> </div> <br>
 <textarea id=check11textarea>
-plot({S.v,S.i}) 
+plot({S.v,S.i})
 </textarea> <br> <div id=check11div> </div> <br>
 No data found
 <textarea id=check12textarea>
 simulate(TestSwitch2, stopTime=2, stepSize=0.000005, method="euler", simflags="")
 </textarea>  <div id=check12div> </div> <br>
 <textarea id=check13textarea>
-plot({S.v,S.i}) 
+plot({S.v,S.i})
 </textarea> <br> <div id=check13div> </div> <br>

@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -47,14 +47,14 @@ class DimSize
   parameter Real specsize[3] = size(x);    // Returns the vector {4, 1, 6}
 equation
  // size(2*x + x) = size(x);                // This equation holds
-end DimSize;  
+end DimSize;
 </textarea>  <div id=check0div> </div> <br>
 <h3>
 1.1
 Simulation of DimSize
 </h3>
 <textarea id=check1textarea>
-simulate( DimSize )   
+simulate( DimSize )
 </textarea>  <div id=check1div> </div> <br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Take a look at an array element value at time=1:</span></p><br>
 <textarea id=check2textarea>
@@ -66,7 +66,7 @@ plot(x[4,1,4])
 <script type="text/javascript">
 g = new Dygraph(document.getElementById("check3div"),
   [[ 0.,  1.],
-       [ 1.,  1.]] 
+       [ 1.,  1.]]
 ,
 {
 legend:"always",
@@ -97,7 +97,7 @@ end DimConvert;
 Simulation of DimConvert
 </h3>
 <textarea id=check5textarea>
-simulate( DimConvert )    
+simulate( DimConvert )
 </textarea>  <div id=check5div> </div> <br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Take a look at an array element value at time=1:</span></p><br>
 <textarea id=check6textarea>
@@ -609,7 +609,7 @@ g = new Dygraph(document.getElementById("check7div"),
        [  9.96000000e-01,   3.00000000e+00,   4.00000000e+00],
        [  9.98000000e-01,   3.00000000e+00,   4.00000000e+00],
        [  1.00000000e+00,   3.00000000e+00,   4.00000000e+00],
-       [  1.00000000e+00,   3.00000000e+00,   4.00000000e+00]] 
+       [  1.00000000e+00,   3.00000000e+00,   4.00000000e+00]]
 ,
 {
 legend:"always",
@@ -639,7 +639,7 @@ end ConstructFunc;
 Simulation of ConstructFunc
 </h3>
 <textarea id=check9textarea>
-simulate( ConstructFunc )    
+simulate( ConstructFunc )
 </textarea>  <div id=check9div> </div> <br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Take a look at an array element value at time=0:</span></p><br>
 <textarea id=check10textarea>
@@ -1151,7 +1151,7 @@ g = new Dygraph(document.getElementById("check11div"),
        [  9.96000000e-01,   0.00000000e+00,   2.10000000e+00],
        [  9.98000000e-01,   0.00000000e+00,   2.10000000e+00],
        [  1.00000000e+00,   0.00000000e+00,   2.10000000e+00],
-       [  1.00000000e+00,   0.00000000e+00,   2.10000000e+00]] 
+       [  1.00000000e+00,   0.00000000e+00,   2.10000000e+00]]
 ,
 {
 legend:"always",
@@ -1692,7 +1692,7 @@ g = new Dygraph(document.getElementById("check15div"),
        [  9.96000000e-01,   1.25600000e+01,   2.10000000e+01],
        [  9.98000000e-01,   1.25600000e+01,   2.10000000e+01],
        [  1.00000000e+00,   1.25600000e+01,   2.10000000e+01],
-       [  1.00000000e+00,   1.25600000e+01,   2.10000000e+01]] 
+       [  1.00000000e+00,   1.25600000e+01,   2.10000000e+01]]
 ,
 {
 legend:"always",
@@ -1722,7 +1722,7 @@ end AlgebraFunc;
 Simulation of AlgebraFunc
 </h3>
 <textarea id=check17textarea>
-simulate( AlgebraFunc )    
+simulate( AlgebraFunc )
 </textarea>  <div id=check17div> </div> <br>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Take a look at the value at time=0:</span></p><br>
 <textarea id=check18textarea>
@@ -2237,7 +2237,7 @@ g = new Dygraph(document.getElementById("check20div"),
        [ 0.996,  1.   ,  0.   ],
        [ 0.998,  1.   ,  0.   ],
        [ 1.   ,  1.   ,  0.   ],
-       [ 1.   ,  1.   ,  0.   ]] 
+       [ 1.   ,  1.   ,  0.   ]]
 ,
 {
 legend:"always",

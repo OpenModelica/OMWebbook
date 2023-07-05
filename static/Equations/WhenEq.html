@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -55,14 +55,14 @@ end WhenEquation;
 </textarea>  <div id=check0div> </div> <br>
 <h2>
 2
-Simulation of WhenEquation 
+Simulation of WhenEquation
 </h2>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Here </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">WhenEquation</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is simulated. Then as below the variables can be plotted.</span></p><br>
 <textarea id=check1textarea>
 simulate( WhenEquation, stopTime=10 )
 </textarea>  <div id=check1div> </div> <br>
 <textarea id=check2textarea>
-plot( { y1, y2, y3, x } ) 
+plot( { y1, y2, y3, x } )
 </textarea> <br> <div id=check2div> </div> <br>
 <script type="text/javascript">
 g = new Dygraph(document.getElementById("check2div"),
@@ -76,7 +76,7 @@ labels:
 )
 </script>
 <textarea id=check3textarea>
-plot( { y1, y3, x } )  
+plot( { y1, y3, x } )
 </textarea> <br> <div id=check3div> </div> <br>
 <script type="text/javascript">
 g = new Dygraph(document.getElementById("check3div"),
@@ -583,7 +583,7 @@ g = new Dygraph(document.getElementById("check3div"),
        [  9.96      ,   6.96      ,   0.90929743,   7.90929743],
        [  9.98      ,   6.98      ,   0.90929743,   7.90929743],
        [ 10.        ,   7.        ,   0.90929743,   7.90929743],
-       [ 10.        ,   7.        ,   0.90929743,   7.90929743]] 
+       [ 10.        ,   7.        ,   0.90929743,   7.90929743]]
 ,
 {
 legend:"always",
@@ -596,7 +596,8 @@ labels:
 3
 WhenSet
 </h2>
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">If we instead use a Boolean vector expression containing three elements as the conditions, then the two equations will be activated at event instants when either of the three conditions: </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">x &gt; 2, sample(0,2), </span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">or</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;"> x  becomes true. Sample is more explained </span><a href="static/DiscreteHybrid/SampleClock.html
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">If we instead use a Boolean vector expression containing three elements as the conditions, then the two equations will be activated at event instants when either of the three conditions: </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">x &gt; 2, sample(0,2), </span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">or</span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;"> x  becomes true. Sample is more explained </span><a href="static/DiscreteHybrid/SampleClock.html
+
 "><span style=" font-family:'Courier New'; font-size:12pt; text-decoration: underline; color:#0000ff;">here</span></a><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">.</span></p><br>
 <textarea id=check4textarea>
 class WhenSet
@@ -614,7 +615,7 @@ end WhenSet;
 </textarea>  <div id=check4div> </div> <br>
 <h2>
 4
-Simulation of WhenSet 
+Simulation of WhenSet
 </h2>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Here </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">WhenSet</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is simulated.</span></p><br>
 <textarea id=check5textarea>
@@ -1137,7 +1138,7 @@ g = new Dygraph(document.getElementById("check6div"),
        [  9.98      ,   6.98      ,  -0.95892427,  12.04107573],
        [ 10.        ,   7.        ,  -0.95892427,  12.04107573],
        [ 10.        ,   7.        ,   0.6569866 ,  17.6569866 ],
-       [ 10.        ,   7.        ,   0.6569866 ,  17.6569866 ]] 
+       [ 10.        ,   7.        ,   0.6569866 ,  17.6569866 ]]
 ,
 {
 legend:"always",
@@ -1168,14 +1169,14 @@ end Activate;
 </textarea>  <div id=check7div> </div> <br>
 <h2>
 6
-Simulation of Activate 
+Simulation of Activate
 </h2>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Here </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Activate</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> is simulated.</span></p><br>
 <textarea id=check8textarea>
 simulate( Activate, stopTime=10 )
 </textarea>  <div id=check8div> </div> <br>
 <textarea id=check9textarea>
-plot( {x, y, z } ) 
+plot( {x, y, z } )
 </textarea> <br> <div id=check9div> </div> <br>
 <script type="text/javascript">
 g = new Dygraph(document.getElementById("check9div"),
@@ -1680,7 +1681,7 @@ g = new Dygraph(document.getElementById("check9div"),
        [  9.96,   4.  ,   7.  ,   0.  ],
        [  9.98,   4.  ,   7.  ,   0.  ],
        [ 10.  ,   4.  ,   7.  ,   0.  ],
-       [ 10.  ,   4.  ,   7.  ,   2.  ]] 
+       [ 10.  ,   4.  ,   7.  ,   2.  ]]
 ,
 {
 legend:"always",
@@ -2247,7 +2248,7 @@ g = new Dygraph(document.getElementById("check14div"),
        [  9.96000000e-01,  -2.00000000e+00,   7.00000000e+00],
        [  9.98000000e-01,  -2.00000000e+00,   7.00000000e+00],
        [  1.00000000e+00,  -2.00000000e+00,   7.00000000e+00],
-       [  1.00000000e+00,  -2.00000000e+00,   7.00000000e+00]] 
+       [  1.00000000e+00,  -2.00000000e+00,   7.00000000e+00]]
 ,
 {
 legend:"always",
@@ -2270,7 +2271,7 @@ equation
       y2 = sin(x);
     end when;
   end when;
-end ErrorNestedWhen;    
+end ErrorNestedWhen;
 </textarea>  <div id=check15div> </div> <br>
 <h3>
 7.6
@@ -2302,7 +2303,7 @@ equation
   when x > 3 then
     close = false;
   end when;
-end DoubleWhenConflict;         
+end DoubleWhenConflict;
 </textarea>  <div id=check17div> </div> <br>
 <h3>
 8.2

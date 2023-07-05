@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -147,7 +147,7 @@ equation
   v = p.v - n.v;
   0 = p.i + n.i;
   i = p.i;
-end TwoPin;          
+end TwoPin;
 </textarea>  <div id=check10div> </div> <br>
 <textarea id=check11textarea>
 class Resistor               "Ideal linear electrical Resistor"
@@ -155,7 +155,7 @@ class Resistor               "Ideal linear electrical Resistor"
   parameter Real R(unit = "Ohm")     "Resistance";
 equation
   R*i = v;
-end Resistor;                // From Modelica.Electrical.Analog.Basic 
+end Resistor;                // From Modelica.Electrical.Analog.Basic
 </textarea>  <div id=check11div> </div> <br>
 <textarea id=check12textarea>
 class Inductor               "Ideal linear electrical Inductor"
@@ -163,14 +163,14 @@ class Inductor               "Ideal linear electrical Inductor"
   parameter Real L(unit = "H")       "Inductance";
 equation
   v = L*der(i);
-end Inductor;              // From Modelica.Electrical.Analog.Basic 
+end Inductor;              // From Modelica.Electrical.Analog.Basic
 </textarea>  <div id=check12div> </div> <br>
 <textarea id=check13textarea>
 class Ground               "Ground node"
   Pin p;
 equation
   p.v = 0;
-end Ground;                // From Modelica.Electrical.Analog.Basic 
+end Ground;                // From Modelica.Electrical.Analog.Basic
 </textarea>  <div id=check13div> </div> <br>
 <textarea id=check14textarea>
 model SignalVoltage            "Generic Voltage source using the input signal as source Voltage"
@@ -222,7 +222,7 @@ equation
   w = der(rotFlange_b.phi);
   v = k*w;
   rotFlange_b.tau = - k*i;
-end EMF;                // From Modelica.Electrical.Analog.Basic 
+end EMF;                // From Modelica.Electrical.Analog.Basic
 </textarea>  <div id=check17div> </div> <br>
 <h3>
 5.4
@@ -278,14 +278,14 @@ model PartDCMotorCircuit
 equation
   connect(step1.outPort, partialDCMotor1.inPort);
   connect(partialDCMotor1.rotFlange_b, inertia1.rotFlange_a);
-end PartDCMotorCircuit;    
+end PartDCMotorCircuit;
 </textarea>  <div id=check21div> </div> <br>
 <h2>
 7
-Simulation of PartDCMotorCircuit 
+Simulation of PartDCMotorCircuit
 </h2>
 <textarea id=check22textarea>
-simulate( PartDCMotorCircuit, stopTime=100 ) 
+simulate( PartDCMotorCircuit, stopTime=100 )
 </textarea>  <div id=check22div> </div> <br>
 <textarea id=check23textarea>
 plot( inertia1.w )
@@ -793,7 +793,7 @@ g = new Dygraph(document.getElementById("check23div"),
        [  9.96000000e+01,   9.99952902e-01],
        [  9.98000000e+01,   9.99953835e-01],
        [  1.00000000e+02,   9.99954749e-01],
-       [  1.00000000e+02,   9.99954749e-01]] 
+       [  1.00000000e+02,   9.99954749e-01]]
 ,
 {
 legend:"always",

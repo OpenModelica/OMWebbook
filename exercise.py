@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-OMWebbook is a An OpenModelica interactive notebook online. The Webbook is generated 
-with the help of Flask framework.This file is used for the conversion of DrModelica exercise files 
+OMWebbook is a An OpenModelica interactive notebook online. The Webbook is generated
+with the help of Flask framework.This file is used for the conversion of DrModelica exercise files
 to HTML Files with some control over the numbering of sections and subsections
 """
 
@@ -33,7 +33,7 @@ __license__ = """
  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE, EXCEPT AS
  EXPRESSLY SET FORTH IN THE BY RECIPIENT SELECTED SUBSIDIARY LICENSE
  CONDITIONS OF OSMC-PL.
- 
+
  Author : Arunkumar Palanisamy, arunkumar.palanisamy@liu.se
 """
 
@@ -58,10 +58,10 @@ def parsetags(all_tags,f):
               soup = BeautifulSoup(html)
               for a in soup.findAll('a'):
                  staticlink="".join(['static','/',a['href']]).replace('.onb','.html')
-                 a['href']=a['href'].replace(a['href'], staticlink)                 
-                 #print staticlink              
+                 a['href']=a['href'].replace(a['href'], staticlink)
+                 #print staticlink
               #findp=soup.find_all('p')
-              
+
               findp=[]
               for p in soup.findAll('p'):
                  checkempty=p['style'].replace(' ','').split(";")
@@ -69,7 +69,7 @@ def parsetags(all_tags,f):
                  if (val==False):
                     if (p.find('img')==None):
                         findp.append(p)
-               
+
               for i in xrange(len(findp)):
                    #x=findp[i].text
                    x=findp[i]
@@ -89,7 +89,7 @@ def parsetags(all_tags,f):
                         f.write(partext)
                         f.write('<br>')
                         f.write('\n')
-                     
+
                      elif(all_tags.attrib['style']=='Title'):
                         print 'title'
                         t=findp[i].text
@@ -98,7 +98,7 @@ def parsetags(all_tags,f):
                         #htmltext='\n'.join([str(x)])
                         f.write(htmltext)
                         f.write('\n')
-                     
+
                      elif(all_tags.attrib['style']=='Section'):
                         print 'section'
                         t=findp[i].text
@@ -113,7 +113,7 @@ def parsetags(all_tags,f):
                         f.write(htmltext)
                         f.write('\n')
                      elif(all_tags.attrib['style']=='Subsection'):
-                       
+
                         if(sectioncheck==True):
                             g=1
                         g+=1
@@ -168,7 +168,7 @@ def parsetags(all_tags,f):
               inputtext=all_tags.find('Input').text
               print 'inputcells',inputtext
               if(inputtext!=None):
-                  linecount=string.split(inputtext, '\n')            
+                  linecount=string.split(inputtext, '\n')
                   textid='check'+str(check)+'textarea'
                   divid='check'+str(check)+'div'
                   if ('plot(' in inputtext):
@@ -180,7 +180,7 @@ def parsetags(all_tags,f):
                   f.write('\n')
                   ## catch the OMCPLOT datas
                   curve=all_tags.find('OMCPlot')
-                  
+
                   if curve!=None:
                      #count=count+1;
                      print count
@@ -202,7 +202,7 @@ def parsetags(all_tags,f):
                   f.write('\n')
 
                   print "Empty Graph cells"
-        
+
 def makeplot(curve,graphdivid):
      datas=curve.findall('Curve')
      plotdata=[]
@@ -220,49 +220,49 @@ def makeplot(curve,graphdivid):
           plotdata.append(xdata)
        plotdata.append(ydata)
        labeldata.append(label)
-       
+
      if (len(plotdata) !=0):
         n=array(plotdata)
         #print 'plotdata', plotdata
         numpy.set_printoptions(threshold='nan')
         #print repr(numpy.hstack(n))
-        try:        
+        try:
            dygraph_array= repr(numpy.hstack(n)).replace('array',' ').replace('(' ,' ').replace(')' ,' ')
            return writedygraphscript(dygraph_array,labeldata,graphdivid)
         except ValueError:
            print 'Value Error'
            return writedygraphscript('ValueError',labeldata,graphdivid)
 
-        
+
 def writedygraphscript(dygraphdata,labeldata,graphdivid):
-   
+
      #divheader= '''<script type="text/javascript" src="../dygraph-combined.js"></script>'''
-     #<div id="graphdiv"></div>                
+     #<div id="graphdiv"></div>
      #<script type="text/javascript">
      #g = new Dygraph(document.getElementById("graphdiv"),'''
      #divid='<div id=graphdiv'+str(count)+'>'+'</div>'
      #divid='<div id='+ graphdivid + '> </div>'
-     #divgraph='g = new Dygraph(document.getElementById("graphdiv'+str(count)+'"),' 
+     #divgraph='g = new Dygraph(document.getElementById("graphdiv'+str(count)+'"),'
      divgraph='g = new Dygraph(document.getElementById('+'"'+str(graphdivid)+'"'+'),'
      scriptheader='\n'.join(['<script type="text/javascript">',divgraph])
      options='\n'.join(['{', 'legend:"always",','labels:',str(labeldata),'}'])
      s = '\n'.join([scriptheader,str(dygraphdata),',',options,')','</script>'])
-     return s              
+     return s
 
 def start(filename,root):
         global sectioncheck,subsectioncheck,currentlevel,subsectioncount,g,g1,r,sectioncount,check
         logdir='C:/OMWebbook/static/Circuits'
         name= os.path.basename(filename)
-        logfile=os.path.join(logdir,name.replace('.onb','.html')).replace('\\','/')   
+        logfile=os.path.join(logdir,name.replace('.onb','.html')).replace('\\','/')
         print logfile
         f=open(logfile,'w')
-        headers='''  
+        headers='''
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -290,13 +290,13 @@ def start(filename,root):
 <br> <br> <br>
 
 '''
-        f.write(headers)     
+        f.write(headers)
         for node in root.iter('GroupCell'):
             #print node.tag
-            if node.tag=='GroupCell' and node.attrib['closed']=='false':     
+            if node.tag=='GroupCell' and node.attrib['closed']=='false':
                 for all_tags in node.findall('./'):
                      parsetags(all_tags,f)
-            
+
             if node.tag=='GroupCell' and node.attrib['closed']=='true':
                 #print '<div>'
                 c=0
@@ -305,7 +305,7 @@ def start(filename,root):
                      if(c==1):
                         global r
                         dividanswer='<div id=answer'+ str(r) +' '+'class=collapse>'
-                        f.write(dividanswer)                        
+                        f.write(dividanswer)
                         print dividanswer
                      parsetags(all_tags,f)
                      c+=1
@@ -314,36 +314,36 @@ def start(filename,root):
                 print '</div>'
                 print '******closed_end'
         f.write('</div></body></html>')
-        f.close()         
+        f.close()
         print 'Completed'
         print 'after completion',r
         r=0
         count=0
         check=0
-        sectioncount=1      
+        sectioncount=1
         subsectioncount=0.01
         sectioncheck=False
         subsectioncheck=False
         currentlevel=''
         g=1
-        g1=1  
+        g1=1
 
 
-        
+
 r=0
 count=0
 check=0
-sectioncount=1      
+sectioncount=1
 subsectioncount=0.01
 sectioncheck=False
 subsectioncheck=False
 currentlevel=''
 g=1
-g1=1  
+g1=1
 
-            
+
 if __name__ == "__main__":
-    
+
     dir1='C:/OPENMODELICAGIT/OpenModelica/OMNotebook/DrModelica/Circuits'
     filelist=os.listdir(dir1)
     #print filelist
@@ -351,17 +351,17 @@ if __name__ == "__main__":
         name=filelist[i]
         filename=os.path.join(dir1,name).replace('\\','/')
         tree = ET.parse(filename)
-        root = tree.getroot()                  
+        root = tree.getroot()
         start(filename,root)
     '''
     filename='C:/OPENMODELICAGIT/OpenModelica/OMNotebook/DrModelica/QuickTour/Exercise1arrays.onb'
     tree = ET.parse(filename)
     #tree = ET.parse('C:/OPENMODELICAGIT/OpenModelica/build/share/omnotebook/drmodelica/QuickTour/HelloWorld.onb')
     #Exercise1classes
-    root = tree.getroot()                  
-    start(filename,root) 
-    
+    root = tree.getroot()
+    start(filename,root)
+
     filename='C:/OPENMODELICAGIT/OpenModelica/OMNotebook/DrModelica/QuickTour/Exercise1classes.onb'
     tree = ET.parse(filename)
-    root = tree.getroot()  
-    start(filename,root) '''    
+    root = tree.getroot()
+    start(filename,root) '''

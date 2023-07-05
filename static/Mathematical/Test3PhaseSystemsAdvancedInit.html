@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -49,7 +49,7 @@ package Test3PhaseSystemsOverdetermined
     connector Positive3PhasePin
        Modelica.Electrical.Analog.Interfaces.PositivePin p1,p2,p3;
     end Positive3PhasePin;
-     
+
     model Line3Phase
       constant Real pi=Modelica.Constants.pi;
       Positive3PhasePin P;
@@ -62,10 +62,10 @@ package Test3PhaseSystemsOverdetermined
       Modelica.Electrical.Analog.Basic.Inductor I3(L=1);
       Real i_abc[3]={I1.i,I2.i,I3.i};
       Real i_dq0[3];
-    protected 
+    protected
       Real theta;
       Real Park[3,3];
-    equation 
+    equation
       theta = 2*pi*time;
       Park = sqrt(2)/sqrt(3)*
         [sin(theta), sin(theta+2*pi/3), sin(theta+4*pi/3);
@@ -85,10 +85,10 @@ package Test3PhaseSystemsOverdetermined
 
     model Line3PhaseInit
     extends Line3Phase;
-    initial equation 
+    initial equation
       der(i_dq0)={0,0,0};
     end Line3PhaseInit;
-      
+
     model Source3Phase
       constant Real pi=Modelica.Constants.pi;
       parameter Real shift=0.0;
@@ -97,7 +97,7 @@ package Test3PhaseSystemsOverdetermined
       Modelica.Electrical.Analog.Sources.SineVoltage S2(freqHz=1, V=1, phase=2*pi/3 + shift);
       Modelica.Electrical.Analog.Sources.SineVoltage S3(freqHz=1, V=1, phase=4*pi/3 + shift);
       Modelica.Electrical.Analog.Basic.Ground G;
-    equation 
+    equation
       connect(S1.p, P.p1);
       connect(S2.p, P.p2);
       connect(S3.p, P.p3);
@@ -106,43 +106,43 @@ package Test3PhaseSystemsOverdetermined
       connect(S3.n, G.p);
     end Source3Phase;
 
-    model Test3PhaseSystems 
+    model Test3PhaseSystems
       Line3Phase LR;
       Source3Phase S(shift=0);
       Source3Phase SS(shift=0.4);
-    equation 
+    equation
       connect(SS.P, LR.P);
       connect(LR.N, S.P);
     end Test3PhaseSystems;
 
-    model Test3PhaseSystemsInit 
+    model Test3PhaseSystemsInit
       Line3PhaseInit LR;
       Source3Phase S(shift=0);
       Source3Phase SS(shift=0.4);
-    equation 
+    equation
       connect(SS.P, LR.P);
       connect(LR.N, S.P);
     end Test3PhaseSystemsInit;
 
-    model Test3PhaseSystemsInit1 
+    model Test3PhaseSystemsInit1
       Line3Phase LR1;
       Line3Phase LR2;
       Source3Phase S(shift=0);
       Source3Phase SS(shift=0.4);
     initial equation
       der(LR1.i_dq0)={0,0,0};
-    equation 
+    equation
       connect(SS.P, LR1.P);
       connect(LR1.N, LR2.P);
       connect(LR2.N, S.P);
     end Test3PhaseSystemsInit1;
 
-    model Test3PhaseSystemsOverdetermined 
+    model Test3PhaseSystemsOverdetermined
       Line3PhaseInit LR1;
       Line3PhaseInit LR2;
       Source3Phase S(shift=0);
       Source3Phase SS(shift=0.4);
-    equation 
+    equation
       connect(SS.P, LR1.P);
       connect(LR1.N, LR2.P);
       connect(LR2.N, S.P);
@@ -1163,7 +1163,7 @@ g = new Dygraph(document.getElementById("check6div"),
        [  1.00000000e+01,   1.72667636e-02,   4.34876346e-02,
          -6.07544981e-02],
        [  1.00000000e+01,   1.72667636e-02,   4.34876346e-02,
-         -6.07544981e-02]] 
+         -6.07544981e-02]]
 ,
 {
 legend:"always",
@@ -2181,7 +2181,7 @@ g = new Dygraph(document.getElementById("check7div"),
        [  1.00000000e+01,   7.37103189e-02,   2.11474209e-02,
          -5.76676328e-08],
        [  1.00000000e+01,   7.37103189e-02,   2.11474209e-02,
-         -5.76676328e-08]] 
+         -5.76676328e-08]]
 ,
 {
 legend:"always",
@@ -3201,7 +3201,7 @@ g = new Dygraph(document.getElementById("check9div"),
        [  1.00000000e+01,   1.73847665e-02,   4.37832836e-02,
          -6.11680501e-02],
        [  1.00000000e+01,   1.73847665e-02,   4.37832836e-02,
-         -6.11680501e-02]] 
+         -6.11680501e-02]]
 ,
 {
 legend:"always",
@@ -4221,7 +4221,7 @@ g = new Dygraph(document.getElementById("check11div"),
        [  1.00000000e+01,   8.69239653e-03,   2.18918798e-02,
          -3.05842763e-02],
        [  1.00000000e+01,   8.69239653e-03,   2.18918798e-02,
-         -3.05842763e-02]] 
+         -3.05842763e-02]]
 ,
 {
 legend:"always",
@@ -5242,7 +5242,7 @@ g = new Dygraph(document.getElementById("check13div"),
        [  1.00000000e+01,   8.69239653e-03,   2.18918798e-02,
          -3.05842763e-02],
        [  1.00000000e+01,   8.69239653e-03,   2.18918798e-02,
-         -3.05842763e-02]] 
+         -3.05842763e-02]]
 ,
 {
 legend:"always",
@@ -6262,7 +6262,7 @@ g = new Dygraph(document.getElementById("check15div"),
        [  1.00000000e+01,   3.71062459e-02,   1.06459681e-02,
           3.74577107e-16],
        [  1.00000000e+01,   3.71062459e-02,   1.06459681e-02,
-          3.74577107e-16]] 
+          3.74577107e-16]]
 ,
 {
 legend:"always",

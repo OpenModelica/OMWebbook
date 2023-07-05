@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -45,7 +45,7 @@ class Resistor               "Ideal linear electrical Resistor"
   parameter Real R(unit = "Ohm")     "Resistance";
 equation
   R*i = v;
-end Resistor;                // From Modelica.Electrical.Analog.Basic 
+end Resistor;                // From Modelica.Electrical.Analog.Basic
 </textarea>  <div id=check0div> </div> <br>
 </div><h2>
 2
@@ -110,7 +110,7 @@ equation
   v = p.v - n.v;
   0 = p.i + n.i;
   i = p.i;
-end TwoPin;          
+end TwoPin;
 </textarea>  <div id=check6div> </div> <br>
 <h2>
 6
@@ -123,7 +123,7 @@ replaceable Resistor Load(R=2)
   annotation(choices(
           choice(redeclare lib2.Resistor Load(a = {2}) ),
           choice(redeclare Capacitor Load(L = 3) )));
-end R;          
+end R;
 </textarea>  <div id=check7div> </div> <br>
 <h2>
 7
@@ -142,7 +142,7 @@ replaceable FrictionFunction a(func = exp)
           choice(redeclare ConstantFriction a(c = 1) ),
           choice(redeclare TableFriction a(table = "a") ),
           choice(redeclare FunctionFriction a(func = exp) )));
-end FF;   
+end FF;
 </textarea>  <div id=check9div> </div> <br>
 <h2>
 8
@@ -681,7 +681,7 @@ g = new Dygraph(document.getElementById("check14div"),
        [  9.96000000e-01,   3.00000000e+00],
        [  9.98000000e-01,   3.00000000e+00],
        [  1.00000000e+00,   3.00000000e+00],
-       [  1.00000000e+00,   3.00000000e+00]] 
+       [  1.00000000e+00,   3.00000000e+00]]
 ,
 {
 legend:"always",

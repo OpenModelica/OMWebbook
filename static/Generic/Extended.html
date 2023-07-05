@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -49,7 +49,7 @@ type Current = Real(unit = "A");
 connector Pin
   Voltage     v;
   flow Current   i;
-end Pin;        
+end Pin;
 </textarea>  <div id=check2div> </div> <br>
 <h2>
 2
@@ -67,7 +67,7 @@ equation
   v = p.v - n.v;
   0 = p.i + n.i;
   i = p.i;
-end TwoPin;          
+end TwoPin;
 </textarea>  <div id=check3div> </div> <br>
 <h2>
 3
@@ -98,7 +98,7 @@ end TempResistor;
 </textarea>  <div id=check5div> </div> <br>
 <h2>
 4
-Reuse of Variable Declarations from Partial Base Classes 
+Reuse of Variable Declarations from Partial Base Classes
 </h2>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">One way of getting around the problems of inheriting and specializing behavior, exemplified with the </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Resistor</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> class, is to create incomplete, i.e. partial base classes that only contain the data declarations that can be reused.</span></p><br>
 <textarea id=check6textarea>

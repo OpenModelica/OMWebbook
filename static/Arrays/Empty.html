@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -52,11 +52,11 @@ class Empty
 
   //The code used the previous two lines, and the omc compiler gave errors
   //due to declaration of variables with same name with different type.
-  //After changing the variable names to A2 and B2 the problem was fixed.  
-  
+  //After changing the variable names to A2 and B2 the problem was fixed.
+
   Real A2[:, :]      = fill(0.0, 0, 1);      // A Real 0 x 1 matrix
-  Boolean B2[:, :, :]  = fill (false, 0, 1, 0);  // A Boolean 0 x 1 x 0 
-  
+  Boolean B2[:, :, :]  = fill (false, 0, 1, 0);  // A Boolean 0 x 1 x 0
+
 end Empty;
 </textarea>  <div id=check0div> </div> <br>
 <h3>
@@ -64,7 +64,7 @@ end Empty;
 Simulation of Empty
 </h3>
 <textarea id=check1textarea>
-simulate( Empty )    
+simulate( Empty )
 </textarea>  <div id=check1div> </div> <br>
 <h2>
 2
@@ -83,7 +83,7 @@ end AddEmpty;
 Simulation of AddEmpty
 </h3>
 <textarea id=check3textarea>
-simulate( AddEmpty )    
+simulate( AddEmpty )
 </textarea>  <div id=check3div> </div> <br>
 <h2>
 3
@@ -108,7 +108,7 @@ end ABCDsystem;
 Simulation of ABCDsystem
 </h3>
 <textarea id=check5textarea>
-simulate( ABCDsystem)    
+simulate( ABCDsystem)
 </textarea>  <div id=check5div> </div> <br>
 <textarea id=check6textarea>
 plot({y[2],n})
@@ -126,7 +126,7 @@ labels:
 </script>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">Take a look at the results at time=0:</span></p><br>
 <textarea id=check7textarea>
-val(D[2, 2],0)   
+val(D[2, 2],0)
 </textarea>  <div id=check7div> </div> <br>
 <textarea id=check8textarea>
 val(y[2],0)

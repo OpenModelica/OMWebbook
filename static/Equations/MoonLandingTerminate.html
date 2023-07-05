@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -519,7 +519,7 @@ g = new Dygraph(document.getElementById("check2div"),
        [  2.12060000e+02,   1.96016964e-01,  -4.73801432e+00],
        [  2.12101081e+02,  -1.05724540e-10,  -4.80499795e+00],
        [  2.12101081e+02,  -1.05724540e-10,  -4.80499795e+00],
-       [  2.12101081e+02,  -1.05724540e-10,  -4.80499795e+00]] 
+       [  2.12101081e+02,  -1.05724540e-10,  -4.80499795e+00]]
 ,
 {
 legend:"always",
@@ -561,7 +561,7 @@ equation
   der(mass)   = -massLossRate * abs(thrust);
   der(altitude) = velocity;
   der(velocity) = acceleration;
-end Rocket;  
+end Rocket;
 </textarea>  <div id=check4div> </div> <br>
 <h2>
 3
@@ -585,7 +585,7 @@ equation
   when apollo.altitude < 0 then                    // Termination condition
     terminate("The moon lander touches the ground of moon");
   end when;
-end MoonLanding;  
+end MoonLanding;
 </textarea>  <div id=check5div> </div> <br>
 <h2>
 4

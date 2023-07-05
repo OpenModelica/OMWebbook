@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -32,7 +32,7 @@
 <br> <br> <br>
 
 <h1>
-Local Classes 
+Local Classes
 </h1>
 <h2>
 1
@@ -46,7 +46,7 @@ class C1
   end Lpin;
 
   //class Voltage = Real(unit="kV"); //this works in Dymola but not it OM
-  type Voltage = Real(unit="kV"); // This is an alternative 
+  type Voltage = Real(unit="kV"); // This is an alternative
 
   Voltage v1 = 5, v2 = 1;
   Lpin pn(p = 2);
@@ -58,7 +58,7 @@ end C1;
 Simulation of C1
 </h2>
 <textarea id=check1textarea>
-simulate( C1 )  
+simulate( C1 )
 </textarea>  <div id=check1div> </div> <br>
 <textarea id=check2textarea>
 plot({v1})
@@ -566,7 +566,7 @@ g = new Dygraph(document.getElementById("check2div"),
        [  9.96000000e-01,   5.00000000e+00],
        [  9.98000000e-01,   5.00000000e+00],
        [  1.00000000e+00,   5.00000000e+00],
-       [  1.00000000e+00,   5.00000000e+00]] 
+       [  1.00000000e+00,   5.00000000e+00]]
 ,
 {
 legend:"always",
@@ -1114,7 +1114,7 @@ g = new Dygraph(document.getElementById("check5div"),
        [  9.96000000e-01,   2.00000000e+00,   3.14000000e+00],
        [  9.98000000e-01,   2.00000000e+00,   3.14000000e+00],
        [  1.00000000e+00,   2.00000000e+00,   3.14000000e+00],
-       [  1.00000000e+00,   2.00000000e+00,   3.14000000e+00]] 
+       [  1.00000000e+00,   2.00000000e+00,   3.14000000e+00]]
 ,
 {
 legend:"always",
@@ -1666,7 +1666,7 @@ g = new Dygraph(document.getElementById("check10div"),
        [  9.96000000e-01,   2.00000000e+00,   3.14000000e+00],
        [  9.98000000e-01,   2.00000000e+00,   3.14000000e+00],
        [  1.00000000e+00,   2.00000000e+00,   3.14000000e+00],
-       [  1.00000000e+00,   2.00000000e+00,   3.14000000e+00]] 
+       [  1.00000000e+00,   2.00000000e+00,   3.14000000e+00]]
 ,
 {
 legend:"always",

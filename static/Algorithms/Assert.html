@@ -1,10 +1,10 @@
-  
+
 <!doctype html>
 <head>
   <title>OMWEBbook</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="../jquery.min1.10.2.js"></script>
+  <script src="../jquery-3.7.0.min.js"></script>
   <script src='../dygraph-combined.js'></script>
   <link rel="stylesheet" href="../bootstrap.min.css">
   <script src="../bootstrap.min.js"></script>
@@ -56,10 +56,10 @@ end Test2;
 </textarea>  <div id=check2div> </div> <br>
 <h2>
 1
-Simulation of Test1 and Test2 
+Simulation of Test1 and Test2
 </h2>
 <textarea id=check3textarea>
-simulate( Test1 )  
+simulate( Test1 )
 </textarea>  <div id=check3div> </div> <br>
 <textarea id=check4textarea>
 plot( { assertTest.x, assertTest.highlimit, assertTest.lowlimit })
@@ -77,6 +77,6 @@ labels:
 </script>
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;">In the simulation of </span><span style=" font-family:'Courier New'; font-size:12pt; color:#000000;">Test2</span><span style=" font-family:'Times New Roman'; font-size:12pt; color:#000000;"> we see that an error occurs and by looking in the file ??dslog.txt we see that the assertion fails and returns the message "Variable x out of limit".</span></p><br>
 <textarea id=check5textarea>
-simulate( Test2, stopTime=10 ) 
+simulate( Test2, stopTime=10 )
 </textarea>  <div id=check5div> </div> <br>
 </div></body></html>
