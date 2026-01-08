@@ -16,25 +16,22 @@ $(document).ready(function () {
   }
 
   /* create a unique omc session object */
-  $(window).on('load', function() {
-    //alert("loading")
-    //console.log('loading');
-    var uuid = guid();
-    //console.log(value);
-    value = uuid
-    //console.log(uuid);
-    var url = '/createsession'
-    $.ajax(
-      {
-        url: url,
-        type: 'POST',
-        data: { sid: uuid },
-        success: function (result) {
-          //console.log('success');
-          //alert(result)
-        }
-      });
-  });
+  //alert("loading")
+  var uuid = guid();
+  //console.log(value);
+  value = uuid
+  //console.log(uuid);
+  var url = '/createsession'
+  $.ajax(
+    {
+      url: url,
+      type: 'POST',
+      data: { sid: uuid },
+      success: function (result) {
+        //console.log('success');
+        //alert(result)
+      }
+    });
 
   /* delete the omc session */
   $(window).bind("beforeunload", function () {
@@ -174,8 +171,6 @@ $(document).ready(function () {
     else {
       alert("Nothing to evaluate, Add cells first to evaluate")
     }
-
-
   }
 
   /* code to evaluate all cells */

@@ -16,25 +16,25 @@ $(document).ready(function () {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
   }
 
-  $(window).load(function () {
-    //alert("loading")
-    console.log('loading');
-    var uuid = guid();
-    //console.log(value);
-    value = uuid
-    //console.log(uuid);
-    var url = '/createsession'
-    $.ajax(
-      {
-        url: url,
-        type: 'POST',
-        data: { sid: uuid },
-        success: function (result) {
-          console.log('success');
-          //alert(result)
-        }
-      });
-  });
+  /* create a unique omc session object */
+  //alert("loading")
+  console.log('loading');
+  var uuid = guid();
+  //console.log(value);
+  value = uuid
+  //console.log(uuid);
+  var url = '/createsession'
+  $.ajax(
+    {
+      url: url,
+      type: 'POST',
+      data: { sid: uuid },
+      success: function (result) {
+        console.log('success');
+        //alert(result)
+      }
+    });
+
   $(window).bind("beforeunload", function () {
     console.log('unloading');
     var url = '/deletesession'

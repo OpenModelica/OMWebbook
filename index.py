@@ -288,7 +288,7 @@ def plotgraph(plotvar, divid, omc, command):
 
             omc.sendExpression('closeSimulationResultFile()')
 
-            exp = '(\s?,\s?)(?=[^\[]*\])|(\s?,\s?)(?=[^\(]*\))'
+            exp = r'(\s?,\s?)(?=[^\[]*\])|(\s?,\s?)(?=[^\(]*\))'
             subexp = re.sub(exp, '$#', plotvar)
 
             plotvalsplit = subexp.split(',')
