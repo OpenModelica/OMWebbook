@@ -1,50 +1,91 @@
-FROM ubuntu:20.04
-MAINTAINER Arunkumar Palanisamy "arunkumar.palanisamy@liu.se"
+# ---------------------------
+# Base image
+# ---------------------------
+FROM ubuntu:24.04
 
-RUN apt-get update
+LABEL maintainer="Arunkumar Palanisamy <arunkumar.palanisamy@liu.se>"
 
-# Add OpenModelica release build
-RUN DEBIAN_FRONTEND=noninteractive apt install -y gnupg lsb-release wget
-RUN for deb in deb deb-src; do echo "$deb http://build.openmodelica.org/apt `lsb_release -cs` release"; done | tee /etc/apt/sources.list.d/openmodelica.list
-RUN wget -q http://build.openmodelica.org/apt/openmodelica.asc -O- | apt-key add -
+# ---------------------------
+# Set locale for OpenModelica
+# ---------------------------
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+ENV HOME=/home/omuser
+ENV MODELICAPATH=/home/omuser/.openmodelica/libraries
+ENV PATH="/venv/bin:$PATH"
 
-# Update index (again)
-RUN apt-get update
+# ---------------------------
+# Install all system packages needed
+# ---------------------------
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        gnupg wget curl ca-certificates lsb-release \
+        software-properties-common \
+        python3 python3-venv python3-pip python3-dev \
+        build-essential git nginx supervisor &&\
+    rm /etc/nginx/sites-enabled/default && \
+    rm -rf /var/lib/apt/lists/*
 
-# install openmodelica
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openmodelica
-# install libraries
-RUN for PKG in `apt-cache search "omlib-.*" | cut -d" " -f1`; do apt-get install -y "$PKG"; done
+# ---------------------------
+# Add and install OpenModelica apt repository (latest method)
+# ---------------------------
+RUN wget -q https://build.openmodelica.org/apt/openmodelica.asc -O /usr/share/keyrings/openmodelica.asc && \
+    echo "deb [signed-by=/usr/share/keyrings/openmodelica.asc] https://build.openmodelica.org/apt $(lsb_release -cs) release" \
+    | tee /etc/apt/sources.list.d/openmodelica.list && \
+    apt-get update && \
+    # Install mininmal omc and omlibrary
+    apt-get install -y --no-install-recommends omc omlibrary && \
+    rm -rf /var/lib/apt/lists/*
 
-# Install Python components
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python3-pip python3-dev build-essential
+# ---------------------------
+# Python environment
+# ---------------------------
+RUN python3 -m venv /venv && \
+    /venv/bin/pip install --no-cache-dir --upgrade pip && \
+    /venv/bin/pip install --no-cache-dir \
+        git+https://github.com/OpenModelica/OMPython.git \
+        flask \
+        gunicorn \
+        futures
 
-# Install git nginx supervisor
-RUN apt-get install -y git nginx supervisor
+# ---------------------------
+# Create non-root user for OpenModelica & gunicorn
+# ---------------------------
+RUN useradd -ms /bin/bash omuser && \
+    mkdir -p /home/omuser/.openmodelica/libraries && \
+    chown -R omuser:omuser /home/omuser
 
-# always upgrade pip
-RUN pip3 install --upgrade pip
+# ---------------------------
+# Nginx configuration
+# ---------------------------
+COPY flask.conf /etc/nginx/sites-available/flask.conf
+RUN ln -s /etc/nginx/sites-available/flask.conf \
+          /etc/nginx/sites-enabled/flask.conf && \
+    echo "daemon off;" >> /etc/nginx/nginx.conf
 
-# Install OMPython
-RUN pip3 install git+https://github.com/OpenModelica/OMPython.git
-
-# Install webdevelopment tools and webservers
-RUN pip3 install flask futures gunicorn
-
-#EXPOSE 5000
-
-# Setup nginx
-RUN rm /etc/nginx/sites-enabled/default
-COPY flask.conf /etc/nginx/sites-available/
-RUN ln -s /etc/nginx/sites-available/flask.conf /etc/nginx/sites-enabled/flask.conf
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-
-# Setup supervisord
+# ---------------------------
+# Supervisor configuration
+# ---------------------------
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Copy the Project and setup workdir
-ADD . /OMWebbook
+# ---------------------------
+# Application code
+# ---------------------------
 WORKDIR /OMWebbook
+COPY . /OMWebbook
 
-# Start processes
-CMD ["supervisord","-c","/etc/supervisor/conf.d/supervisord.conf"]
+# ---------------------------
+# Expose port
+# ---------------------------
+#EXPOSE 80
+
+# ---------------------------
+# HEALTHCHECK
+# ---------------------------
+# HEALTHCHECK --interval=30s --timeout=5s --start-period=10s \
+#   CMD curl -f http://localhost || exit 1
+
+# ---------------------------
+# Start supervisord
+# ---------------------------
+CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
