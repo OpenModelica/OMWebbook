@@ -263,7 +263,7 @@ $(document).ready(function () {
   });
 
   /* evaluate all cells using keys delete */
-  $.key("delete", function () {
+  $.key("ctrl+delete", function () {
     deletecells()
   });
 
